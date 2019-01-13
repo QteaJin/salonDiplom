@@ -1,9 +1,12 @@
 package com.salon.service.client.impl;
 
+import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.client.ClientBean;
 import com.salon.repository.dao.client.ClientDAO;
 import com.salon.repository.entity.client.Client;
+import com.salon.service.adress.AdressService;
 import com.salon.service.client.ClientService;
+import com.salon.service.google.GoogleLocationService;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 import org.slf4j.Logger;
@@ -28,9 +31,19 @@ public class ClientServiceImpl implements ClientService {
         return clientDAO;
     }
 
+    @Autowired
+    private GoogleLocationService locationService;
+
+    @Autowired
+    private AdressService adressService;
+
+
     @Override
     public ClientBean save(ClientBean bean) {
         LOGGER.debug("Client save start");
+
+        AdressBean adressBean = adressService.save(locationService.receiveAddressFromGoogle());
+        bean.setAddress(adressService.toDomain(adressBean));
 
         Client client = clientDAO.save(toDomain(bean));
 
@@ -107,15 +120,15 @@ public class ClientServiceImpl implements ClientService {
         Client client = new Client();
         client.setId(bean.getId());
         client.setAddress(bean.getAddress());
-        if(Objects.isNull(bean.getRole())){
+        if (Objects.isNull(bean.getRole())) {
             client.setRole(EnumRole.CLIENT);
-        }else {
+        } else {
             client.setRole(bean.getRole());
         }
 
-        if(Objects.isNull(bean.getStatus())){
+        if (Objects.isNull(bean.getStatus())) {
             client.setStatus(EnumStatus.NOACTIVE);
-        }else {
+        } else {
             client.setStatus(bean.getStatus());
         }
 
