@@ -93,7 +93,7 @@ public class Address {
         this.lng = lng;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinTable(name = "address_worker",
             joinColumns = {@JoinColumn(name = "address_id")},
             inverseJoinColumns = {@JoinColumn(name = "worker_id", nullable = false)})
@@ -105,7 +105,7 @@ public class Address {
         this.salonList = salonList;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinTable(name = "address_client",
             joinColumns = {@JoinColumn(name = "address_id")},
             inverseJoinColumns = {@JoinColumn(name = "client_id")})

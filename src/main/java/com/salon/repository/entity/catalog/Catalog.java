@@ -81,7 +81,7 @@ public class Catalog {
         this.timeLead = timeLead;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinTable(name = "catalog_check_list",
             joinColumns = {@JoinColumn(name = "catalog_id")},
             inverseJoinColumns = {@JoinColumn(name = "check_list_id")})
@@ -93,7 +93,7 @@ public class Catalog {
         this.checkLists = checkLists;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "skills_id")
     public Skills getSkills() {
         return skills;

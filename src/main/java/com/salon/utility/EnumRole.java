@@ -1,7 +1,8 @@
 package com.salon.utility;
 
-public enum EnumUser {
+public enum EnumRole {
     WORKER,
     CLIENT,
+    ADMIN,
     MANAGER
 }
