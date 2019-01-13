@@ -1,6 +1,6 @@
 package com.salon.service.profile.impl;
 
-import com.salon.repository.bean.worker.WorkerBean;
+import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.dao.profile.ProfileDAO;
 import com.salon.repository.entity.profile.Profile;
 import com.salon.service.profile.ProfileService;
@@ -12,50 +12,54 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
-    @Autowired
     private ProfileDAO profileDAO;
 
-    @Override
-    public WorkerBean save(WorkerBean bean) {
-        Profile profile = profileDAO.save(toBean(bean));
-
-        return toDomain(profile);
+    @Autowired
+    public ProfileDAO getProfileDAO() {
+        return profileDAO;
     }
 
     @Override
-    public List<WorkerBean> findAll() {
+    public ProfileBean save(ProfileBean bean) {
+        Profile profile = profileDAO.save(toDomain(bean));
+        return toBean(profile);
+    }
+
+    @Override
+    public List<ProfileBean> findAll() {
         List<Profile> profiles = profileDAO.findAll();
         return toDomain(profiles);
     }
 
     @Override
-    public WorkerBean findById(Long id) {
+    public ProfileBean findById(Long id) {
         Optional<Profile> profile = profileDAO.findById(id);
-        return toDomain(profile.get());
+        return toBean(profile.get());
     }
 
     @Override
-    public WorkerBean update(WorkerBean bean) {
-        Profile profile = profileDAO.saveAndFlush(toBean(bean));
-        return toDomain(profile);
+    public ProfileBean update(ProfileBean bean) {
+        Profile profile = profileDAO.saveAndFlush(toDomain(bean));
+        return toBean(profile);
     }
 
     @Override
-    public void delete(WorkerBean bean) {
-        profileDAO.delete(toBean(bean));
+    public void delete(ProfileBean bean) {
+        profileDAO.delete(toDomain(bean));
     }
 
     @Override
-    public List<WorkerBean> findByExample(WorkerBean bean) {
-        List<Profile> profiles = profileDAO.findAll(Example.of(toBean(bean)));
+    public List<ProfileBean> findByExample(ProfileBean bean) {
+        List<Profile> profiles = profileDAO.findAll(Example.of(toDomain(bean)));
         return toDomain(profiles);
     }
 
     @Override
-    public Profile toBean(WorkerBean domain) {
+    public Profile toDomain(ProfileBean domain) {
         Profile profile = new Profile();
         profile.setProfileId(domain.getId());
         profile.setName(domain.getName());
@@ -67,22 +71,22 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public WorkerBean toDomain(Profile bean) {
-        WorkerBean workerBean = new WorkerBean();
-        workerBean.setId(bean.getProfileId());
-        workerBean.setName(bean.getName());
-        workerBean.setLogin(bean.getLogin());
-        workerBean.setPassword(bean.getPassword());
-        workerBean.setPhone(bean.getPhone());
-        workerBean.setEmail(bean.getEmail());
-        return workerBean;
+    public ProfileBean toBean(Profile bean) {
+        ProfileBean profileBean = new ProfileBean();
+        profileBean.setId(bean.getProfileId());
+        profileBean.setName(bean.getName());
+        profileBean.setEmail(bean.getEmail());
+        profileBean.setPhone(bean.getPhone());
+        profileBean.setLogin(bean.getLogin());
+        profileBean.setPassword(bean.getPassword());
+        return profileBean;
     }
 
-    private List<WorkerBean> toDomain(List<Profile> profiles) {
-        List<WorkerBean> workerBeans = new ArrayList<>();
+    List<ProfileBean> toDomain(List<Profile> profiles) {
+        List<ProfileBean> beanList = new ArrayList<>();
         for (Profile profile : profiles) {
-            workerBeans.add(toDomain(profile));
+            beanList.add(toBean(profile));
         }
-        return workerBeans;
+        return beanList;
     }
 }

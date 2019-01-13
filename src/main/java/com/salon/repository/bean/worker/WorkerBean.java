@@ -1,24 +1,24 @@
 package com.salon.repository.bean.worker;
 
+import com.salon.repository.entity.checklist.CheckList;
+import com.salon.repository.entity.profile.Profile;
+import com.salon.repository.entity.role.Role;
+import com.salon.repository.entity.salon.Salon;
+import com.salon.repository.entity.skills.Skills;
+import com.salon.utility.EnumStatus;
+
+import java.util.List;
+
 public class WorkerBean {
     private Long id;
-    private String name;
-    private String phone;
-    private String email;
-    private String login;
-    private String password;
+    private Role role;
+    private Profile profile;
+    private EnumStatus status;
+    private List<Skills> skillsList;
+    private List<CheckList> checkLists;
+    private Salon salon;
 
     public WorkerBean() {
-    }
-
-    public WorkerBean(Long id, String name, String phone,
-                      String email, String login, String password) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.login = login;
-        this.password = password;
     }
 
     public Long getId() {
@@ -29,43 +29,51 @@ public class WorkerBean {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Role getRole() {
+        return role;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public String getPhone() {
-        return phone;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
-    public String getEmail() {
-        return email;
+    public EnumStatus getStatus() {
+        return status;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStatus(EnumStatus status) {
+        this.status = status;
     }
 
-    public String getLogin() {
-        return login;
+    public List<Skills> getSkillsList() {
+        return skillsList;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setSkillsList(List<Skills> skillsList) {
+        this.skillsList = skillsList;
     }
 
-    public String getPassword() {
-        return password;
+    public List<CheckList> getCheckLists() {
+        return checkLists;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCheckLists(List<CheckList> checkLists) {
+        this.checkLists = checkLists;
+    }
+
+    public Salon getSalon() {
+        return salon;
+    }
+
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 }
