@@ -1,37 +1,37 @@
 package com.salon.repository.entity.abstractEntity.user;
 
 import com.salon.repository.entity.profile.Profile;
-import com.salon.repository.entity.role.Role;
+import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
 
 @MappedSuperclass
 public class AbstractUser {
-    private Role role;
+    private EnumRole role;
     private Profile profile;
     private EnumStatus status;
 
     public AbstractUser() {
     }
 
-    public AbstractUser( Role role, Profile profile, EnumStatus status) {
+    public AbstractUser( EnumRole role, Profile profile, EnumStatus status) {
         this.role = role;
         this.profile = profile;
         this.status = status;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn( name = "role_id")
-    public Role getRole() {
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    public EnumRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(EnumRole role) {
         this.role = role;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id")
     public Profile getProfile() {
         return profile;

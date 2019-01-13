@@ -48,7 +48,7 @@ public class Skills {
         this.name = name;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinTable(name = "skills_catalog",
             joinColumns = {@JoinColumn(name = "skills_id")},
             inverseJoinColumns = {@JoinColumn(name = "catalog_id")})

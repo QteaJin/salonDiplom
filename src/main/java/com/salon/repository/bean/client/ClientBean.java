@@ -1,6 +1,5 @@
-package com.salon.repository.entity.client;
+package com.salon.repository.bean.client;
 
-import com.salon.repository.entity.abstractEntity.user.AbstractUser;
 import com.salon.repository.entity.address.Address;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.discount.Discount;
@@ -9,34 +8,18 @@ import com.salon.repository.entity.salon.Salon;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name = "client")
-public class Client extends AbstractUser implements Serializable {
+public class ClientBean {
     private Long id;
     private Address address;
     private Discount discount;
     private Salon salon;
+    private EnumRole role;
+    private Profile profile;
+    private EnumStatus status;
     private List<CheckList> checkList;
 
-    public Client(){
-
-    }
-
-    public Client(EnumRole role, Profile profile, EnumStatus status,
-                  Long id, Address address, Discount discount) {
-        super(role, profile, status);
-        this.id = id;
-        this.address = address;
-        this.discount = discount;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id", nullable = false, unique = true)
     public Long getId() {
         return id;
     }
@@ -45,8 +28,6 @@ public class Client extends AbstractUser implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne()
-    @JoinColumn(name = "address_id")
     public Address getAddress() {
         return address;
     }
@@ -55,8 +36,6 @@ public class Client extends AbstractUser implements Serializable {
         this.address = address;
     }
 
-    @OneToOne()
-    @JoinColumn(name = "discount_id")
     public Discount getDiscount() {
         return discount;
     }
@@ -65,8 +44,6 @@ public class Client extends AbstractUser implements Serializable {
         this.discount = discount;
     }
 
-    @ManyToOne()
-    @JoinColumn(name = "salon_id")
     public Salon getSalon() {
         return salon;
     }
@@ -75,10 +52,30 @@ public class Client extends AbstractUser implements Serializable {
         this.salon = salon;
     }
 
-    @OneToMany()
-    @JoinTable(name = "worker_skills",
-            joinColumns = {@JoinColumn(name = "worker_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skills_id")})
+    public EnumRole getRole() {
+        return role;
+    }
+
+    public void setRole(EnumRole role) {
+        this.role = role;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public EnumStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumStatus status) {
+        this.status = status;
+    }
+
     public List<CheckList> getCheckList() {
         return checkList;
     }

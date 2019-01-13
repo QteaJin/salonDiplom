@@ -2,10 +2,9 @@ package com.salon.service.worker.impl;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.dao.worker.WorkerDAO;
 import com.salon.repository.entity.worker.Worker;
-import com.salon.service.role.RoleService;
 import com.salon.service.worker.WorkerService;
+import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
-import com.salon.utility.EnumUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,6 @@ public class WorkerServiceImpl implements WorkerService {
     @Autowired
     private WorkerDAO workerDAO;
 
-    @Autowired
-    private RoleService roleService;
 
     @Override
     public WorkerBean save(WorkerBean bean) {
@@ -96,8 +93,7 @@ public class WorkerServiceImpl implements WorkerService {
         worker.setId(domain.getId());
 
         if (Objects.isNull(domain.getRole())) {
-            worker.setRole(roleService.toDomain(roleService.findByName(
-                    EnumUser.WORKER.name())));
+            worker.setRole(EnumRole.WORKER);
         } else {
             worker.setRole(domain.getRole());
         }

@@ -96,7 +96,7 @@ public class CheckList {
         this.dateAppointment = dateAppointment;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "worker_id")
     public Worker getWorker() {
         return worker;
@@ -106,7 +106,7 @@ public class CheckList {
         this.worker = worker;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "client_id")
     public Client getClient() {
         return client;
@@ -116,7 +116,7 @@ public class CheckList {
         this.client = client;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "catalog_id")
     public Catalog getCatalog() {
         return catalog;

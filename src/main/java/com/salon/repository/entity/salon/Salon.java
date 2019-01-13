@@ -60,7 +60,7 @@ public class Salon {
         this.description = description;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "address_id")
     public Address getAddress() {
         return address;
@@ -70,7 +70,7 @@ public class Salon {
         this.address = address;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany()
     @JoinTable(name = "salon_work_time",
             joinColumns = {@JoinColumn(name = "salon_id")},
             inverseJoinColumns = {@JoinColumn(name = "work_time_id")})
@@ -82,7 +82,7 @@ public class Salon {
         this.timeList = timeList;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinTable(name = "salon_worker",
             joinColumns = {@JoinColumn(name = "salon_id")},
             inverseJoinColumns = {@JoinColumn(name = "worker_id")})
@@ -94,7 +94,7 @@ public class Salon {
         this.workerList = workerList;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinTable(name = "salon_client",
             joinColumns = {@JoinColumn(name = "salon_id")},
             inverseJoinColumns = {@JoinColumn(name = "client_id")})

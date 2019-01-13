@@ -3,9 +3,9 @@ package com.salon.repository.entity.worker;
 import com.salon.repository.entity.abstractEntity.user.AbstractUser;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.profile.Profile;
-import com.salon.repository.entity.role.Role;
 import com.salon.repository.entity.salon.Salon;
 import com.salon.repository.entity.skills.Skills;
+import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
@@ -24,7 +24,7 @@ public class Worker extends AbstractUser implements Serializable {
 
     }
 
-    public Worker(Long id, Role role, Profile profile,
+    public Worker(Long id, EnumRole role, Profile profile,
                   EnumStatus status, List<Skills> skillsList) {
         super(role, profile, status);
         this.id = id;
@@ -42,7 +42,7 @@ public class Worker extends AbstractUser implements Serializable {
         this.id = id;
     }
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany()
     @JoinTable(name = "worker_skills",
             joinColumns = @JoinColumn(name = "worker_id"),
             inverseJoinColumns = @JoinColumn(name = "skills_id"))
@@ -54,7 +54,7 @@ public class Worker extends AbstractUser implements Serializable {
         this.skillsList = skillsList;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany()
     @JoinTable(name = "worker_check_list",
             joinColumns = {@JoinColumn(name = "worker_id")},
             inverseJoinColumns = {@JoinColumn(name = "check_list_id")})
@@ -66,7 +66,7 @@ public class Worker extends AbstractUser implements Serializable {
         this.checkLists = checkLists;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "salon_id")
     public Salon getSalon() {
         return salon;

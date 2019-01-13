@@ -2,16 +2,16 @@ package com.salon.repository.bean.worker;
 
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.profile.Profile;
-import com.salon.repository.entity.role.Role;
 import com.salon.repository.entity.salon.Salon;
 import com.salon.repository.entity.skills.Skills;
+import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 
 import java.util.List;
 
 public class WorkerBean {
     private Long id;
-    private Role role;
+    private EnumRole role;
     private Profile profile;
     private EnumStatus status;
     private List<Skills> skillsList;
@@ -29,11 +29,11 @@ public class WorkerBean {
         this.id = id;
     }
 
-    public Role getRole() {
+    public EnumRole getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(EnumRole role) {
         this.role = role;
     }
 

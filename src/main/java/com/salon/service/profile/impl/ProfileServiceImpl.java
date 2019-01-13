@@ -3,7 +3,10 @@ package com.salon.service.profile.impl;
 import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.dao.profile.ProfileDAO;
 import com.salon.repository.entity.profile.Profile;
+import com.salon.service.client.impl.ClientServiceImpl;
 import com.salon.service.profile.ProfileService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -15,13 +18,11 @@ import java.util.Optional;
 
 @Service
 public class ProfileServiceImpl implements ProfileService {
-
-    private ProfileDAO profileDAO;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientServiceImpl.class);
 
     @Autowired
-    public ProfileDAO getProfileDAO() {
-        return profileDAO;
-    }
+    private ProfileDAO profileDAO;
+
 
     @Override
     public ProfileBean save(ProfileBean bean) {
