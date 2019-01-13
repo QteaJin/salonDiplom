@@ -4,11 +4,13 @@ import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.salon.Salon;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "address")
-public class Address {
+public class Address implements Serializable{
     private Long addressId;
     private String street;
     private String country;
