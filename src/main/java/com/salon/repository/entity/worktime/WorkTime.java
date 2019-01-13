@@ -1,15 +1,17 @@
 package com.salon.repository.entity.worktime;
 
-import com.salon.repository.entity.salon.Salon;
+
 import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "work_time")
-public class WorkTime {
+public class WorkTime implements Serializable{
     private Long id;
     private Timestamp startWorking;
     private Timestamp finishWorking;

@@ -6,11 +6,13 @@ import com.salon.repository.entity.worker.Worker;
 import com.salon.repository.entity.worktime.WorkTime;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "salon")
-public class Salon {
+public class Salon implements Serializable{
     private Long salonId;
     private String name;
     private String description;
