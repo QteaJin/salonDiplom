@@ -19,9 +19,9 @@ import com.salon.service.salon.SalonService;
 public class SalonServiceImpl implements SalonService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SalonServiceImpl.class);
 
+	@Autowired
 	private SalonDAO salonDAO;
 
-	@Autowired
 	public SalonDAO getSalonDAO() {
 		return salonDAO;
 	}
