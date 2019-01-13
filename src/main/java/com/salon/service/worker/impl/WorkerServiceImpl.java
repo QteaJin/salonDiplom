@@ -1,118 +1,140 @@
 package com.salon.service.worker.impl;
-
-import com.salon.repository.bean.role.RoleBean;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.dao.worker.WorkerDAO;
-import com.salon.repository.entity.profile.Profile;
 import com.salon.repository.entity.worker.Worker;
-import com.salon.service.profile.ProfileService;
 import com.salon.service.role.RoleService;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumStatus;
 import com.salon.utility.EnumUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WorkerServiceImpl.class);
 
     @Autowired
     private WorkerDAO workerDAO;
-
-    @Autowired
-    private ProfileService profileService;
 
     @Autowired
     private RoleService roleService;
 
     @Override
     public WorkerBean save(WorkerBean bean) {
-        WorkerBean workerBean = profileService.save(bean);
+        LOGGER.debug("save Worker start");
 
-        Worker worker = new Worker();
-        worker.setProfile(profileService.toBean(workerBean));
+        Worker worker = workerDAO.save(toDomain(bean));
 
-        RoleBean roleBean = roleService.findByName(EnumUser.WORKER.name());
-        worker.setRole(roleService.toBean(roleBean));
+        LOGGER.debug("save Worker finish");
 
-        worker.setStatus(EnumStatus.NOACTIVE);
-
-        worker = workerDAO.save(worker);
-        return toDomain(worker);
+        return toBean(worker);
     }
 
     @Override
     public List<WorkerBean> findAll() {
+        LOGGER.debug("find All Worker start");
+
         List<Worker> workers = workerDAO.findAll();
-        return getWorkerBean(workers);
+
+        LOGGER.debug("find All Worker finish");
+
+        return toDomain(workers);
     }
 
     @Override
     public WorkerBean findById(Long id) {
+        LOGGER.debug("find By id start");
+
         Optional<Worker> optional = workerDAO.findById(id);
-        return toDomain(optional.get());
+
+        LOGGER.debug("find By id finish");
+
+        return toBean(optional.get());
     }
+
 
     @Override
     public WorkerBean update(WorkerBean bean) {
-        return profileService.update(bean);
+        LOGGER.debug("update Worker start");
+
+        Worker worker = workerDAO.saveAndFlush(toDomain(bean));
+
+        LOGGER.debug("update Worker finish");
+
+        return toBean(worker);
     }
 
     @Override
     public void delete(WorkerBean bean) {
-        List<WorkerBean> workerBeans = profileService.findByExample(bean);
-        WorkerBean workerBean=workerBeans.get(0);
-        profileService.delete(workerBean);
-        Worker worker=new Worker();
+        LOGGER.debug("Worker delete");
 
+        workerDAO.delete(toDomain(bean));
     }
 
     @Override
     public List<WorkerBean> findByExample(WorkerBean bean) {
-        return null;
+        LOGGER.debug("find by example Worker start");
+
+        List<Worker> workers = workerDAO.findAll(Example.of(toDomain(bean)));
+
+        LOGGER.debug("find by example Worker finish");
+
+        return toDomain(workers);
     }
 
     @Override
-    public Worker toBean(WorkerBean domain) {
+    public Worker toDomain(WorkerBean domain) {
         Worker worker = new Worker();
+        worker.setId(domain.getId());
 
-        Profile profile = new Profile();
-        profile.setProfileId(domain.getId());
-        profile.setName(profile.getName());
-        profile.setEmail(profile.getEmail());
-        profile.setPhone(profile.getPhone());
-        profile.setLogin(profile.getLogin());
-        profile.setPassword(profile.getPassword());
+        if (Objects.isNull(domain.getRole())) {
+            worker.setRole(roleService.toDomain(roleService.findByName(
+                    EnumUser.WORKER.name())));
+        } else {
+            worker.setRole(domain.getRole());
+        }
 
-        worker.setProfile(profile);
+        if(Objects.isNull(domain.getStatus())){
+            worker.setStatus(EnumStatus.NOACTIVE);
+        }else {
+            worker.setStatus(domain.getStatus());
+        }
+
+        worker.setProfile(domain.getProfile());
+        worker.setSalon(domain.getSalon());
+        worker.setCheckLists(domain.getCheckLists());
+        worker.setSkillsList(domain.getSkillsList());
+
         return worker;
     }
 
     @Override
-    public WorkerBean toDomain(Worker bean) {
+    public WorkerBean toBean(Worker bean) {
         WorkerBean workerBean = new WorkerBean();
-
-        Profile profil = bean.getProfile();
-        workerBean.setId(profil.getProfileId());
-        workerBean.setName(profil.getName());
-        workerBean.setEmail(profil.getEmail());
-        workerBean.setPhone(profil.getPhone());
-        workerBean.setLogin(profil.getLogin());
-        workerBean.setPassword(profil.getPassword());
+        workerBean.setId(bean.getId());
+        workerBean.setProfile(bean.getProfile());
+        workerBean.setRole(bean.getRole());
+        workerBean.setStatus(bean.getStatus());
+        workerBean.setSalon(bean.getSalon());
+        workerBean.setCheckLists(bean.getCheckLists());
+        workerBean.setSkillsList(bean.getSkillsList());
         return workerBean;
     }
 
-    private List<WorkerBean> getWorkerBean(List<Worker> workers) {
-        List<WorkerBean> workerBeans = new ArrayList<>();
+    List<WorkerBean> toDomain(List<Worker> workers) {
+        List<WorkerBean> list = new ArrayList<>();
         for (Worker worker : workers) {
-            workerBeans.add(profileService.toDomain(worker.getProfile()));
+            list.add(toBean(worker));
         }
-        return workerBeans;
+        return list;
     }
 
 }

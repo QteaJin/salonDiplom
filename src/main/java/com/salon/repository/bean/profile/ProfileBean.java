@@ -1,25 +1,19 @@
-package com.salon.repository.entity.profile;
+package com.salon.repository.bean.profile;
 
-import javax.persistence.*;
-import java.io.Serializable;
-
-@Entity
-@Table(name = "profile")
-public class Profile implements Serializable {
-    private Long profileId;
+public class ProfileBean {
+    private Long id;
     private String name;
     private String phone;
     private String email;
     private String login;
     private String password;
 
-
-    public Profile() {
+    public ProfileBean() {
     }
 
-    public Profile(Long profileId, String name, String phone,
-                   String email, String login, String password) {
-        this.profileId = profileId;
+    public ProfileBean(Long id, String name, String phone,
+                       String email, String login, String password) {
+        this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -27,18 +21,14 @@ public class Profile implements Serializable {
         this.password = password;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "profile_id", nullable = false, unique = true)
-    public Long getProfileId() {
-        return profileId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProfileId(Long profileId) {
-        this.profileId = profileId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -47,7 +37,6 @@ public class Profile implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "phone", nullable = false)
     public String getPhone() {
         return phone;
     }
@@ -56,7 +45,6 @@ public class Profile implements Serializable {
         this.phone = phone;
     }
 
-    @Column(name = "email", nullable = false)
     public String getEmail() {
         return email;
     }
@@ -65,7 +53,6 @@ public class Profile implements Serializable {
         this.email = email;
     }
 
-    @Column(name = "login", nullable = false)
     public String getLogin() {
         return login;
     }
@@ -74,7 +61,6 @@ public class Profile implements Serializable {
         this.login = login;
     }
 
-    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }

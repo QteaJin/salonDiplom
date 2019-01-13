@@ -19,19 +19,13 @@ public class WorkerController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public WorkerBean findById(@PathVariable("id") long id) {
-        return workerService.findById(id);
-    }
+    public WorkerBean findById(@PathVariable("id") long id) {return workerService.findById(id); }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<WorkerBean> findAllWorker() {
-        return workerService.findAll();
-    }
+    public List<WorkerBean> findAllWorker() { return workerService.findAll(); }
 
     @RequestMapping(method = RequestMethod.POST)
-    public WorkerBean createWorker(@RequestBody WorkerBean workerBean) {
-        return workerService.save(workerBean);
-    }
+    public WorkerBean createWorker(@RequestBody WorkerBean workerBean) { return workerService.save(workerBean); }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable("id") long id) {

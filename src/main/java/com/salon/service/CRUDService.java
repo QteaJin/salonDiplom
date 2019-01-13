@@ -17,8 +17,8 @@ public interface CRUDService <D,B extends Serializable> {
 
     List<D> findByExample(D bean);
 
-    B toBean(D domain);
+    D toBean(B domain);
 
-    D toDomain(B bean);
+    B toDomain(D bean);
 
 }

@@ -22,7 +22,7 @@ public class AbstractUser {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, name = "role_id")
+    @JoinColumn( name = "role_id")
     public Role getRole() {
         return role;
     }
@@ -31,8 +31,8 @@ public class AbstractUser {
         this.role = role;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, name = "profile_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id")
     public Profile getProfile() {
         return profile;
     }

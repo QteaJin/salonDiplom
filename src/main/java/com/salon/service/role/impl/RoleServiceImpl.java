@@ -13,21 +13,27 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class RoleServiceImpl implements RoleService {
     private final Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
 
-    @Autowired
+
     private RoleDAO roleDAO;
+
+    @Autowired
+    public RoleDAO getRoleDAO() {
+        return roleDAO;
+    }
 
 
     @Override
     public RoleBean save(RoleBean bean) {
         logger.debug("save Role ");
-        Role role = roleDAO.save(toBean(bean));
-        return toDomain(role);
+        Role role = roleDAO.save(toDomain(bean));
+        return toBean(role);
     }
 
     @Override
@@ -47,23 +53,23 @@ public class RoleServiceImpl implements RoleService {
         Optional<Role> role = roleDAO.findById(id);
 
         logger.debug("find by id Role finish");
-        return toDomain(role.get());
+        return toBean(role.get());
     }
 
     @Override
     public RoleBean update(RoleBean bean) {
         logger.debug("update Role start");
 
-        Role role = roleDAO.saveAndFlush(toBean(bean));
+        Role role = roleDAO.saveAndFlush(toDomain(bean));
 
-        return toDomain(role);
+        return toBean(role);
     }
 
     @Override
     public void delete(RoleBean bean) {
         logger.debug("delete Role start");
 
-        roleDAO.delete(toBean(bean));
+        roleDAO.delete(toDomain(bean));
 
         logger.debug("delete Role start");
     }
@@ -72,7 +78,7 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleBean> findByExample(RoleBean bean) {
         logger.debug("find by example Role start");
 
-        List<Role> roles = roleDAO.findAll(Example.of(toBean(bean)));
+        List<Role> roles = roleDAO.findAll(Example.of(toDomain(bean)));
 
         logger.debug("find by example Role finish");
         return toDomain(roles);
@@ -83,46 +89,47 @@ public class RoleServiceImpl implements RoleService {
         RoleBean role = new RoleBean();
         role.setName(name);
         List<RoleBean> roleBeans = findByExample(role);
-        if(!roleBeans.isEmpty()){
-            role=roleBeans.get(0);
+        if (!roleBeans.isEmpty()) {
+            role = roleBeans.get(0);
         }
         return role;
     }
 
     @Override
-    public Role toBean(RoleBean domain) {
-        Role role = new Role();
-        role.setRoleId(domain.getRoleId());
-        role.setName(domain.getName());
-        role.setDescription(domain.getDescription());
-
-        if (domain.getEnumStatus() == null) {
-            role.setEnumStatus(EnumStatus.ACTIVE);
-        } else {
-            role.setEnumStatus(domain.getEnumStatus());
-        }
-
-        return role;
-    }
-
-    @Override
-    public RoleBean toDomain(Role bean) {
+    public RoleBean toBean(Role domain) {
         RoleBean roleBean = new RoleBean();
-        roleBean.setRoleId(bean.getRoleId());
-        roleBean.setName(bean.getName());
-        roleBean.setDescription(bean.getDescription());
-        roleBean.setEnumStatus(bean.getEnumStatus());
+        roleBean.setRoleId(domain.getRoleId());
+        roleBean.setName(domain.getName());
+        roleBean.setDescription(domain.getDescription());
+        roleBean.setEnumStatus(domain.getEnumStatus());
+        roleBean.setClientList(domain.getClientList());
+        roleBean.setWorkerList(domain.getWorkerList());
+
         return roleBean;
     }
 
-    public RoleDAO getRoleDAO() {
-        return roleDAO;
+    @Override
+    public Role toDomain(RoleBean bean) {
+        Role role = new Role();
+        role.setRoleId(bean.getRoleId());
+        role.setName(bean.getName());
+        role.setDescription(bean.getDescription());
+
+        if(Objects.isNull(bean.getEnumStatus())){
+            role.setEnumStatus(EnumStatus.NOACTIVE);
+        }else {
+            role.setEnumStatus(bean.getEnumStatus());
+        }
+
+        role.setClientList(bean.getClientList());
+        role.setWorkerList(bean.getWorkerList());
+        return role;
     }
 
     public List<RoleBean> toDomain(List<Role> roles) {
         List<RoleBean> roleBeans = new ArrayList<>();
         for (Role role : roles) {
-            roleBeans.add(toDomain(role));
+            roleBeans.add(toBean(role));
         }
         return roleBeans;
     }
@@ -130,7 +137,7 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> toBean(List<RoleBean> beans) {
         List<Role> roleBeans = new ArrayList<>();
         for (RoleBean bean : beans) {
-            roleBeans.add(toBean(bean));
+            roleBeans.add(toDomain(bean));
         }
         return roleBeans;
     }
