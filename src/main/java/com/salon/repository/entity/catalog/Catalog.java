@@ -4,12 +4,14 @@ import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.skills.Skills;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
 @Table(name = "catalog")
-public class Catalog {
+public class Catalog implements Serializable{
     private Long catalogId;
     private String name;
     private String description;

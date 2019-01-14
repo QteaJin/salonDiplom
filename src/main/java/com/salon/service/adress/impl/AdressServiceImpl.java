@@ -19,9 +19,9 @@ import com.salon.service.adress.AdressService;
 @Service
 public class AdressServiceImpl implements AdressService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AdressServiceImpl.class);
+	@Autowired
 	private AdressDAO adressDAO;
 
-	@Autowired
 	public void setAdressDAO(AdressDAO adressDAO) {
 		this.adressDAO = adressDAO;
 	}

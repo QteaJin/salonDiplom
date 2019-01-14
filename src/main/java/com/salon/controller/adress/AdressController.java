@@ -15,10 +15,10 @@ import com.salon.service.adress.AdressService;
 @RestController
 @RequestMapping("/adress")
 public class AdressController {
-
+	@Autowired
 	private AdressService adressService;
 
-	@Autowired
+	
 	public void setAdressService(AdressService adressService) {
 		this.adressService = adressService;
 	}
