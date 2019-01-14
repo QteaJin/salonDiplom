@@ -15,10 +15,10 @@ import com.salon.service.salon.SalonService;
 @RestController
 @RequestMapping("/salon")
 public class SalonController {
-
+	@Autowired
 	private SalonService salonService;
 
-	@Autowired
+	
 	public void setSalonService(SalonService salonService) {
 		this.salonService = salonService;
 	}

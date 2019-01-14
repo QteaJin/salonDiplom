@@ -15,10 +15,10 @@ import com.salon.service.worktime.WorkTimeService;
 @RestController
 @RequestMapping("/worktime")
 public class WorkTimeController {
-
+	@Autowired
 	private WorkTimeService workTimeService;
 
-	@Autowired
+	
 	public void setWorkTimeService(WorkTimeService workTimeService) {
 		this.workTimeService = workTimeService;
 	}

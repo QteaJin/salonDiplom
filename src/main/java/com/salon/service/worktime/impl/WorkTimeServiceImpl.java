@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import com.salon.utility.EnumStatus;
 @Service
 public class WorkTimeServiceImpl implements WorkTimeService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WorkTimeServiceImpl.class);
+	@Autowired
 	private WorkTimeDAO workTimeDAO;
 
 	public void setWorkTimeDAO(WorkTimeDAO workTimeDAO) {

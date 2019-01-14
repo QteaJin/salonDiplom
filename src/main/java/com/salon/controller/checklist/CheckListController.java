@@ -10,10 +10,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/checklist")
 public class CheckListController {
-
+	
+	@Autowired
     private CheckListService checkListService;
 
-    @Autowired
+    
     public void setCheckListService(CheckListService checkListService) {
         this.checkListService = checkListService;
     }
