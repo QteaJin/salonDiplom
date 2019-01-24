@@ -1,5 +1,8 @@
 package com.salon.repository.bean.profile;
 
+import com.salon.repository.entity.client.Client;
+import com.salon.repository.entity.worker.Worker;
+
 public class ProfileBean {
     private Long id;
     private String name;
@@ -8,18 +11,8 @@ public class ProfileBean {
     private String login;
     private String password;
 
-    public ProfileBean() {
-    }
-
-    public ProfileBean(Long id, String name, String phone,
-                       String email, String login, String password) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-    }
+    private Worker worker;
+    private Client client;
 
     public Long getId() {
         return id;
@@ -67,5 +60,21 @@ public class ProfileBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

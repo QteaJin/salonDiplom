@@ -1,5 +1,8 @@
 package com.salon.repository.entity.profile;
 
+import com.salon.repository.entity.client.Client;
+import com.salon.repository.entity.worker.Worker;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,18 +16,24 @@ public class Profile implements Serializable {
     private String login;
     private String password;
 
+    private Worker worker;
+    private Client client;
+
 
     public Profile() {
     }
 
-    public Profile(Long profileId, String name, String phone,
-                   String email, String login, String password) {
-        this.profileId = profileId;
+    public Profile( String name, String phone,
+                   String email, String login, String password,
+                   Worker worker ,Client client) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.login = login;
         this.password = password;
+
+        this.worker=worker;
+        this.client=client;
     }
 
     @Id
@@ -81,5 +90,25 @@ public class Profile implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @OneToOne()
+    @JoinColumn(name = "worker_id")
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
+    }
+
+    @OneToOne()
+    @JoinColumn(name = "client_id")
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
