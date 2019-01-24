@@ -24,10 +24,9 @@ public class Worker extends AbstractUser implements Serializable {
 
     }
 
-    public Worker(Long id, EnumRole role, Profile profile,
+    public Worker(EnumRole role, Profile profile,
                   EnumStatus status, List<Skills> skillsList) {
         super(role, profile, status);
-        this.id = id;
         this.skillsList = skillsList;
     }
 
