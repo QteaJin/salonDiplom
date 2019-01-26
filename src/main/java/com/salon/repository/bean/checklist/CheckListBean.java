@@ -15,6 +15,7 @@ public class CheckListBean {
     private EnumStatusCheckList status;
     private Date dateCreate;
     private Date dateAppointment;
+    private String description;
 
     private Worker worker;
     private Client client;
@@ -66,6 +67,14 @@ public class CheckListBean {
 
     public void setDateAppointment(Date dateAppointment) {
         this.dateAppointment = dateAppointment;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Worker getWorker() {

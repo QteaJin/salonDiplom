@@ -92,6 +92,7 @@ public class CheckListServiceImpl implements CheckListService {
         checkListBean.setClient(domain.getClient());
         checkListBean.setDateAppointment(domain.getDateAppointment());
         checkListBean.setDateCreate(domain.getDateCreate());
+        checkListBean.setDescription(domain.getDescription());
         checkListBean.setPrice(domain.getPrice());
         checkListBean.setWorker(domain.getWorker());
         checkListBean.setTimeFinish(domain.getTimeFinish());
@@ -107,6 +108,7 @@ public class CheckListServiceImpl implements CheckListService {
         checkList.setClient(bean.getClient());
         checkList.setDateAppointment(bean.getDateAppointment());
         checkList.setDateCreate(bean.getDateCreate());
+        checkList.setDescription(bean.getDescription());
         checkList.setPrice(bean.getPrice());
         checkList.setWorker(bean.getWorker());
         checkList.setTimeFinish(bean.getTimeFinish());
