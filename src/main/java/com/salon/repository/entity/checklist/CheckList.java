@@ -20,6 +20,7 @@ public class CheckList implements Serializable {
     private EnumStatusCheckList status;
     private Date dateCreate;
     private Date dateAppointment; // Date on when order was assigned
+    private String description;
 
     private Worker worker;
     private Client client;
@@ -29,7 +30,8 @@ public class CheckList implements Serializable {
     }
 
     public CheckList(Long sheckListId, Timestamp timeFinish, Double price, EnumStatusCheckList status,
-                     Date dateCreate, Date dateAppointment, Worker worker, Client client, Catalog catalog) {
+                     Date dateCreate, Date dateAppointment, Worker worker, Client client, Catalog catalog,
+                     String description) {
         this.sheckListId = sheckListId;
         this.timeFinish = timeFinish;
         this.price = price;
@@ -39,6 +41,7 @@ public class CheckList implements Serializable {
         this.worker = worker;
         this.client = client;
         this.catalog = catalog;
+        this.description = description;
     }
 
     @Id
@@ -96,6 +99,15 @@ public class CheckList implements Serializable {
 
     public void setDateAppointment(Date dateAppointment) {
         this.dateAppointment = dateAppointment;
+    }
+
+    @Column(name = "description", nullable = false)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @ManyToOne()
