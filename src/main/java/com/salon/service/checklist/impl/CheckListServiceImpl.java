@@ -1,15 +1,18 @@
 package com.salon.service.checklist.impl;
 
 import com.salon.repository.bean.checklist.CheckListBean;
+import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.repository.dao.checklist.CheckListDAO;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.service.checklist.CheckListService;
+import com.salon.utility.EnumStatusCheckList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +73,28 @@ public class CheckListServiceImpl implements CheckListService {
         LOGGER.debug("CheckList delete");
 
         checkListDAO.delete(toDomain(bean));
+    }
+
+    @Override
+    public QuickOrderBean createQuickOrde(QuickOrderBean orderBean) {
+        if (orderBean == null) {
+            //ошибка
+        }
+
+        CheckListBean checkListBean = new CheckListBean();
+        checkListBean.setDateCreate(new Date(System.currentTimeMillis()));
+        checkListBean.setStatus(EnumStatusCheckList.NEW);
+        checkListBean.setDescription("Name: " + orderBean.getName()
+                + " Phone: " + orderBean.getPhone()
+                + "Email: " + orderBean.getEmail()
+                + "Description: " + orderBean.getDescription());
+
+        CheckListBean listBean = save(checkListBean);
+        if (listBean != null && listBean.getSheckListId() != null) {
+            return orderBean;
+        }
+
+        return new QuickOrderBean();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.salon.controller.checklist;
 
 import com.salon.repository.bean.checklist.CheckListBean;
+import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,23 +11,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/checklist")
 public class CheckListController {
-	
-	@Autowired
+
+    @Autowired
     private CheckListService checkListService;
 
-    
     public void setCheckListService(CheckListService checkListService) {
         this.checkListService = checkListService;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public CheckListBean findById(@PathVariable("id") long id) {return checkListService.findById(id); }
+    public CheckListBean findById(@PathVariable("id") long id) {
+        return checkListService.findById(id);
+    }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<CheckListBean> findAllCheckList() { return checkListService.findAll(); }
+    public List<CheckListBean> findAllCheckList() {
+        return checkListService.findAll();
+    }
 
     @RequestMapping(method = RequestMethod.POST)
-    public CheckListBean createCheckList(@RequestBody CheckListBean checkListBean) { return checkListService.save(checkListBean); }
+    public CheckListBean createCheckList(@RequestBody CheckListBean checkListBean) {
+        return checkListService.save(checkListBean);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable("id") long id) {
@@ -36,5 +42,10 @@ public class CheckListController {
     @RequestMapping(method = RequestMethod.PUT)
     public CheckListBean updateCheckList(@RequestBody CheckListBean checkListBean) {
         return checkListService.update(checkListBean);
+    }
+
+    @RequestMapping(value = "/quick", method = RequestMethod.POST)
+    public QuickOrderBean createQuickOrder(@RequestBody QuickOrderBean quickOrderBean) {
+        return checkListService.createQuickOrde(quickOrderBean);
     }
 }

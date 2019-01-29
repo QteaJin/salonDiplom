@@ -92,7 +92,7 @@ public class CheckList implements Serializable {
         this.dateCreate = dateCreate;
     }
 
-    @Column(name = "date_appointment", nullable = false)
+    @Column(name = "date_appointment")
     public Date getDateAppointment() {
         return dateAppointment;
     }
@@ -101,7 +101,7 @@ public class CheckList implements Serializable {
         this.dateAppointment = dateAppointment;
     }
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }

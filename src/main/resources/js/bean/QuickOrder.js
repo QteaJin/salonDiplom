@@ -5,9 +5,7 @@ var QuickOrderBean = {
 	    phone: String,
 	    email: String,
 	    description : String,
-	    dateCreate: String,
-	    
-	        
+
 	    get getName() {
 	        return this.name;
 	    },
@@ -31,11 +29,5 @@ var QuickOrderBean = {
 	    },
 	    set setDescription(description) {
 	        this.description = description;
-	    },
-	    get getDateCreate() {
-	        return this.dateCreate;
-	    },
-	    set setDateCreate(dateCreate) {
-	        this.dateCreate = dateCreate;
 	    }
 	};

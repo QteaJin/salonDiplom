@@ -1,25 +1,14 @@
 package com.salon.repository.bean.quickorder;
 
-import java.sql.Date;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class QuickOrderBean {
 
 	private String name;
 	private String phone;
 	private String email;
 	private String description;
-	private String dateCreate;
 	
-		
-	public String getDateCreate() {
-		return dateCreate;
-	}
-	public void setDateCreate(String dateCreate) {
-		this.dateCreate = dateCreate;
-	}
+
 	public String getName() {
 		return name;
 	}
