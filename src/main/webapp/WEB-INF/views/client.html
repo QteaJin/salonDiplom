@@ -1,10 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+	integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+	integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+<style type="text/css">
+.back {
+	background-color: #D9E1DA;
+}
+.footer{
+	height: 70px;
+	margin-top: 20px;
+}
+.block{
+      width: 60px;
+      height: 30px;
+      background: #e3f2fd;
+      display: inline-block;
+      margin: 2px;
+      text-align: center;
+    }
+.block:hover{
+    	background: #EFBCF5;
+    }
+.blockpast{
+      width: 60px;
+      height: 30px;
+      background: grey;
+      display: inline-block;
+      margin: 2px;
+      text-align: center;
+    }
+.workerPhoto{
+	width: 170px;
+	margin: 10px;
+	display: inline-block;
+}
+</style>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<title>Client Page</title>
 </head>
-<body>
+<body onload = "createHead ()">
+	<header>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-10 back"></div>
+				<div class="col-md-2 back">
+					<span class="float-right">
+						<p></p>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" class="btn btn-primary"
+								data-toggle="collapse" data-target="#login">Вход</button>
+							<a class="btn btn-primary" href="registration" role="button">Зарегистрироваться</a>
+						</div>
+						<div id="login" class="collapse">
+							<form action="auth" method="post" modelAttribute = 'loginForm'>
+								<div class="form-group">
+									<input type="login" class="form-control" id="InputLogin"
+										placeholder="Enter login" name="login">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="InputPassword"
+										placeholder="Password" name="password">
+								</div>
+								<button type="submit" class="btn btn-primary">Войти</button>
+								<a  href="forgotPass">Восстановить пароль</a>
+							</form>
+						</div>
+
+						<p></p>
+
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+
+				<div class="col-md-12 back">
+					<div class="row h-100 justify-content-center">
+						<div class="btn-group " role="group">
+							<a href="#" class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">О нас</a> <a href="#"
+								class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">Услуги</a> <a href="#"
+								class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">В тренде</a> <a href="#"
+								class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">Стоимость услуг</a> <a href="#"
+								class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">Отзывы</a> <a href="#"
+								class="btn btn-primary btn-lg active" role="button"
+								aria-pressed="true">Контакты</a>
+							<div></div>
+						</div>
+					</div>
+				</div>
+	</header>
+	<!-- <th:block th:include="/header"></th:block>  -->
+
+
+	<div class="shadow-lg p-3 mb-5 bg-white rounded">
+		<div class="container-fluid">
+		<div class="row" >
+			<div id="workerPhoto" class=" col-md-8" ></div>
+			<div class="col-md-4 calendar"></div>
+			<script type="text/javascript" src = "/js/service/indexCallendar.js"></script>
+		</div>
+		</div>
+			
+			<!-- <script type="text/javascript" src = "script/workerPhoto.js"></script> -->
+			
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+
+				<div class="col-md-8" >
+					<div align="center">
+						<p>test1</p>
+
+
+						
+
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="container-fluid bg-light py-3">
+    <form id="contact-form">
+        <div class="messages"></div>
+        <div class="controls">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_name">Имя *</label>
+                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Введите имя" required="required" data-error="name is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_email">Email</label>
+                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Введите email">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_phone">Телефон *</label>
+                        <input id="form_phone" type="tel" name="phone" class="form-control" required="required" placeholder="+380ххххххххх">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="form_message">Сообщение *</label>
+                    <textarea id="form_message" name="description" class="form-control" placeholder="Сообщение" rows="4" required="required" data-error="send a message."></textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary btn-send" value="Отправить заявку" onclick="sendQuickOrder(event)">
+                <script type="text/javascript" src = "/js/bean/QuickOrder.js"></script>
+                <script type="text/javascript" src = "/js/service/QuickOrderService.js"></script>
+                <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted"><strong>*</strong> Поля обязательны к заполнению</p>
+            </div>
+        </div>
+    </form>
+</div>
+   				 </div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+
+<!-- <script type="text/javascript" src = 'script/startIndex.js'></script> -->
+
+<footer>
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 back footer"></div>
+			</div>
+		</div>
+</footer>
 
 </body>
 </html>
