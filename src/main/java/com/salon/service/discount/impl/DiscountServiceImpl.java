@@ -92,6 +92,7 @@ public class DiscountServiceImpl implements DiscountService {
         DiscountBean discountBean = new DiscountBean();
         discountBean.setDiscountId(domain.getDiscountId());
         discountBean.setName(domain.getName());
+        discountBean.setDiscount(domain.getDiscount());
         discountBean.setDescription(domain.getDescription());
         discountBean.setStatus(domain.getStatus());
         return discountBean;
@@ -102,6 +103,7 @@ public class DiscountServiceImpl implements DiscountService {
         Discount discount = new Discount();
         discount.setDiscountId(bean.getDiscountId());
         discount.setName(bean.getName());
+        discount.setDiscount(bean.getDiscount());
         discount.setDescription(bean.getDescription());
 
         if (Objects.isNull(bean.getStatus())) {
