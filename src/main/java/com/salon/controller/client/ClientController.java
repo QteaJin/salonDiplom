@@ -19,13 +19,19 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ClientBean findById(@PathVariable("id") long id) {return clientService.findById(id); }
+    public ClientBean findById(@PathVariable("id") long id) {
+        return clientService.findById(id);
+    }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<ClientBean> findAllClient() { return clientService.findAll(); }
+    public List<ClientBean> findAllClient() {
+        return clientService.findAll();
+    }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ClientBean createClient(@RequestBody ClientBean clientBean) { return clientService.save(clientBean); }
+    public ClientBean createClient(@RequestBody ClientBean clientBean) {
+        return clientService.save(clientBean);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteById(@PathVariable("id") long id) {
@@ -33,7 +39,8 @@ public class ClientController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ClientBean updateClient (@RequestBody ClientBean clientBean) {
+    public ClientBean updateClient(@RequestBody ClientBean clientBean) {
         return clientService.update(clientBean);
     }
+
 }

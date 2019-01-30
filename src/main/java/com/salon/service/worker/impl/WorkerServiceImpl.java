@@ -1,4 +1,5 @@
 package com.salon.service.worker.impl;
+import com.salon.repository.bean.client.WorkerCustumBean;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.dao.worker.WorkerDAO;
 import com.salon.repository.entity.worker.Worker;
@@ -57,6 +58,10 @@ public class WorkerServiceImpl implements WorkerService {
         return toBean(optional.get());
     }
 
+    @Override
+    public List<WorkerCustumBean> getClientByCityAndSalon(String city, Long salonId) {
+        return null;
+    }
 
     @Override
     public WorkerBean update(WorkerBean bean) {

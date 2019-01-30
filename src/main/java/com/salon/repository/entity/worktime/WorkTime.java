@@ -1,6 +1,7 @@
 package com.salon.repository.entity.worktime;
 
 
+import com.salon.repository.entity.salon.Salon;
 import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "work_time")
@@ -16,13 +19,15 @@ public class WorkTime implements Serializable{
     private Timestamp startWorking;
     private Timestamp finishWorking;
     private EnumStatus status;
-    private Date date;
+    private Timestamp date;
+
+    private List<Salon> salons = new ArrayList<>();
 
     public WorkTime() {
     }
 
     public WorkTime(Long id, Timestamp startWorking, Timestamp finishWorking,
-                    EnumStatus status, Date date) {
+                    EnumStatus status, Timestamp date) {
         this.id = id;
         this.startWorking = startWorking;
         this.finishWorking = finishWorking;
@@ -32,7 +37,7 @@ public class WorkTime implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_time_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     public Long getId() {
         return id;
     }
@@ -41,7 +46,7 @@ public class WorkTime implements Serializable{
         this.id = id;
     }
 
-    @Column(name = "start_working", nullable = false)
+    @Column(name = "start_working")
     public Timestamp getStartWorking() {
         return startWorking;
     }
@@ -50,7 +55,7 @@ public class WorkTime implements Serializable{
         this.startWorking = startWorking;
     }
 
-    @Column(name = "finish_working", nullable = false)
+    @Column(name = "finish_working")
     public Timestamp getFinishWorking() {
         return finishWorking;
     }
@@ -59,7 +64,7 @@ public class WorkTime implements Serializable{
         this.finishWorking = finishWorking;
     }
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     public EnumStatus getStatus() {
         return status;
@@ -70,11 +75,20 @@ public class WorkTime implements Serializable{
     }
 
     @Column(name = "date")
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
+    }
+
+    @ManyToMany(mappedBy = "timeList")
+    public List<Salon> getSalons() {
+        return salons;
+    }
+
+    public void setSalons(List<Salon> salons) {
+        this.salons = salons;
     }
 }

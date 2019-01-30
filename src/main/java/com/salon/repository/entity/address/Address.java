@@ -18,7 +18,8 @@ public class Address implements Serializable{
     private Double lat;
     private Double lng;
 
-    private List<Salon> salonList;
+    private Salon salon;
+
     private List<Client> clientsList;
 
 
@@ -26,7 +27,7 @@ public class Address implements Serializable{
     }
 
     public Address(Long addressId, String street, String country,
-                   String city, Double lat, Double lng, List<Salon> salonList,
+                   String city, Double lat, Double lng, Salon salon,
                    List<Client> clientsList) {
         this.addressId = addressId;
         this.street = street;
@@ -35,13 +36,13 @@ public class Address implements Serializable{
         this.lat = lat;
         this.lng = lng;
 
-        this.salonList=salonList;
+        this.salon=salon;
         this.clientsList=clientsList;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     public Long getAddressId() {
         return addressId;
     }
@@ -59,7 +60,7 @@ public class Address implements Serializable{
         this.street = street;
     }
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "country")
     public String getCountry() {
         return country;
     }
@@ -68,7 +69,7 @@ public class Address implements Serializable{
         this.country = country;
     }
 
-    @Column(name = "city", nullable = false)
+    @Column(name = "city")
     public String getCity() {
         return city;
     }
@@ -77,7 +78,7 @@ public class Address implements Serializable{
         this.city = city;
     }
 
-    @Column(name = "lat")
+    @Column(name = "latitude")
     public Double getLat() {
         return lat;
     }
@@ -86,7 +87,7 @@ public class Address implements Serializable{
         this.lat = lat;
     }
 
-    @Column(name = "lng")
+    @Column(name = "longitude")
     public Double getLng() {
         return lng;
     }
@@ -95,16 +96,14 @@ public class Address implements Serializable{
         this.lng = lng;
     }
 
-    @OneToMany()
-    @JoinTable(name = "address_worker",
-            joinColumns = {@JoinColumn(name = "address_id")},
-            inverseJoinColumns = {@JoinColumn(name = "worker_id", nullable = false)})
-    public List<Salon> getSalonList() {
-        return salonList;
+    @OneToOne(mappedBy = "address")
+    @JoinColumn(name = "salon_id")
+    public Salon getSalon() {
+        return salon;
     }
 
-    public void setSalonList(List<Salon> salonList) {
-        this.salonList = salonList;
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 
     @OneToMany()

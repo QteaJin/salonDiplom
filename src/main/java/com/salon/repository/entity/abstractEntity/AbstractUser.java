@@ -1,4 +1,4 @@
-package com.salon.repository.entity.abstractEntity.user;
+package com.salon.repository.entity.abstractEntity;
 
 import com.salon.repository.entity.profile.Profile;
 import com.salon.utility.EnumRole;
@@ -31,8 +31,7 @@ public class AbstractUser {
         this.role = role;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "profile_id")
+    @OneToOne
     public Profile getProfile() {
         return profile;
     }

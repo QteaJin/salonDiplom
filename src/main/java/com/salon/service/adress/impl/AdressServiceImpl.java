@@ -96,7 +96,7 @@ public class AdressServiceImpl implements AdressService {
 		adressBean.setCountry(domain.getCountry());
 		adressBean.setLat(domain.getLat());
 		adressBean.setLng(domain.getLng());
-		adressBean.setSalonList(domain.getSalonList());
+		adressBean.setSalon(domain.getSalon());
 		adressBean.setStreet(domain.getStreet());
 		return adressBean;
 	}
@@ -110,7 +110,7 @@ public class AdressServiceImpl implements AdressService {
 		adress.setCountry(bean.getCountry());
 		adress.setLat(bean.getLat());
 		adress.setLng(bean.getLng());
-		adress.setSalonList(bean.getSalonList());
+		adress.setSalon(bean.getSalon());
 		adress.setStreet(bean.getStreet());
 		return adress;
 	}

@@ -59,6 +59,8 @@ public class ProfileServiceImpl implements ProfileService {
         return toDomain(profiles);
     }
 
+
+
     @Override
     public Profile toDomain(ProfileBean domain) {
         Profile profile = new Profile();
@@ -68,6 +70,8 @@ public class ProfileServiceImpl implements ProfileService {
         profile.setEmail(domain.getEmail());
         profile.setLogin(domain.getLogin());
         profile.setPassword(domain.getPassword());
+        profile.setWorkerId(domain.getWorkerId());
+        profile.setClientId(domain.getClientId());
         return profile;
     }
 
@@ -80,6 +84,8 @@ public class ProfileServiceImpl implements ProfileService {
         profileBean.setPhone(bean.getPhone());
         profileBean.setLogin(bean.getLogin());
         profileBean.setPassword(bean.getPassword());
+        profileBean.setWorkerId(bean.getWorkerId());
+        profileBean.setClientId(bean.getClientId());
         return profileBean;
     }
 

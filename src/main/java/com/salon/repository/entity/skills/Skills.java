@@ -15,7 +15,8 @@ public class Skills implements Serializable {
     private Long skillsId;
     private String name;
 
-    private List<Catalog> catalogList;
+    private List<Catalog> catalogList = new ArrayList<>();
+
     private List<Worker> workers = new ArrayList<>();
 
     public Skills() {
@@ -40,7 +41,7 @@ public class Skills implements Serializable {
         this.skillsId = skillsId;
     }
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -49,10 +50,7 @@ public class Skills implements Serializable {
         this.name = name;
     }
 
-    @OneToMany()
-    @JoinTable(name = "skills_catalog",
-            joinColumns = {@JoinColumn(name = "skills_id")},
-            inverseJoinColumns = {@JoinColumn(name = "catalog_id")})
+    @OneToMany(mappedBy = "skills")
     public List<Catalog> getCatalogList() {
         return catalogList;
     }

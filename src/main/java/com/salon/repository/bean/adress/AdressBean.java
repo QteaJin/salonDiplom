@@ -13,7 +13,7 @@ public class AdressBean {
 	private String city;
 	private Double lat;
 	private Double lng;
-	private List<Salon> salonList;
+    private Salon salon;
 	private List<Client> clientsList;
 
 	public Long getAddressId() {
@@ -64,12 +64,12 @@ public class AdressBean {
 		this.lng = lng;
 	}
 
-	public List<Salon> getSalonList() {
-		return salonList;
+	public Salon getSalon() {
+		return salon;
 	}
 
-	public void setSalonList(List<Salon> salonList) {
-		this.salonList = salonList;
+	public void setSalon(Salon salon) {
+		this.salon = salon;
 	}
 
 	public List<Client> getClientsList() {
