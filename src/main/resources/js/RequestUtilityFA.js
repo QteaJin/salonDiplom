@@ -10,6 +10,9 @@ Request.PostQuickOrder = function (jsonObject) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var quickOrder = JSON.parse(xhr.responseText);
             console.log(quickOrder);
+            if(quickOrder != null){
+            	succesQuickMessage();
+            }
 
         }
     };

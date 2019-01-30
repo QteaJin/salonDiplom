@@ -14,3 +14,12 @@ function sendQuickOrder(event) {
 	
 }
 
+function succesQuickMessage() {
+	var insertText = document.querySelector(".messages");
+	insertText.style.background = '#51F966';
+	insertText.style.textAlign = 'center';
+	insertText.innerHTML = "Сообщение отправлено";
+	
+	
+}
+
