@@ -1,6 +1,6 @@
 package com.salon.repository.entity.worker;
 
-import com.salon.repository.entity.abstractEntity.user.AbstractUser;
+import com.salon.repository.entity.abstractEntity.AbstractUser;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.profile.Profile;
 import com.salon.repository.entity.salon.Salon;
@@ -10,14 +10,18 @@ import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "worker")
 public class Worker extends AbstractUser implements Serializable {
     private Long id;
-    private List<Skills> skillsList;
-    private List<CheckList> checkLists;
+
+    private List<Skills> skillsList = new ArrayList<>();
+
+    private List<CheckList> checkLists = new ArrayList<>();
+
     private Salon salon;
 
     public Worker() {
@@ -32,7 +36,7 @@ public class Worker extends AbstractUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "worker_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     public Long getId() {
         return id;
     }
@@ -42,9 +46,6 @@ public class Worker extends AbstractUser implements Serializable {
     }
 
     @ManyToMany()
-    @JoinTable(name = "worker_skills",
-            joinColumns = @JoinColumn(name = "worker_id"),
-            inverseJoinColumns = @JoinColumn(name = "skills_id"))
     public List<Skills> getSkillsList() {
         return skillsList;
     }
@@ -53,10 +54,7 @@ public class Worker extends AbstractUser implements Serializable {
         this.skillsList = skillsList;
     }
 
-    @OneToMany()
-    @JoinTable(name = "worker_check_list",
-            joinColumns = {@JoinColumn(name = "worker_id")},
-            inverseJoinColumns = {@JoinColumn(name = "check_list_id")})
+    @OneToMany(mappedBy = "worker")
     public List<CheckList> getCheckLists() {
         return checkLists;
     }

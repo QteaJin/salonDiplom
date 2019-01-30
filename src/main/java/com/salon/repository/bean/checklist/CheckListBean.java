@@ -7,6 +7,8 @@ import com.salon.utility.EnumStatusCheckList;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheckListBean {
     private Long sheckListId;
@@ -19,7 +21,7 @@ public class CheckListBean {
 
     private Worker worker;
     private Client client;
-    private Catalog catalog;
+    private List<Catalog> catalog = new ArrayList<>();
 
     public Long getSheckListId() {
         return sheckListId;
@@ -93,11 +95,11 @@ public class CheckListBean {
         this.client = client;
     }
 
-    public Catalog getCatalog() {
+    public List<Catalog> getCatalog() {
         return catalog;
     }
 
-    public void setCatalog(Catalog catalog) {
+    public void setCatalog(List<Catalog> catalog) {
         this.catalog = catalog;
     }
 }

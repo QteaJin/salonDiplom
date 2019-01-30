@@ -1,6 +1,6 @@
 package com.salon.repository.entity.client;
 
-import com.salon.repository.entity.abstractEntity.user.AbstractUser;
+import com.salon.repository.entity.abstractEntity.AbstractUser;
 import com.salon.repository.entity.address.Address;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.discount.Discount;
@@ -11,6 +11,7 @@ import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,8 +20,10 @@ public class Client extends AbstractUser implements Serializable {
     private Long id;
     private Address address;
     private Discount discount;
+
     private Salon salon;
-    private List<CheckList> checkList;
+
+    private List<CheckList> checkList = new ArrayList<>();
 
     public Client(){
 
@@ -75,10 +78,7 @@ public class Client extends AbstractUser implements Serializable {
         this.salon = salon;
     }
 
-    @OneToMany()
-    @JoinTable(name = "worker_skills",
-            joinColumns = {@JoinColumn(name = "worker_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skills_id")})
+    @OneToMany(mappedBy = "client")
     public List<CheckList> getCheckList() {
         return checkList;
     }

@@ -7,6 +7,7 @@ import com.salon.repository.entity.client.Client;
 import com.salon.service.adress.AdressService;
 import com.salon.service.client.ClientService;
 import com.salon.service.google.GoogleLocationService;
+import com.salon.service.salon.SalonService;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 import org.slf4j.Logger;
@@ -37,6 +38,9 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private AdressService adressService;
 
+    @Autowired
+    private SalonService salonService;
+
 
     @Override
     public ClientBean save(ClientBean bean) {
@@ -62,6 +66,8 @@ public class ClientServiceImpl implements ClientService {
 
         return toBean(clients);
     }
+
+
 
     @Override
     public ClientBean findById(Long id) {

@@ -10,6 +10,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "check_list")
@@ -23,14 +25,16 @@ public class CheckList implements Serializable {
     private String description;
 
     private Worker worker;
+
     private Client client;
-    private Catalog catalog;
+
+    private List<Catalog> catalogs = new ArrayList<>();
 
     public CheckList() {
     }
 
     public CheckList(Long sheckListId, Timestamp timeFinish, Double price, EnumStatusCheckList status,
-                     Date dateCreate, Date dateAppointment, Worker worker, Client client, Catalog catalog,
+                     Date dateCreate, Date dateAppointment, Worker worker, Client client,  List<Catalog> catalogs,
                      String description) {
         this.sheckListId = sheckListId;
         this.timeFinish = timeFinish;
@@ -40,7 +44,7 @@ public class CheckList implements Serializable {
         this.dateAppointment = dateAppointment;
         this.worker = worker;
         this.client = client;
-        this.catalog = catalog;
+        this.catalogs = catalogs;
         this.description = description;
     }
 
@@ -130,13 +134,12 @@ public class CheckList implements Serializable {
         this.client = client;
     }
 
-    @ManyToOne()
-    @JoinColumn(name = "catalog_id")
-    public Catalog getCatalog() {
-        return catalog;
+    @ManyToMany(mappedBy = "checkLists")
+    public List<Catalog> getCatalogs() {
+        return catalogs;
     }
 
-    public void setCatalog(Catalog catalog) {
-        this.catalog = catalog;
+    public void setCatalogs(List<Catalog> catalogs) {
+        this.catalogs = catalogs;
     }
 }

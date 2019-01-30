@@ -10,7 +10,7 @@ public class WorkTimeBean {
 	private Timestamp startWorking;
 	private Timestamp finishWorking;
 	private EnumStatus status;
-	private Date date;
+	private Timestamp date;
 
 	public Long getId() {
 		return id;
@@ -44,11 +44,11 @@ public class WorkTimeBean {
 		this.status = status;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 

@@ -5,6 +5,7 @@ import com.salon.repository.bean.client.ClientBean;
 import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.entity.client.Client;
+import com.salon.repository.entity.profile.Profile;
 import com.salon.repository.entity.worker.Worker;
 import com.salon.service.auth.AuthService;
 import com.salon.service.client.ClientService;
@@ -64,18 +65,6 @@ public class AuthServiceImpl implements AuthService {
 
         authBean.setUserName(bean.getName());
 
-        if (Objects.nonNull(bean.getClient())) {
-
-            Client client = bean.getClient();
-            authBean.setUserId(client.getId());
-            authBean.setEnumRole(EnumRole.CLIENT);
-
-        } else if (Objects.nonNull(bean.getClient())) {
-
-            Worker worker = bean.getWorker();
-            authBean.setUserId(worker.getId());
-            authBean.setEnumRole(EnumRole.WORKER);
-        }
 
         LOGGER.debug("login finish");
 
@@ -88,12 +77,17 @@ public class AuthServiceImpl implements AuthService {
 
         validProfile(profile);
 
+        ProfileBean profileBean = profileService.save(profile);
+
         WorkerBean worker = new WorkerBean();
-        worker.setProfile(profileService.toDomain(profile));
+        worker.setProfile(profileService.toDomain(profileBean));
         worker.setRole(EnumRole.WORKER);
         worker.setStatus(EnumStatus.NOACTIVE);
 
-        workerService.save(worker);
+        WorkerBean workerBean = workerService.save(worker);
+
+        profileBean.setWorkerId(workerBean.getId());
+        profileService.update(profileBean);
 
         //NEXT SEND EMAIL
 

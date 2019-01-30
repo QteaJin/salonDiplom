@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,8 @@ public class Catalog implements Serializable{
     private Timestamp timeLead;
 
     private Skills skills;
-    private List<CheckList> checkLists;
+
+    private List<CheckList> checkLists = new ArrayList<>();
 
     public Catalog() {
     }
@@ -83,10 +85,7 @@ public class Catalog implements Serializable{
         this.timeLead = timeLead;
     }
 
-    @OneToMany()
-    @JoinTable(name = "catalog_check_list",
-            joinColumns = {@JoinColumn(name = "catalog_id")},
-            inverseJoinColumns = {@JoinColumn(name = "check_list_id")})
+    @ManyToMany()
     public List<CheckList> getCheckLists() {
         return checkLists;
     }

@@ -113,7 +113,7 @@ public class CheckListServiceImpl implements CheckListService {
     public CheckListBean toBean(CheckList domain) {
         CheckListBean checkListBean = new CheckListBean();
         checkListBean.setSheckListId(domain.getSheckListId());
-        checkListBean.setCatalog(domain.getCatalog());
+        checkListBean.setCatalog(domain.getCatalogs());
         checkListBean.setClient(domain.getClient());
         checkListBean.setDateAppointment(domain.getDateAppointment());
         checkListBean.setDateCreate(domain.getDateCreate());
@@ -129,7 +129,7 @@ public class CheckListServiceImpl implements CheckListService {
     public CheckList toDomain(CheckListBean bean) {
         CheckList checkList = new CheckList();
         checkList.setSheckListId(bean.getSheckListId());
-        checkList.setCatalog(bean.getCatalog());
+        checkList.setCatalogs(bean.getCatalog());
         checkList.setClient(bean.getClient());
         checkList.setDateAppointment(bean.getDateAppointment());
         checkList.setDateCreate(bean.getDateCreate());

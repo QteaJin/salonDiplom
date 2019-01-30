@@ -1,7 +1,5 @@
 package com.salon.repository.entity.profile;
 
-import com.salon.repository.entity.client.Client;
-import com.salon.repository.entity.worker.Worker;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,29 +14,28 @@ public class Profile implements Serializable {
     private String login;
     private String password;
 
-    private Worker worker;
-    private Client client;
+    private Long workerId;
+    private Long clientId;
 
 
     public Profile() {
     }
 
-    public Profile( String name, String phone,
-                   String email, String login, String password,
-                   Worker worker ,Client client) {
+    public Profile(String name, String phone,
+                   String email, String login, String password, Long workerId, Long clientId) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.login = login;
         this.password = password;
+        this.workerId = workerId;
+        this.clientId = clientId;
 
-        this.worker=worker;
-        this.client=client;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "profile_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     public Long getProfileId() {
         return profileId;
     }
@@ -47,7 +44,7 @@ public class Profile implements Serializable {
         this.profileId = profileId;
     }
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -56,7 +53,7 @@ public class Profile implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -65,7 +62,7 @@ public class Profile implements Serializable {
         this.phone = phone;
     }
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -74,7 +71,7 @@ public class Profile implements Serializable {
         this.email = email;
     }
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login")
     public String getLogin() {
         return login;
     }
@@ -83,7 +80,7 @@ public class Profile implements Serializable {
         this.login = login;
     }
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -92,23 +89,19 @@ public class Profile implements Serializable {
         this.password = password;
     }
 
-    @OneToOne()
-    @JoinColumn(name = "worker_id")
-    public Worker getWorker() {
-        return worker;
+    public Long getWorkerId() {
+        return workerId;
     }
 
-    public void setWorker(Worker worker) {
-        this.worker = worker;
+    public void setWorkerId(Long workerId) {
+        this.workerId = workerId;
     }
 
-    @OneToOne()
-    @JoinColumn(name = "client_id")
-    public Client getClient() {
-        return client;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 }

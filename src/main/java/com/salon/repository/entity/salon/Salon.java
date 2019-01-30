@@ -8,6 +8,7 @@ import com.salon.repository.entity.worktime.WorkTime;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,10 +17,15 @@ public class Salon implements Serializable{
     private Long salonId;
     private String name;
     private String description;
+
+
     private Address address;
-    private List<WorkTime> timeList;
-    private List<Worker> workerList;
-    private List<Client> clientList;
+
+    private List<WorkTime> timeList = new ArrayList<>();
+
+    private List<Worker> workerList = new ArrayList<>();
+
+    private List<Client> clientList = new ArrayList<>();
 
     public Salon() {
 
@@ -35,7 +41,7 @@ public class Salon implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "salon_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     public Long getSalonId() {
         return salonId;
     }
@@ -44,7 +50,7 @@ public class Salon implements Serializable{
         this.salonId = salonId;
     }
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -62,7 +68,7 @@ public class Salon implements Serializable{
         this.description = description;
     }
 
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn(name = "address_id")
     public Address getAddress() {
         return address;
@@ -73,9 +79,6 @@ public class Salon implements Serializable{
     }
 
     @ManyToMany()
-    @JoinTable(name = "salon_work_time",
-            joinColumns = {@JoinColumn(name = "salon_id")},
-            inverseJoinColumns = {@JoinColumn(name = "work_time_id")})
     public List<WorkTime> getTimeList() {
         return timeList;
     }
@@ -84,10 +87,7 @@ public class Salon implements Serializable{
         this.timeList = timeList;
     }
 
-    @OneToMany()
-    @JoinTable(name = "salon_worker",
-            joinColumns = {@JoinColumn(name = "salon_id")},
-            inverseJoinColumns = {@JoinColumn(name = "worker_id")})
+    @OneToMany(mappedBy = "salon")
     public List<Worker> getWorkerList() {
         return workerList;
     }
@@ -96,10 +96,7 @@ public class Salon implements Serializable{
         this.workerList = workerList;
     }
 
-    @OneToMany()
-    @JoinTable(name = "salon_client",
-            joinColumns = {@JoinColumn(name = "salon_id")},
-            inverseJoinColumns = {@JoinColumn(name = "client_id")})
+    @OneToMany(mappedBy = "salon")
     public List<Client> getClientList() {
         return clientList;
     }
