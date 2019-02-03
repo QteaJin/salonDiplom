@@ -1,5 +1,7 @@
 package com.salon.repository.entity.worker;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.salon.repository.entity.abstractEntity.AbstractUser;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.profile.Profile;
@@ -46,6 +48,7 @@ public class Worker extends AbstractUser implements Serializable {
     }
 
     @ManyToMany()
+    @JsonManagedReference
     public List<Skills> getSkillsList() {
         return skillsList;
     }
@@ -55,6 +58,7 @@ public class Worker extends AbstractUser implements Serializable {
     }
 
     @OneToMany(mappedBy = "worker")
+    @JsonBackReference
     public List<CheckList> getCheckLists() {
         return checkLists;
     }
@@ -65,6 +69,7 @@ public class Worker extends AbstractUser implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "salon_id")
+    @JsonBackReference
     public Salon getSalon() {
         return salon;
     }

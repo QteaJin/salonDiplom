@@ -13,7 +13,7 @@ import com.salon.repository.bean.adress.AdressBean;
 import com.salon.service.adress.AdressService;
 
 @RestController
-@RequestMapping("/adress")
+@RequestMapping("/address")
 public class AdressController {
 	@Autowired
 	private AdressService adressService;

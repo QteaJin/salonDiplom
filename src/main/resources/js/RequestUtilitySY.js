@@ -1,33 +1,37 @@
 'use strict';
 
 const URL_DEFAULT = "http://localhost:8080";
-const PROFILE_URL = URL_DEFAULT + "/profile";
+const URL_CHECKLIST = URL_DEFAULT + "/checklist";
+
 
 var Request = {};
-Request.PostProfile = function (jsonObject) {
+Request.GetCheckListWorkerByStatusAndDayAndMountsAndYear =
+    function (status, day, mounts, year) {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var quickOrder = JSON.parse(xhr.responseText);
+                checklistJson(quickOrder);
+            }
+        };
+
+
+        xhr.open("GET", URL_CHECKLIST + "/quick", true);
+        xhr.send();
+    };
+
+Request.GetCheckListALL = function () {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            var profile = JSON.parse(xhr.responseText);
-            console.log(profile);
-            succes(profile);
+            var checkListJson = JSON.parse(xhr.responseText);
+            checklistJson(checkListJson);
         }
     };
 
-    xhr.open("POST", PROFILE_URL, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(jsonObject);
-};
-
-Request.GetProfile = function (id) {
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var profile = JSON.parse(xhr.responseText);
-            console.log(profile);
-        }
-    };
-
-    xhr.open("GET", PROFILE_URL +"/"+id, true);
+    xhr.open("GET", URL_CHECKLIST + "/all", true);
     xhr.send();
 };
+
+
+

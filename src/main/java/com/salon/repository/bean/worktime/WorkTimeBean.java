@@ -1,6 +1,5 @@
 package com.salon.repository.bean.worktime;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import com.salon.utility.EnumStatus;

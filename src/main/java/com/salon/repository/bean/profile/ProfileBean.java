@@ -1,6 +1,8 @@
 package com.salon.repository.bean.profile;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.salon.repository.entity.client.Client;
+import com.salon.repository.entity.worker.Worker;
 
 
 public class ProfileBean {
@@ -10,8 +12,8 @@ public class ProfileBean {
     private String email;
     private String login;
     private String password;
-    private Long workerId;
-    private Long clientId;
+    private Worker worker;
+    private Client client;
 
     public Long getId() {
         return id;
@@ -63,20 +65,20 @@ public class ProfileBean {
 
 
     @JsonProperty(access =  JsonProperty.Access.READ_ONLY)
-    public Long getWorkerId() {
-        return workerId;
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setWorkerId(Long workerId) {
-        this.workerId = workerId;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
     @JsonProperty(access =  JsonProperty.Access.READ_ONLY)
-    public Long getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

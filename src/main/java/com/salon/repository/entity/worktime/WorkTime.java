@@ -1,6 +1,7 @@
 package com.salon.repository.entity.worktime;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.salon.repository.entity.salon.Salon;
 import com.salon.utility.EnumStatus;
 
@@ -84,6 +85,7 @@ public class WorkTime implements Serializable{
     }
 
     @ManyToMany(mappedBy = "timeList")
+    @JsonBackReference
     public List<Salon> getSalons() {
         return salons;
     }

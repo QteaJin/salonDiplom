@@ -25,9 +25,9 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientServiceImpl.class);
 
+    @Autowired
     private ClientDAO clientDAO;
 
-    @Autowired
     public ClientDAO getClientDAO() {
         return clientDAO;
     }
@@ -46,8 +46,8 @@ public class ClientServiceImpl implements ClientService {
     public ClientBean save(ClientBean bean) {
         LOGGER.debug("Client save start");
 
-        AdressBean adressBean = adressService.save(locationService.receiveAddressFromGoogle());
-        bean.setAddress(adressService.toDomain(adressBean));
+//        AdressBean adressBean = adressService.save(locationService.receiveAddressFromGoogle());
+//        bean.setAddress(adressService.toDomain(adressBean));
 
         Client client = clientDAO.save(toDomain(bean));
 

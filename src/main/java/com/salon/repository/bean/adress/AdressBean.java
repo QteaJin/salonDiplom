@@ -2,6 +2,7 @@ package com.salon.repository.bean.adress;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.salon.Salon;
 
@@ -13,6 +14,7 @@ public class AdressBean {
 	private String city;
 	private Double lat;
 	private Double lng;
+
     private Salon salon;
 	private List<Client> clientsList;
 
@@ -64,6 +66,7 @@ public class AdressBean {
 		this.lng = lng;
 	}
 
+	@JsonProperty(access =  JsonProperty.Access.READ_ONLY)
 	public Salon getSalon() {
 		return salon;
 	}
@@ -72,6 +75,7 @@ public class AdressBean {
 		this.salon = salon;
 	}
 
+	@JsonProperty(access =  JsonProperty.Access.READ_ONLY)
 	public List<Client> getClientsList() {
 		return clientsList;
 	}

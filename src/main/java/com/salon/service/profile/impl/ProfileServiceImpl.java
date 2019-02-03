@@ -70,8 +70,8 @@ public class ProfileServiceImpl implements ProfileService {
         profile.setEmail(domain.getEmail());
         profile.setLogin(domain.getLogin());
         profile.setPassword(domain.getPassword());
-        profile.setWorkerId(domain.getWorkerId());
-        profile.setClientId(domain.getClientId());
+        profile.setWorker(domain.getWorker());
+        profile.setClient(domain.getClient());
         return profile;
     }
 
@@ -84,8 +84,8 @@ public class ProfileServiceImpl implements ProfileService {
         profileBean.setPhone(bean.getPhone());
         profileBean.setLogin(bean.getLogin());
         profileBean.setPassword(bean.getPassword());
-        profileBean.setWorkerId(bean.getWorkerId());
-        profileBean.setClientId(bean.getClientId());
+        profileBean.setWorker(bean.getWorker());
+        profileBean.setClient(bean.getClient());
         return profileBean;
     }
 

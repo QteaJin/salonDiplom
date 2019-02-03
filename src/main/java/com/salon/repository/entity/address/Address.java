@@ -1,5 +1,6 @@
 package com.salon.repository.entity.address;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.salon.Salon;
 
@@ -98,6 +99,7 @@ public class Address implements Serializable{
 
     @OneToOne(mappedBy = "address")
     @JoinColumn(name = "salon_id")
+    @JsonBackReference
     public Salon getSalon() {
         return salon;
     }
@@ -110,6 +112,7 @@ public class Address implements Serializable{
     @JoinTable(name = "address_client",
             joinColumns = {@JoinColumn(name = "address_id")},
             inverseJoinColumns = {@JoinColumn(name = "client_id")})
+    @JsonBackReference
     public List<Client> getClientsList() {
         return clientsList;
     }

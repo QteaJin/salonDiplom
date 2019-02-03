@@ -1,5 +1,6 @@
 package com.salon.repository.bean.checklist;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.salon.repository.entity.catalog.Catalog;
 import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.worker.Worker;
@@ -10,13 +11,29 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+*   dateAppointment,
+*   description,
+*
+*   workerid,
+*   clientid,
+*   "catalod":[
+*       {
+*           "idcatalog":5
+*       },
+*       {
+*          "idcatalog":5
+*       }
+*   ]
+* */
 public class CheckListBean {
     private Long sheckListId;
     private Timestamp timeFinish;
     private Double price;
     private EnumStatusCheckList status;
-    private Date dateCreate;
-    private Date dateAppointment;
+    private Timestamp dateCreate;
+    private Timestamp dateAppointment;
     private String description;
 
     private Worker worker;
@@ -55,19 +72,19 @@ public class CheckListBean {
         this.status = status;
     }
 
-    public Date getDateCreate() {
+    public Timestamp getDateCreate() {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
+    public void setDateCreate(Timestamp dateCreate) {
         this.dateCreate = dateCreate;
     }
 
-    public Date getDateAppointment() {
+    public Timestamp getDateAppointment() {
         return dateAppointment;
     }
 
-    public void setDateAppointment(Date dateAppointment) {
+    public void setDateAppointment(Timestamp dateAppointment) {
         this.dateAppointment = dateAppointment;
     }
 
@@ -79,6 +96,7 @@ public class CheckListBean {
         this.description = description;
     }
 
+    @JsonProperty(access =  JsonProperty.Access.READ_ONLY)
     public Worker getWorker() {
         return worker;
     }
@@ -87,6 +105,7 @@ public class CheckListBean {
         this.worker = worker;
     }
 
+    @JsonProperty(access =  JsonProperty.Access.READ_ONLY)
     public Client getClient() {
         return client;
     }
@@ -95,6 +114,7 @@ public class CheckListBean {
         this.client = client;
     }
 
+    @JsonProperty(access =  JsonProperty.Access.READ_ONLY)
     public List<Catalog> getCatalog() {
         return catalog;
     }

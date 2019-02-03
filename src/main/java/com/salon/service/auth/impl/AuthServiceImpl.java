@@ -4,9 +4,6 @@ import com.salon.repository.bean.auth.AuthBean;
 import com.salon.repository.bean.client.ClientBean;
 import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.bean.worker.WorkerBean;
-import com.salon.repository.entity.client.Client;
-import com.salon.repository.entity.profile.Profile;
-import com.salon.repository.entity.worker.Worker;
 import com.salon.service.auth.AuthService;
 import com.salon.service.client.ClientService;
 import com.salon.service.exception.ErrorInfoExeption;
@@ -21,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -77,18 +73,14 @@ public class AuthServiceImpl implements AuthService {
 
         validProfile(profile);
 
-        ProfileBean profileBean = profileService.save(profile);
+        ProfileBean bean = profileService.save(profile);
 
         WorkerBean worker = new WorkerBean();
-        worker.setProfile(profileService.toDomain(profileBean));
+        worker.setProfile(profileService.toDomain(bean));
         worker.setRole(EnumRole.WORKER);
         worker.setStatus(EnumStatus.NOACTIVE);
 
-        WorkerBean workerBean = workerService.save(worker);
-
-        profileBean.setWorkerId(workerBean.getId());
-        profileService.update(profileBean);
-
+        workerService.save(worker);
         //NEXT SEND EMAIL
 
         return true;
@@ -100,12 +92,14 @@ public class AuthServiceImpl implements AuthService {
 
         validProfile(profile);
 
+        ProfileBean bean = profileService.save(profile);
+
         ClientBean client = new ClientBean();
-        client.setProfile(profileService.toDomain(profile));
+        client.setProfile(profileService.toDomain(bean));
         client.setRole(EnumRole.CLIENT);
         client.setStatus(EnumStatus.NOACTIVE);
 
-        clientService.update(client);
+        clientService.save(client);
 
         //NEXT SEND EMAIL
 
