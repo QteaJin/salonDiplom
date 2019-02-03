@@ -27,6 +27,6 @@ public class AuthContrloller {
 
     @RequestMapping(value = "/registr/client", method = RequestMethod.POST)
     public boolean registerClient (@RequestBody ProfileBean profile) {
-        return authService.registerWorker(profile);
+        return authService.registerClient(profile);
     }
 }

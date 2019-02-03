@@ -2,9 +2,12 @@ package com.salon.service.checklist.impl;
 
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
+import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.dao.checklist.CheckListDAO;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.service.checklist.CheckListService;
+import com.salon.service.exception.ErrorInfoExeption;
+import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumStatusCheckList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
+import java.sql.Timestamp;
+import java.util.*;
 
 @Service
 public class CheckListServiceImpl implements CheckListService {
@@ -23,6 +25,9 @@ public class CheckListServiceImpl implements CheckListService {
 
     @Autowired
     private CheckListDAO checkListDAO;
+
+    @Autowired
+    private WorkerService workerService;
 
     @Override
     public CheckListBean save(CheckListBean bean) {
@@ -58,6 +63,35 @@ public class CheckListServiceImpl implements CheckListService {
     }
 
     @Override
+    public List<CheckListBean> getCheckListByStatusAndDayAndMountsAndYear(Long workerId,
+                                                                          EnumStatusCheckList status,
+                                                                          Integer day, Integer mounts,
+                                                                          Integer year) {
+
+        List<CheckListBean> listBeans = new ArrayList<>();
+
+        if (day == null && mounts == null && year == null) {
+            WorkerBean workerBean = workerService.findById(workerId);
+            if (workerBean == null) {
+                LOGGER.debug("Worker NOT_FOUND");
+                throw new ErrorInfoExeption("Worker NOT_FOUND",
+                        "WORKER.NOT_FOUND");
+            }
+            List<CheckList> beans = workerBean.getCheckLists();
+
+            for (CheckList checkList : beans) {
+                if (checkList.getStatus().equals(status)) {
+                    listBeans.add(toBean(checkList));
+                    System.out.println(checkList.getDateAppointment());
+                }
+            }
+        } else {
+           //UNIX TIME
+        }
+        return listBeans;
+    }
+
+    @Override
     public CheckListBean update(CheckListBean bean) {
         LOGGER.debug("update CheckList start");
 
@@ -82,7 +116,7 @@ public class CheckListServiceImpl implements CheckListService {
         }
 
         CheckListBean checkListBean = new CheckListBean();
-        checkListBean.setDateCreate(new Date(System.currentTimeMillis()));
+        checkListBean.setDateCreate(new Timestamp(System.currentTimeMillis()));
         checkListBean.setStatus(EnumStatusCheckList.NEW);
         checkListBean.setDescription("Name: " + orderBean.getName()
                 + " Phone: " + orderBean.getPhone()

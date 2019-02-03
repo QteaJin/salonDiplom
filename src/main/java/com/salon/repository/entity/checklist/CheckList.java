@@ -1,5 +1,6 @@
 package com.salon.repository.entity.checklist;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.salon.repository.entity.catalog.Catalog;
 import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.worker.Worker;
@@ -20,8 +21,8 @@ public class CheckList implements Serializable {
     private Timestamp timeFinish;
     private Double price;
     private EnumStatusCheckList status;
-    private Date dateCreate;
-    private Date dateAppointment; // Date on when order was assigned
+    private Timestamp dateCreate;
+    private Timestamp dateAppointment; // Date on when order was assigned
     private String description;
 
     private Worker worker;
@@ -34,7 +35,7 @@ public class CheckList implements Serializable {
     }
 
     public CheckList(Long sheckListId, Timestamp timeFinish, Double price, EnumStatusCheckList status,
-                     Date dateCreate, Date dateAppointment, Worker worker, Client client,  List<Catalog> catalogs,
+                     Timestamp dateCreate, Timestamp dateAppointment, Worker worker, Client client,  List<Catalog> catalogs,
                      String description) {
         this.sheckListId = sheckListId;
         this.timeFinish = timeFinish;
@@ -87,21 +88,21 @@ public class CheckList implements Serializable {
         this.status = status;
     }
 
-    @Column(name = "date_create", nullable = false)
-    public Date getDateCreate() {
+    @Column(name = "date_create")
+    public Timestamp getDateCreate() {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
+    public void setDateCreate(Timestamp dateCreate) {
         this.dateCreate = dateCreate;
     }
 
     @Column(name = "date_appointment")
-    public Date getDateAppointment() {
+    public Timestamp getDateAppointment() {
         return dateAppointment;
     }
 
-    public void setDateAppointment(Date dateAppointment) {
+    public void setDateAppointment(Timestamp dateAppointment) {
         this.dateAppointment = dateAppointment;
     }
 
@@ -116,6 +117,7 @@ public class CheckList implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "worker_id")
+    @JsonManagedReference
     public Worker getWorker() {
         return worker;
     }
@@ -126,6 +128,7 @@ public class CheckList implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "client_id")
+    @JsonManagedReference
     public Client getClient() {
         return client;
     }
@@ -135,6 +138,7 @@ public class CheckList implements Serializable {
     }
 
     @ManyToMany(mappedBy = "checkLists")
+    @JsonManagedReference
     public List<Catalog> getCatalogs() {
         return catalogs;
     }

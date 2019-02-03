@@ -1,5 +1,6 @@
 package com.salon.repository.entity.salon;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.salon.repository.entity.address.Address;
 import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.worker.Worker;
@@ -70,6 +71,7 @@ public class Salon implements Serializable{
 
     @OneToOne()
     @JoinColumn(name = "address_id")
+    @JsonManagedReference
     public Address getAddress() {
         return address;
     }
@@ -79,6 +81,7 @@ public class Salon implements Serializable{
     }
 
     @ManyToMany()
+    @JsonManagedReference
     public List<WorkTime> getTimeList() {
         return timeList;
     }
@@ -88,6 +91,7 @@ public class Salon implements Serializable{
     }
 
     @OneToMany(mappedBy = "salon")
+    @JsonManagedReference
     public List<Worker> getWorkerList() {
         return workerList;
     }
@@ -97,6 +101,7 @@ public class Salon implements Serializable{
     }
 
     @OneToMany(mappedBy = "salon")
+    @JsonManagedReference
     public List<Client> getClientList() {
         return clientList;
     }

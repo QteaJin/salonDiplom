@@ -1,6 +1,11 @@
 package com.salon.repository.entity.profile;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.salon.repository.entity.client.Client;
+import com.salon.repository.entity.worker.Worker;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -14,22 +19,22 @@ public class Profile implements Serializable {
     private String login;
     private String password;
 
-    private Long workerId;
-    private Long clientId;
+    private Worker worker;
+    private Client client;
 
 
     public Profile() {
     }
 
     public Profile(String name, String phone,
-                   String email, String login, String password, Long workerId, Long clientId) {
+                   String email, String login, String password, Worker worker, Client client) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.login = login;
         this.password = password;
-        this.workerId = workerId;
-        this.clientId = clientId;
+        this.worker = worker;
+        this.client = client;
 
     }
 
@@ -89,19 +94,23 @@ public class Profile implements Serializable {
         this.password = password;
     }
 
-    public Long getWorkerId() {
-        return workerId;
+    @OneToOne(mappedBy = "profile")
+    @JsonBackReference
+    public Worker getWorker() {
+        return worker;
     }
 
-    public void setWorkerId(Long workerId) {
-        this.workerId = workerId;
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 
-    public Long getClientId() {
-        return clientId;
+    @OneToOne(mappedBy = "profile")
+    @JsonBackReference
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

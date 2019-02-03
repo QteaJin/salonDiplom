@@ -1,5 +1,7 @@
 package com.salon.repository.entity.skills;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.salon.repository.entity.catalog.Catalog;
 import com.salon.repository.entity.worker.Worker;
 
@@ -51,6 +53,7 @@ public class Skills implements Serializable {
     }
 
     @OneToMany(mappedBy = "skills")
+    @JsonManagedReference
     public List<Catalog> getCatalogList() {
         return catalogList;
     }
@@ -60,6 +63,7 @@ public class Skills implements Serializable {
     }
 
     @ManyToMany(mappedBy = "skillsList")
+    @JsonBackReference
     public List<Worker> getWorkers() {
         return workers;
     }

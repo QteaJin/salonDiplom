@@ -1,5 +1,6 @@
 package com.salon.repository.bean.skills;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.salon.repository.entity.catalog.Catalog;
 import com.salon.repository.entity.worker.Worker;
 
@@ -29,6 +30,7 @@ public class SkillsBean {
         this.name = name;
     }
 
+    @JsonProperty(access =  JsonProperty.Access.READ_ONLY)
     public List<Catalog> getCatalogList() {
         return catalogList;
     }
@@ -37,6 +39,7 @@ public class SkillsBean {
         this.catalogList = catalogList;
     }
 
+    @JsonProperty(access =  JsonProperty.Access.READ_ONLY)
     public List<Worker> getWorkers() {
         return workers;
     }

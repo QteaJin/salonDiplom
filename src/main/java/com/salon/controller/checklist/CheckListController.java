@@ -3,6 +3,7 @@ package com.salon.controller.checklist;
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
+import com.salon.utility.EnumStatusCheckList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,4 +49,15 @@ public class CheckListController {
     public QuickOrderBean createQuickOrder(@RequestBody QuickOrderBean quickOrderBean) {
         return checkListService.createQuickOrde(quickOrderBean);
     }
+
+    @RequestMapping(value = "/worker/{workerId}/status/{status}", method = RequestMethod.GET)
+    public List<CheckListBean> getCheckListByStatusAndDayAndMountsAndYear(@PathVariable("workerId") long workerId,
+                                                                          @PathVariable("status") EnumStatusCheckList status,
+                                                                          @RequestParam(value = "day", required = false) Integer day,
+                                                                          @RequestParam(value = "mounts", required = false) Integer mounts,
+                                                                          @RequestParam(value = "year", required = false) Integer year) {
+
+        return checkListService.getCheckListByStatusAndDayAndMountsAndYear(workerId, status, day, mounts, year);
+    }
+
 }

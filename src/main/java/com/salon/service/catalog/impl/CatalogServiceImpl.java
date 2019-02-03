@@ -18,6 +18,7 @@ import com.salon.service.catalog.CatalogService;
 @Service
 public class CatalogServiceImpl implements CatalogService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogServiceImpl.class);
+
 	@Autowired
 	private CatalogDAO catalogDAO;
 

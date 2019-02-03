@@ -1,5 +1,6 @@
 package com.salon.repository.entity.abstractEntity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.salon.repository.entity.profile.Profile;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
@@ -32,6 +33,7 @@ public class AbstractUser {
     }
 
     @OneToOne
+    @JsonManagedReference
     public Profile getProfile() {
         return profile;
     }

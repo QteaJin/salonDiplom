@@ -38,7 +38,7 @@ public class Discount implements Serializable {
         this.discountId = discountId;
     }
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -47,7 +47,7 @@ public class Discount implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "discount", nullable = false)
+    @Column(name = "discount")
     public Double getDiscount() {
         return discount;
     }
