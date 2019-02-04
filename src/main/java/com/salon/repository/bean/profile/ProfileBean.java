@@ -14,6 +14,7 @@ public class ProfileBean {
     private String password;
     private Worker worker;
     private Client client;
+    private String description;
 
     public Long getId() {
         return id;
@@ -81,4 +82,12 @@ public class ProfileBean {
     public void setClient(Client client) {
         this.client = client;
     }
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

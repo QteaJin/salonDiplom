@@ -72,6 +72,7 @@ public class ProfileServiceImpl implements ProfileService {
         profile.setPassword(domain.getPassword());
         profile.setWorker(domain.getWorker());
         profile.setClient(domain.getClient());
+        profile.setDescription(domain.getDescription());
         return profile;
     }
 
@@ -86,6 +87,7 @@ public class ProfileServiceImpl implements ProfileService {
         profileBean.setPassword(bean.getPassword());
         profileBean.setWorker(bean.getWorker());
         profileBean.setClient(bean.getClient());
+        profileBean.setDescription(bean.getDescription());
         return profileBean;
     }
 

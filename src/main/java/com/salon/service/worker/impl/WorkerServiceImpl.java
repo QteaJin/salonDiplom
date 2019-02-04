@@ -1,8 +1,11 @@
 package com.salon.service.worker.impl;
+import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.client.WorkerCustumBean;
+import com.salon.repository.bean.salon.SalonBean;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.dao.worker.WorkerDAO;
 import com.salon.repository.entity.worker.Worker;
+import com.salon.service.salon.SalonService;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
@@ -23,6 +26,9 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Autowired
     private WorkerDAO workerDAO;
+    
+    @Autowired
+    private SalonService salonService;
 
 
     @Override
@@ -59,8 +65,24 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public List<WorkerCustumBean> getClientByCityAndSalon(String city, Long salonId) {
-        return null;
+    public List<WorkerCustumBean> getWorkersBySalon(Long salonId) {
+    	List<WorkerCustumBean> custumBeans = new ArrayList<WorkerCustumBean>();
+    	SalonBean salonBean = new SalonBean();
+    	salonBean.setSalonId(salonId);
+    	WorkerBean workerBean = new WorkerBean();
+    	workerBean.setSalon(salonService.toDomain(salonBean));
+    	List<WorkerBean> workerBeans = findByExample(workerBean);
+    	if (!workerBeans.isEmpty()) {
+			for (WorkerBean workerBeanTemp : workerBeans) {
+				WorkerCustumBean workerCustumBean = new WorkerCustumBean();
+				workerCustumBean.setId(workerBeanTemp.getId());
+				workerCustumBean.setName(workerBeanTemp.getProfile().getName());
+				workerCustumBean.setDescripton(workerBeanTemp.getProfile().getDescription());
+				custumBeans.add(workerCustumBean);
+			}
+		}
+    	
+        return custumBeans;
     }
 
     @Override

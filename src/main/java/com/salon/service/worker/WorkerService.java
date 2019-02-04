@@ -8,5 +8,5 @@ import com.salon.service.CRUDService;
 import java.util.List;
 
 public interface WorkerService extends CRUDService<WorkerBean,Worker> {
-    List<WorkerCustumBean> getClientByCityAndSalon(String city, Long salonId);
+    List<WorkerCustumBean> getWorkersBySalon(Long salonId);
 }

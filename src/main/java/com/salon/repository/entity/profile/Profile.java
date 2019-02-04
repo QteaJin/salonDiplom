@@ -18,6 +18,7 @@ public class Profile implements Serializable {
     private String email;
     private String login;
     private String password;
+    private String description;
 
     private Worker worker;
     private Client client;
@@ -27,7 +28,7 @@ public class Profile implements Serializable {
     }
 
     public Profile(String name, String phone,
-                   String email, String login, String password, Worker worker, Client client) {
+                   String email, String login, String password, Worker worker, Client client, String description) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -35,7 +36,7 @@ public class Profile implements Serializable {
         this.password = password;
         this.worker = worker;
         this.client = client;
-
+        this.description = description;
     }
 
     @Id
@@ -113,4 +114,12 @@ public class Profile implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
+    @Column(name = "description")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
