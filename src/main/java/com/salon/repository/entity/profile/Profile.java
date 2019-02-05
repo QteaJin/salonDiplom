@@ -7,6 +7,10 @@ import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.worker.Worker;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import java.io.Serializable;
 
 @Entity
@@ -96,6 +100,7 @@ public class Profile implements Serializable {
     }
 
     @OneToOne(mappedBy = "profile")
+    @NotFound(action = NotFoundAction.IGNORE)
     @JsonBackReference
     public Worker getWorker() {
         return worker;
@@ -106,6 +111,7 @@ public class Profile implements Serializable {
     }
 
     @OneToOne(mappedBy = "profile")
+    @NotFound(action = NotFoundAction.IGNORE)
     @JsonBackReference
     public Client getClient() {
         return client;

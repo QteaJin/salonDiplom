@@ -15,6 +15,7 @@ public class ProfileBean {
     private Worker worker;
     private Client client;
     private String description;
+    private Long salonId;
 
     public Long getId() {
         return id;
@@ -90,4 +91,13 @@ public class ProfileBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Long getSalonId() {
+		return salonId;
+	}
+
+	public void setSalonId(Long salonId) {
+		this.salonId = salonId;
+	}
+	
 }

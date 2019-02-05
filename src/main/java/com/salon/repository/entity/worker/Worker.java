@@ -11,6 +11,10 @@ import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +52,7 @@ public class Worker extends AbstractUser implements Serializable {
     }
 
     @ManyToMany()
+    @NotFound(action = NotFoundAction.IGNORE)
     @JsonManagedReference
     public List<Skills> getSkillsList() {
         return skillsList;
@@ -58,6 +63,7 @@ public class Worker extends AbstractUser implements Serializable {
     }
 
     @OneToMany(mappedBy = "worker")
+    @NotFound(action = NotFoundAction.IGNORE)
     @JsonBackReference
     public List<CheckList> getCheckLists() {
         return checkLists;
@@ -68,6 +74,7 @@ public class Worker extends AbstractUser implements Serializable {
     }
 
     @ManyToOne()
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "salon_id")
     @JsonBackReference
     public Salon getSalon() {
