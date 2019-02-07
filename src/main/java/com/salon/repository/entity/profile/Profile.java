@@ -7,6 +7,10 @@ import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.worker.Worker;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import java.io.Serializable;
 
 @Entity
@@ -18,6 +22,7 @@ public class Profile implements Serializable {
     private String email;
     private String login;
     private String password;
+    private String description;
 
     private Worker worker;
     private Client client;
@@ -27,7 +32,7 @@ public class Profile implements Serializable {
     }
 
     public Profile(String name, String phone,
-                   String email, String login, String password, Worker worker, Client client) {
+                   String email, String login, String password, Worker worker, Client client, String description) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -35,7 +40,7 @@ public class Profile implements Serializable {
         this.password = password;
         this.worker = worker;
         this.client = client;
-
+        this.description = description;
     }
 
     @Id
@@ -95,6 +100,7 @@ public class Profile implements Serializable {
     }
 
     @OneToOne(mappedBy = "profile")
+    @NotFound(action = NotFoundAction.IGNORE)
     @JsonBackReference
     public Worker getWorker() {
         return worker;
@@ -105,6 +111,7 @@ public class Profile implements Serializable {
     }
 
     @OneToOne(mappedBy = "profile")
+    @NotFound(action = NotFoundAction.IGNORE)
     @JsonBackReference
     public Client getClient() {
         return client;
@@ -113,4 +120,12 @@ public class Profile implements Serializable {
     public void setClient(Client client) {
         this.client = client;
     }
+    @Column(name = "description")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

@@ -53,10 +53,13 @@ public class SalonServiceImpl implements SalonService {
 		LOGGER.debug("find by id Salon start");
 
 		Optional<Salon> salon = salonDAO.findById(id);
+		if (salon.isPresent()) {
+			return toBean(salon.get());
+		}
 
 		LOGGER.debug("find by id Salon finish");
 
-		return toBean(salon.get());
+		return new SalonBean();
 	}
 
 	@Override

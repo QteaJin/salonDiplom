@@ -38,9 +38,8 @@ public class WorkerController {
         return workerService.update(workerBean);
     }
 
-    @RequestMapping(value = "/{city}/{salonId}", method = RequestMethod.GET)
-    public List<WorkerCustumBean> getClientByCityAndSalon(@PathVariable("city") String city,
-                                                                     @PathVariable("salonId") Long salonId) {
-        return workerService.getClientByCityAndSalon(city, salonId);
+    @RequestMapping(method = RequestMethod.GET)
+    public List<WorkerCustumBean> getClientByCityAndSalon(@RequestParam("salonId") Long salonId) {
+        return workerService.getWorkersBySalon(salonId);
     }
 }
