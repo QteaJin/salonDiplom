@@ -3,6 +3,7 @@ import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.client.WorkerCustumBean;
 import com.salon.repository.bean.salon.SalonBean;
 import com.salon.repository.bean.worker.WorkerBean;
+import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
 import com.salon.repository.dao.worker.WorkerDAO;
 import com.salon.repository.entity.worker.Worker;
 import com.salon.service.salon.SalonService;
@@ -78,6 +79,7 @@ public class WorkerServiceImpl implements WorkerService {
 				workerCustumBean.setId(workerBeanTemp.getId());
 				workerCustumBean.setName(workerBeanTemp.getProfile().getName());
 				workerCustumBean.setDescripton(workerBeanTemp.getProfile().getDescription());
+				workerCustumBean.setNameImage(workerBeanTemp.getId() +"worker.jpg" );
 				custumBeans.add(workerCustumBean);
 			}
 		}
@@ -159,5 +161,20 @@ public class WorkerServiceImpl implements WorkerService {
         }
         return list;
     }
+
+	@Override
+	public WorkerProfileSkillsBean getWorkerProfileSkillsById(Long workerId) {
+		Optional<Worker> worker = workerDAO.findById(workerId);
+		WorkerBean workerBean = toBean(worker.get());
+		WorkerProfileSkillsBean profileSkillsBean = new WorkerProfileSkillsBean();
+		profileSkillsBean.setWorkerProfileId(workerId);
+		profileSkillsBean.setDescription(workerBean.getProfile().getDescription());
+		if(!workerBean.getSkillsList().isEmpty()) {
+		profileSkillsBean.setListSkills(workerBean.getSkillsList());
+		}
+		
+				
+		return profileSkillsBean;
+	}
 
 }

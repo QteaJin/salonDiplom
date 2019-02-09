@@ -113,4 +113,13 @@ public class SkillsServiceImpl implements SkillsService {
         }
         return beans;
     }
+    
+   
+    public List<Skills> toDomainList(List<SkillsBean> skills) {
+        List<Skills> beans = new ArrayList<>();
+        for (SkillsBean skill : skills) {
+            beans.add(toDomain(skill));
+        }
+        return beans;
+    }
 }

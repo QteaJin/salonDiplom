@@ -2,6 +2,7 @@ package com.salon.controller.worker;
 
 import com.salon.repository.bean.client.WorkerCustumBean;
 import com.salon.repository.bean.worker.WorkerBean;
+import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
 import com.salon.service.worker.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,12 @@ public class WorkerController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<WorkerCustumBean> getClientByCityAndSalon(@RequestParam("salonId") Long salonId) {
+    public List<WorkerCustumBean> getClientByCityAndSalon(@RequestParam("salonId") long salonId) {
         return workerService.getWorkersBySalon(salonId);
+    }
+    
+    @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
+    public WorkerProfileSkillsBean getWorkerProfileSkillsById(@PathVariable("id") long workerId) {
+        return workerService.getWorkerProfileSkillsById(workerId);
     }
 }
