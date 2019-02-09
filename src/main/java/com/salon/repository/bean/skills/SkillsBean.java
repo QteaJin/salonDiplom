@@ -11,7 +11,7 @@ public class SkillsBean {
     private Long skillsId;
     private String name;
 
-    private List<Catalog> catalogList;
+    private List<Catalog> catalogList = new ArrayList<>();
     private List<Worker> workers = new ArrayList<>();
 
     public Long getSkillsId() {

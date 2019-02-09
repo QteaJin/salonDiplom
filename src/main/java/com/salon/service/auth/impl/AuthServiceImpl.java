@@ -4,12 +4,14 @@ import com.salon.repository.bean.auth.AuthBean;
 import com.salon.repository.bean.client.ClientBean;
 import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.bean.salon.SalonBean;
+import com.salon.repository.bean.skills.SkillsBean;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.service.auth.AuthService;
 import com.salon.service.client.ClientService;
 import com.salon.service.exception.ErrorInfoExeption;
 import com.salon.service.profile.ProfileService;
 import com.salon.service.salon.SalonService;
+import com.salon.service.skills.SkillsService;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
@@ -40,6 +42,9 @@ public class AuthServiceImpl implements AuthService {
 
 	@Autowired
 	private SalonService salonService;
+	
+	@Autowired
+	private SkillsService skillsService;
 
 	@Override
 	public AuthBean loginUser(String login, String password) {
@@ -80,12 +85,14 @@ public class AuthServiceImpl implements AuthService {
 
 		SalonBean salon = salonService.findById(profile.getSalonId());
 		
+		//List<SkillsBean> skillsBean = skillsService.findAll();
 		ProfileBean bean = profileService.save(profile);
 
 		WorkerBean worker = new WorkerBean();
 		worker.setProfile(profileService.toDomain(bean));
 		worker.setRole(EnumRole.WORKER);
 		worker.setStatus(EnumStatus.NOACTIVE);
+		//worker.setSkillsList(skillsService.toDomainList(skillsBean));
 		if (salon.getSalonId() != null) {
 			worker.setSalon(salonService.toDomain(salon));
 		}
