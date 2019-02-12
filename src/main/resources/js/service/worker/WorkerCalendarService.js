@@ -87,7 +87,7 @@ function getButton() {
     seletc.appendChild(document.createTextNode("Потвердить"));
     return seletc;
 }
-
+//json[i].client
 function getNameClient(jsonClient) {
     var js = JSON.parse(jsonClient);
     var jsProfile = JSON.parse(JSON.stringify(js.profile));

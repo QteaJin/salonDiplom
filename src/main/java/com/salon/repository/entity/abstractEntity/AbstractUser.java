@@ -12,14 +12,16 @@ public class AbstractUser {
     private EnumRole role;
     private Profile profile;
     private EnumStatus status;
+    private String description;
 
     public AbstractUser() {
     }
 
-    public AbstractUser( EnumRole role, Profile profile, EnumStatus status) {
+    public AbstractUser(EnumRole role, Profile profile, EnumStatus status, String description) {
         this.role = role;
         this.profile = profile;
         this.status = status;
+        this.description = description;
     }
 
     @Column(name = "role")
@@ -50,5 +52,14 @@ public class AbstractUser {
 
     public void setStatus(EnumStatus status) {
         this.status = status;
+    }
+
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

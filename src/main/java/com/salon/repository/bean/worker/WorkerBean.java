@@ -17,6 +17,7 @@ public class WorkerBean {
     private List<Skills> skillsList;
     private List<CheckList> checkLists;
     private Salon salon;
+    private String description;
 
     public WorkerBean() {
     }
@@ -75,5 +76,13 @@ public class WorkerBean {
 
     public void setSalon(Salon salon) {
         this.salon = salon;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -137,6 +137,7 @@ public class WorkerServiceImpl implements WorkerService {
         worker.setSalon(domain.getSalon());
         worker.setCheckLists(domain.getCheckLists());
         worker.setSkillsList(domain.getSkillsList());
+        worker.setDescription(domain.getDescription());
 
         return worker;
     }
@@ -151,6 +152,7 @@ public class WorkerServiceImpl implements WorkerService {
         workerBean.setSalon(bean.getSalon());
         workerBean.setCheckLists(bean.getCheckLists());
         workerBean.setSkillsList(bean.getSkillsList());
+        workerBean.setDescription(bean.getDescription());
         return workerBean;
     }
 

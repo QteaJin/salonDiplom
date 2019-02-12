@@ -2,7 +2,6 @@ package com.salon.repository.entity.profile;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.worker.Worker;
 

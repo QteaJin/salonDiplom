@@ -117,6 +117,7 @@ public class ClientServiceImpl implements ClientService {
         clientBean.setDiscount(domain.getDiscount());
         clientBean.setSalon(domain.getSalon());
         clientBean.setCheckList(domain.getCheckList());
+        clientBean.setDescription(domain.getDescription());
 
         return clientBean;
     }
@@ -142,6 +143,7 @@ public class ClientServiceImpl implements ClientService {
         client.setDiscount(bean.getDiscount());
         client.setCheckList(bean.getCheckList());
         client.setSalon(bean.getSalon());
+        client.setDescription(bean.getDescription());
         return client;
     }
 
