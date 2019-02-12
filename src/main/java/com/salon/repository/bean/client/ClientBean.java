@@ -19,6 +19,7 @@ public class ClientBean {
     private Profile profile;
     private EnumStatus status;
     private List<CheckList> checkList;
+    private String description;
 
     public Long getId() {
         return id;
@@ -82,5 +83,13 @@ public class ClientBean {
 
     public void setCheckList(List<CheckList> checkList) {
         this.checkList = checkList;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

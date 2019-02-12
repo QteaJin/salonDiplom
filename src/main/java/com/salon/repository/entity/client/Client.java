@@ -27,13 +27,13 @@ public class Client extends AbstractUser implements Serializable {
 
     private List<CheckList> checkList = new ArrayList<>();
 
-    public Client(){
+    public Client() {
 
     }
 
     public Client(EnumRole role, Profile profile, EnumStatus status,
-                  Long id, Address address, Discount discount) {
-        super(role, profile, status);
+                  Long id, Address address, Discount discount, String descroption) {
+        super(role, profile, status, descroption);
         this.id = id;
         this.address = address;
         this.discount = discount;
