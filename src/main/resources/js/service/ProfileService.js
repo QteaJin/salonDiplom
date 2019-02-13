@@ -54,7 +54,8 @@ function createWorkerProfile(json, workerId){
 	profileBlock.appendChild(profileDescription);
 	profileBlock.appendChild(workerSkills);
 	parentProfile.appendChild(profileBlock);
-	
+	var item = parentProfile;
+	//scrollToItem(item);
 	
 	}
 }
@@ -66,5 +67,6 @@ function createWorkerProfile(json, workerId){
 		if(myNode != null){
 			myNode.forEach(e => e.parentNode.removeChild(e));
 	}
+	
 }
 	
