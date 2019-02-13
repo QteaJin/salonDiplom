@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+    <title>Контакты</title>
 </head>
 <body>
-
+<!--HEADER-->
+<header>
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
+        <div class="container">
+            <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+           
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/service">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/trends">В тренде</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/price-list">Стоимость</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/comments">Отзывы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/contact">Контакы</a>
+                    </li>
+                </ul>
+                <div class="dropdown">
+					  <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
+					    Выберите салон
+					  </button>
+					  <div class="dropdown-menu">
+					    <button type="button" class="dropdown-item" salonId="1" onclick="getRequestWorkersPhoto (this);">Киев</button>
+						<button type="button" class="dropdown-item" salonId="2" onclick="getRequestWorkersPhoto (this);">Одесса</button>
+						<button type="button" class="dropdown-item" salonId="3" onclick="getRequestWorkersPhoto (this);">Харьков</button>
+					  </div>
+					</div>
+                
+                <div class=" my-2 my-md-0">
+                	
+                    <button class="btn btn-outline-light">ВХОД</button>
+                    <button class="btn btn-outline-light">ВЫХОД</button>
+                </div>
+            </div>
+        </div>
+      </nav>
+</header>
+<!--HEADER-->
+5, вулиця Дерибасівська, Одеса <br>
+(048) -777-77-77 <br>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d930.1227531028236!2d30.74374293159657!3d46.483181958376484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631989c254863%3A0xbb58c043e607b484!2sNAZARKO+beauty+space!5e0!3m2!1sru!2sua!4v1550055909614" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 </body>
 </html>

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPage </title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,7 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+            
 <style type="text/css">
 .back {
 	background-color: #D9E1DA;
@@ -49,12 +51,8 @@
 }
 </style>
 
-<head>
-<meta charset="UTF-8">
-<title>Client Page</title>
 </head>
-<body onload = "createHead ()">
-
+<body >
 <!--HEADER-->
 <header>
     <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
@@ -66,24 +64,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarsExample07">
            
-                <ul class="navbar-nav mr-auto">
+                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Главня</a>
+                        <a class="nav-link" href="/">Главная</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="#">Услуги</a>
+                        <a class="nav-link" href="/service">Услуги</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">В тренде</a>
+                        <a class="nav-link " href="/trends">В тренде</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Стоимость</a>
+                        <a class="nav-link" href="/price-list">Стоимость</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Отзывы</a>
+                        <a class="nav-link " href="/comments">Отзывы</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Контакы</a>
+                        <a class="nav-link " href="/contact">Контакы</a>
                     </li>
                 </ul>
                 <div class="dropdown">
@@ -108,177 +106,176 @@
 </header>
 <!--HEADER-->
 
-<!-- 	<header>
+<!--BODY-->
 
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-10 back"></div>
-				<div class="col-md-2 back">
-					<span class="float-right">
-						<p></p>
-						<div class="btn-group" role="group" aria-label="Basic example">
-							<div class="dropdown">
-							    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							      Выберите город
-							    </button>
-							    <div class="dropdown-menu">
-							    <button type="button" class="dropdown-item" salonId="1" onclick="getRequestWorkersPhoto (this);">Киев</button>
-							    <button type="button" class="dropdown-item" salonId="2" onclick="getRequestWorkersPhoto (this);">Одесса</button>
-							    <button type="button" class="dropdown-item" salonId="3" onclick="getRequestWorkersPhoto (this);">Харьков</button>
-							      
-							    </div>
-							  </div>
-							<button type="button" class="btn btn-primary"
-								data-toggle="collapse" data-target="#login">Вход</button>
-							<button type="button" class="btn btn-primary" onclick="location.href='registration';">Зарегистрироваться</button>
-						</div>
-						<div id="login" class="collapse">
-							<form action="auth" method="post" modelAttribute = 'loginForm'>
-								<div class="form-group">
-									<input type="login" class="form-control" id="InputLogin"
-										placeholder="Enter login" name="login">
-								</div>
-								<div class="form-group">
-									<input type="password" class="form-control" id="InputPassword"
-										placeholder="Password" name="password">
-								</div>
-								<button type="submit" class="btn btn-primary">Войти</button>
-								<a  href="forgotPass">Восстановить пароль</a>
-							</form>
-						</div>
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Новый заказ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="work-tab" data-toggle="tab" href="#work" role="tab" aria-controls="contact" aria-selected="false">Список заказов</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">ОТЗЫВЫ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Профиль</a>
+        </li>
+    </ul>
 
-						<p></p>
+    <!-- КАЛЕНДАРЬ-->
+    <div class="tab-content" id="myTabContent">
 
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row">
-
-				<div class="col-md-12 back">
-					<div class="row h-100 justify-content-center">
-						<div class="btn-group " role="group">
-							<a href="#" class="btn btn-primary btn-lg active" role="button"
-								aria-pressed="true">О нас</a> <a href="#"
-								class="btn btn-primary btn-lg active" role="button"
-								aria-pressed="true">Услуги</a> <a href="#"
-								class="btn btn-primary btn-lg active" role="button"
-								aria-pressed="true">В тренде</a> <a href="#"
-								class="btn btn-primary btn-lg active" role="button"
-								aria-pressed="true">Стоимость услуг</a> <a href="#"
-								class="btn btn-primary btn-lg active" role="button"
-								aria-pressed="true">Отзывы</a> <a href="#"
-								class="btn btn-primary btn-lg active" role="button"
-								aria-pressed="true">Контакты</a>
-							
-						</div>
-					</div>
-				</div>
-	</header> -->
-	<!-- <th:block th:include="/header"></th:block>  -->
-
-
-	<div class="shadow-lg p-3 mb-5 bg-white rounded">
-		<div class="container-fluid">
+    	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    		<div class="container-fluid">
 		<div class="row" >
-			<div id="workerPhoto" class=" col-md-8" ></div>
-			<div class="col-md-4 calendar"></div>
+			Оформить новый заказ
+			<div id="workerPhoto" class=" col-md-12" ></div> <!-- Тут фото работников -->
+			
 			
 		</div>
+		<div class="row" >
+		<div class="col-md-8 workerprofile">	</div>
+		<div class="col-md-4 workercatalog"> workercatalog </div>
 		</div>
-			
-			<!-- <script type="text/javascript" src = "script/workerPhoto.js"></script> -->
-			
 		</div>
-		<div class="container-fluid">
-			<div class="row">
+    		
+    	</div>
+		
+        <div class="tab-pane fade" id="work" role="tabpanel" aria-labelledby="work-tab">
 
-				<div class="col-md-8" >
-					<div class="workerprofile">					
-					
-					</div>
-					<div><p>test1</p></div>
-						
+            <!--День Месяц ГОД-->
+            <div class="mt-5">
+                <div class="row">
 
-					
-				</div>
-				<div class="col-md-4">
-					<div class="container-fluid bg-light py-3">
-    <form id="contact-form">
-        <div class="messages"></div>
-        <div class="controls">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="form_name">Имя *</label>
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Введите имя" required="required" data-error="name is required.">
-                        <div class="help-block with-errors"></div>
+                    <div class="col">
+                        <select id="inputStateDay" class="form-control">
+                        </select>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="form_email">Email</label>
-                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Введите email">
-                        <div class="help-block with-errors"></div>
+                    <div class="col">
+                        <select id="inputStateMounts" class="form-control" onclick="selectDay();">
+                        </select>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="form_phone">Телефон *</label>
-                        <input id="form_phone" type="tel" name="phone" class="form-control" required="required" placeholder="+380ххххххххх">
-                        <div class="help-block with-errors"></div>
+                    <div class="col">
+                        <select id="inputStateYear" class="form-control">
+                            <option selected>ГОД</option>
+                            <option>2018</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStateStatus" class="form-control">
+                            <option selected>Статус</option>
+                            <option>Покараска</option>
+                        </select>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="clearfix"></div>
+            <!--День Месяц ГОД-->
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="form_message">Сообщение *</label>
-                    <textarea id="form_message" name="description" class="form-control" placeholder="Сообщение" rows="4" required="required" data-error="send a message."></textarea>
-                    <div class="help-block with-errors"></div>
+            <div class="mt-5 ">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Название Процедуры</th>
+                        <th scope="col">Имя Клиента</th>
+                        <th scope="col">Цена</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">На когда назначен</th>
+                        <th scope="col">Статус Текущий</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Потвердить</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyTable">
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <!-- КАЛЕНДАРЬ-->
+
+
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+
+            <div class="mt-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col ">
+                            <div class="card">
+                                <img src="http://remsmaservis.ru/wp-content/uploads/2017/12/no_img.png" class="card-img-top" alt="..." style="width: 300px; height: 200px">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Имя</label>
+                                        <input type="text" class="form-control" placeholder="Имя">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Телефон</label>
+                                        <input type="text" class="form-control" placeholder="Телефон">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Login</label>
+                                        <input type="text" class="form-control" placeholder="Login">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Email</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                                </div>
+                                <div class="center">
+                                    <button type="submit" class="btn btn-primary">Изменить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <input type="submit" class="btn btn-primary btn-send" value="Отправить заявку" onclick="sendQuickOrder(event)">
-                
-                
+
+
+            <div class="mt-5">
+                <!--CКИЛЫ-->
+
             </div>
+
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-muted"><strong>*</strong> Поля обязательны к заполнению</p>
-            </div>
-        </div>
-    </form>
+
+
+
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">sakdhkjashk</div>
+    </div>
 </div>
-   				 </div>
-				</div>
-
-			</div>
-		</div>
-
-	</div>
-
-
-<!-- <script type="text/javascript" src = 'script/startIndex.js'></script> -->
-
-<footer>
-	<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-12 back footer"></div>
-			</div>
-		</div>
-</footer>
-
-</body>
-				<script type="text/javascript" src = "/js/service/indexCallendar.js"></script>
-				<script type="text/javascript" src = "/js/bean/QuickOrder.js"></script>
-                <script type="text/javascript" src = "/js/service/QuickOrderService.js"></script>
+<!--BODY-->
+<div></div>
+<!-- <script type="text/javascript">
+	function scrollToItem(item) {
+		
+    var diff=(item.offsetTop-window.scrollY)/8
+    if (Math.abs(diff)>1) {
+        window.scrollTo(0, (window.scrollY+diff))
+        clearTimeout(window._TO)
+        window._TO=setTimeout(scrollToItem, 30, item)
+    } else {
+        window.scrollTo(0, item.offsetTop)
+    }
+   
+} -->
+</script>
                 <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
                 <script type="text/javascript" src = "/js/service/workerPhoto.js"></script>
                 <script type="text/javascript" src = "/js/service/ProfileService.js"></script>
+</body>
 </html>

@@ -78,7 +78,7 @@ public class WorkerServiceImpl implements WorkerService {
 				WorkerCustumBean workerCustumBean = new WorkerCustumBean();
 				workerCustumBean.setId(workerBeanTemp.getId());
 				workerCustumBean.setName(workerBeanTemp.getProfile().getName());
-				workerCustumBean.setDescripton(workerBeanTemp.getProfile().getDescription());
+				workerCustumBean.setDescripton(workerBeanTemp.getDescription());
 				workerCustumBean.setNameImage(workerBeanTemp.getId() +"worker.jpg" );
 				custumBeans.add(workerCustumBean);
 			}
