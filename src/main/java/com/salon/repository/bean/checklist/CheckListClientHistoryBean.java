@@ -11,6 +11,7 @@ import com.salon.utility.EnumStatusCheckList;
 public class CheckListClientHistoryBean {
 
 	private Long clientId;
+	private Long checkListId;
 	private Timestamp dateAppointment;
 	private String salon;
 	private String worker;
@@ -60,6 +61,12 @@ public class CheckListClientHistoryBean {
 	}
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	public Long getCheckListId() {
+		return checkListId;
+	}
+	public void setCheckListId(Long checkListId) {
+		this.checkListId = checkListId;
 	}
 	
 	

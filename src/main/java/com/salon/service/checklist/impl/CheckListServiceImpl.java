@@ -173,7 +173,12 @@ public class CheckListServiceImpl implements CheckListService {
 	                        "CLIENT.NOT_FOUND");
 	            }
 			List<CheckList> checkListBeans = clientBean.getCheckList();
+			if (checkListBeans.isEmpty()) {
+				LOGGER.debug("NO ORDERS of Client");
+				return clientHistoryBeans;
+			}
 			checkListBeans.sort(new CheckListComparatorByDate());
+			
 			
 			for (CheckList checkList : checkListBeans) {
 				if (checkList.getDateAppointment().after(timestampEnd)) {
@@ -183,15 +188,20 @@ public class CheckListServiceImpl implements CheckListService {
 					Double price = 0d;
 					CheckListClientHistoryBean historyBean = new CheckListClientHistoryBean();
 					historyBean.setClientId(clientId);
+					historyBean.setCheckListId(checkList.getSheckListId());
 					historyBean.setDateAppointment(checkList.getDateAppointment());
 					historyBean.setSalon(checkList.getWorker().getSalon().getName());
 					historyBean.setWorker(checkList.getWorker().getDescription());
-					historyBean.setCatalogs(checkList.getCatalogs());
-					for (Catalog catalog : checkList.getCatalogs()) {
-						price += catalog.getPrice();
+					if(!checkList.getCatalogs().isEmpty()) {
+						historyBean.setCatalogs(checkList.getCatalogs());
+						for (Catalog catalog : checkList.getCatalogs()) {
+							price += catalog.getPrice();
+						}
 					}
+					
 					historyBean.setPrice(price);
 					historyBean.setStatus(checkList.getStatus());
+					clientHistoryBeans.add(historyBean);
 				}
 				
 					
