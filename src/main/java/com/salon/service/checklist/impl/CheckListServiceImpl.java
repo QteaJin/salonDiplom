@@ -1,11 +1,16 @@
 package com.salon.service.checklist.impl;
 
 import com.salon.repository.bean.checklist.CheckListBean;
+import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
+import com.salon.repository.bean.client.ClientBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.dao.checklist.CheckListDAO;
+import com.salon.repository.entity.catalog.Catalog;
 import com.salon.repository.entity.checklist.CheckList;
+import com.salon.service.checklist.CheckListComparatorByDate;
 import com.salon.service.checklist.CheckListService;
+import com.salon.service.client.ClientService;
 import com.salon.service.exception.ErrorInfoExeption;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumStatusCheckList;
@@ -17,7 +22,11 @@ import org.springframework.stereotype.Service;
 
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
+import java.text.DateFormat;
+import java.text.ParseException;
 
 @Service
 public class CheckListServiceImpl implements CheckListService {
@@ -28,6 +37,9 @@ public class CheckListServiceImpl implements CheckListService {
 
     @Autowired
     private WorkerService workerService;
+    
+    @Autowired
+    private ClientService clientService;
 
     @Override
     public CheckListBean save(CheckListBean bean) {
@@ -140,6 +152,53 @@ public class CheckListServiceImpl implements CheckListService {
         LOGGER.debug("find by example CheckList finish");
 
         return toBean(workers);
+    }
+    
+    
+    @Override
+    public List<CheckListClientHistoryBean> getClientHistory(Long clientId, Integer year, Integer month, String status) {
+    	List<CheckListClientHistoryBean> clientHistoryBeans = new ArrayList<CheckListClientHistoryBean>();
+    	    
+    	    LocalDate start = LocalDate.of(year, month, 1);
+    	    int days = start.lengthOfMonth();
+    	    LocalDate end = LocalDate.of(year, month, days);
+    	    Timestamp timestampStart = Timestamp.valueOf(start.atStartOfDay());
+    	    Timestamp timestampEnd = Timestamp.valueOf(end.atStartOfDay().plusHours(23).plusMinutes(59));
+        
+ 
+			ClientBean clientBean = clientService.findById(clientId);
+			 if (clientBean == null) {
+	                LOGGER.debug("Client NOT_FOUND");
+	                throw new ErrorInfoExeption("Client NOT_FOUND",
+	                        "CLIENT.NOT_FOUND");
+	            }
+			List<CheckList> checkListBeans = clientBean.getCheckList();
+			checkListBeans.sort(new CheckListComparatorByDate());
+			
+			for (CheckList checkList : checkListBeans) {
+				if (checkList.getDateAppointment().after(timestampEnd)) {
+					break;
+				}
+				if (checkList.getDateAppointment().after(timestampStart)) {
+					Double price = 0d;
+					CheckListClientHistoryBean historyBean = new CheckListClientHistoryBean();
+					historyBean.setClientId(clientId);
+					historyBean.setDateAppointment(checkList.getDateAppointment());
+					historyBean.setSalon(checkList.getWorker().getSalon().getName());
+					historyBean.setWorker(checkList.getWorker().getDescription());
+					historyBean.setCatalogs(checkList.getCatalogs());
+					for (Catalog catalog : checkList.getCatalogs()) {
+						price += catalog.getPrice();
+					}
+					historyBean.setPrice(price);
+					historyBean.setStatus(checkList.getStatus());
+				}
+				
+					
+			}
+		
+    	
+    	return clientHistoryBeans;
     }
 
 

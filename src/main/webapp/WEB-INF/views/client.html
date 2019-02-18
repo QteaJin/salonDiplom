@@ -16,6 +16,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
             
 <style type="text/css">
 .back {
@@ -114,7 +115,7 @@
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Новый заказ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="work-tab" data-toggle="tab" href="#work" role="tab" aria-controls="contact" aria-selected="false">Список заказов</a>
+            <a class="nav-link" id="work-tab" data-toggle="tab" href="#work" role="tab" aria-controls="contact" aria-selected="false" onclick="setCurrentDateClient();">Список заказов</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">ОТЗЫВЫ</a>
@@ -124,7 +125,7 @@
         </li>
     </ul>
 
-    <!-- КАЛЕНДАРЬ-->
+    
     <div class="tab-content" id="myTabContent">
 
     	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -143,32 +144,37 @@
     		
     	</div>
 		
+		<!-- КАЛЕНДАРЬ-->
         <div class="tab-pane fade" id="work" role="tabpanel" aria-labelledby="work-tab">
 
             <!--День Месяц ГОД-->
             <div class="mt-5">
                 <div class="row">
 
+                   
                     <div class="col">
-                        <select id="inputStateDay" class="form-control">
+                        <select id="inputStateMounts" class="form-control" onclick="selectMonthClient();">
+                        	
                         </select>
                     </div>
                     <div class="col">
-                        <select id="inputStateMounts" class="form-control" onclick="selectDay();">
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select id="inputStateYear" class="form-control">
-                            <option selected>ГОД</option>
+                        <select id="inputStateYear" class="form-control" onclick="selectYearClient();">
                             <option>2018</option>
                         </select>
                     </div>
                     <div class="col">
-                        <select id="inputStateStatus" class="form-control">
+                        <select id="inputStateStatus" class="form-control" onchange="changeStatusOrderClient()">
                             <option selected>Статус</option>
-                            <option>Покараска</option>
+                            <option value = "ALL">ВСЕ</option>
+                            <option value="DONE">ВЫПОНЕН</option>
+                            <option value="CANCELED">ОТМЕН</option>
+                            <option value="ACTIVE">АКТИВНЫЙ</option>
+                            <option value = "NEW">НОВЫЙ</option>
+                            
+
                         </select>
                     </div>
+                    <button> Поиск </button>
                 </div>
             </div>
             <!--День Месяц ГОД-->
@@ -178,17 +184,17 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Название Процедуры</th>
-                        <th scope="col">Имя Клиента</th>
-                        <th scope="col">Цена</th>
-                        <th scope="col">Описание</th>
-                        <th scope="col">На когда назначен</th>
-                        <th scope="col">Статус Текущий</th>
+                        <th scope="col">Дата</th>
+                        <th scope="col">Салон</th>
+                        <th scope="col">Мастер</th>
+                        <th scope="col">Услуга</th>
+                        <th scope="col">Стоимость</th>
                         <th scope="col">Статус</th>
-                        <th scope="col">Потвердить</th>
+                        <th scope="col">Изменить</th>
                     </tr>
                     </thead>
                     <tbody id="tbodyTable">
+
                     </tbody>
                 </table>
             </div>
@@ -260,20 +266,43 @@
 </div>
 <!--BODY-->
 <div></div>
-<!-- <script type="text/javascript">
-	function scrollToItem(item) {
+<script type="text/javascript">
+	function changeStatusOrderClient() {
+		var selected = document.getElementById("inputStateStatus").value;
+		console.log(selected);
+	}
+
+	function setCurrentDateClient () {
+		var arrMonth=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+		var now = moment();
+		// console.log(now.format('M'));
+		// console.log(now.format('YYYY'));
+		var month = document.getElementById("inputStateMounts");
+		for (var i = 0; i < arrMonth.length; i++) {
+			var select = document.createElement("option");
+			select.setAttribute("month", (i+1));
+			if(now.format('M').toString() == (i + 1)){
+				select.setAttribute("selected", "selected");
+
+			}
+			var node = document.createTextNode(arrMonth[i]);
+			select.appendChild(node);
+			month.appendChild(select);
+		}
+
+		var year = document.getElementById("inputStateYear");
+		var currentYear = document.createElement("option");
+		currentYear.setAttribute("selected", "selected");
+		var yearNode = document.createTextNode(now.format('YYYY'));
+		currentYear.appendChild(yearNode);
+		year.appendChild(currentYear);
 		
-    var diff=(item.offsetTop-window.scrollY)/8
-    if (Math.abs(diff)>1) {
-        window.scrollTo(0, (window.scrollY+diff))
-        clearTimeout(window._TO)
-        window._TO=setTimeout(scrollToItem, 30, item)
-    } else {
-        window.scrollTo(0, item.offsetTop)
-    }
-   
-} -->
+
+
+	}
 </script>
+
+
                 <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
                 <script type="text/javascript" src = "/js/service/workerPhoto.js"></script>
                 <script type="text/javascript" src = "/js/service/ProfileService.js"></script>

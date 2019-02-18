@@ -11,4 +11,5 @@ import java.util.List;
 public interface WorkerService extends CRUDService<WorkerBean,Worker> {
     List<WorkerCustumBean> getWorkersBySalon(Long salonId);
     WorkerProfileSkillsBean getWorkerProfileSkillsById(Long workerId);
+    List<WorkerBean> getWorkersByCity(String city);
 }

@@ -1,6 +1,7 @@
 package com.salon.controller.checklist;
 
 import com.salon.repository.bean.checklist.CheckListBean;
+import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
 import com.salon.utility.EnumStatusCheckList;
@@ -59,5 +60,15 @@ public class CheckListController {
 
         return checkListService.getCheckListByStatusAndDayAndMountsAndYear(workerId, status, day, mounts, year);
     }
+    
+    @RequestMapping(value = "/client/{clientId}/history", method = RequestMethod.GET)
+    public List<CheckListClientHistoryBean> getClientHistory(@PathVariable("clientId") Long clientId,
+    														@RequestParam(value = "year") Integer year,
+    														@RequestParam(value = "month") Integer month,
+    														@RequestParam(value = "status", required = false) String status){
+	return checkListService.getClientHistory(clientId, year, month, status);
+    	
+    }
+    
 
 }

@@ -6,6 +6,7 @@ import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
 import com.salon.repository.dao.worker.WorkerDAO;
 import com.salon.repository.entity.worker.Worker;
+import com.salon.service.adress.AdressService;
 import com.salon.service.salon.SalonService;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumRole;
@@ -30,6 +31,9 @@ public class WorkerServiceImpl implements WorkerService {
     
     @Autowired
     private SalonService salonService;
+    
+    @Autowired
+    private AdressService addressService;
 
 
     @Override
@@ -177,6 +181,31 @@ public class WorkerServiceImpl implements WorkerService {
 		
 				
 		return profileSkillsBean;
+	}
+
+	@Override
+	public List<WorkerBean> getWorkersByCity(String city) {
+		List<WorkerBean> workerBeans = new ArrayList<WorkerBean>();
+		AdressBean adressBean = new AdressBean();
+		adressBean.setCity(city);
+		SalonBean salonBean = new SalonBean();
+		salonBean.setAddress(addressService.toDomain(adressBean));
+		List <SalonBean> salonBeans = salonService.findByExample(salonBean);
+		if (!salonBeans.isEmpty()) {
+			List<Worker> workers = new ArrayList<Worker>();
+			
+			for (SalonBean bean : salonBeans) {
+				workers.addAll(bean.getWorkerList());
+			}
+			for (Worker worker : workers) {
+				workerBeans.add(toBean(worker));
+			}
+			
+			return workerBeans;
+		}
+		
+				
+		return workerBeans;
 	}
 
 }

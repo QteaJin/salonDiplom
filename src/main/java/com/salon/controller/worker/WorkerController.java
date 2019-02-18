@@ -48,4 +48,9 @@ public class WorkerController {
     public WorkerProfileSkillsBean getWorkerProfileSkillsById(@PathVariable("id") long workerId) {
         return workerService.getWorkerProfileSkillsById(workerId);
     }
+    
+    @RequestMapping(value = "/All/{city}", method = RequestMethod.GET)
+    public List<WorkerBean> getWorkersByCity(@PathVariable("city") String city) {
+        return workerService.getWorkersByCity(city);
+    }
 }
