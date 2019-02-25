@@ -16,8 +16,7 @@ public interface CheckListService extends CRUDService<CheckListBean, CheckList> 
                                                                    EnumStatusCheckList status,
                                                                    Integer day, Integer mounts, Integer year );
     
-    List<CheckListClientHistoryBean> getClientHistory(	Long clientId,
-											    		Integer year,
+    List<CheckListClientHistoryBean> getClientHistory(	Integer year,
 											    		Integer month,
 														String status);
 }

@@ -153,18 +153,18 @@
 
                    
                     <div class="col">
-                        <select id="inputStateMounts" class="form-control" onclick="selectMonthClient();">
+                        <select id="inputStateMounts" class="form-control" >
                         	
                         </select>
                     </div>
                     <div class="col">
-                        <select id="inputStateYear" class="form-control" onclick="selectYearClient();">
-                            <option>2018</option>
+                        <select id="inputStateYear" class="form-control" >
+                            
                         </select>
                     </div>
                     <div class="col">
-                        <select id="inputStateStatus" class="form-control" onchange="changeStatusOrderClient()">
-                            <option selected>Статус</option>
+                        <select id="inputStateStatus" class="form-control" >
+                            <option value = "ALL" selected>Статус</option>
                             <option value = "ALL">ВСЕ</option>
                             <option value="DONE">ВЫПОНЕН</option>
                             <option value="CANCELED">ОТМЕН</option>
@@ -174,7 +174,7 @@
 
                         </select>
                     </div>
-                    <button> Поиск </button>
+                    <button onclick="sendRequestClientHistory()"> Поиск </button>
                 </div>
             </div>
             <!--День Месяц ГОД-->
@@ -194,6 +194,16 @@
                     </tr>
                     </thead>
                     <tbody id="tbodyTable">
+                    	<tr>
+                    		<td>test</td>
+                    		<td>test</td>
+                    		<td>test</td>
+                    		<td>test</td>
+                    		<td>test</td>
+                    		<td>test</td>
+                    		<td>test</td>
+                    		<td>test</td>
+                    	</tr>
 
                     </tbody>
                 </table>
@@ -266,45 +276,12 @@
 </div>
 <!--BODY-->
 <div></div>
-<script type="text/javascript">
-	function changeStatusOrderClient() {
-		var selected = document.getElementById("inputStateStatus").value;
-		console.log(selected);
-	}
 
-	function setCurrentDateClient () {
-		var arrMonth=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-		var now = moment();
-		// console.log(now.format('M'));
-		// console.log(now.format('YYYY'));
-		var month = document.getElementById("inputStateMounts");
-		for (var i = 0; i < arrMonth.length; i++) {
-			var select = document.createElement("option");
-			select.setAttribute("month", (i+1));
-			if(now.format('M').toString() == (i + 1)){
-				select.setAttribute("selected", "selected");
-
-			}
-			var node = document.createTextNode(arrMonth[i]);
-			select.appendChild(node);
-			month.appendChild(select);
-		}
-
-		var year = document.getElementById("inputStateYear");
-		var currentYear = document.createElement("option");
-		currentYear.setAttribute("selected", "selected");
-		var yearNode = document.createTextNode(now.format('YYYY'));
-		currentYear.appendChild(yearNode);
-		year.appendChild(currentYear);
-		
-
-
-	}
-</script>
 
 
                 <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
                 <script type="text/javascript" src = "/js/service/workerPhoto.js"></script>
                 <script type="text/javascript" src = "/js/service/ProfileService.js"></script>
+                <script type="text/javascript" src = "/js/service/client/ClientHistoryOrders.js"></script>
 </body>
 </html>

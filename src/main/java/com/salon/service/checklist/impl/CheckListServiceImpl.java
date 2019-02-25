@@ -8,6 +8,7 @@ import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.dao.checklist.CheckListDAO;
 import com.salon.repository.entity.catalog.Catalog;
 import com.salon.repository.entity.checklist.CheckList;
+import com.salon.service.RecieveUserInfo;
 import com.salon.service.checklist.CheckListComparatorByDate;
 import com.salon.service.checklist.CheckListService;
 import com.salon.service.client.ClientService;
@@ -22,11 +23,9 @@ import org.springframework.stereotype.Service;
 
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
-import java.text.DateFormat;
-import java.text.ParseException;
+
 
 @Service
 public class CheckListServiceImpl implements CheckListService {
@@ -156,9 +155,12 @@ public class CheckListServiceImpl implements CheckListService {
     
     
     @Override
-    public List<CheckListClientHistoryBean> getClientHistory(Long clientId, Integer year, Integer month, String status) {
+    public List<CheckListClientHistoryBean> getClientHistory( Integer year, Integer month, String status) {
+    	RecieveUserInfo userInfo = new RecieveUserInfo();   //Long clientId,
+    	Long clientId = userInfo.getUserId();
+    	
     	List<CheckListClientHistoryBean> clientHistoryBeans = new ArrayList<CheckListClientHistoryBean>();
-    	    
+    	  
     	    LocalDate start = LocalDate.of(year, month, 1);
     	    int days = start.lengthOfMonth();
     	    LocalDate end = LocalDate.of(year, month, days);
@@ -185,6 +187,8 @@ public class CheckListServiceImpl implements CheckListService {
 					break;
 				}
 				if (checkList.getDateAppointment().after(timestampStart)) {
+					if(!checkList.getStatus().toString().equals(status.toUpperCase()) && !status.toUpperCase().equals("ALL") ) {continue;}						
+					
 					Double price = 0d;
 					CheckListClientHistoryBean historyBean = new CheckListClientHistoryBean();
 					historyBean.setClientId(clientId);
