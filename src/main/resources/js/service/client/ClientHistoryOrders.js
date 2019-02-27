@@ -36,7 +36,7 @@ function setCurrentDateClient () {
 	year.appendChild(currentYear);
 	year.appendChild(lastYear);
 	
-
+	sendRequestClientHistory();
 
 }
 
@@ -46,6 +46,7 @@ function sendRequestClientHistory(){
 	var year = document.getElementById('inputStateYear').value;
 	var status = document.getElementById('inputStateStatus').value;
 	var clientRequest = 'year='+year+'&month='+month+'&status='+status;
+	console.log(clientRequest);
 	clientRequest = 'year=1970&month=1&status=all';							//test DB
 	var clientHistoryRequest = Object.create(Request);
 	clientHistoryRequest = Request.GetClientOrders(clientRequest);
@@ -131,4 +132,12 @@ function createTable (jsonIncome) {
 
 function cancelOrder(e) {
 	console.log(e.value) ;
+	var cancelOrderClient = Object.create(Request);
+	cancelOrderClient = Request.CancelClientOrder(e.value);
+}
+
+function cancelOrderDone(text){
+	alert(text);
+	location.reload(true)
+
 }
