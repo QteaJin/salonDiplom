@@ -5,6 +5,7 @@ const URL_DEFAULT_LOCAL = "http://localhost:8080";
 const QUICK_ORDER_URL = URL_DEFAULT + "/checklist";
 const GET_WORKER_PHOTO_URL = URL_DEFAULT + "/worker/?salonId=";
 const GET_WORKER_PROFILE_URL = URL_DEFAULT + "/worker/profile/";
+const CLIENT_HISTORY_REQUEST = "http://localhost:8080/checklist/client/history?";
 
 var Request = {};
 Request.PostQuickOrder = function (jsonObject) {
@@ -55,6 +56,25 @@ Request.GetProfileWorker = function(workerId){
 //	        for (var i = 0; i < json.listSkills.length; i++) {
 //	        	console.log(json.listSkills[i].name);
 //			}
+	    }
+	};
+	xhr.send();
+};
+
+Request.GetClientOrders = function(clientRequest){
+	
+	var xhr = new XMLHttpRequest();
+	var url = CLIENT_HISTORY_REQUEST + clientRequest;
+	console.log(url);
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var jsonIncome = JSON.parse(xhr.responseText);
+	        
+	        createTable (jsonIncome);
+	       
+
 	    }
 	};
 	xhr.send();

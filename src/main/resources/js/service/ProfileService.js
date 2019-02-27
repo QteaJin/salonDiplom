@@ -7,9 +7,9 @@ function openWorkerProfile (event){
 			}
 
 function createWorkerProfile(json, workerId){
-	console.log("function ---");
-	console.log(JSON.stringify(json));
-	console.log(workerId);
+	//console.log("function ---");
+	//console.log(JSON.stringify(json));
+	//console.log(workerId);
 	createProfile(json, workerId);
 	function createProfile (json, workerId) {
 		
