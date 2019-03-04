@@ -6,8 +6,10 @@ import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.bean.salon.SalonBean;
 import com.salon.repository.bean.skills.SkillsBean;
 import com.salon.repository.bean.worker.WorkerBean;
+import com.salon.repository.entity.abstractEntity.AbstractUser;
 import com.salon.service.auth.AuthService;
 import com.salon.service.client.ClientService;
+import com.salon.service.crypto.TokenCrypt;
 import com.salon.service.exception.ErrorInfoExeption;
 import com.salon.service.profile.ProfileService;
 import com.salon.service.salon.SalonService;
@@ -21,7 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -30,6 +34,11 @@ public class AuthServiceImpl implements AuthService {
 	private final static Logger LOGGER = LoggerFactory.getLogger(AuthServiceImpl.class);
 
 	private final static String ERROR_TYPE = "AUTHSERVICE.ERROR";
+	
+	private transient Map<Long, String> userTokens = new HashMap<Long, String>(); //save Users tokens
+	
+	@Autowired
+	private TokenCrypt crypt;
 
 	@Autowired
 	private ProfileService profileService;
@@ -60,17 +69,38 @@ public class AuthServiceImpl implements AuthService {
 		ProfileBean profileBean = new ProfileBean();
 		profileBean.setLogin(login);
 		profileBean.setPassword(password);
-
+		
 		List<ProfileBean> list = profileService.findByExample(profileBean);
 
 		if (list.isEmpty()) {
 			LOGGER.debug("Profile not found");
 			throw new ErrorInfoExeption("Profile not found", "NOT_FOUND");
 		}
-
+		
 		ProfileBean bean = list.get(0);
-
+		if(userTokens.get(bean.getId()) == null) {
+			
+			if (bean.getClient() != null) {
+				
+				createToken(bean.getClient());
+			} else {
+				createToken(bean.getWorker());
+				
+			}
+			
+		}
+		String token = userTokens.get(bean.getId());	
+		
+		if (bean.getClient() != null) {
+			authBean.setUserId(bean.getClient().getId());
+			authBean.setEnumRole(bean.getClient().getRole());
+		} else {
+			authBean.setUserId(bean.getWorker().getId());
+			authBean.setEnumRole(bean.getWorker().getRole());
+		}
+		
 		authBean.setUserName(bean.getName());
+		authBean.setToken(token);
 
 		LOGGER.debug("login finish");
 
@@ -97,6 +127,9 @@ public class AuthServiceImpl implements AuthService {
 			worker.setSalon(salonService.toDomain(salon));
 		}
 		
+		createToken(workerService.toDomain(worker));
+
+
 
 		workerService.save(worker);
 		// NEXT SEND EMAIL
@@ -116,6 +149,8 @@ public class AuthServiceImpl implements AuthService {
 		client.setProfile(profileService.toDomain(bean));
 		client.setRole(EnumRole.CLIENT);
 		client.setStatus(EnumStatus.NOACTIVE);
+		
+		createToken(clientService.toDomain(client));
 
 		clientService.save(client);
 
@@ -131,5 +166,15 @@ public class AuthServiceImpl implements AuthService {
 			LOGGER.debug("Profile already exists");
 			throw new ErrorInfoExeption("Profile already exists", "PROFILE_EXIST");
 		}
+	}
+	private String createToken(AbstractUser user) {
+		
+		Long idUserProfile = user.getProfile().getProfileId(); //save token
+		String role = user.getRole().name();
+		String cryptToken = crypt.cryptToken(idUserProfile + " " + role);
+		userTokens.put(idUserProfile, cryptToken);
+		
+		return cryptToken;
+		
 	}
 }
