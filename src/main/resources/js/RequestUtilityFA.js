@@ -1,6 +1,6 @@
 'use strict';
 
-const URL_DEFAULT = "https://vip-salon.herokuapp.com";
+const URL_DEFAULT = ""; //https://vip-salon.herokuapp.com
 const URL_DEFAULT_LOCAL = "http://localhost:8080";
 const QUICK_ORDER_URL = URL_DEFAULT + "/checklist";
 const GET_WORKER_PHOTO_URL = URL_DEFAULT + "/worker/?salonId=";
