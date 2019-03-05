@@ -93,13 +93,7 @@
                 <div class=" my-2 my-md-0">
                 	
                     
-                    <ul class="navbar-nav">
-   
-    <li th:if="${currentUser == null}" class="nav-item active"><a class="nav-link" href="/login">Log in</a></li>
-    <li th:if="${currentUser == null}" class="nav-item active"><a class="nav-link" href="/register">Register</a></li>
-	
-    <li> <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a></li>
-    </ul>
+                    
                 </div>
             </div>
         </div>
@@ -110,30 +104,12 @@
 			<div class="row">
 
 				<div class="col-md-2 ">
-				<form name='f' action="/j_spring_security_check" method='POST'>
-         <table>
-            <tr>
-               <td>User:</td>
-               <td><input type='text' name='username' value=''></td>
-            </tr>
-            <tr>
-               <td>Password:</td>
-               <td><input type='password' name='password' /></td>
-            </tr>
-            <tr>
-               <td>Remember Me?</td>
-               <td><input type="checkbox" name="remember-me" /></td>
-            </tr>            
-            <tr>
-               <td><input name="submit" type="submit" value="submit" /></td>
-            </tr>
-         </table>
-      </form>
+
 				</div>
 				<div class="col-md-8 ">
 					<div class="container-fluid bg-light py-3">
 						<div> <h3> Регистрация </h3></div>
-    <form id="register-form" method="post" action="registration" role="form" modelAttribute = 'registrClientForm'>
+    <form id="login-form" >
         <div class="messages"></div>
         <div class="controls">
             
@@ -146,29 +122,8 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="form_email">Email *</label>
-                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Введите email" required="required" data-error="Valid email is required.">
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="form_phone">Телефон *</label>
-                        <input id="form_phone" type="tel" name="phone" class="form-control" required="required" placeholder="+380ххххххххх">
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
                         <label for="password">Пароль *</label>
                         <input id="password" type="password" name="password" class="form-control" required="required" placeholder="Password" >
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-            	<div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="password">Подтверждение пароля *</label>
-                        <input id="passwordconfirm" type="password" name="passwordconfirm" class="form-control" required="required" placeholder="Password" >
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
@@ -176,15 +131,9 @@
         <div class="clearfix"></div>
 
         <div class="row">
-            <!-- <div class="col-md-12">
-                <div class="form-group">
-                    <label for="form_message">Дополнительная информация</label>
-                    <textarea id="form_message" name="description" class="form-control" placeholder="Сообщение" rows="4" data-error="send a message."></textarea>
-                    <div class="help-block with-errors"></div>
-                </div>
-            </div> -->
+
             <div class="col-md-12">
-                <input type="submit" class="btn btn-primary btn-send" value="Зарегистрироваться">
+                <input type="submit" class="btn btn-primary btn-send" value="Войти" onclick="sendLoginForm(event)">
             </div>
         </div>
         <div class="row">
@@ -200,4 +149,8 @@
 </div>
 
 </body>
+<script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
+<script type="text/javascript" src = "/js/bean/LoginBean.js"></script>
+<script type="text/javascript" src = "/js/service/LoginSendForm.js"></script>
+
 </html>

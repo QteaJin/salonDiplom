@@ -2,6 +2,7 @@
  * 
  */
 document.cookie = "userName=Vasya";
+document.cookie = "userName=dima";
 
 var checkToken = getCookie('userName');
 
