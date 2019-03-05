@@ -7,8 +7,25 @@ const GET_WORKER_PHOTO_URL = URL_DEFAULT + "/worker/?salonId=";
 const GET_WORKER_PROFILE_URL = URL_DEFAULT + "/worker/profile/";
 const CLIENT_HISTORY_REQUEST = URL_DEFAULT + "/checklist/client/history?";
 const CANCEL_ORDER_BY_ID = URL_DEFAULT + "/checklist/cancel/";
+const LOGIN_SEND_POST = URL_DEFAULT + "/auth/login";
 
 var Request = {};
+
+Request.Login = function (jsonObject) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var loginResponce = JSON.parse(xhr.responseText);
+            console.log(loginResponce);
+            
+        }
+    };
+
+    xhr.open("POST", LOGIN_SEND_POST , true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(jsonObject));
+};
+
 Request.PostQuickOrder = function (jsonObject) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {

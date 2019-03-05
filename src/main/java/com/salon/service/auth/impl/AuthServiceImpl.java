@@ -35,8 +35,6 @@ public class AuthServiceImpl implements AuthService {
 
 	private final static String ERROR_TYPE = "AUTHSERVICE.ERROR";
 	
-	private transient Map<Long, String> userTokens = new HashMap<Long, String>(); //save Users tokens
-	
 	@Autowired
 	private TokenCrypt crypt;
 
@@ -78,7 +76,7 @@ public class AuthServiceImpl implements AuthService {
 		}
 		
 		ProfileBean bean = list.get(0);
-		if(userTokens.get(bean.getId()) == null) {
+		if(crypt.getUserTokens().get(bean.getId()) == null) {
 			
 			if (bean.getClient() != null) {
 				
@@ -89,7 +87,7 @@ public class AuthServiceImpl implements AuthService {
 			}
 			
 		}
-		String token = userTokens.get(bean.getId());	
+		String token = crypt.getUserTokens().get(bean.getId());	
 		
 		if (bean.getClient() != null) {
 			authBean.setUserId(bean.getClient().getId());
@@ -172,7 +170,7 @@ public class AuthServiceImpl implements AuthService {
 		Long idUserProfile = user.getProfile().getProfileId(); //save token
 		String role = user.getRole().name();
 		String cryptToken = crypt.cryptToken(idUserProfile + " " + role);
-		userTokens.put(idUserProfile, cryptToken);
+		crypt.getUserTokens().put(idUserProfile, cryptToken);
 		
 		return cryptToken;
 		
