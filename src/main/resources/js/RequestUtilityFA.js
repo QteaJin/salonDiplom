@@ -17,13 +17,19 @@ Request.Login = function (jsonObject) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var loginResponce = JSON.parse(xhr.responseText);
             console.log(loginResponce);
-            
+            var date = new Date(new Date().getTime() + 60 * 60 * 1000); //1 hour
+            document.cookie = "token="+loginResponce.token +"; path=/; expires=" + date.toUTCString();
+            createLoginLogoutButton();
         }
     };
 
     xhr.open("POST", LOGIN_SEND_POST , true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(jsonObject));
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    console.log(LOGIN_SEND_POST);
+    console.log(JSON.stringify(jsonObject));
+    var params = 'login=' +jsonObject.login +'&password='+jsonObject.password;
+    console.log(params);
+    xhr.send(params);
 };
 
 Request.PostQuickOrder = function (jsonObject) {
@@ -47,6 +53,7 @@ Request.PostQuickOrder = function (jsonObject) {
 Request.GetPhotoWorker = function(salonId){
 	var xhr = new XMLHttpRequest();
 	var url = GET_WORKER_PHOTO_URL + salonId;
+	console.log(url);
 	xhr.open("GET", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.onreadystatechange = function () {
