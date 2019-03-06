@@ -6,7 +6,7 @@
   var endDays = 21;
 
 function createHead () {
-  
+	createLoginLogoutButton();
 
   var myNode = document.querySelector('.calendar');
       while (myNode.firstChild) {

@@ -1,12 +1,14 @@
 /**
  * 
  */
-document.cookie = "userName=Vasya";
-document.cookie = "userName=dima";
 
-var checkToken = getCookie('userName');
+function checkUserToken(){
+	
+	var checkToken = getCookie('token');
+	console.log(checkToken);
+	return checkToken;
+}
 
-console.log(checkToken);
 
 function getCookie(name) {
 	  var matches = document.cookie.match(new RegExp(

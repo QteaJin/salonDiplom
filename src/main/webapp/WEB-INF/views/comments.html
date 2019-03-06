@@ -16,10 +16,11 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+            	<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
+                <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
     <title>Отзывы</title>
 </head>
-<body>
-<!--HEADER-->
+<body onload='createLoginLogoutButton()'>
 <header>
     <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
         <div class="container">
@@ -50,21 +51,11 @@
                         <a class="nav-link " href="/contact">Контакы</a>
                     </li>
                 </ul>
-                <div class="dropdown">
-					  <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
-					    Выберите салон
-					  </button>
-					  <div class="dropdown-menu">
-					    <button type="button" class="dropdown-item" salonId="1" onclick="getRequestWorkersPhoto (this);">Киев</button>
-						<button type="button" class="dropdown-item" salonId="2" onclick="getRequestWorkersPhoto (this);">Одесса</button>
-						<button type="button" class="dropdown-item" salonId="3" onclick="getRequestWorkersPhoto (this);">Харьков</button>
-					  </div>
-					</div>
+
                 
-                <div class=" my-2 my-md-0">
+                <div class=" my-2 my-md-0 " id="logbutton">
                 	
-                    <button class="btn btn-outline-light">ВХОД</button>
-                    <button class="btn btn-outline-light">ВЫХОД</button>
+               
                 </div>
             </div>
         </div>

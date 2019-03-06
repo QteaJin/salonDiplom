@@ -61,7 +61,9 @@ public class AuthServiceImpl implements AuthService {
 
 		if (StringUtils.isBlank(login) && StringUtils.isBlank(password)) {
 			LOGGER.debug("login and password empty");
-			throw new ErrorInfoExeption("login and password empty", "LOGIN_PASSWORD.EMPTY");
+			authBean.setErrorMessage("login and password empty");
+			return authBean;
+			//throw new ErrorInfoExeption("login and password empty", "LOGIN_PASSWORD.EMPTY");
 		}
 
 		ProfileBean profileBean = new ProfileBean();
@@ -72,7 +74,9 @@ public class AuthServiceImpl implements AuthService {
 
 		if (list.isEmpty()) {
 			LOGGER.debug("Profile not found");
-			throw new ErrorInfoExeption("Profile not found", "NOT_FOUND");
+			authBean.setErrorMessage("Profile not found");
+			return authBean;
+			//throw new ErrorInfoExeption("Profile not found", "NOT_FOUND");
 		}
 		
 		ProfileBean bean = list.get(0);

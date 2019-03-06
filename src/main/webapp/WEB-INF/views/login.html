@@ -56,7 +56,7 @@
 	<meta charset="UTF-8">
 	<title>Registration</title>
 </head>
-<body>
+<body onload='createLoginLogoutButton()'>
 <!--HEADER-->
 <header>
     <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
@@ -90,7 +90,7 @@
                 </ul>
                 
                 
-                <div class=" my-2 my-md-0">
+                <div class=" my-2 my-md-0 " id="logbutton">
                 	
                     
                     
@@ -152,5 +152,8 @@
 <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
 <script type="text/javascript" src = "/js/bean/LoginBean.js"></script>
 <script type="text/javascript" src = "/js/service/LoginSendForm.js"></script>
+<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
+<script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
+
 
 </html>
