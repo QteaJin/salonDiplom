@@ -24,17 +24,22 @@ function createWorkerProfile(json, workerId){
 	closeProfile.setAttribute('onclick', 'closeProfileButton();')
 	let close = document.createTextNode('Close');
 	let closeButton = document.createElement('button');
+	
+	let p = document.createElement('p');
 
 	let workerFoto = document.createElement('img');
-	workerFoto.setAttribute('src', 'img/' + workerId + 'workerPhoto.jpg');
+	workerFoto.setAttribute('src', 'img/worker/' + workerId + 'workerPhoto.jpg');
 	workerFoto.setAttribute('width' , '30%');
 	workerFoto.setAttribute('class', 'customWorkerFoto');
+	workerFoto.setAttribute('align' , 'left');
 	workerFoto.onerror = function () {
 		workerFoto.setAttribute('src', 'img/nofoto.png');
 	}
+	p.appendChild(workerFoto);
+	p.appendChild(document.createTextNode(json.description));
 
-	let profileDescription = document.createElement('div');
-	profileDescription.appendChild(document.createTextNode(json.description));
+//	let profileDescription = document.createElement('span');
+//	profileDescription.appendChild(document.createTextNode(json.description));
 	
 	let workerSkills = document.createElement('div');
 
@@ -50,8 +55,9 @@ function createWorkerProfile(json, workerId){
 	closeButton.appendChild(close);
 	closeProfile.appendChild(closeButton);
 	profileBlock.appendChild(closeProfile);
-	profileBlock.appendChild(workerFoto);
-	profileBlock.appendChild(profileDescription);
+	//profileBlock.appendChild(workerFoto);
+	//profileBlock.appendChild(profileDescription);
+	profileBlock.appendChild(p);
 	profileBlock.appendChild(workerSkills);
 	parentProfile.appendChild(profileBlock);
 	var item = parentProfile;
