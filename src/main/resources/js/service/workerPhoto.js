@@ -36,7 +36,7 @@
 			link.setAttribute('href', '#');
 			divParent.setAttribute('onclick', 'event.preventDefault(); openWorkerProfile (event);');
 			var photoSrc = document.createElement('img');
-			photoSrc.setAttribute('src', 'img/nofoto.png');
+			photoSrc.setAttribute('src', 'img/worker/' + obj[i].id + 'workerPhoto.jpg');
 			photoSrc.setAttribute('alt', 'worker'+obj[i].id);
 			photoSrc.setAttribute('style', 'width:100%');
 			photoSrc.setAttribute('myData', obj[i].id);
