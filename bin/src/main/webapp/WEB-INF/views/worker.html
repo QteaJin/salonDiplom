@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Worker - </title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="/js/service/worker/WorkerFrontendService.js"></script>
+    <script src="/js/service/worker/WorkerCalendarService.js"></script>
+    <script src="/js/RequestUtilitySY.js"></script>
+</head>
+<body onload="geList();">
+<!--HEADER-->
+<header>
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
+        <div class="container">
+            <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Главня</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">В тренде</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Стоимость</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Отзывы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Контакы</a>
+                    </li>
+                </ul>
+                <div class=" my-2 my-md-0">
+                    <button class="btn btn-outline-light">ВХОД</button>
+                    <button class="btn btn-outline-light">ВЫХОД</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<!--HEADER-->
+
+<!--BODY-->
+
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">КАЛЕНДАРЬ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ПРОФИЛЬ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">ОТЗЫВЫ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="work-tab" data-toggle="tab" href="#work" role="tab" aria-controls="contact" aria-selected="false">РАБОТА</a>
+        </li>
+    </ul>
+
+    <!-- КАЛЕНДАРЬ-->
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <!--День Месяц ГОД-->
+            <div class="mt-5">
+                <div class="row">
+
+                    <div class="col">
+                        <select id="inputStateDay" class="form-control">
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStateMounts" class="form-control" onclick="selectDay();">
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStateYear" class="form-control">
+                            <option selected>ГОД</option>
+                            <option>2018</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStateStatus" class="form-control">
+                            <option selected>Статус</option>
+                            <option>Покараска</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--День Месяц ГОД-->
+
+            <div class="mt-5 ">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Название Процедуры</th>
+                        <th scope="col">Имя Клиента</th>
+                        <th scope="col">Цена</th>
+                        <th scope="col">Описание</th>
+                        <th scope="col">На когда назначен</th>
+                        <th scope="col">Статус Текущий</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Потвердить</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyTable">
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <!-- КАЛЕНДАРЬ-->
+
+
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+
+            <div class="mt-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col ">
+                            <div class="card">
+                                <img src="http://remsmaservis.ru/wp-content/uploads/2017/12/no_img.png" class="card-img-top" alt="..." style="width: 300px; height: 200px">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Имя</label>
+                                        <input type="text" class="form-control" placeholder="Имя">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Телефон</label>
+                                        <input type="text" class="form-control" placeholder="Телефон">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Login</label>
+                                        <input type="text" class="form-control" placeholder="Login">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Email</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                                </div>
+                                <div class="center">
+                                    <button type="submit" class="btn btn-primary">Изменить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mt-5">
+                <!--CКИЛЫ-->
+
+            </div>
+
+        </div>
+
+
+
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">sakdhkjashk</div>
+    </div>
+</div>
+<!--BODY-->
+<div></div>
+</body>
+</html>

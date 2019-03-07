@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPage </title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src = "/js/service/CheckToken.js"></script>
+                <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
+            
+<style type="text/css">
+.back {
+	background-color: #D9E1DA;
+}
+.footer{
+	height: 70px;
+	margin-top: 20px;
+}
+.block{
+      width: 60px;
+      height: 30px;
+      background: #e3f2fd;
+      display: inline-block;
+      margin: 2px;
+      text-align: center;
+    }
+.block:hover{
+    	background: #EFBCF5;
+    }
+.blockpast{
+      width: 60px;
+      height: 30px;
+      background: grey;
+      display: inline-block;
+      margin: 2px;
+      text-align: center;
+    }
+.workerPhoto{
+	width: 170px;
+	margin: 10px;
+	display: inline-block;
+}
+</style>
+
+</head>
+<body onload='createLoginLogoutButton()'>
+<header>
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
+        <div class="container">
+            <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+           
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/service">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/trends">В тренде</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/price-list">Стоимость</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/comments">Отзывы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/contact">Контакы</a>
+                    </li>
+                </ul>
+
+                
+                <div class=" my-2 my-md-0 " id="logbutton">
+                	
+               
+                </div>
+            </div>
+        </div>
+      </nav>
+</header>
+<!--HEADER-->
+
+<!--BODY-->
+
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Новый заказ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="work-tab" data-toggle="tab" href="#work" role="tab" aria-controls="contact" aria-selected="false" onclick="setCurrentDateClient();">Список заказов</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">ОТЗЫВЫ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Профиль</a>
+        </li>
+    </ul>
+
+    
+    <div class="tab-content" id="myTabContent">
+
+    	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    		<div class="container-fluid">
+		<div class="row" >
+			Оформить новый заказ
+			<div id="workerPhoto" class=" col-md-12" ></div> <!-- Тут фото работников -->
+			
+			
+		</div>
+		<div class="row" >
+		<div class="col-md-8 workerprofile">	</div>
+		<div class="col-md-4 workercatalog"> workercatalog </div>
+		</div>
+		</div>
+    		
+    	</div>
+		
+		<!-- КАЛЕНДАРЬ-->
+        <div class="tab-pane fade" id="work" role="tabpanel" aria-labelledby="work-tab">
+
+            <!--День Месяц ГОД-->
+            <div class="mt-5">
+                <div class="row">
+
+                   
+                    <div class="col">
+                        <select id="inputStateMounts" class="form-control" >
+                        	
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStateYear" class="form-control" >
+                            
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStateStatus" class="form-control" >
+                            <option value = "ALL" selected>Статус</option>
+                            <option value = "ALL">ВСЕ</option>
+                            <option value="DONE">ВЫПОНЕН</option>
+                            <option value="CANCELED">ОТМЕН</option>
+                            <option value="ACTIVE">АКТИВНЫЙ</option>
+                            <option value = "NEW">НОВЫЙ</option>
+                            
+
+                        </select>
+                    </div>
+                    <button onclick="sendRequestClientHistory()"> Поиск </button>
+                </div>
+            </div>
+            <!--День Месяц ГОД-->
+
+            <div class="mt-5 ">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Дата</th>
+                        <th scope="col">Салон</th>
+                        <th scope="col">Мастер</th>
+                        <th scope="col">Услуга</th>
+                        <th scope="col">Стоимость</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Изменить</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbodyTable">
+                    	
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <!-- КАЛЕНДАРЬ-->
+
+
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+
+            <div class="mt-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col ">
+                            <div class="card">
+                                <img src="http://remsmaservis.ru/wp-content/uploads/2017/12/no_img.png" class="card-img-top" alt="..." style="width: 300px; height: 200px">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <form>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Имя</label>
+                                        <input type="text" class="form-control" placeholder="Имя">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Телефон</label>
+                                        <input type="text" class="form-control" placeholder="Телефон">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Login</label>
+                                        <input type="text" class="form-control" placeholder="Login">
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Email</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                                </div>
+                                <div class="center">
+                                    <button type="submit" class="btn btn-primary">Изменить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mt-5">
+                <!--CКИЛЫ-->
+
+            </div>
+
+        </div>
+
+
+
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">sakdhkjashk</div>
+    </div>
+</div>
+<!--BODY-->
+<div></div>
+
+
+
+                <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
+                <script type="text/javascript" src = "/js/service/workerPhoto.js"></script>
+                <script type="text/javascript" src = "/js/service/ProfileService.js"></script>
+                <script type="text/javascript" src = "/js/service/client/ClientHistoryOrders.js"></script>
+</body>
+</html>

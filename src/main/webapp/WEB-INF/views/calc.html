@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		span {
+			font-size: 50px;
+		}
+		input{
+			font-size: 50px;
+		
+		}
+		body{
+			  background-image: url("https://png.pngtree.com/thumb_back/fw800/back_pic/03/90/73/2757de19b42a6c4.jpg"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 700px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+		}
+
+	</style>
+</head>
+<body >
+	
+	<div class="container">
+		Введите максимальное число для генерации
+		<input id="random" type="text" maxlength="2" size="2"> <button class="btn btn-success" onclick="start ();"> Сгенерировать </button>
+  <div class="row ">
+
+    <div class="col-sm-6 p-5 ">
+    	<h1> Сложение чисел </h1>
+    	<div class=" plus">
+    		
+			
+			</div>
+			<button class="btn btn-success" onclick="checkPlus(plus, resPlus);"> Проверить + </button>
+	</div>
+    <div class="col-sm-6 p-5">
+    	<h1> Вычитание чисел </h1>
+    	<div class="minus">
+			
+		<!-- 	<span> 5 - 10 =</span> <input class="minusIn" type="text" maxlength="2" size="2" name="0"> <br>
+			<span> 5 - 10 =</span> <input class="minusIn" type="text" maxlength="2" size="2" name="1"> -->
+			</div>
+	<button class="btn btn-success" onclick="checkMinus(minus, resMinus);"> Проверить - </button>
+    </div>
+  </div>
+	</div>
+	<audio id="audio" src="/js/applause10.mp3" autoplay="false" ></audio>
+
+	<!-- <div>
+		<div class="d-inline-flex p-5">
+			<div class=" plus">
+			
+			</div>
+
+			<div class="minus">
+			
+			<span> 5 - 10 =</span> <input class="minusIn" type="text" maxlength="2" size="2" name="0"> <br>
+			<span> 5 - 10 =</span> <input class="minusIn" type="text" maxlength="2" size="2" name="1">
+			</div>
+		</div> -->
+			
+
+		
+
+	</div>
+	
+	
+	<script type="text/javascript">
+			var plus = [];
+			var resPlus = [];
+			var minus = [];
+			var resMinus = [];
+
+		function start () {
+			
+			var generateMax = document.getElementById("random").value;
+			console.log(generateMax);
+			if(generateMax == ''){generateMax = 10; }
+
+			var createPlus = document.querySelector(".plus");
+			var createMinus = document.querySelector(".minus");
+
+			while (createPlus.firstChild) {
+    	createPlus.removeChild(createPlus.firstChild);
+		}
+			while (createMinus.firstChild) {
+    	createMinus.removeChild(createMinus.firstChild);
+		}
+
+			for (var i = 0; i < 10; i++) {
+				plus[i] = Math.floor( Math.random() * (generateMax - 0) + 0);
+			}
+			var j = 0;
+			for (var i = 0; i < 5; i++) {
+				var span = document.createElement('span');
+				var br = document.createElement("br");
+				var input = document.createElement('input');
+				input.setAttribute("class", "plusIn");
+				input.setAttribute("type", "text");
+				input.setAttribute("maxlength", "2");
+				input.setAttribute("size", "2");
+				input.setAttribute("name", i);
+
+				var temp = plus[j] + " + " + plus[j+1] + " = ";
+				var text = document.createTextNode(temp);
+				resPlus[i] = plus[j]+plus[j+1];
+				j = j+2;
+				span.appendChild(text);
+				//console.log(resPlus[i]);
+
+				createPlus.appendChild(span);
+				createPlus.appendChild(input);
+				createPlus.appendChild(br);
+
+			}
+			for (var i = 0; i < plus.length; i = i+2) {
+				if(plus[i] < plus[i+1]){
+					minus[i] = plus[i+1];
+					minus[i+1] = plus[i];
+					
+				}else{
+					minus[i] = plus[i];
+					minus[i+1] = plus[i+1];
+				}
+			}
+
+			var j = 0;
+			for (var i = 0; i < 5; i++) {
+				var span = document.createElement('span');
+				var br = document.createElement("br");
+				var input = document.createElement('input');
+				input.setAttribute("class", "minusIn");
+				input.setAttribute("type", "text");
+				input.setAttribute("maxlength", "2");
+				input.setAttribute("size", "2");
+				input.setAttribute("name", i);
+
+				var temp = minus[j] + " - " + minus[j+1] + " = ";
+				var text = document.createTextNode(temp);
+				resMinus[i] = minus[j]-minus[j+1];
+				j = j+2;
+				span.appendChild(text);
+				console.log(resMinus[i]);
+
+				createMinus.appendChild(span);
+				createMinus.appendChild(input);
+				createMinus.appendChild(br);
+
+			}
+
+			
+			checkPlus (plus, resPlus);
+		}
+
+		
+
+		function checkPlus (plus, resPlus) {
+			//console.log(plus[1]);
+			var pl = document.querySelectorAll(".plusIn");
+			//console.log(pl.length);
+			var count = 0;
+			for (var i = 0; i < pl.length; i++) {
+				if(pl[i].value == ""){
+					continue;
+				}
+				if(pl[i].value == resPlus[i]){
+					pl[i].style.backgroundColor = "#51F966";
+					count++;
+				}
+				else{
+					pl[i].style.backgroundColor = "#F9BC51";
+				}
+			}
+			if(count == 5){
+				win();
+			}
+		}
+			function checkMinus (minus, resMinus) {
+			//console.log(plus[1]);
+			var pl = document.querySelectorAll(".minusIn");
+			var count = 0;
+			//console.log(pl.length);
+			for (var i = 0; i < pl.length; i++) {
+				if(pl[i].value == ""){
+					continue;
+				}
+				if(pl[i].value == resMinus[i]){
+					pl[i].style.backgroundColor = "#51F966";
+					count++;
+				}
+				else{
+					pl[i].style.backgroundColor = "#F9BC51";
+				}
+			}
+			if(count == 5){
+				win();
+			}
+		}
+
+		function win () {
+			
+			var sound = document.getElementById("audio");
+          sound.play();
+		}
+
+	</script>
+	
+</body>
+</html>
