@@ -7,6 +7,10 @@
 
 function createHead () {
 	createLoginLogoutButton();
+	
+	var temp = document.querySelector('.dropdown');
+	temp.setAttribute('salonid', '1');
+	getRequestWorkersPhoto(temp);
 
   var myNode = document.querySelector('.calendar');
       while (myNode.firstChild) {

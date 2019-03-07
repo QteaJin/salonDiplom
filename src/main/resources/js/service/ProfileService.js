@@ -49,6 +49,17 @@ function createWorkerProfile(json, workerId){
 		skill.setAttribute('class', 'skill');
 		skill.setAttribute('skillId', json.listSkills[i].skillsId);
 		skill.innerHTML = json.listSkills[i].name;
+		let ul = document.createElement('ul');
+		if(json.listSkills[i].catalogList.length !=0){
+			for (var j = 0; j < json.listSkills[i].catalogList.length; j++){
+				console.log(json.listSkills[i].catalogList[j].description);
+				let li = document.createElement('li');
+				li.appendChild(document.createTextNode(json.listSkills[i].catalogList[j].description));
+				ul.appendChild(li);
+			}
+		}
+		skill.appendChild(ul);
+		
 		workerSkills.appendChild(skill);
 	}
 

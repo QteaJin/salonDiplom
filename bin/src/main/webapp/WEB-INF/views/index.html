@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+<style type="text/css">
+.customWorkerFoto{
+	float:left; 
+    margin: 15px 15px 15px 0; 
+}
+.back {
+	background-color: #D9E1DA;
+}
+.footer{
+	height: 70px;
+	margin-top: 20px;
+}
+.block{
+      width: 60px;
+      height: 30px;
+      background: #e3f2fd;
+      display: inline-block;
+      margin: 2px;
+      text-align: center;
+    }
+.block:hover{
+    	background: #EFBCF5;
+    }
+.blockpast{
+      width: 60px;
+      height: 30px;
+      background: grey;
+      display: inline-block;
+      margin: 2px;
+      text-align: center;
+    }
+.workerPhoto{
+	width: 170px;
+	margin: 10px;
+	display: inline-block;
+}
+</style>
+
+<head>
+<meta charset="UTF-8">
+<title>Index Page</title>
+</head>
+<body onload = "createHead ()">
+
+<!--HEADER-->
+<header>
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
+        <div class="container">
+            <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarsExample07">
+           
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Главная</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/service">Услуги</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/trends">В тренде</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/price-list">Стоимость</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/comments">Отзывы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/contact">Контакы</a>
+                    </li>
+                </ul>
+                <div class="dropdown">
+					  <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
+					    Выберите салон
+					  </button>
+					  <div class="dropdown-menu">
+					    <button type="button" class="dropdown-item" salonId="1" onclick="getRequestWorkersPhoto (this);">Одесса</button>
+						
+						
+					  </div>
+					</div>
+                
+                <div class=" my-2 my-md-0 " id="logbutton">
+                	
+               
+                </div>
+            </div>
+        </div>
+      </nav>
+</header>
+
+	<div class="shadow-lg p-3 mb-5 bg-white rounded">
+		<div class="container-fluid">
+		<div class="row" >
+			<div id="workerPhoto" class=" col-md-8" ></div>
+			<div class="col-md-4 calendar"></div>
+			
+		</div>
+		</div>
+			
+			<!-- <script type="text/javascript" src = "script/workerPhoto.js"></script> -->
+			
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+
+				<div class="col-md-8" >
+					<div class="workerprofile">					
+					
+					</div>
+					<div><p>test1</p>
+
+					</div>
+						
+
+					
+				</div>
+				<div class="col-md-4">
+					<div class="container-fluid bg-light py-3">
+    <form id="contact-form">
+        <div class="messages"></div>
+        <div class="controls">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_name">Имя *</label>
+                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Введите имя" required="required" data-error="name is required.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_email">Email</label>
+                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Введите email">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_phone">Телефон *</label>
+                        <input id="form_phone" type="tel" name="phone" class="form-control" required="required" placeholder="+380ххххххххх">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="form_message">Сообщение *</label>
+                    <textarea id="form_message" name="description" class="form-control" placeholder="Сообщение" rows="4" required="required" data-error="send a message."></textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-primary btn-send" value="Отправить заявку" onclick="sendQuickOrder(event)">
+                
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted"><strong>*</strong> Поля обязательны к заполнению</p>
+            </div>
+        </div>
+    </form>
+</div>
+   				 </div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+
+<!-- <script type="text/javascript" src = 'script/startIndex.js'></script> -->
+
+<footer>
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 back footer"></div>
+			</div>
+		</div>
+</footer>
+
+</body>
+				<script type="text/javascript" src = "/js/service/indexCallendar.js"></script>
+				<script type="text/javascript" src = "/js/bean/QuickOrder.js"></script>
+                <script type="text/javascript" src = "/js/service/QuickOrderService.js"></script>
+                <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
+                <script type="text/javascript" src = "/js/service/workerPhoto.js"></script>
+                <script type="text/javascript" src = "/js/service/ProfileService.js"></script>
+                <script type="text/javascript" src = "/js/service/CheckToken.js"></script>
+                <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
+</html>
