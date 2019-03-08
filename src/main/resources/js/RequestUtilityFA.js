@@ -20,6 +20,7 @@ Request.Login = function (jsonObject) {
             var date = new Date(new Date().getTime() + 60 * 60 * 1000); //1 hour
             document.cookie = "token="+loginResponce.token +"; path=/; expires=" + date.toUTCString();
             createLoginLogoutButton();
+            successLogin();
         }
     };
 

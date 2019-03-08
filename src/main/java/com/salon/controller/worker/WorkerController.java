@@ -53,4 +53,8 @@ public class WorkerController {
     public List<WorkerBean> getWorkersByCity(@PathVariable("city") String city) {
         return workerService.getWorkersByCity(city);
     }
+//    @RequestMapping(value = "/cookie", method = RequestMethod.GET)
+//    public void getCookie(@CookieValue ("token") String token ) {
+//    	System.out.println(token);
+//    }
 }
