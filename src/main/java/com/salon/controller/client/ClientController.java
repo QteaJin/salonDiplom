@@ -5,6 +5,7 @@ import com.salon.service.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -42,5 +43,10 @@ public class ClientController {
     public ClientBean updateClient(@RequestBody ClientBean clientBean) {
         return clientService.update(clientBean);
     }
-
+    
+    @RequestMapping(value = "/cookie", method = RequestMethod.GET)
+    public String getCookie(@CookieValue (value = "token", required = false) String token ) {
+    	
+    	return token;
+    }
 }
