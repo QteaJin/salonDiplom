@@ -4,16 +4,25 @@ import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
+import com.salon.service.crypto.TokenCrypt;
 import com.salon.utility.EnumStatusCheckList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/checklist")
 public class CheckListController {
-
+	
+	@Autowired
+	private TokenCrypt tokenCrypt;
+	
     @Autowired
     private CheckListService checkListService;
 
@@ -62,10 +71,14 @@ public class CheckListController {
     }
     
     @RequestMapping(value = "/client/history", method = RequestMethod.GET)
-    public List<CheckListClientHistoryBean> getClientHistory(@RequestParam(value = "year") Integer year,
+    public List<CheckListClientHistoryBean> getClientHistory(@CookieValue(value = "token", required = false) String token,
+    														@RequestParam(value = "year") Integer year,
     														@RequestParam(value = "month") Integer month,
-    														@RequestParam(value = "status", required = false) String status){
-	return checkListService.getClientHistory(year, month, status);
+    														@RequestParam(value = "status", required = false) String status) {
+    	
+
+    	
+	return checkListService.getClientHistory(token,year, month, status);
     	
     }
     

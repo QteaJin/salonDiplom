@@ -54,7 +54,13 @@ function sendRequestClientHistory(){
 }
 
 function createTable (jsonIncome) {
-    	
+    		
+		if(jsonIncome.length>0 && jsonIncome[0].token == "error"){ //redirect if token error to login page
+			
+			location.href = '/login';  
+			return;
+		}
+		
     	var table = document.getElementById("tbodyTable");
 
 		while (table.firstChild) {

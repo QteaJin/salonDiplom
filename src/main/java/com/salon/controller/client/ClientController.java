@@ -44,9 +44,10 @@ public class ClientController {
         return clientService.update(clientBean);
     }
     
-    @RequestMapping(value = "/cookie", method = RequestMethod.GET)
-    public String getCookie(@CookieValue (value = "token", required = false) String token ) {
-    	
-    	return token;
-    }
+//    @RequestMapping(value = "/cookie", method = RequestMethod.GET)
+//    public String getCookie(@CookieValue (value = "token", required = false) String token ) {
+//    
+//    	if(token == null) {return "null";} 
+//    	return token;
+//    }
 }
