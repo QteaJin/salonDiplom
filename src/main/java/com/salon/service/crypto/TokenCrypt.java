@@ -1,16 +1,28 @@
 package com.salon.service.crypto;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.stereotype.Component;
 
+import com.salon.repository.bean.auth.AuthBean;
+import com.salon.repository.bean.profile.ProfileBean;
+import com.salon.service.profile.ProfileService;
+import com.salon.utility.EnumRole;
+
 @Component
 public class TokenCrypt {
 
+	@Autowired
+	private ProfileService profileService;
+	
 	private final String password = "nfjn uifdshudfnvnus3324jnhia";
 	
 	private transient Map<Long, String> userTokens = new HashMap<Long, String>(); //save Users tokens
@@ -37,6 +49,55 @@ public class TokenCrypt {
 	}
 	public Map<Long, String> getUserTokens() {
 		return userTokens;
+	}
+	
+	public AuthBean checkToken(String token) throws Throwable {
+		
+		AuthBean bean = new AuthBean();
+		String decrypt;
+				
+		try {
+			decrypt = decryptToken(token); 
+			
+		} catch (Exception e) { // javax.crypto.BadPaddingException
+			bean.setErrorMessage("Error token encoding");
+			
+			return bean;
+		}
+		
+		
+		String [] splitToken = decrypt.split(" ");
+		Long profileId = Long.valueOf(splitToken[0]);
+		ProfileBean profBean = profileService.findById(profileId);
+		if(profBean.getClient() != null) {
+			bean.setUserId(profBean.getClient().getId());
+		}else {
+			bean.setUserId(profBean.getWorker().getId());
+		}
+		
+		bean.setProfileId(profileId);
+		
+		switch (splitToken[1]) {
+		case "CLIENT": bean.setEnumRole(EnumRole.CLIENT);
+			
+			break;
+			
+		case "WORKER": bean.setEnumRole(EnumRole.WORKER);
+		
+			break;
+		
+		case "ADMIN": bean.setEnumRole(EnumRole.ADMIN);
+			
+			break;
+		
+		case "MANAGER": bean.setEnumRole(EnumRole.MANAGER);
+		
+			break;
+		
+		}
+				
+		return bean;
+		
 	}
 	
     

@@ -6,23 +6,26 @@ import java.security.Timestamp;
 
 public class AuthBean {
     private Long userId;
+    private Long profileId;
     private String userName;
     private EnumRole enumRole;
     private String token;
     private Timestamp activeTime;
     private String errorMessage;
+    
 
     public AuthBean() {
     }
 
     public AuthBean(Long userId, String userName, EnumRole enumRole,
-                    String token, Timestamp activeTime, String errorMessage) {
+                    String token, Timestamp activeTime, String errorMessage, Long profileId) {
         this.userId = userId;
         this.userName = userName;
         this.enumRole = enumRole;
         this.token = token;
         this.activeTime = activeTime;
         this.errorMessage = errorMessage;
+        this.profileId = profileId;
     }
 
     public Long getUserId() {
@@ -71,6 +74,14 @@ public class AuthBean {
 
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
+	}
+
+	public Long getProfileId() {
+		return profileId;
+	}
+
+	public void setProfileId(Long profileId) {
+		this.profileId = profileId;
 	}
     
 }

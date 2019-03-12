@@ -79,29 +79,30 @@ public class AuthServiceImpl implements AuthService {
 			//throw new ErrorInfoExeption("Profile not found", "NOT_FOUND");
 		}
 		
-		ProfileBean bean = list.get(0);
-		if(crypt.getUserTokens().get(bean.getId()) == null) {
+		ProfileBean profBean = list.get(0);
+		if(crypt.getUserTokens().get(profBean.getId()) == null) {
 			
-			if (bean.getClient() != null) {
+			if (profBean.getClient() != null) {
 				
-				createToken(bean.getClient());
+				createToken(profBean.getClient());
 			} else {
-				createToken(bean.getWorker());
+				createToken(profBean.getWorker());
 				
 			}
 			
 		}
-		String token = crypt.getUserTokens().get(bean.getId());	
+		String token = crypt.getUserTokens().get(profBean.getId());	
 		
-		if (bean.getClient() != null) {
-			authBean.setUserId(bean.getClient().getId());
-			authBean.setEnumRole(bean.getClient().getRole());
+		if (profBean.getClient() != null) {
+			authBean.setUserId(profBean.getClient().getId());
+			authBean.setEnumRole(profBean.getClient().getRole());
 		} else {
-			authBean.setUserId(bean.getWorker().getId());
-			authBean.setEnumRole(bean.getWorker().getRole());
+			authBean.setUserId(profBean.getWorker().getId());
+			authBean.setEnumRole(profBean.getWorker().getRole());
 		}
 		
-		authBean.setUserName(bean.getName());
+		authBean.setUserName(profBean.getName());
+		authBean.setProfileId(profBean.getId());
 		authBean.setToken(token);
 
 		LOGGER.debug("login finish");

@@ -97,7 +97,7 @@ Request.GetClientOrders = function(clientRequest){
 	xhr.onreadystatechange = function () {
 	    if (xhr.readyState === 4 && xhr.status === 200) {
 	        var jsonIncome = JSON.parse(xhr.responseText);
-	        
+	        console.log(jsonIncome);
 	        createTable (jsonIncome);
 	       
 

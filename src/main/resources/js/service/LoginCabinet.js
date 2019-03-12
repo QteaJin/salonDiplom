@@ -19,9 +19,9 @@ function createLoginLogoutButton() {
 
 		var cabinetButton = document.createElement('a');
 		cabinetButton.setAttribute('class', "btn btn-outline-light");
-		cabinetButton.setAttribute('href', "#");
-		cabinetButton.setAttribute('onclick',
-				"sendCabinetRequest();return false;")
+		cabinetButton.setAttribute('href', "/cabinet");
+//		cabinetButton.setAttribute('onclick',
+//				"sendCabinetRequest();return false;")
 		cabinetButton.innerHTML = 'КАБИНЕТ';
 		crBut.appendChild(cabinetButton);
 
@@ -50,10 +50,10 @@ function successLogin(){
 	if (uToken == null || uToken == undefined || uToken == "null") {return;}
 	else{
 		var formCabinet = document.createElement('a');
-		formCabinet.setAttribute('href', "#");
+		formCabinet.setAttribute('href', "/cabinet");
 		formCabinet.setAttribute('class', "btn btn-warning");
-		formCabinet.setAttribute('onclick',
-		"sendCabinetRequest();return false;")
+//		formCabinet.setAttribute('onclick',
+//		"sendCabinetRequest();return false;")
 		formCabinet.innerHTML = 'Перейти в личный кабинет';
 		message.appendChild(formCabinet);
 	}

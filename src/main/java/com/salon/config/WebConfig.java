@@ -1,11 +1,14 @@
 package com.salon.config;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.salon.filter.AuthFillter;
 
 @EnableWebMvc
 @ComponentScan
@@ -26,7 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/service").setViewName("services");
         registry.addViewController("/trends").setViewName("trends");
         registry.addViewController("/employee").setViewName("worker");
-        registry.addViewController("/login").setViewName("login");
+       // registry.addViewController("/login").setViewName("login");
         registry.addViewController("/game").setViewName("calc");
     }
 
@@ -61,4 +64,14 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+    
+//    @Bean
+//    public FilterRegistrationBean < AuthFillter > filterRegistrationBean() {
+//     FilterRegistrationBean < AuthFillter > registrationBean = new FilterRegistrationBean<AuthFillter>();
+//     AuthFillter authFilter = new AuthFillter();
+//
+//     registrationBean.setFilter(authFilter);
+//     registrationBean.addUrlPatterns("/checklist/client/*");
+//     return registrationBean;
+//    }
 }
