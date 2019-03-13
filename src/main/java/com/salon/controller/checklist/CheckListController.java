@@ -82,5 +82,15 @@ public class CheckListController {
     	
     }
     
+    @RequestMapping(value = "/cancel/{orderId}", method = RequestMethod.GET)
+    public String cancelOrderByClient(@PathVariable("orderId") Long orderId) {
+    	
+    	CheckListBean checkListBean = checkListService.findById(orderId);
+    	checkListBean.setStatus(EnumStatusCheckList.CANCELED);
+    	checkListService.update(checkListBean);
+    	return orderId+"";
+    }
+    
+    
 
 }
