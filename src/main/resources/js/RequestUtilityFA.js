@@ -8,8 +8,29 @@ const GET_WORKER_PROFILE_URL = URL_DEFAULT + "/worker/profile/";
 const CLIENT_HISTORY_REQUEST = URL_DEFAULT + "/checklist/client/history?";
 const CANCEL_ORDER_BY_ID = URL_DEFAULT + "/checklist/cancel/";
 const LOGIN_SEND_POST = URL_DEFAULT + "/auth/login";
+const CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client"
 
 var Request = {};
+
+Request.Registration = function (jsonObject) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var registrationMessage = JSON.parse(xhr.responseText);
+            console.log(registrationMessage);
+            if(registrationMessage == true){
+            	successRegistrationClient();
+            }else{
+            	alert('Такой профиль уже существует!');
+            }
+
+        }
+    };
+
+    xhr.open("POST", CLIENT_REGISTRATION_REQUEST , true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(jsonObject));
+};
 
 Request.Login = function (jsonObject) {
     let xhr = new XMLHttpRequest();

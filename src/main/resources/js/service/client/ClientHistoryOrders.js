@@ -47,7 +47,7 @@ function sendRequestClientHistory(){
 	var status = document.getElementById('inputStateStatus').value;
 	var clientRequest = 'year='+year+'&month='+month+'&status='+status;
 	console.log(clientRequest);
-	clientRequest = 'year=1970&month=1&status=all';							//test DB
+	//clientRequest = 'year=1970&month=1&status=all';							//test DB
 	var clientHistoryRequest = Object.create(Request);
 	clientHistoryRequest = Request.GetClientOrders(clientRequest);
 	
@@ -143,7 +143,7 @@ function cancelOrder(e) {
 }
 
 function cancelOrderDone(text){
-	alert(text);
+	alert('Ваша заявка успешно отменена. Номер заявки '+ text);
 	location.reload(true)
 
 }
