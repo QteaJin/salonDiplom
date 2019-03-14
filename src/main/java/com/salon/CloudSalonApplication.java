@@ -6,7 +6,7 @@ import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 
-import com.salon.service.crypto.TokenCrypt;
+import com.salon.service.crypto.TokenCryptImpl;
 
 @SpringBootApplication
 public class CloudSalonApplication {

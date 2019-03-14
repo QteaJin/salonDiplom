@@ -16,3 +16,13 @@ function getCookie(name) {
 	  ));
 	  return matches ? decodeURIComponent(matches[1]) : undefined;
 	}
+
+function checkTokenExist(){
+	
+	var checkToken = getCookie('token');
+	
+	if(checkToken == null || checkToken === undefined ){
+		location.href = '/login';  
+		return;
+	}
+}

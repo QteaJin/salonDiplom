@@ -1,10 +1,10 @@
 package com.salon.repository.bean.email;
 
-import org.springframework.stereotype.Component;
+
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Component
+
 public class Email {
 	private String from;
 	private String to;

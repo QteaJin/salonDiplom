@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.salon.repository.bean.auth.AuthBean;
-import com.salon.service.crypto.TokenCrypt;
+import com.salon.service.crypto.TokenCryptImpl;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class AuthFillter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		String token = "";
-		TokenCrypt tokenCrypt = new TokenCrypt();
+		TokenCryptImpl tokenCrypt = new TokenCryptImpl();
 		AuthBean authBean = new AuthBean();
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;

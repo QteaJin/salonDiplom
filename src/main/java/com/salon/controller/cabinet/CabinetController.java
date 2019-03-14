@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salon.repository.bean.auth.AuthBean;
-import com.salon.service.crypto.TokenCrypt;
+import com.salon.service.crypto.TokenCryptImpl;
 
 @RestController
 public class CabinetController {
 	@Autowired
-	private TokenCrypt crypt;
+	private TokenCryptImpl crypt;
 
 	@RequestMapping(value = "/cabinet", method = RequestMethod.GET)
 	public void forwardCabinetUser(@CookieValue(value = "token", required = false) String token,

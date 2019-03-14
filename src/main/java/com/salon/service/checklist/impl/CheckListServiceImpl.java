@@ -12,7 +12,7 @@ import com.salon.service.RecieveUserInfo;
 import com.salon.service.checklist.CheckListComparatorByDate;
 import com.salon.service.checklist.CheckListService;
 import com.salon.service.client.ClientService;
-import com.salon.service.crypto.TokenCrypt;
+import com.salon.service.crypto.TokenCryptImpl;
 import com.salon.service.exception.ErrorInfoExeption;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumStatusCheckList;
@@ -33,7 +33,7 @@ public class CheckListServiceImpl implements CheckListService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CheckListServiceImpl.class);
     
     @Autowired
-    private TokenCrypt tokenCrypt;
+    private TokenCryptImpl tokenCrypt;
     
     @Autowired
     private CheckListDAO checkListDAO;

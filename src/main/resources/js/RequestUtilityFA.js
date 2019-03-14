@@ -8,9 +8,30 @@ const GET_WORKER_PROFILE_URL = URL_DEFAULT + "/worker/profile/";
 const CLIENT_HISTORY_REQUEST = URL_DEFAULT + "/checklist/client/history?";
 const CANCEL_ORDER_BY_ID = URL_DEFAULT + "/checklist/cancel/";
 const LOGIN_SEND_POST = URL_DEFAULT + "/auth/login";
-const CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client"
+const CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client";
+const SEND_MESSAGE_TO_ADMIN = URL_DEFAULT + "/email/admin";
 
 var Request = {};
+
+Request.SendMessageByEmail = function (jsonObject) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sendMessage = JSON.parse(xhr.responseText);
+            console.log(sendMessage);
+            if(sendMessage == true){
+            	sendEmailSuccess();
+            }else{
+            	alert('Что-то пошло не так. Ваше сообщение не доставлено.');
+            }
+
+        }
+    };
+
+    xhr.open("POST", SEND_MESSAGE_TO_ADMIN , true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(jsonObject));
+};
 
 Request.Registration = function (jsonObject) {
     let xhr = new XMLHttpRequest();

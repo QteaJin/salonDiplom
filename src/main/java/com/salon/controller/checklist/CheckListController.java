@@ -4,7 +4,7 @@ import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
-import com.salon.service.crypto.TokenCrypt;
+import com.salon.service.crypto.TokenCryptImpl;
 import com.salon.utility.EnumStatusCheckList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CheckListController {
 	
 	@Autowired
-	private TokenCrypt tokenCrypt;
+	private TokenCryptImpl tokenCrypt;
 	
     @Autowired
     private CheckListService checkListService;
