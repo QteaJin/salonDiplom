@@ -14,7 +14,12 @@ function createLoginLogoutButton() {
 		loginBut.setAttribute('class', "btn btn-outline-light");
 		loginBut.setAttribute('href', "/login");
 		loginBut.innerHTML = 'ВОЙТИ';
+		var registrBut = document.createElement('a');
+		registrBut.setAttribute('class', "btn btn-outline-light");
+		registrBut.setAttribute('href', "/registration");
+		registrBut.innerHTML = 'РЕГИСТРАЦИЯ';
 		crBut.appendChild(loginBut);
+		crBut.appendChild(registrBut);
 	} else {
 
 		var cabinetButton = document.createElement('a');
