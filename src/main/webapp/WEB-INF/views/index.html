@@ -56,6 +56,23 @@
     padding: 10px; /* Поля вокруг текста */
     margin: 10px; /* Отступы вокруг */
    }
+ .quickspan{
+ text-align: center;
+ }
+   
+   .quickspan:hover::after {
+   content: attr(data-title); /* Выводим текст */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 0; right: 0; /* Положение подсказки */
+    z-index: 1; /* Отображаем подсказку поверх других элементов */
+    background: blue; /* Полупрозрачный цвет фона */
+    color: #fff; /* Цвет текста */
+    text-align: center; /* Выравнивание текста по центру */
+    font-family: Arial, sans-serif; /* Гарнитура шрифта */
+    font-size: 11px; /* Размер текста подсказки */
+    padding: 5px 10px; /* Поля */
+    border: 1px solid #333; /* Параметры рамки */
+    }
 </style>
 
 <head>
@@ -145,6 +162,10 @@
 				<div class="col-md-4">
 					<div class="container-fluid bg-light py-3">
     <form id="contact-form">
+    <div style="text-align: center; margin-bottom: 20px;">
+    <span class = "quickspan" data-title="Вы можете зарегистрироваться и воспользоваться личным кабинетом для записи в салон">Быстрая форма записи к мастеру</span>
+    </div>
+    	
         <div class="messages"></div>
         <div class="controls">
             <div class="row">

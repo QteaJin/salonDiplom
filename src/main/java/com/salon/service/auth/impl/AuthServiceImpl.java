@@ -9,7 +9,7 @@ import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.entity.abstractEntity.AbstractUser;
 import com.salon.service.auth.AuthService;
 import com.salon.service.client.ClientService;
-import com.salon.service.crypto.TokenCrypt;
+import com.salon.service.crypto.TokenCryptImpl;
 import com.salon.service.exception.ErrorInfoExeption;
 import com.salon.service.profile.ProfileService;
 import com.salon.service.salon.SalonService;
@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
 	private final static String ERROR_TYPE = "AUTHSERVICE.ERROR";
 	
 	@Autowired
-	private TokenCrypt crypt;
+	private TokenCryptImpl crypt;
 
 	@Autowired
 	private ProfileService profileService;
