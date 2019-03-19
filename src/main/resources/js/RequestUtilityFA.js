@@ -59,6 +59,11 @@ Request.Login = function (jsonObject) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var loginResponce = JSON.parse(xhr.responseText);
             console.log(loginResponce);
+            if(loginResponce.errorMessage == "Profile not found"){
+            	console.log('Profile not found');
+            	loginFail();
+            	return;
+            }
             var date = new Date(new Date().getTime() + 60 * 60 * 1000); //1 hour
             document.cookie = "token="+loginResponce.token +"; path=/; expires=" + date.toUTCString();
             createLoginLogoutButton();

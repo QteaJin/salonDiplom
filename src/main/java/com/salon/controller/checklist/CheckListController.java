@@ -71,14 +71,14 @@ public class CheckListController {
     }
     
     @RequestMapping(value = "/client/history", method = RequestMethod.GET)
-    public List<CheckListClientHistoryBean> getClientHistory(@CookieValue(value = "token", required = false) String token,
+    public List<CheckListClientHistoryBean> getClientHistory(HttpServletRequest req,
     														@RequestParam(value = "year") Integer year,
     														@RequestParam(value = "month") Integer month,
     														@RequestParam(value = "status", required = false) String status) {
     	
 
     	
-	return checkListService.getClientHistory(token,year, month, status);
+	return checkListService.getClientHistory(req, year, month, status);
     	
     }
     

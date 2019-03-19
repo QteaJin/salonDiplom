@@ -1,5 +1,6 @@
 package com.salon.service.checklist.impl;
 
+import com.salon.repository.bean.auth.AuthBean;
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.client.ClientBean;
@@ -26,6 +27,9 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 
 @Service
@@ -159,7 +163,9 @@ public class CheckListServiceImpl implements CheckListService {
     
     
     @Override
-    public List<CheckListClientHistoryBean> getClientHistory(String token, Integer year, Integer month, String status) {
+    public List<CheckListClientHistoryBean> getClientHistory(HttpServletRequest req, Integer year, Integer month, String status) {
+    	
+    	String token = tokenCrypt.getCookie(req);
     	
     	try {
 			if(tokenCrypt.checkToken(token).getErrorMessage() != null) {
@@ -173,9 +179,11 @@ public class CheckListServiceImpl implements CheckListService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	AuthBean bean = tokenCrypt.checkToken(token);
+    	    	
+    	//RecieveUserInfo userInfo = new RecieveUserInfo();   //Long clientId,
+    	Long clientId = bean.getUserId();
     	
-    	RecieveUserInfo userInfo = new RecieveUserInfo();   //Long clientId,
-    	Long clientId = userInfo.getUserId();
     	
     	List<CheckListClientHistoryBean> clientHistoryBeans = new ArrayList<CheckListClientHistoryBean>();
     	  
@@ -213,7 +221,7 @@ public class CheckListServiceImpl implements CheckListService {
 					historyBean.setCheckListId(checkList.getSheckListId());
 					historyBean.setDateAppointment(checkList.getDateAppointment());
 					historyBean.setSalon(checkList.getWorker().getSalon().getName());
-					historyBean.setWorker(checkList.getWorker().getDescription());
+					historyBean.setWorker(checkList.getWorker().getProfile().getName() + " - " + checkList.getWorker().getDescription() );
 					if(!checkList.getCatalogs().isEmpty()) {
 						historyBean.setCatalogs(checkList.getCatalogs());
 						for (Catalog catalog : checkList.getCatalogs()) {
@@ -274,4 +282,6 @@ public class CheckListServiceImpl implements CheckListService {
         }
         return beans;
     }
+    
+
 }

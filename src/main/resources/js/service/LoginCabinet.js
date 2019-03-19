@@ -48,6 +48,8 @@ function logoutSession() {
 }
 
 function successLogin(){
+	var fail = document.getElementById('loginfail');
+	fail.innerHTML = "";
 	var message = document.getElementById('successLogin');
 	while (message.firstChild) {
 		message.removeChild(message.firstChild); // delete link
