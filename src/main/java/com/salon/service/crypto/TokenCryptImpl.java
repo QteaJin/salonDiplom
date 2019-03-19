@@ -4,6 +4,8 @@ package com.salon.service.crypto;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,7 +103,13 @@ public class TokenCryptImpl implements TokenCrypt {
 		return bean;
 		
 	}
-	
+	public String getCookie(HttpServletRequest req) {
+        for (Cookie c : req.getCookies()) {
+           if (c.getName().equals("token"))
+               return c.getValue();
+           }
+        return null;
+    }
     
 }
 

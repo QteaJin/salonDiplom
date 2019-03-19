@@ -9,6 +9,8 @@ import com.salon.utility.EnumStatusCheckList;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 public interface CheckListService extends CRUDService<CheckListBean, CheckList> {
     QuickOrderBean createQuickOrde(QuickOrderBean orderBean);
@@ -16,7 +18,7 @@ public interface CheckListService extends CRUDService<CheckListBean, CheckList> 
                                                                    EnumStatusCheckList status,
                                                                    Integer day, Integer mounts, Integer year );
     
-    List<CheckListClientHistoryBean> getClientHistory(	String token,
+    List<CheckListClientHistoryBean> getClientHistory(HttpServletRequest req,
     													Integer year,
 											    		Integer month,
 														String status);

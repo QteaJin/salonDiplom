@@ -45,7 +45,7 @@ function sendRequestClientHistory(){
 	var month = document.getElementById('inputStateMounts').value;
 	var year = document.getElementById('inputStateYear').value;
 	var status = document.getElementById('inputStateStatus').value;
-	var clientRequest = 'year='+year+'&month='+month+'&status='+status;
+	var clientRequest ='&year='+year+'&month='+month+'&status='+status;
 	console.log(clientRequest);
 	//clientRequest = 'year=1970&month=1&status=all';							//test DB
 	var clientHistoryRequest = Object.create(Request);

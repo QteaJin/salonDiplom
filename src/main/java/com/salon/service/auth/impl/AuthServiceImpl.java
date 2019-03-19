@@ -114,7 +114,10 @@ public class AuthServiceImpl implements AuthService {
 	public boolean registerWorker(ProfileBean profile) {
 		LOGGER.debug("register start");
 
-		validProfile(profile);
+		boolean profileExist = validProfile(profile);
+		if (profileExist) {
+			return false;
+		}
 
 		SalonBean salon = salonService.findById(profile.getSalonId());
 		
@@ -144,7 +147,10 @@ public class AuthServiceImpl implements AuthService {
 	public boolean registerClient(ProfileBean profile) {
 		LOGGER.debug("register start");
 
-		validProfile(profile);
+		boolean profileExist = validProfile(profile);
+		if (profileExist) {
+			return false;
+		}
 
 		ProfileBean bean = profileService.save(profile);
 
@@ -162,13 +168,20 @@ public class AuthServiceImpl implements AuthService {
 		return true;
 	}
 
-	private void validProfile(ProfileBean profileBean) {
-		List<ProfileBean> list = profileService.findByExample(profileBean);
-
-		if (!list.isEmpty()) {
+	private boolean validProfile(ProfileBean profileBean) {
+		ProfileBean beanEmail = new ProfileBean();
+		beanEmail.setEmail(profileBean.getEmail());
+		List<ProfileBean> list = profileService.findByExample(beanEmail);
+		
+		ProfileBean beanPhone = new ProfileBean();
+		beanPhone.setPhone(profileBean.getPhone());
+		List<ProfileBean> listPhone = profileService.findByExample(beanPhone);
+		if (!list.isEmpty() || !listPhone.isEmpty()) {
 			LOGGER.debug("Profile already exists");
-			throw new ErrorInfoExeption("Profile already exists", "PROFILE_EXIST");
+			//throw new ErrorInfoExeption("Profile already exists", "PROFILE_EXIST");
+			return true;
 		}
+		return false;
 	}
 	private String createToken(AbstractUser user) {
 		

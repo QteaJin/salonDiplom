@@ -13,3 +13,8 @@ function sendLoginForm(event){
 	var loginRequest = Object.create(Request);
 	loginRequest.Login(loginForm);
 }
+
+function loginFail(){
+	var fail = document.getElementById('loginfail');
+	fail.innerHTML = "Неправильный Логин или Пароль";
+}

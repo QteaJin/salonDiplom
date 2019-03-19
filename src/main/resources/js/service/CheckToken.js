@@ -25,4 +25,5 @@ function checkTokenExist(){
 		location.href = '/login';  
 		return;
 	}
+	return checkToken;
 }
