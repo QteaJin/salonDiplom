@@ -10,9 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.salon.SalonBean;
+import com.salon.repository.bean.salon.SalonCreateEditBean;
+import com.salon.repository.dao.adress.AdressDAO;
 import com.salon.repository.dao.salon.SalonDAO;
+import com.salon.repository.entity.address.Address;
 import com.salon.repository.entity.salon.Salon;
+import com.salon.service.adress.AdressService;
 import com.salon.service.salon.SalonService;
 
 @Service
@@ -21,6 +26,10 @@ public class SalonServiceImpl implements SalonService {
 
 	@Autowired
 	private SalonDAO salonDAO;
+	
+	@Autowired
+	private AdressService adressService;
+	
 
 	public SalonDAO getSalonDAO() {
 		return salonDAO;
@@ -125,6 +134,56 @@ public class SalonServiceImpl implements SalonService {
 
 		return salonBeans;
 
+	}
+
+	@Override
+	public SalonCreateEditBean createSalon(SalonCreateEditBean bean) {
+		
+		AdressBean salonAdress = new AdressBean();
+		salonAdress.setCountry(bean.getCountry());
+		salonAdress.setCity(bean.getCity());
+		salonAdress.setStreet(bean.getStreet());
+		salonAdress = adressService.save(salonAdress);
+		
+		AdressBean adBean = adressService.findById(salonAdress.getAddressId());
+		
+		SalonBean salonBean = new SalonBean();
+		salonBean.setName(bean.getName());
+		salonBean.setDescription(bean.getDescription());
+		salonBean.setAddress(adressService.toDomain(adBean));
+		
+		salonBean = save(salonBean);
+		
+		bean.setId(salonBean.getSalonId());
+		
+		
+		return bean;
+	}
+
+	@Override
+	public List<SalonCreateEditBean> findAllSalons() {
+		List<SalonCreateEditBean> beans = new ArrayList<>();
+		
+		List<SalonBean> salonBeans = new ArrayList<SalonBean>();
+		salonBeans = findAll();
+		
+		if (salonBeans.isEmpty()) {
+			return beans;
+		}
+		for (SalonBean salonBean : salonBeans) {
+			SalonCreateEditBean simpleBean = new SalonCreateEditBean();
+			simpleBean.setId(salonBean.getSalonId());
+			simpleBean.setName(salonBean.getName());
+			simpleBean.setDescription(salonBean.getDescription());
+			simpleBean.setCountry(salonBean.getAddress().getCountry());
+			simpleBean.setCity(salonBean.getAddress().getCity());
+			simpleBean.setStreet(salonBean.getAddress().getStreet());
+			beans.add(simpleBean);
+			
+		}
+		
+		
+		return beans;
 	}
 
 }

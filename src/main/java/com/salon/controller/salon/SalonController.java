@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salon.repository.bean.salon.SalonBean;
+import com.salon.repository.bean.salon.SalonCreateEditBean;
 import com.salon.service.salon.SalonService;
 
 @RestController
@@ -43,5 +44,15 @@ public class SalonController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public SalonBean updateSalon(@RequestBody SalonBean salonBean) {
 		return salonService.update(salonBean);
+	}
+	@RequestMapping(value = "/create" , method = RequestMethod.POST)
+	public SalonCreateEditBean createNewSalon(@RequestBody SalonCreateEditBean createEditBean) {
+		
+		return salonService.createSalon(createEditBean);
+		
+	}
+	@RequestMapping(value = "/admin/all", method = RequestMethod.GET)
+	public List<SalonCreateEditBean> findAllSalons(){
+		return salonService.findAllSalons();
 	}
 }
