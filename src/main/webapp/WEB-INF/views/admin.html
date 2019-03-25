@@ -10,7 +10,14 @@
             crossorigin="anonymous"></script>
             	<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
                 <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
-    <title>ADMIN</title>
+                <script type="text/javascript" src = "/js/bean/Salon.js"></script>
+                <script type="text/javascript" src = "/js/RequestUtilityADMIN.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/CreateSalon.js"></script>
+                
+    <title>ADMIN PAGE</title>
+    <style type="text/css">
+     
+    </style>
     
 </head>
 <body onload='createLoginLogoutButton()'>
@@ -56,5 +63,113 @@
       </nav>
 </header>
 <!--HEADER-->
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="salon-tab" data-toggle="tab" href="#salon" role="tab" aria-controls="salon" aria-selected="true" onclick="checkTokenExist();">Создать / Изменить салон</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false" onclick="setCurrentDateClient();">Создать / Изменить клиента</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="worker-tab" data-toggle="tab" href="#worker" role="tab" aria-controls="worker" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить работника</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить заказ</a>
+        </li>
+    
+        <li class="nav-item">
+            <a class="nav-link" id="discount-tab" data-toggle="tab" href="#discount" role="tab" aria-controls="discount" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить скидку</a>
+        </li>
+            <li class="nav-item">
+            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить комментарий</a>
+        </li>
+        </li>
+            <li class="nav-item">
+            <a class="nav-link" id="skill-tab" data-toggle="tab" href="#skill" role="tab" aria-controls="skill" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить услугу</a>
+        </li>
+    
+         </li>
+            <li class="nav-item">
+            <a class="nav-link" id="catalog-tab" data-toggle="tab" href="#catalog" role="tab" aria-controls="catalog" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить каталог</a>
+        </li>
+    </ul>
+
+    
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade show active" id="salon" role="tabpanel" aria-labelledby="salon-tab">
+            <div class="container-fluid">
+       <div class="container">
+                      <div class="row">
+                        <div class="col"  id = "salon1">
+                          1 из 2
+                            
+                            <form id = 'salonForm'>
+                                      <div class="form-group">
+                                      <input class="form-control" type="text" id="salonid" placeholder="Id салона" readonly>
+                                        <label for="salonname">Название салона:</label>
+                                        <input type="text" class="form-control" id="salonname" name="salonname">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="salondescr">Описание салона:</label>
+                                        <textarea class="form-control" rows="3" id="salondescr" name="salondescr"></textarea>
+                                      </div>
+                                      <label>Адресс салона:</label>
+                                      <br>
+                                      <label for="saloncountry">Страна:</label>
+                                      <input type="text" class="form-control" id="saloncountry" name="saloncountry">
+                                      <label for="saloncity">Город:</label>
+                                      <input type="text" class="form-control" id="saloncity" name="saloncity">
+                                      <label for="salonstreet">Улица:</label>
+                                      <input type="text" class="form-control" id="salonstreet" name="salonstreet">
+
+                                      <button type="submit" class="btn btn-primary" onclick="savesalon(event);">Добавить / Изменить</button>
+                                    </form>
+
+                        </div>
+                        <div class="col" id = "salon2">
+                          2 из 2
+                          <br>
+                          <button type="submit" class="btn btn-primary" onclick="getsalons(event);">Найти все салоны</button>
+                          <div id = "salonslist"></div>
+                        </div>
+                      </div>
+                    </div>
+        </div>
+            
+        </div>
+        
+        
+
+    <div class="tab-pane fade" id="client" role="tabpanel" aria-labelledby="client-tab">
+
+    <div class="row" >
+            Создать клиента
+        </div>
+            <div class="mt-5">
+               Создать клиента
+             </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="worker" role="tabpanel" aria-labelledby="worker-tab">Создать / Изменить работника</div>
+
+        <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">Создать / Изменить заказ</div>
+
+        <div class="tab-pane fade" id="discount" role="tabpanel" aria-labelledby="discount-tab">Создать / Изменить скидку</div>
+
+        <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">Создать / Изменить комментарий</div>
+        
+        <div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="skill-tab">Создать / Изменить услугу</div>
+
+        <div class="tab-pane fade" id="catalog" role="tabpanel" aria-labelledby="catalog-tab">Создать / Изменить каталог</div>
+
+
+
+    </div>
+</div>
+<!--BODY-->
 </body>
 </html>
