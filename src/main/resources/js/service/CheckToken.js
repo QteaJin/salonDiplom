@@ -1,6 +1,6 @@
-/**
- * 
- */
+const CUSTOMER_CABINET = "/customer";
+const WORKER_CABINET = "/employee";
+const ADMIN_CABINET = "/admin";
 
 function checkUserToken(){
 	
@@ -21,7 +21,31 @@ function checkTokenExist(){
 	
 	var checkToken = getCookie('token');
 	
-	if(checkToken == null || checkToken === undefined ){
+	if(checkToken == null || checkToken === undefined){
+		location.href = '/login';  
+		return;
+	}
+	return checkToken;
+}
+
+function checkErrorToken(){
+	
+	var checkToken = getCookie('token');
+	var urlLocation = window.location.href;
+	var splitUrl = urlLocation.split('\/');
+	var length = splitUrl.length;
+	var splitResultUrl = "\/" + splitUrl[length-1];
+
+	if(CUSTOMER_CABINET == splitResultUrl && checkToken == undefined){
+		location.href = '/login';  
+		return;
+	}
+	if(ADMIN_CABINET == splitResultUrl && checkToken == undefined){
+		location.href = '/login';  
+		return;
+	}
+	
+	if(checkToken == "error"){
 		location.href = '/login';  
 		return;
 	}

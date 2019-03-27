@@ -139,6 +139,17 @@ public class SalonServiceImpl implements SalonService {
 	@Override
 	public SalonCreateEditBean createSalon(SalonCreateEditBean bean) {
 		
+		if(bean.getId() != null) {
+			SalonBean updateSalon = findById(bean.getId());
+			updateSalon.getAddress().setCountry(bean.getCountry());
+			updateSalon.getAddress().setCity(bean.getCity());
+			updateSalon.getAddress().setStreet(bean.getStreet());
+			updateSalon.setName(bean.getName());
+			updateSalon.setDescription(bean.getDescription());
+			update(updateSalon);
+			return bean;
+		}
+		
 		AdressBean salonAdress = new AdressBean();
 		salonAdress.setCountry(bean.getCountry());
 		salonAdress.setCity(bean.getCity());
