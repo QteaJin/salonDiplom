@@ -36,6 +36,8 @@ function getsalons(event){ //get all salons
 
 function displayAllSalons(json){
 	
+	localStorage.setItem("salons", JSON.stringify(json)); //save object to storage
+	
 	var allSalonDiv = document.getElementById("salonslist"); //remove previous nodes
 	while (allSalonDiv.firstChild) {
 		allSalonDiv.removeChild(allSalonDiv.firstChild);
@@ -47,19 +49,32 @@ function displayAllSalons(json){
 		var div = document.createElement("div");
 		div.setAttribute("salonid", json[i].id);
 		div.setAttribute("class", "shadow p-4 mb-4 bg-white"); //
+		var spanSalon = document.createElement("span");
+		spanSalon.setAttribute("class", "spansalons");
+		spanSalon.setAttribute("salonid", json[i].id);
 		var textName = document.createTextNode(json[i].name);
 		var textAddress = document.createTextNode(json[i].city + " , " + json[i].street);
-		div.appendChild(textName);
-		div.appendChild(document.createElement("br"));
-		div.appendChild(textAddress);
-
+		spanSalon.appendChild(textName);
+		spanSalon.appendChild(document.createElement("br"));
+		spanSalon.appendChild(textAddress);
+		div.appendChild(spanSalon);
 		allSalonDiv.appendChild(div);
 	}
 }
 
 function choosesalon(event) {
 	event.stopPropagation();		
-
-let blabla = event.target.getAttribute('salonid');
-console.log(blabla);
+	var salons = {};
+	if (localStorage.getItem("salons")) {
+		salons = JSON.parse(localStorage.getItem("salons"));
+	}
+	console.log(salons);
+let salonId = event.target.getAttribute('salonid') - 1;
+console.log(salonId);
+document.forms['salonForm']['salonid'].value = salons[salonId].id;
+document.forms['salonForm']['salonname'].value = salons[salonId].name;
+document.forms['salonForm']['salondescr'].value = salons[salonId].description;
+document.forms['salonForm']['saloncountry'].value = salons[salonId].country;
+document.forms['salonForm']['saloncity'].value = salons[salonId].city;
+document.forms['salonForm']['salonstreet'].value = salons[salonId].street;
 }

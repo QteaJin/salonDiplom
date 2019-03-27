@@ -58,6 +58,10 @@ public class TokenCryptImpl implements TokenCrypt {
 	public AuthBean checkToken(String token) {
 		
 		AuthBean bean = new AuthBean();
+		if(token == null) {
+			bean.setErrorMessage("Token is NULL");
+			return bean;
+		}
 		String decrypt;
 				
 		try {
@@ -104,6 +108,9 @@ public class TokenCryptImpl implements TokenCrypt {
 		
 	}
 	public String getCookie(HttpServletRequest req) {
+		if(req.getCookies()==null) {
+			return "token error";
+		}
         for (Cookie c : req.getCookies()) {
            if (c.getName().equals("token"))
                return c.getValue();

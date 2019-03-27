@@ -1,6 +1,6 @@
 function createLoginLogoutButton() {
 	
-
+	
 	var crBut = document.getElementById('logbutton');
 
 	while (crBut.firstChild) {
@@ -33,11 +33,12 @@ function createLoginLogoutButton() {
 		var logoutButton = document.createElement('a');
 		logoutButton.setAttribute('class', "btn btn-outline-light");
 		logoutButton.setAttribute('href', "#");
-		logoutButton.setAttribute('onclick', "logoutSession();return false;")
+		logoutButton.setAttribute('onclick', "logoutSessionMainPage();return false;")
 		logoutButton.innerHTML = 'ВЫХОД';
 		crBut.appendChild(logoutButton);
 		
 	}
+	checkErrorToken();
 }
 function logoutSession() {
 
@@ -45,7 +46,17 @@ function logoutSession() {
 	document.cookie = "token=; path=/; expires=" + date.toUTCString();
 	createLoginLogoutButton();
 	
+	
 }
+function logoutSessionMainPage() {
+
+	var date = new Date(0);
+	document.cookie = "token=; path=/; expires=" + date.toUTCString();
+	createLoginLogoutButton();
+	location.href = '/';
+	
+}
+
 
 function successLogin(){
 	var fail = document.getElementById('loginfail');
