@@ -62,4 +62,10 @@ public class CatalogController {
 				
 		return catalogService.findCatalogsBySkillId(skillId, request);
 	}
+	@RequestMapping(value = "/create" , method = RequestMethod.POST)
+	public CatalogBeanCreateAdmin createEditCatalog(@RequestBody CatalogBeanCreateAdmin catalogBean) {
+		
+		return catalogService.createCatalog(catalogBean);
+		
+	}
 }

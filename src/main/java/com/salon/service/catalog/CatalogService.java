@@ -12,4 +12,6 @@ import com.salon.service.CRUDService;
 public interface CatalogService extends CRUDService<CatalogBean, Catalog>{
 
 	List<CatalogBeanCreateAdmin> findCatalogsBySkillId(Long skillId, HttpServletRequest request);
+
+	CatalogBeanCreateAdmin createCatalog(CatalogBeanCreateAdmin catalogBean);
 }
