@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,12 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.salon.repository.bean.catalog.CatalogBean;
+import com.salon.repository.bean.catalog.CatalogBeanCreateAdmin;
 import com.salon.repository.dao.catalog.CatalogDAO;
 import com.salon.repository.entity.catalog.Catalog;
+import com.salon.repository.entity.skills.Skills;
 import com.salon.service.catalog.CatalogService;
+import com.salon.service.crypto.TokenCryptImpl;
 
 @Service
 public class CatalogServiceImpl implements CatalogService {
@@ -21,6 +26,9 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Autowired
 	private CatalogDAO catalogDAO;
+	
+    @Autowired
+    private TokenCryptImpl tokenCrypt;
 
 	@Override
 	public CatalogBean save(CatalogBean bean) {
@@ -116,5 +124,40 @@ public class CatalogServiceImpl implements CatalogService {
 		}
 
 		return catalogBeans;
+	}
+
+	@Override
+	public List<CatalogBeanCreateAdmin> findCatalogsBySkillId(Long skillId, HttpServletRequest request) {
+		List <CatalogBean> catalogBeans = new ArrayList<CatalogBean>();
+		List <CatalogBeanCreateAdmin> catalogBeansAdmin = new ArrayList<CatalogBeanCreateAdmin>();
+		
+		String token = tokenCrypt.getCookie(request);
+		if(tokenCrypt.checkToken(token).getErrorMessage() != null) {
+			CatalogBeanCreateAdmin catalogBeanCreateAdmin = new CatalogBeanCreateAdmin();
+			catalogBeanCreateAdmin.setToken("error");
+			catalogBeansAdmin.add(catalogBeanCreateAdmin);
+			return catalogBeansAdmin;
+		}
+		
+		Skills skill = new Skills();
+		skill.setSkillsId(skillId);
+		CatalogBean catalogBeanExample = new CatalogBean();
+		catalogBeanExample.setSkills(skill);
+		catalogBeans = findByExample(catalogBeanExample);
+		if(!catalogBeans.isEmpty()) {
+			for (CatalogBean catalogBean : catalogBeans) {
+				CatalogBeanCreateAdmin beanCreateAdmin = new CatalogBeanCreateAdmin();
+				beanCreateAdmin.setCatalogId(catalogBean.getCatalogId());
+				beanCreateAdmin.setDescription(catalogBean.getDescription());
+				beanCreateAdmin.setName(catalogBean.getName());
+				beanCreateAdmin.setPrice(catalogBean.getPrice());
+				beanCreateAdmin.setTimeLead(catalogBean.getTimeLead());
+				beanCreateAdmin.setSkillId(catalogBean.getSkills().getSkillsId());
+				catalogBeansAdmin.add(beanCreateAdmin);
+			}
+			return catalogBeansAdmin;
+		}
+		
+		return catalogBeansAdmin;
 	}
 }

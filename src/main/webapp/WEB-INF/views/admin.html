@@ -13,6 +13,11 @@
                 <script type="text/javascript" src = "/js/bean/Salon.js"></script>
                 <script type="text/javascript" src = "/js/RequestUtilityADMIN.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/CreateSalon.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/Skills.js"></script>
+                <script type="text/javascript" src = "/js/bean/Skill.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/Catalogs.js"></script>
+                <script type="text/javascript" src = "/js/bean/Catalog.js"></script>
+                 
                 
     <title>ADMIN PAGE</title>
     <style type="text/css">
@@ -71,7 +76,7 @@
             <a class="nav-link active" id="salon-tab" data-toggle="tab" href="#salon" role="tab" aria-controls="salon" aria-selected="true" onclick="checkTokenExist();">Создать / Изменить салон</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false" onclick="setCurrentDateClient();">Создать / Изменить клиента</a>
+            <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить клиента</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="worker-tab" data-toggle="tab" href="#worker" role="tab" aria-controls="worker" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить работника</a>
@@ -164,9 +169,59 @@
 
         <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">Создать / Изменить комментарий</div>
         
-        <div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="skill-tab">Создать / Изменить услугу</div>
+        <div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="skill-tab">
+        
+        Создать / Изменить услугу
+        
+        	<div class="container">
+		<div class="row">
 
-        <div class="tab-pane fade" id="catalog" role="tabpanel" aria-labelledby="catalog-tab">Создать / Изменить каталог</div>
+			<div class="col-8"  id = "skill1">
+
+				<form id = 'skillForm'>
+
+					<div class="input-group mb-3">			
+						<div class="col-3"  id = "skill2">
+				<input class="form-control" type="text" id="skillid" placeholder="Id услуги" name="skillid" readonly >
+			</div>
+						
+						<input type="text" class="form-control" placeholder="Название услуги:" aria-label="Название услуги:" aria-describedby="basic-addon2" id="skillname" name="skillname" >
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="submit" onclick="saveEditSkill(event);">Добавить / Изменить</button>
+						</div>
+					</div>
+				</form>
+
+				<button class="btn btn-primary" type="submit" onclick="sendRequestFindAllSKills(event);">Найти все услуги</button>
+				<div id="skilltable"> </div>
+
+			</div>
+
+		</div>
+	</div>
+        
+        </div>
+
+        <div class="tab-pane fade" id="catalog" role="tabpanel" aria-labelledby="catalog-tab">Создать / Изменить каталог
+         <div class="container">
+                      <div class="row">
+                        <div class="col"  id = "catalog1">
+                        <button class="btn btn-primary" type="submit" onclick="getSkillsForCatalog();">Выберите умение</button>
+                        
+        			<form>
+							<div class="form-group" id="catalogskillselect" >
+								
+							</div>
+					</form>
+					<div id="catalogTable"></div>
+                        </div>
+        			<div class="col"  id = "catalog2"> 2 
+        			<div id="changecatalog"></div>
+        			</div>
+				
+		</div>
+		</div>			
+        </div>
 
 
 
