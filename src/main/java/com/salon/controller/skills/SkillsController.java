@@ -1,6 +1,7 @@
 package com.salon.controller.skills;
 
 import com.salon.repository.bean.skills.SkillsBean;
+import com.salon.repository.bean.skills.SkillsBeanSimple;
 import com.salon.service.skills.SkillsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,17 @@ public class SkillsController {
     @RequestMapping(method = RequestMethod.PUT)
     public SkillsBean updateSkillsBean(@RequestBody SkillsBean skillsBean) {
         return skillsService.update(skillsBean);
+    }
+    @RequestMapping(value = "/admin/all", method = RequestMethod.GET)
+    public List<SkillsBeanSimple> findAllSkillsSimple() { 
+    	
+    		return skillsService.getAllSkills(); }
+    
+    @RequestMapping(value = "/create" , method = RequestMethod.POST)
+    public SkillsBeanSimple createEditSkill(@RequestBody SkillsBeanSimple beanSimple) {
+		
+    	return skillsService.createEditSkill(beanSimple);
+    	
     }
 
 }

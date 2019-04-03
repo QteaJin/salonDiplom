@@ -62,6 +62,8 @@ function successLogin(){
 	var fail = document.getElementById('loginfail');
 	fail.innerHTML = "";
 	var message = document.getElementById('successLogin');
+	document.forms['login-form']['login'].value = "";
+	document.forms['login-form']['password'].value = "";
 	while (message.firstChild) {
 		message.removeChild(message.firstChild); // delete link
 	}
@@ -75,6 +77,7 @@ function successLogin(){
 //		"sendCabinetRequest();return false;")
 		formCabinet.innerHTML = 'Перейти в личный кабинет';
 		message.appendChild(formCabinet);
+		
 	}
 	
 }

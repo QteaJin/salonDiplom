@@ -1,6 +1,7 @@
 package com.salon.service.skills.impl;
 
 import com.salon.repository.bean.skills.SkillsBean;
+import com.salon.repository.bean.skills.SkillsBeanSimple;
 import com.salon.repository.dao.skills.SkillsDAO;
 import com.salon.repository.entity.skills.Skills;
 import com.salon.service.skills.SkillsService;
@@ -122,4 +123,39 @@ public class SkillsServiceImpl implements SkillsService {
         }
         return beans;
     }
+
+	@Override
+	public List<SkillsBeanSimple> getAllSkills() {
+		List<SkillsBeanSimple> skillsBeanSimples = new ArrayList<SkillsBeanSimple>();;
+		List<SkillsBean> skillsBeans = new ArrayList<SkillsBean>();
+		skillsBeans = findAll();
+		if (!skillsBeans.isEmpty()) {
+		 			
+			for (SkillsBean skillsBean : skillsBeans) {
+				SkillsBeanSimple beanSimple = new SkillsBeanSimple();
+				beanSimple.setSkillsId(skillsBean.getSkillsId());
+				beanSimple.setName(skillsBean.getName());
+				skillsBeanSimples.add(beanSimple);
+			}
+		}
+		
+		return skillsBeanSimples;
+	}
+
+	@Override
+	public SkillsBeanSimple createEditSkill(SkillsBeanSimple beanSimple) {
+		SkillsBean skillsBean = new SkillsBean();
+		
+		if (beanSimple.getSkillsId() != null) {
+			skillsBean = findById(beanSimple.getSkillsId());
+			skillsBean.setName(beanSimple.getName());
+			update(skillsBean);
+			return beanSimple;
+		}
+				
+		skillsBean.setName(beanSimple.getName());
+		save(skillsBean);
+		
+		return beanSimple;
+	}
 }

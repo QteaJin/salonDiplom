@@ -117,6 +117,24 @@ public class TokenCryptImpl implements TokenCrypt {
            }
         return null;
     }
+	
+//	public void checkUserToken(HttpServletResponse response, HttpServletRequest request) {
+//		
+//		if(request.getCookies()==null) {
+//			return;
+//		}
+//        for (Cookie c : request.getCookies()) {
+//           if (c.getName().equals("token"))
+//        	   c.setValue("error");
+//           System.err.println(c.getValue());
+//           response.addCookie(c);
+//           return;
+//           }
+//        
+//		
+//		
+//		
+//	}
     
 }
 
