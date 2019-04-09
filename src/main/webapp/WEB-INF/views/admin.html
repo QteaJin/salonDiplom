@@ -17,6 +17,8 @@
                 <script type="text/javascript" src = "/js/bean/Skill.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Catalogs.js"></script>
                 <script type="text/javascript" src = "/js/bean/Catalog.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/Workers.js"></script>
+                <script type="text/javascript" src = "/js/bean/Worker.js"></script>
                  
                 
     <title>ADMIN PAGE</title>
@@ -161,7 +163,30 @@
 
         </div>
 
-        <div class="tab-pane fade" id="worker" role="tabpanel" aria-labelledby="worker-tab">Создать / Изменить работника</div>
+        <div class="tab-pane fade" id="worker" role="tabpanel" aria-labelledby="worker-tab">
+        Создать / Изменить работника
+        <div class="container">
+             <div class="row">
+                        <div class="col"  id = "worker1">
+                        <button class="btn btn-primary" type="submit" onclick="getSalonsToChooseWorker()">Найти все Салоны</button>
+                        <div id = "salonsforworkers"></div>
+                        <div id = "createnewworker"></div>
+                        <div id = "createtableforworkers"></div>
+        			<form >
+						
+					</form>
+					<div id="workerTable"></div>
+                        </div>
+        			<div class="col"  id = "worker2"> 
+        			<div id = "workerform"></div>
+        			
+        			
+        			</div>
+				
+		     </div>
+		</div>	
+        
+        </div>
 
         <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">Создать / Изменить заказ</div>
 

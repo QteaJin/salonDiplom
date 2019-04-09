@@ -3,11 +3,15 @@
 const URL_DEFAULT = ""; // https://vip-salon.herokuapp.com
 const URL_DEFAULT_LOCAL = "http://localhost:8080";
 const CREATE_SALON = "/salon/create";
-const GET_ALL_SALONS = "/salon/admin/all";
+const GET_ALL_SALONS = "/salon/admin/all"; 
 const CREATE_EDIT_SKILL = "/skill/create";
 const GET_ALL_SKILLS = "/skill/admin/all";
 const GET_CATALOGS_BY_SKILL = "/catalog/admin/";
 const CREATE_EDIT_CATALOG = "/catalog/create";
+const GET_WORKER_URL = URL_DEFAULT + "/worker/?salonId="; //get all workers by salon id
+const GET_WORKER_BY_ID = URL_DEFAULT + "/worker/admin/"; //get worker by ID
+const UPDATE_WORKER_DATA = URL_DEFAULT + "/worker/admin/update";
+const CREATE_NEW_WORKER = URL_DEFAULT + "/auth/registr/worker";
 
 var RequestAdmin = {};
 
@@ -37,6 +41,7 @@ RequestAdmin.GetAllSalonsAdmin = function() {
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var json = JSON.parse(xhr.responseText);
 			displayAllSalons(json);
+			displayAllSalonsToChoseWorker(json);
 		}
 	};
 	xhr.send();
@@ -120,6 +125,82 @@ RequestAdmin.CreateEditCatalogAdmin = function(jsonObject) {
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send(JSON.stringify(jsonObject));
 };
+
+RequestAdmin.GetWorkerBySalon = function(salonId){
+	var xhr = new XMLHttpRequest();
+	var url = GET_WORKER_URL + salonId;
+	console.log(url);
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        createTableForWorkers(json);
+	    }
+	};
+	xhr.send();
+};
+
+RequestAdmin.GetWorkerRequest = function(workerId){
+	var xhr = new XMLHttpRequest();
+	var url = GET_WORKER_BY_ID + workerId;
+	console.log(url);
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        setWorkerDataToForm(json);
+	        
+	    }
+	};
+	xhr.send();
+};
+
+RequestAdmin.UpdateWorkerInfo = function(jsonObject) {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var workerBean = JSON.parse(xhr.responseText);
+			console.log(workerBean);
+			if(workerBean.workerId == null){
+				alert("Что-то пошло не так. Изменения не внесены");
+			}else{
+				alert("Создание / Изменение сотрудника прошло успешно");
+			}
+
+		}
+	};
+
+	xhr.open("POST", UPDATE_WORKER_DATA, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
+};
+
+RequestAdmin.CreateNewWorker = function(jsonObject) {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var workerBean = JSON.parse(xhr.responseText);
+			console.log(workerBean);
+			
+			if(workerBean.workerId == null){
+				alert("Что-то пошло не так. Изменения не внесены");
+			}else{
+				alert("Создание / Изменение сотрудника прошло успешно");
+			}
+			
+			
+			
+
+		}
+	};
+
+	xhr.open("POST", CREATE_NEW_WORKER, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
+};
+
 
 // Request.Registration = function (jsonObject) {
 // let xhr = new XMLHttpRequest();

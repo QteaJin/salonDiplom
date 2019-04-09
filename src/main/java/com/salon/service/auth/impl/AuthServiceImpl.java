@@ -6,6 +6,7 @@ import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.bean.salon.SalonBean;
 import com.salon.repository.bean.skills.SkillsBean;
 import com.salon.repository.bean.worker.WorkerBean;
+import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.repository.entity.abstractEntity.AbstractUser;
 import com.salon.service.auth.AuthService;
 import com.salon.service.client.ClientService;
@@ -56,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public AuthBean loginUser(String login, String password) {
 		LOGGER.debug("login start");
-
+		
 		AuthBean authBean = new AuthBean();
 
 		if (StringUtils.isBlank(login) && StringUtils.isBlank(password)) {
@@ -111,8 +112,17 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public boolean registerWorker(ProfileBean profile) {
+	public boolean registerWorker(WorkerCreateUpdateBean createWorkerBean) {
 		LOGGER.debug("register start");
+		ProfileBean profile = new ProfileBean();
+		profile.setSalonId(createWorkerBean.getSalonId());
+		profile.setDescription(createWorkerBean.getDescription());
+		profile.setEmail(createWorkerBean.getEmail());
+		profile.setLogin(createWorkerBean.getLogin());
+		profile.setName(createWorkerBean.getName());
+		profile.setPassword(createWorkerBean.getPassword());
+		profile.setPhone(createWorkerBean.getPhone());
+		
 
 		boolean profileExist = validProfile(profile);
 		if (profileExist) {
@@ -128,6 +138,7 @@ public class AuthServiceImpl implements AuthService {
 		worker.setProfile(profileService.toDomain(bean));
 		worker.setRole(EnumRole.WORKER);
 		worker.setStatus(EnumStatus.NOACTIVE);
+		worker.setDescription(createWorkerBean.getShortDescription());
 		//worker.setSkillsList(skillsService.toDomainList(skillsBean));
 		if (salon.getSalonId() != null) {
 			worker.setSalon(salonService.toDomain(salon));
@@ -176,7 +187,12 @@ public class AuthServiceImpl implements AuthService {
 		ProfileBean beanPhone = new ProfileBean();
 		beanPhone.setPhone(profileBean.getPhone());
 		List<ProfileBean> listPhone = profileService.findByExample(beanPhone);
-		if (!list.isEmpty() || !listPhone.isEmpty()) {
+		
+		ProfileBean beanLogin = new ProfileBean();
+		beanLogin.setLogin(profileBean.getLogin());
+		List<ProfileBean> listLogin = profileService.findByExample(beanLogin);
+		
+		if (!list.isEmpty() || !listPhone.isEmpty() || !listLogin.isEmpty()) {
 			LOGGER.debug("Profile already exists");
 			//throw new ErrorInfoExeption("Profile already exists", "PROFILE_EXIST");
 			return true;
@@ -192,5 +208,20 @@ public class AuthServiceImpl implements AuthService {
 		
 		return cryptToken;
 		
+	}
+	public boolean checkLogin(ProfileBean profileBean) {
+		ProfileBean beanLogin = new ProfileBean();
+		beanLogin.setLogin(profileBean.getLogin());
+		List<ProfileBean> listLogin = profileService.findByExample(beanLogin);
+		if(!listLogin.isEmpty()) {
+			for (ProfileBean profileBean2 : listLogin) {
+				if(!profileBean2.getEmail().equals(profileBean.getEmail())) {
+					return true;
+				}
+			}
+			
+			
+		}
+		return false;
 	}
 }

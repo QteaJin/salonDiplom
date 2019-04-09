@@ -2,6 +2,7 @@ package com.salon.controller.auth;
 
 import com.salon.repository.bean.auth.AuthBean;
 import com.salon.repository.bean.profile.ProfileBean;
+import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.service.auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,8 @@ public class AuthContrloller {
     }
 
     @RequestMapping(value = "/registr/worker", method = RequestMethod.POST)
-    public boolean registerWorker (@RequestBody ProfileBean profile) {
-        return authService.registerWorker(profile);
+    public boolean registerWorker (@RequestBody WorkerCreateUpdateBean createUpdateBean) {
+        return authService.registerWorker(createUpdateBean);
     }
 
     @RequestMapping(value = "/registr/client", method = RequestMethod.POST)

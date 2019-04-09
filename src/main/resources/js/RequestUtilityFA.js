@@ -3,7 +3,7 @@
 const URL_DEFAULT = ""; //https://vip-salon.herokuapp.com
 const URL_DEFAULT_LOCAL = "http://localhost:8080";
 const QUICK_ORDER_URL = URL_DEFAULT + "/checklist";
-const GET_WORKER_PHOTO_URL = URL_DEFAULT + "/worker/?salonId=";
+const GET_WORKER_PHOTO_URL = URL_DEFAULT + "/worker/?salonId="; //get all workers by salon id
 const GET_WORKER_PROFILE_URL = URL_DEFAULT + "/worker/profile/";
 const CLIENT_HISTORY_REQUEST = URL_DEFAULT + "/checklist/client/history?";
 const CANCEL_ORDER_BY_ID = URL_DEFAULT + "/checklist/cancel/";

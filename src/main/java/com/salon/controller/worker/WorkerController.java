@@ -2,6 +2,7 @@ package com.salon.controller.worker;
 
 import com.salon.repository.bean.client.WorkerCustumBean;
 import com.salon.repository.bean.worker.WorkerBean;
+import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
 import com.salon.service.worker.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class WorkerController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<WorkerCustumBean> getClientByCityAndSalon(@RequestParam("salonId") long salonId) {
+    public List<WorkerCustumBean> getWorkerByCityAndSalon(@RequestParam("salonId") long salonId) {
         return workerService.getWorkersBySalon(salonId);
     }
     
@@ -53,6 +54,15 @@ public class WorkerController {
     public List<WorkerBean> getWorkersByCity(@PathVariable("city") String city) {
         return workerService.getWorkersByCity(city);
     }
+    
+    @RequestMapping(value = "/admin/{id}" , method = RequestMethod.GET)
+    public WorkerCreateUpdateBean getWorkerById(@PathVariable("id") long workerId) {
+        return workerService.getWorkerById(workerId);
+    }
+    @RequestMapping(value = "/admin/update" , method = RequestMethod.POST)
+    public WorkerCreateUpdateBean updateWorker(@RequestBody WorkerCreateUpdateBean workerBean) {
+    	return workerService.updateWorkerData(workerBean); }
+    
 //    @RequestMapping(value = "/cookie", method = RequestMethod.GET)
 //    public void getCookie(@CookieValue ("token") String token ) {
 //    	System.out.println(token);
