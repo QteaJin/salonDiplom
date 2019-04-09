@@ -1,12 +1,15 @@
 package com.salon.service.worker.impl;
 import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.client.WorkerCustumBean;
+import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.bean.salon.SalonBean;
 import com.salon.repository.bean.worker.WorkerBean;
+import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
 import com.salon.repository.dao.worker.WorkerDAO;
 import com.salon.repository.entity.worker.Worker;
 import com.salon.service.adress.AdressService;
+import com.salon.service.auth.impl.AuthServiceImpl;
 import com.salon.service.salon.SalonService;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumRole;
@@ -34,6 +37,9 @@ public class WorkerServiceImpl implements WorkerService {
     
     @Autowired
     private AdressService addressService;
+    
+    @Autowired
+    private AuthServiceImpl authService;
 
 
     @Override
@@ -207,5 +213,54 @@ public class WorkerServiceImpl implements WorkerService {
 				
 		return workerBeans;
 	}
+
+	@Override
+	public WorkerCreateUpdateBean getWorkerById(long workerId) {
+		
+		WorkerCreateUpdateBean updateBean = new WorkerCreateUpdateBean();
+		Optional<Worker> worker = workerDAO.findById(workerId);
+		if(!worker.isPresent()) {
+			return updateBean;
+		}
+		WorkerBean workerBean = toBean(worker.get());
+		updateBean.setWorkerId(workerBean.getId());
+		updateBean.setDescription(workerBean.getProfile().getDescription());
+		updateBean.setEmail(workerBean.getProfile().getEmail());
+		updateBean.setLogin(workerBean.getProfile().getLogin());
+		updateBean.setName(workerBean.getProfile().getName());
+		updateBean.setPassword(workerBean.getProfile().getPassword());
+		updateBean.setPhone(workerBean.getProfile().getPhone());
+		updateBean.setShortDescription(workerBean.getDescription());
+		
+		return updateBean;
+	}
+
+	@Override
+	public WorkerCreateUpdateBean updateWorkerData(WorkerCreateUpdateBean updateWorkerBean) {
+		ProfileBean profileBean = new ProfileBean();
+		profileBean.setEmail(updateWorkerBean.getEmail());
+		profileBean.setLogin(updateWorkerBean.getLogin());
+		boolean existProfile = authService.checkLogin(profileBean);
+		if(existProfile) {
+			return new WorkerCreateUpdateBean();
+		}
+		
+		Optional<Worker> worker = workerDAO.findById(updateWorkerBean.getWorkerId());
+		if(!worker.isPresent()) {
+			return updateWorkerBean;
+		}
+		WorkerBean workerBean = toBean(worker.get());
+		workerBean.getProfile().setDescription(updateWorkerBean.getDescription());
+		workerBean.getProfile().setEmail(updateWorkerBean.getEmail());
+		workerBean.getProfile().setLogin(updateWorkerBean.getLogin());
+		workerBean.getProfile().setName(updateWorkerBean.getName());
+		workerBean.getProfile().setPassword(updateWorkerBean.getPassword());
+		workerBean.getProfile().setPhone(updateWorkerBean.getPhone());
+		workerBean.setDescription(updateWorkerBean.getShortDescription());
+		update(workerBean);
+		return updateWorkerBean;
+	}
+	
+	
 
 }

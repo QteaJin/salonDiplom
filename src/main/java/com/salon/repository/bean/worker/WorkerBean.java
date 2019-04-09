@@ -19,6 +19,7 @@ public class WorkerBean {
     private Salon salon;
     private String description;
 
+
     public WorkerBean() {
     }
 
@@ -85,4 +86,6 @@ public class WorkerBean {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }
