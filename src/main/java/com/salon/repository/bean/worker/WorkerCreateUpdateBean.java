@@ -1,5 +1,9 @@
 package com.salon.repository.bean.worker;
 
+import java.util.List;
+
+import com.salon.repository.bean.skills.SkillsBeanSimple;
+
 public class WorkerCreateUpdateBean {
 
 	private Long salonId;
@@ -11,6 +15,8 @@ public class WorkerCreateUpdateBean {
     private String password;
     private String description;
     private String shortDescription;
+    private List<SkillsBeanSimple> usedSkills;
+    private List<SkillsBeanSimple> notUsedSkills;
     
     
 	public Long getWorkerId() {
@@ -66,6 +72,18 @@ public class WorkerCreateUpdateBean {
 	}
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
+	}
+	public List<SkillsBeanSimple> getUsedSkills() {
+		return usedSkills;
+	}
+	public void setUsedSkills(List<SkillsBeanSimple> usedSkills) {
+		this.usedSkills = usedSkills;
+	}
+	public List<SkillsBeanSimple> getNotUsedSkills() {
+		return notUsedSkills;
+	}
+	public void setNotUsedSkills(List<SkillsBeanSimple> notUsedSkills) {
+		this.notUsedSkills = notUsedSkills;
 	}
     
     

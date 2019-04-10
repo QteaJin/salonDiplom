@@ -38,7 +38,7 @@ function requestWorkers(event){
 	var buttonExist = document.getElementById("createNewWorkerButton");
 	if (buttonExist) {
 		buttonExist.parentNode.removeChild(buttonExist);
-		console.log("in");
+		
 	}
 	var workerFormDiv = document.getElementById('workerform'); // delete form on change salon
 	while (workerFormDiv.firstChild) {
@@ -117,6 +117,15 @@ function createWorkerForm(event){
 	var info = JSON.parse(infoText);
 	console.log(info);
 	
+	var inpMain = document.createElement("input");
+	inpMain.setAttribute("class", "form-control");
+	inpMain.setAttribute("type", "text");
+	inpMain.setAttribute("placeholder", "Имя сотрудника");
+	inpMain.setAttribute("readonly", "");
+	inpMain.setAttribute("id", "workerName");
+	
+	workerFormDiv.appendChild(inpMain);
+	
 	var workerForm = document.createElement("form");
 	workerForm.setAttribute("id", "formworker");
 	
@@ -128,10 +137,10 @@ function createWorkerForm(event){
 	buttonProfileColloapse.setAttribute("type", "button");
 	buttonProfileColloapse.appendChild(document.createTextNode("Профиль сотрудника"));
 	
-	
 	var divProfileColloapse = document.createElement("div"); //profile div start
 	divProfileColloapse.setAttribute("id", "workerprofile");
 	divProfileColloapse.setAttribute("class", "collapse");
+	
 	
 	var inp1 = document.createElement("input");
 	inp1.setAttribute("class", "form-control");
@@ -247,7 +256,6 @@ function createWorkerForm(event){
 	workerForm.appendChild(buttonProfileColloapse);
 	workerForm.appendChild(divProfileColloapse); // profile div end
 	
-	
 	workerForm.appendChild(buttonCreateEdit);
 	workerFormDiv.appendChild(workerForm);
 	
@@ -261,7 +269,9 @@ function createWorkerForm(event){
 }
 
 function setWorkerDataToForm(json){
-	var salonId = document.getElementById('selectedsalon').value;
+	var salonId = document.getElementById('selectedsalon').value;	
+	var inputName = document.getElementById('workerName');
+	inputName.value = json.name;
 	document.forms['formworker']['workerSalonId'].value = salonId;
 	document.forms['formworker']['workerId'].value = json.workerId;
 	document.forms['formworker']['workername'].value = json.name;
@@ -271,6 +281,104 @@ function setWorkerDataToForm(json){
 	document.forms['formworker']['workerpassword'].value = json.password;
 	document.forms['formworker']['workertextarea'].value = json.description;
 	document.forms['formworker']['workertextareashort'].value = json.shortDescription;
+	
+	createWorkerSkills(json);
+	
+}
+
+function createWorkerSkills(json){
+	
+	var mainDiv = document.getElementById("workerform");
+	
+	var buttonSkillsCollapse = document.createElement("button"); //skills collapse button
+	buttonSkillsCollapse.setAttribute("data-toggle", "collapse");
+	buttonSkillsCollapse.setAttribute("data-target", "#workerskills");
+	buttonSkillsCollapse.setAttribute("class", "btn btn-light");
+	buttonSkillsCollapse.setAttribute("type", "button");
+	buttonSkillsCollapse.appendChild(document.createTextNode("Умения сотрудника"));
+	
+	var divSkillsCollapse = document.createElement("div"); //skills div
+	divSkillsCollapse.setAttribute("id", "workerskills");
+	divSkillsCollapse.setAttribute("class", "collapse");
+	
+	mainDiv.appendChild(buttonSkillsCollapse);
+	mainDiv.appendChild(divSkillsCollapse);
+	
+	var divskills = document.getElementById("workerskills");
+	
+	var table = document.createElement("table");
+	table.setAttribute("class", "table table-hover ");
+	table.setAttribute("id", "tableworkerskills");
+	var row = table.insertRow(0);
+	var cell1 = row.insertCell(0);
+	var cell2 = row.insertCell(1);
+	var cell3 = row.insertCell(2);
+
+	// Add some text to the new cells:
+	cell1.innerHTML = "Id услуги";
+	cell2.innerHTML = "Название услуги";
+
+
+	for (var i = 0; i < json.usedSkills.length; i++) {
+		var data = {};
+		data.workerId = json.workerId;
+		data.skillsId = json.usedSkills[i].skillsId;
+		data.change = "del";
+
+		var row = table.insertRow(i+1);
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+
+		cell1.innerHTML = json.usedSkills[i].skillsId;
+		cell2.innerHTML = json.usedSkills[i].name;
+
+		var buttonDel = document.createElement("button");
+		buttonDel.setAttribute("info", JSON.stringify(data));
+		buttonDel.appendChild(document.createTextNode("Отключить"));
+		buttonDel.setAttribute("onclick", "sendRequestToChangeSkill(event);");
+		
+		cell3.appendChild(buttonDel);
+
+	}
+	var row = table.insertRow(json.usedSkills.length+1);
+	var cell1 = row.insertCell(0);
+	var cell2 = row.insertCell(1);
+	cell2.innerHTML = "<b>Неподключенные умения</b>";
+
+	for (var i = 0; i < json.notUsedSkills.length; i++) {
+
+		var data = {};
+		data.workerId = json.workerId;
+		data.skillsId = json.notUsedSkills[i].skillsId;
+		data.change = "add";
+
+		var row = table.insertRow(json.usedSkills.length+2+i);
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+
+		cell1.innerHTML = json.notUsedSkills[i].skillsId;
+		cell2.innerHTML = json.notUsedSkills[i].name;
+
+		var buttonAdd = document.createElement("button");
+		buttonAdd.setAttribute("info", JSON.stringify(data));
+		buttonAdd.appendChild(document.createTextNode("Подключить"));
+		buttonAdd.setAttribute("onclick", "sendRequestToChangeSkill(event);");
+		cell3.appendChild(buttonAdd);
+
+	}
+
+	divskills.appendChild(table);
+}
+
+function sendRequestToChangeSkill(event){
+	event.stopPropagation();
+	var jsonObj = event.target.getAttribute("info");
+	
+	var updWorkerListSkillRequest = Object.create(RequestAdmin);
+	updWorkerListSkillRequest.UpdateWorkerSkillList(jsonObj);
+	
 }
 
 function createEditWorker(event){
