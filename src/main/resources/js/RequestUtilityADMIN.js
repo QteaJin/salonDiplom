@@ -12,6 +12,7 @@ const GET_WORKER_URL = URL_DEFAULT + "/worker/?salonId="; //get all workers by s
 const GET_WORKER_BY_ID = URL_DEFAULT + "/worker/admin/"; //get worker by ID
 const UPDATE_WORKER_DATA = URL_DEFAULT + "/worker/admin/update";
 const CREATE_NEW_WORKER = URL_DEFAULT + "/auth/registr/worker";
+const UPDATE_WORKER_SKILL_LIST = URL_DEFAULT + "/worker/admin/skill";
 
 var RequestAdmin = {};
 
@@ -150,6 +151,7 @@ RequestAdmin.GetWorkerRequest = function(workerId){
 	xhr.onreadystatechange = function () {
 	    if (xhr.readyState === 4 && xhr.status === 200) {
 	        var json = JSON.parse(xhr.responseText);
+	        console.log(json);
 	        setWorkerDataToForm(json);
 	        
 	    }
@@ -184,15 +186,12 @@ RequestAdmin.CreateNewWorker = function(jsonObject) {
 			var workerBean = JSON.parse(xhr.responseText);
 			console.log(workerBean);
 			
-			if(workerBean.workerId == null){
+			if(!workerBean){
 				alert("Что-то пошло не так. Изменения не внесены");
 			}else{
 				alert("Создание / Изменение сотрудника прошло успешно");
+				requestWorkers(event);
 			}
-			
-			
-			
-
 		}
 	};
 
@@ -201,6 +200,26 @@ RequestAdmin.CreateNewWorker = function(jsonObject) {
 	xhr.send(JSON.stringify(jsonObject));
 };
 
+RequestAdmin.UpdateWorkerSkillList = function(jsonObject) {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = JSON.parse(xhr.responseText);
+			console.log(result);
+			if(!result){
+				alert("Что-то пошло не так. Изменения не внесены");
+			}else{
+				alert("Изменения прошли успешно");
+				requestWorkers(event);
+			}
+
+		}
+	};
+
+	xhr.open("POST", UPDATE_WORKER_SKILL_LIST, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send((jsonObject));
+};
 
 // Request.Registration = function (jsonObject) {
 // let xhr = new XMLHttpRequest();

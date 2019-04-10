@@ -3,14 +3,19 @@ import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.client.WorkerCustumBean;
 import com.salon.repository.bean.profile.ProfileBean;
 import com.salon.repository.bean.salon.SalonBean;
+import com.salon.repository.bean.skills.SkillsBean;
+import com.salon.repository.bean.skills.SkillsBeanSimple;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
+import com.salon.repository.bean.worker.WorkerUpdateSkillBean;
 import com.salon.repository.dao.worker.WorkerDAO;
+import com.salon.repository.entity.skills.Skills;
 import com.salon.repository.entity.worker.Worker;
 import com.salon.service.adress.AdressService;
 import com.salon.service.auth.impl.AuthServiceImpl;
 import com.salon.service.salon.SalonService;
+import com.salon.service.skills.SkillsService;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
@@ -40,6 +45,9 @@ public class WorkerServiceImpl implements WorkerService {
     
     @Autowired
     private AuthServiceImpl authService;
+    
+    @Autowired
+    private SkillsService skillsService;
 
 
     @Override
@@ -232,6 +240,33 @@ public class WorkerServiceImpl implements WorkerService {
 		updateBean.setPhone(workerBean.getProfile().getPhone());
 		updateBean.setShortDescription(workerBean.getDescription());
 		
+		List<Skills> workerSkills = workerBean.getSkillsList();
+		List<SkillsBeanSimple> beanSimples = new ArrayList<SkillsBeanSimple>();
+		for (Skills skills : workerSkills) {
+			SkillsBeanSimple beanSimple = new SkillsBeanSimple();
+			beanSimple.setSkillsId(skills.getSkillsId());
+			beanSimple.setName(skills.getName());
+			beanSimples.add(beanSimple);
+		}
+		updateBean.setUsedSkills(beanSimples);
+		
+		List<SkillsBeanSimple> unusedBeanSimples = new ArrayList<SkillsBeanSimple>();
+		
+		List<SkillsBeanSimple> allBeanSimples = skillsService.getAllSkills();
+		for (SkillsBeanSimple allBeanSimple : allBeanSimples) {
+			boolean flag = true;
+			for (SkillsBeanSimple usedBeanSimple : beanSimples) {
+				if(allBeanSimple.getName().equals(usedBeanSimple.getName())) {
+					flag = false;
+				}
+			}
+			if(flag) {
+				unusedBeanSimples.add(allBeanSimple);	
+			}
+			
+		}
+		updateBean.setNotUsedSkills(unusedBeanSimples);
+		
 		return updateBean;
 	}
 
@@ -259,6 +294,36 @@ public class WorkerServiceImpl implements WorkerService {
 		workerBean.setDescription(updateWorkerBean.getShortDescription());
 		update(workerBean);
 		return updateWorkerBean;
+	}
+
+	@Override
+	public boolean updateSkillWorker(WorkerUpdateSkillBean workerBean) {
+		Optional<Worker> worker = workerDAO.findById(workerBean.getWorkerId());
+		WorkerBean workerBeanTemp = toBean(worker.get());
+		SkillsBean skill = skillsService.findById(workerBean.getSkillsId());
+		if(!worker.isPresent()) {
+			LOGGER.debug("Wrong worker ID");
+			return false;
+		}
+		List<Skills> skillsList = workerBeanTemp.getSkillsList();
+		if(workerBean.getChange().equals("add")) {
+			
+			skillsList.add(skillsService.toDomain(skill));
+		}else {
+			
+			int index = 0;
+			for (Skills skills : skillsList) {
+				if(skills.getSkillsId().equals(workerBean.getSkillsId())) {
+					break;
+				}
+				index++;
+			}
+			skillsList.remove(index);
+		}
+		workerBeanTemp.setSkillsList(skillsList);
+		update(workerBeanTemp);
+		
+		return true;
 	}
 	
 	

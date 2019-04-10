@@ -4,6 +4,7 @@ import com.salon.repository.bean.client.WorkerCustumBean;
 import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
+import com.salon.repository.bean.worker.WorkerUpdateSkillBean;
 import com.salon.service.worker.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -63,8 +64,9 @@ public class WorkerController {
     public WorkerCreateUpdateBean updateWorker(@RequestBody WorkerCreateUpdateBean workerBean) {
     	return workerService.updateWorkerData(workerBean); }
     
-//    @RequestMapping(value = "/cookie", method = RequestMethod.GET)
-//    public void getCookie(@CookieValue ("token") String token ) {
-//    	System.out.println(token);
-//    }
+    @RequestMapping(value = "/admin/skill" , method = RequestMethod.POST)
+    public boolean updateSkillWorker(@RequestBody WorkerUpdateSkillBean workerBean) {
+    	return workerService.updateSkillWorker(workerBean); }
+    
+
 }
