@@ -133,7 +133,7 @@ function createWorkerForm(event){
 	var buttonProfileColloapse = document.createElement("button"); //profile collapse button
 	buttonProfileColloapse.setAttribute("data-toggle", "collapse");
 	buttonProfileColloapse.setAttribute("data-target", "#workerprofile");
-	buttonProfileColloapse.setAttribute("class", "btn btn-light");
+	buttonProfileColloapse.setAttribute("class", "btn btn-outline-dark btn-block");
 	buttonProfileColloapse.setAttribute("type", "button");
 	buttonProfileColloapse.appendChild(document.createTextNode("Профиль сотрудника"));
 	
@@ -252,11 +252,12 @@ function createWorkerForm(event){
 	divProfileColloapse.appendChild(textar);
 	divProfileColloapse.appendChild(lable7);
 	divProfileColloapse.appendChild(textar1);
+	divProfileColloapse.appendChild(buttonCreateEdit);
 	
 	workerForm.appendChild(buttonProfileColloapse);
 	workerForm.appendChild(divProfileColloapse); // profile div end
 	
-	workerForm.appendChild(buttonCreateEdit);
+	//workerForm.appendChild(buttonCreateEdit);
 	workerFormDiv.appendChild(workerForm);
 	
 	var salonId = document.getElementById('selectedsalon').value;
@@ -293,7 +294,7 @@ function createWorkerSkills(json){
 	var buttonSkillsCollapse = document.createElement("button"); //skills collapse button
 	buttonSkillsCollapse.setAttribute("data-toggle", "collapse");
 	buttonSkillsCollapse.setAttribute("data-target", "#workerskills");
-	buttonSkillsCollapse.setAttribute("class", "btn btn-light");
+	buttonSkillsCollapse.setAttribute("class", "btn btn-outline-dark btn-block");
 	buttonSkillsCollapse.setAttribute("type", "button");
 	buttonSkillsCollapse.appendChild(document.createTextNode("Умения сотрудника"));
 	
