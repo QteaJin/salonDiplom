@@ -8,6 +8,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
             	<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
                 <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
                 <script type="text/javascript" src = "/js/bean/Salon.js"></script>
@@ -19,6 +20,7 @@
                 <script type="text/javascript" src = "/js/bean/Catalog.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Workers.js"></script>
                 <script type="text/javascript" src = "/js/bean/Worker.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/Scheduller.js"></script>
                  
                 
     <title>ADMIN PAGE</title>
@@ -26,6 +28,18 @@
     .spansalons:hover{
     color: blue;
     } 
+    .pasttime{
+			background-color: grey;
+		}
+	.futuretime{
+
+		}
+	.futuretime:hover{
+			background-color: #EFBCF5;
+		}
+	.selectedDate{
+			background-color: green;
+		}
     </style>
     
 </head>
@@ -179,8 +193,7 @@
                         </div>
         			<div class="col"  id = "worker2"> 
         			<div id = "workerform"></div>
-        			
-        			
+        			     <div id="schedulecalendar"></div>  			
         			</div>
 				
 		     </div>

@@ -5,7 +5,9 @@ import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
 import com.salon.repository.bean.worker.WorkerUpdateSkillBean;
+import com.salon.repository.bean.worker.WorkingDays;
 import com.salon.repository.entity.worker.Worker;
+import com.salon.repository.entity.worktime.WorkTime;
 import com.salon.service.CRUDService;
 
 import java.util.List;
@@ -22,4 +24,6 @@ public interface WorkerService extends CRUDService<WorkerBean, Worker> {
 	WorkerCreateUpdateBean updateWorkerData(WorkerCreateUpdateBean workerBean);
 
 	boolean updateSkillWorker(WorkerUpdateSkillBean workerBean);
+
+	List<WorkTime> addWorkingDays(WorkingDays days);
 }

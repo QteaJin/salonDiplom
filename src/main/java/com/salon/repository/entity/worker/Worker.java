@@ -7,11 +7,13 @@ import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.profile.Profile;
 import com.salon.repository.entity.salon.Salon;
 import com.salon.repository.entity.skills.Skills;
+import com.salon.repository.entity.worktime.WorkTime;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -27,6 +29,9 @@ public class Worker extends AbstractUser implements Serializable {
     private List<Skills> skillsList = new ArrayList<>();
 
     private List<CheckList> checkLists = new ArrayList<>();
+    
+    
+    private List<WorkTime> schedule = new ArrayList<>();
 
     private Salon salon;
 
@@ -35,9 +40,11 @@ public class Worker extends AbstractUser implements Serializable {
     }
 
     public Worker(EnumRole role, Profile profile,
-                  EnumStatus status, List<Skills> skillsList, String description) {
+                  EnumStatus status, List<Skills> skillsList, String description, List<CheckList> checkLists, List<WorkTime> schedule ) {
         super(role, profile, status, description);
         this.skillsList = skillsList;
+        this.checkLists = checkLists;
+        this.schedule = schedule;
     }
 
     @Id
@@ -84,4 +91,16 @@ public class Worker extends AbstractUser implements Serializable {
     public void setSalon(Salon salon) {
         this.salon = salon;
     }
+    
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JsonManagedReference
+	public List<WorkTime> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(List<WorkTime> schedule) {
+		this.schedule = schedule;
+	}
+    
+    
 }

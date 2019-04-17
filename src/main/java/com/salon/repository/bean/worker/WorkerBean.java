@@ -4,9 +4,11 @@ import com.salon.repository.entity.checklist.CheckList;
 import com.salon.repository.entity.profile.Profile;
 import com.salon.repository.entity.salon.Salon;
 import com.salon.repository.entity.skills.Skills;
+import com.salon.repository.entity.worktime.WorkTime;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkerBean {
@@ -18,7 +20,7 @@ public class WorkerBean {
     private List<CheckList> checkLists;
     private Salon salon;
     private String description;
-
+    private List<WorkTime> schedule = new ArrayList<>();
 
     public WorkerBean() {
     }
@@ -86,6 +88,14 @@ public class WorkerBean {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public List<WorkTime> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(List<WorkTime> schedule) {
+		this.schedule = schedule;
+	}
 
 
 }

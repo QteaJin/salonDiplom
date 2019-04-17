@@ -1,7 +1,11 @@
 package com.salon.repository.bean.worktime;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.salon.repository.entity.salon.Salon;
+import com.salon.repository.entity.worker.Worker;
 import com.salon.utility.EnumStatus;
 
 public class WorkTimeBean {
@@ -10,6 +14,8 @@ public class WorkTimeBean {
 	private Timestamp finishWorking;
 	private EnumStatus status;
 	private Timestamp date;
+	private List<Salon> salons = new ArrayList<>();
+	private List<Worker> workers = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -49,6 +55,22 @@ public class WorkTimeBean {
 
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+
+	public List<Salon> getSalons() {
+		return salons;
+	}
+
+	public void setSalons(List<Salon> salons) {
+		this.salons = salons;
+	}
+
+	public List<Worker> getWorkers() {
+		return workers;
+	}
+
+	public void setWorkers(List<Worker> workers) {
+		this.workers = workers;
 	}
 
 }

@@ -3,12 +3,12 @@ package com.salon.repository.entity.worktime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.salon.repository.entity.salon.Salon;
+import com.salon.repository.entity.worker.Worker;
 import com.salon.utility.EnumStatus;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +23,21 @@ public class WorkTime implements Serializable{
     private Timestamp date;
 
     private List<Salon> salons = new ArrayList<>();
+    
+    private List<Worker> workers = new ArrayList<>();
 
     public WorkTime() {
     }
 
     public WorkTime(Long id, Timestamp startWorking, Timestamp finishWorking,
-                    EnumStatus status, Timestamp date) {
+                    EnumStatus status, Timestamp date, List<Salon> salons, List<Worker> workers) {
         this.id = id;
         this.startWorking = startWorking;
         this.finishWorking = finishWorking;
         this.status = status;
         this.date = date;
+        this.salons = salons;
+        this.workers = workers;
     }
 
     @Id
@@ -93,4 +97,15 @@ public class WorkTime implements Serializable{
     public void setSalons(List<Salon> salons) {
         this.salons = salons;
     }
+    
+    @ManyToMany(mappedBy = "schedule")
+    @JsonBackReference
+	public List<Worker> getWorkers() {
+		return workers;
+	}
+
+	public void setWorkers(List<Worker> workers) {
+		this.workers = workers;
+	}
+    
 }

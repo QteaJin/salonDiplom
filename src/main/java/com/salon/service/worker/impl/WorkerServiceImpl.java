@@ -1,4 +1,5 @@
 package com.salon.service.worker.impl;
+
 import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.client.WorkerCustumBean;
 import com.salon.repository.bean.profile.ProfileBean;
@@ -9,14 +10,17 @@ import com.salon.repository.bean.worker.WorkerBean;
 import com.salon.repository.bean.worker.WorkerCreateUpdateBean;
 import com.salon.repository.bean.worker.WorkerProfileSkillsBean;
 import com.salon.repository.bean.worker.WorkerUpdateSkillBean;
+import com.salon.repository.bean.worker.WorkingDays;
 import com.salon.repository.dao.worker.WorkerDAO;
 import com.salon.repository.entity.skills.Skills;
 import com.salon.repository.entity.worker.Worker;
+import com.salon.repository.entity.worktime.WorkTime;
 import com.salon.service.adress.AdressService;
 import com.salon.service.auth.impl.AuthServiceImpl;
 import com.salon.service.salon.SalonService;
 import com.salon.service.skills.SkillsService;
 import com.salon.service.worker.WorkerService;
+import com.salon.service.worktime.WorkTimeService;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 import org.slf4j.Logger;
@@ -25,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,155 +37,159 @@ import java.util.Optional;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(WorkerServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WorkerServiceImpl.class);
 
-    @Autowired
-    private WorkerDAO workerDAO;
-    
-    @Autowired
-    private SalonService salonService;
-    
-    @Autowired
-    private AdressService addressService;
-    
-    @Autowired
-    private AuthServiceImpl authService;
-    
-    @Autowired
-    private SkillsService skillsService;
+	@Autowired
+	private WorkerDAO workerDAO;
 
+	@Autowired
+	private SalonService salonService;
 
-    @Override
-    public WorkerBean save(WorkerBean bean) {
-        LOGGER.debug("save Worker start");
+	@Autowired
+	private AdressService addressService;
 
-        Worker worker = workerDAO.save(toDomain(bean));
+	@Autowired
+	private AuthServiceImpl authService;
 
-        LOGGER.debug("save Worker finish");
+	@Autowired
+	private SkillsService skillsService;
+	
+	@Autowired
+	private WorkTimeService workTimeService;
 
-        return toBean(worker);
-    }
+	@Override
+	public WorkerBean save(WorkerBean bean) {
+		LOGGER.debug("save Worker start");
 
-    @Override
-    public List<WorkerBean> findAll() {
-        LOGGER.debug("find All Worker start");
+		Worker worker = workerDAO.save(toDomain(bean));
 
-        List<Worker> workers = workerDAO.findAll();
+		LOGGER.debug("save Worker finish");
 
-        LOGGER.debug("find All Worker finish");
+		return toBean(worker);
+	}
 
-        return toDomain(workers);
-    }
+	@Override
+	public List<WorkerBean> findAll() {
+		LOGGER.debug("find All Worker start");
 
-    @Override
-    public WorkerBean findById(Long id) {
-        LOGGER.debug("find By id start");
+		List<Worker> workers = workerDAO.findAll();
 
-        Optional<Worker> optional = workerDAO.findById(id);
+		LOGGER.debug("find All Worker finish");
 
-        LOGGER.debug("find By id finish");
+		return toDomain(workers);
+	}
 
-        return toBean(optional.get());
-    }
+	@Override
+	public WorkerBean findById(Long id) {
+		LOGGER.debug("find By id start");
 
-    @Override
-    public List<WorkerCustumBean> getWorkersBySalon(Long salonId) {
-    	List<WorkerCustumBean> custumBeans = new ArrayList<WorkerCustumBean>();
-    	SalonBean salonBean = new SalonBean();
-    	salonBean.setSalonId(salonId);
-    	WorkerBean workerBean = new WorkerBean();
-    	workerBean.setSalon(salonService.toDomain(salonBean));
-    	List<WorkerBean> workerBeans = findByExample(workerBean);
-    	if (!workerBeans.isEmpty()) {
+		Optional<Worker> optional = workerDAO.findById(id);
+
+		LOGGER.debug("find By id finish");
+
+		return toBean(optional.get());
+	}
+
+	@Override
+	public List<WorkerCustumBean> getWorkersBySalon(Long salonId) {
+		List<WorkerCustumBean> custumBeans = new ArrayList<WorkerCustumBean>();
+		SalonBean salonBean = new SalonBean();
+		salonBean.setSalonId(salonId);
+		WorkerBean workerBean = new WorkerBean();
+		workerBean.setSalon(salonService.toDomain(salonBean));
+		List<WorkerBean> workerBeans = findByExample(workerBean);
+		if (!workerBeans.isEmpty()) {
 			for (WorkerBean workerBeanTemp : workerBeans) {
 				WorkerCustumBean workerCustumBean = new WorkerCustumBean();
 				workerCustumBean.setId(workerBeanTemp.getId());
 				workerCustumBean.setName(workerBeanTemp.getProfile().getName());
 				workerCustumBean.setDescripton(workerBeanTemp.getDescription());
-				workerCustumBean.setNameImage(workerBeanTemp.getId() +"worker.jpg" );
+				workerCustumBean.setNameImage(workerBeanTemp.getId() + "worker.jpg");
 				custumBeans.add(workerCustumBean);
 			}
 		}
-    	
-        return custumBeans;
-    }
 
-    @Override
-    public WorkerBean update(WorkerBean bean) {
-        LOGGER.debug("update Worker start");
+		return custumBeans;
+	}
 
-        Worker worker = workerDAO.saveAndFlush(toDomain(bean));
+	@Override
+	public WorkerBean update(WorkerBean bean) {
+		LOGGER.debug("update Worker start");
 
-        LOGGER.debug("update Worker finish");
+		Worker worker = workerDAO.saveAndFlush(toDomain(bean));
 
-        return toBean(worker);
-    }
+		LOGGER.debug("update Worker finish");
 
-    @Override
-    public void delete(WorkerBean bean) {
-        LOGGER.debug("Worker delete");
+		return toBean(worker);
+	}
 
-        workerDAO.delete(toDomain(bean));
-    }
+	@Override
+	public void delete(WorkerBean bean) {
+		LOGGER.debug("Worker delete");
 
-    @Override
-    public List<WorkerBean> findByExample(WorkerBean bean) {
-        LOGGER.debug("find by example Worker start");
+		workerDAO.delete(toDomain(bean));
+	}
 
-        List<Worker> workers = workerDAO.findAll(Example.of(toDomain(bean)));
+	@Override
+	public List<WorkerBean> findByExample(WorkerBean bean) {
+		LOGGER.debug("find by example Worker start");
 
-        LOGGER.debug("find by example Worker finish");
+		List<Worker> workers = workerDAO.findAll(Example.of(toDomain(bean)));
 
-        return toDomain(workers);
-    }
+		LOGGER.debug("find by example Worker finish");
 
-    @Override
-    public Worker toDomain(WorkerBean domain) {
-        Worker worker = new Worker();
-        worker.setId(domain.getId());
+		return toDomain(workers);
+	}
 
-        if (Objects.isNull(domain.getRole())) {
-            worker.setRole(EnumRole.WORKER);
-        } else {
-            worker.setRole(domain.getRole());
-        }
+	@Override
+	public Worker toDomain(WorkerBean domain) {
+		Worker worker = new Worker();
+		worker.setId(domain.getId());
 
-        if(Objects.isNull(domain.getStatus())){
-            worker.setStatus(EnumStatus.NOACTIVE);
-        }else {
-            worker.setStatus(domain.getStatus());
-        }
+		if (Objects.isNull(domain.getRole())) {
+			worker.setRole(EnumRole.WORKER);
+		} else {
+			worker.setRole(domain.getRole());
+		}
 
-        worker.setProfile(domain.getProfile());
-        worker.setSalon(domain.getSalon());
-        worker.setCheckLists(domain.getCheckLists());
-        worker.setSkillsList(domain.getSkillsList());
-        worker.setDescription(domain.getDescription());
+		if (Objects.isNull(domain.getStatus())) {
+			worker.setStatus(EnumStatus.NOACTIVE);
+		} else {
+			worker.setStatus(domain.getStatus());
+		}
 
-        return worker;
-    }
+		worker.setProfile(domain.getProfile());
+		worker.setSalon(domain.getSalon());
+		worker.setCheckLists(domain.getCheckLists());
+		worker.setSkillsList(domain.getSkillsList());
+		worker.setDescription(domain.getDescription());
+		worker.setSchedule(domain.getSchedule());
 
-    @Override
-    public WorkerBean toBean(Worker bean) {
-        WorkerBean workerBean = new WorkerBean();
-        workerBean.setId(bean.getId());
-        workerBean.setProfile(bean.getProfile());
-        workerBean.setRole(bean.getRole());
-        workerBean.setStatus(bean.getStatus());
-        workerBean.setSalon(bean.getSalon());
-        workerBean.setCheckLists(bean.getCheckLists());
-        workerBean.setSkillsList(bean.getSkillsList());
-        workerBean.setDescription(bean.getDescription());
-        return workerBean;
-    }
+		return worker;
+	}
 
-    List<WorkerBean> toDomain(List<Worker> workers) {
-        List<WorkerBean> list = new ArrayList<>();
-        for (Worker worker : workers) {
-            list.add(toBean(worker));
-        }
-        return list;
-    }
+	@Override
+	public WorkerBean toBean(Worker bean) {
+		WorkerBean workerBean = new WorkerBean();
+		workerBean.setId(bean.getId());
+		workerBean.setProfile(bean.getProfile());
+		workerBean.setRole(bean.getRole());
+		workerBean.setStatus(bean.getStatus());
+		workerBean.setSalon(bean.getSalon());
+		workerBean.setCheckLists(bean.getCheckLists());
+		workerBean.setSkillsList(bean.getSkillsList());
+		workerBean.setDescription(bean.getDescription());
+		workerBean.setSchedule(bean.getSchedule());
+		return workerBean;
+	}
+
+	private List<WorkerBean> toDomain(List<Worker> workers) {
+		List<WorkerBean> list = new ArrayList<>();
+		for (Worker worker : workers) {
+			list.add(toBean(worker));
+		}
+		return list;
+	}
 
 	@Override
 	public WorkerProfileSkillsBean getWorkerProfileSkillsById(Long workerId) {
@@ -189,11 +198,10 @@ public class WorkerServiceImpl implements WorkerService {
 		WorkerProfileSkillsBean profileSkillsBean = new WorkerProfileSkillsBean();
 		profileSkillsBean.setWorkerProfileId(workerId);
 		profileSkillsBean.setDescription(workerBean.getProfile().getDescription());
-		if(!workerBean.getSkillsList().isEmpty()) {
-		profileSkillsBean.setListSkills(workerBean.getSkillsList());
+		if (!workerBean.getSkillsList().isEmpty()) {
+			profileSkillsBean.setListSkills(workerBean.getSkillsList());
 		}
-		
-				
+
 		return profileSkillsBean;
 	}
 
@@ -204,30 +212,29 @@ public class WorkerServiceImpl implements WorkerService {
 		adressBean.setCity(city);
 		SalonBean salonBean = new SalonBean();
 		salonBean.setAddress(addressService.toDomain(adressBean));
-		List <SalonBean> salonBeans = salonService.findByExample(salonBean);
+		List<SalonBean> salonBeans = salonService.findByExample(salonBean);
 		if (!salonBeans.isEmpty()) {
 			List<Worker> workers = new ArrayList<Worker>();
-			
+
 			for (SalonBean bean : salonBeans) {
 				workers.addAll(bean.getWorkerList());
 			}
 			for (Worker worker : workers) {
 				workerBeans.add(toBean(worker));
 			}
-			
+
 			return workerBeans;
 		}
-		
-				
+
 		return workerBeans;
 	}
 
 	@Override
 	public WorkerCreateUpdateBean getWorkerById(long workerId) {
-		
+
 		WorkerCreateUpdateBean updateBean = new WorkerCreateUpdateBean();
 		Optional<Worker> worker = workerDAO.findById(workerId);
-		if(!worker.isPresent()) {
+		if (!worker.isPresent()) {
 			return updateBean;
 		}
 		WorkerBean workerBean = toBean(worker.get());
@@ -239,7 +246,7 @@ public class WorkerServiceImpl implements WorkerService {
 		updateBean.setPassword(workerBean.getProfile().getPassword());
 		updateBean.setPhone(workerBean.getProfile().getPhone());
 		updateBean.setShortDescription(workerBean.getDescription());
-		
+
 		List<Skills> workerSkills = workerBean.getSkillsList();
 		List<SkillsBeanSimple> beanSimples = new ArrayList<SkillsBeanSimple>();
 		for (Skills skills : workerSkills) {
@@ -249,24 +256,24 @@ public class WorkerServiceImpl implements WorkerService {
 			beanSimples.add(beanSimple);
 		}
 		updateBean.setUsedSkills(beanSimples);
-		
+
 		List<SkillsBeanSimple> unusedBeanSimples = new ArrayList<SkillsBeanSimple>();
-		
+
 		List<SkillsBeanSimple> allBeanSimples = skillsService.getAllSkills();
 		for (SkillsBeanSimple allBeanSimple : allBeanSimples) {
 			boolean flag = true;
 			for (SkillsBeanSimple usedBeanSimple : beanSimples) {
-				if(allBeanSimple.getName().equals(usedBeanSimple.getName())) {
+				if (allBeanSimple.getName().equals(usedBeanSimple.getName())) {
 					flag = false;
 				}
 			}
-			if(flag) {
-				unusedBeanSimples.add(allBeanSimple);	
+			if (flag) {
+				unusedBeanSimples.add(allBeanSimple);
 			}
-			
+
 		}
 		updateBean.setNotUsedSkills(unusedBeanSimples);
-		
+
 		return updateBean;
 	}
 
@@ -276,12 +283,12 @@ public class WorkerServiceImpl implements WorkerService {
 		profileBean.setEmail(updateWorkerBean.getEmail());
 		profileBean.setLogin(updateWorkerBean.getLogin());
 		boolean existProfile = authService.checkLogin(profileBean);
-		if(existProfile) {
+		if (existProfile) {
 			return new WorkerCreateUpdateBean();
 		}
-		
+
 		Optional<Worker> worker = workerDAO.findById(updateWorkerBean.getWorkerId());
-		if(!worker.isPresent()) {
+		if (!worker.isPresent()) {
 			return updateWorkerBean;
 		}
 		WorkerBean workerBean = toBean(worker.get());
@@ -301,19 +308,19 @@ public class WorkerServiceImpl implements WorkerService {
 		Optional<Worker> worker = workerDAO.findById(workerBean.getWorkerId());
 		WorkerBean workerBeanTemp = toBean(worker.get());
 		SkillsBean skill = skillsService.findById(workerBean.getSkillsId());
-		if(!worker.isPresent()) {
+		if (!worker.isPresent()) {
 			LOGGER.debug("Wrong worker ID");
 			return false;
 		}
 		List<Skills> skillsList = workerBeanTemp.getSkillsList();
-		if(workerBean.getChange().equals("add")) {
-			
+		if (workerBean.getChange().equals("add")) {
+
 			skillsList.add(skillsService.toDomain(skill));
-		}else {
-			
+		} else {
+
 			int index = 0;
 			for (Skills skills : skillsList) {
-				if(skills.getSkillsId().equals(workerBean.getSkillsId())) {
+				if (skills.getSkillsId().equals(workerBean.getSkillsId())) {
 					break;
 				}
 				index++;
@@ -322,10 +329,27 @@ public class WorkerServiceImpl implements WorkerService {
 		}
 		workerBeanTemp.setSkillsList(skillsList);
 		update(workerBeanTemp);
-		
+
 		return true;
 	}
-	
-	
+
+	@Override
+	public List<WorkTime> addWorkingDays(WorkingDays days) {
+		Optional<Worker> worker = workerDAO.findById(days.getWorkerId());
+		WorkerBean workerBean = toBean(worker.get());
+		List<WorkTime> workTimes = workerBean.getSchedule();
+		List<Long> times = days.getDatesList();
+		for (Long day : times) {
+			WorkTime wt = new WorkTime();
+			wt.setDate(new Timestamp(day));
+			workTimes.add(wt);
+		//	workTimeService.save(workTimeService.toBean(wt));
+		}
+		
+		workerBean.setSchedule(workTimes);
+		update(workerBean);
+		
+		return workTimes;
+	}
 
 }
