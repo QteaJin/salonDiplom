@@ -284,6 +284,7 @@ function setWorkerDataToForm(json){
 	document.forms['formworker']['workertextareashort'].value = json.shortDescription;
 	
 	createWorkerSkills(json);
+	createschedulecalendar();
 	
 }
 

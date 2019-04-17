@@ -95,6 +95,8 @@ public class WorkTimeServiceImpl implements WorkTimeService {
 		workTimeBean.setStartWorking(domain.getStartWorking());
 		workTimeBean.setFinishWorking(domain.getFinishWorking());
 		workTimeBean.setStatus(domain.getStatus());
+		workTimeBean.setSalons(domain.getSalons());
+		workTimeBean.setWorkers(domain.getWorkers());
 
 		return workTimeBean;
 	}
@@ -106,6 +108,8 @@ public class WorkTimeServiceImpl implements WorkTimeService {
 		workTime.setDate(bean.getDate());
 		workTime.setStartWorking(bean.getStartWorking());
 		workTime.setFinishWorking(bean.getFinishWorking());
+		workTime.setSalons(bean.getSalons());
+		workTime.setWorkers(bean.getWorkers());
 		if(Objects.isNull(bean.getStatus())){
 			workTime.setStatus(EnumStatus.NOACTIVE);
         }else {
@@ -121,6 +125,15 @@ public class WorkTimeServiceImpl implements WorkTimeService {
 			workTimeBeans.add(toBean(workTime));
 		}
 		return workTimeBeans;
+	}
+	@Override
+	public List<WorkTime> ListToDomain (List<WorkTimeBean> beans){
+		List<WorkTime> workTimes = new ArrayList<>();
+		for (WorkTimeBean workTime : beans) {
+			workTimes.add(toDomain(workTime));
+		}
+		
+		return workTimes;
 	}
 
 }

@@ -13,6 +13,7 @@ const GET_WORKER_BY_ID = URL_DEFAULT + "/worker/admin/"; //get worker by ID
 const UPDATE_WORKER_DATA = URL_DEFAULT + "/worker/admin/update";
 const CREATE_NEW_WORKER = URL_DEFAULT + "/auth/registr/worker";
 const UPDATE_WORKER_SKILL_LIST = URL_DEFAULT + "/worker/admin/skill";
+const ADD_WORKING_DAYS = URL_DEFAULT + "/worker/admin/addDays";
 
 var RequestAdmin = {};
 
@@ -219,6 +220,21 @@ RequestAdmin.UpdateWorkerSkillList = function(jsonObject) {
 	xhr.open("POST", UPDATE_WORKER_SKILL_LIST, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send((jsonObject));
+};
+
+RequestAdmin.AddWorkingDays = function(jsonObject) {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = JSON.parse(xhr.responseText);
+			console.log(result);
+
+		}
+	};
+
+	xhr.open("POST", ADD_WORKING_DAYS, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
 };
 
 // Request.Registration = function (jsonObject) {
