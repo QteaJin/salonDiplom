@@ -7,6 +7,8 @@ import com.salon.repository.entity.worktime.WorkTime;
 import com.salon.service.CRUDService;
 
 public interface WorkTimeService extends CRUDService<WorkTimeBean, WorkTime>{
+	
 	List<WorkTime> ListToDomain (List<WorkTimeBean> beans);
+	List<WorkTimeBean> toBean(List<WorkTime> workTimes);
 
 }

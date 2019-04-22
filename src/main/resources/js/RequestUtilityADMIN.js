@@ -14,6 +14,8 @@ const UPDATE_WORKER_DATA = URL_DEFAULT + "/worker/admin/update";
 const CREATE_NEW_WORKER = URL_DEFAULT + "/auth/registr/worker";
 const UPDATE_WORKER_SKILL_LIST = URL_DEFAULT + "/worker/admin/skill";
 const ADD_WORKING_DAYS = URL_DEFAULT + "/worker/admin/addDays";
+const GET_WORKING_DAYS = URL_DEFAULT + "/worker/admin/getDays/";
+const DEL_WORKING_DAYS = URL_DEFAULT + "/worker/admin/delDays/";
 
 var RequestAdmin = {};
 
@@ -228,11 +230,40 @@ RequestAdmin.AddWorkingDays = function(jsonObject) {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = JSON.parse(xhr.responseText);
 			console.log(result);
-
+			createschedulecalendar ();
 		}
 	};
 
 	xhr.open("POST", ADD_WORKING_DAYS, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
+};
+
+RequestAdmin.GetWorkingDays = function(workerId){
+	var xhr = new XMLHttpRequest();
+	var url = GET_WORKING_DAYS + workerId;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        setWorkingDaysToCallendar(json);
+	       
+	    }
+	};
+	xhr.send();
+};
+RequestAdmin.DelWorkingDays = function(jsonObject) {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = JSON.parse(xhr.responseText);
+			console.log(result);
+			createschedulecalendar ();
+		}
+	};
+
+	xhr.open("POST", DEL_WORKING_DAYS, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send(JSON.stringify(jsonObject));
 };

@@ -17,10 +17,10 @@ import com.salon.repository.entity.worker.Worker;
 import com.salon.repository.entity.worktime.WorkTime;
 import com.salon.service.adress.AdressService;
 import com.salon.service.auth.impl.AuthServiceImpl;
+import com.salon.service.comparator.WorkTimeComparator;
 import com.salon.service.salon.SalonService;
 import com.salon.service.skills.SkillsService;
 import com.salon.service.worker.WorkerService;
-import com.salon.service.worktime.WorkTimeService;
 import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatus;
 import org.slf4j.Logger;
@@ -30,7 +30,10 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -53,9 +56,6 @@ public class WorkerServiceImpl implements WorkerService {
 
 	@Autowired
 	private SkillsService skillsService;
-	
-	@Autowired
-	private WorkTimeService workTimeService;
 
 	@Override
 	public WorkerBean save(WorkerBean bean) {
@@ -335,20 +335,82 @@ public class WorkerServiceImpl implements WorkerService {
 
 	@Override
 	public List<WorkTime> addWorkingDays(WorkingDays days) {
+		if(days.getWorkerId() == null || days.getDatesList().isEmpty()) {
+			new Exception("Income data is empty"); 
+		}
 		Optional<Worker> worker = workerDAO.findById(days.getWorkerId());
 		WorkerBean workerBean = toBean(worker.get());
 		List<WorkTime> workTimes = workerBean.getSchedule();
 		List<Long> times = days.getDatesList();
+		
 		for (Long day : times) {
 			WorkTime wt = new WorkTime();
-			wt.setDate(new Timestamp(day));
+			Timestamp timestamp = new Timestamp(day);
+			
+			wt.setDate(timestamp);
 			workTimes.add(wt);
-		//	workTimeService.save(workTimeService.toBean(wt));
 		}
-		
+
 		workerBean.setSchedule(workTimes);
 		update(workerBean);
+
+		return workTimes;
+	}
+
+	@Override
+	public WorkingDays getWorkingDays(Long workerId) {
+		WorkingDays workingDays = new WorkingDays();
+		workingDays.setWorkerId(workerId);
+		LocalDate date = LocalDate.now();
 		
+		Timestamp timestamp = Timestamp.valueOf(date.atStartOfDay());
+		Optional<Worker> worker = workerDAO.findById(workerId);
+		WorkerBean workerBean = toBean(worker.get());
+		List<WorkTime> workTimes = workerBean.getSchedule();
+		List<Long> timeList = new ArrayList<>();
+		for (WorkTime workTime : workTimes) {
+			if(workTime.getDate().after(timestamp)) {
+				timeList.add(workTime.getDate().getTime());
+			}
+		}
+		Collections.sort(timeList);
+		workingDays.setDatesList(timeList);
+		
+		return workingDays;
+	}
+
+	@Override
+	public List<WorkTime> delWorkingDays(WorkingDays days) {
+		if(days.getWorkerId() == null || days.getDatesList().isEmpty()) {
+			new Exception("Income data is empty"); 
+		}
+		Optional<Worker> worker = workerDAO.findById(days.getWorkerId());
+		WorkerBean workerBean = toBean(worker.get());
+		List<WorkTime> workTimes = workerBean.getSchedule();
+		List<Long> times = days.getDatesList();
+		WorkTimeComparator comparator = new WorkTimeComparator();
+		Collections.sort(workTimes, comparator);
+		Collections.sort(times);
+		int timeSize = times.size();
+		int count = 0;
+		Iterator <WorkTime> iterator = workTimes.iterator();
+//		Timestamp ts = new Timestamp(times.get(0));
+		while (iterator.hasNext()) {
+			WorkTime workTime = (WorkTime) iterator.next();
+//			if(ts.before(workTime.getDate()) ) {
+//				continue;
+//			}
+			Timestamp tsTemp = new Timestamp(times.get(count));
+			if(tsTemp.equals(workTime.getDate())) {
+				iterator.remove();
+				count++;
+				if(count == timeSize) {
+					break;
+				}
+			}
+		}
+		workerBean.setSchedule(workTimes);
+		update(workerBean);
 		return workTimes;
 	}
 

@@ -284,7 +284,8 @@ function setWorkerDataToForm(json){
 	document.forms['formworker']['workertextareashort'].value = json.shortDescription;
 	
 	createWorkerSkills(json);
-	createschedulecalendar();
+	createschedulecalendar(); // create calendar
+	//сделать запрос на получение рабочих дней и сохранить объект в сессию
 	
 }
 
