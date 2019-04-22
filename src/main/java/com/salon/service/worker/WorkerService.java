@@ -26,4 +26,8 @@ public interface WorkerService extends CRUDService<WorkerBean, Worker> {
 	boolean updateSkillWorker(WorkerUpdateSkillBean workerBean);
 
 	List<WorkTime> addWorkingDays(WorkingDays days);
+
+	WorkingDays getWorkingDays(Long workerId);
+
+	List<WorkTime> delWorkingDays(WorkingDays days);
 }

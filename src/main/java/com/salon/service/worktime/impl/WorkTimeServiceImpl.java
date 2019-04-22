@@ -118,8 +118,8 @@ public class WorkTimeServiceImpl implements WorkTimeService {
 
 		return workTime;
 	}
-
-	private List<WorkTimeBean> toBean(List<WorkTime> workTimes) {
+	@Override
+	public List<WorkTimeBean> toBean(List<WorkTime> workTimes) {
 		List<WorkTimeBean> workTimeBeans = new ArrayList<>();
 		for (WorkTime workTime : workTimes) {
 			workTimeBeans.add(toBean(workTime));

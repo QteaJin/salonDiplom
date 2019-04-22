@@ -73,4 +73,14 @@ public class WorkerController {
     @RequestMapping(value = "/admin/addDays" , method = RequestMethod.POST)
     public List<WorkTime> addWorkingDays(@RequestBody WorkingDays days) {
     	return workerService.addWorkingDays(days); }
+    
+    @RequestMapping(value = "/admin/getDays/{workerId}" , method = RequestMethod.GET) //get days after current date
+    public WorkingDays getWorkingDays(@PathVariable Long workerId) {
+    	return workerService.getWorkingDays(workerId); }
+    
+    @RequestMapping(value = "/admin/delDays" , method = RequestMethod.POST)
+    public List<WorkTime> delWorkingDays(@RequestBody WorkingDays days) {
+    	return workerService.delWorkingDays(days); }
+    
 }
+
