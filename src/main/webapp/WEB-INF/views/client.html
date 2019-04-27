@@ -19,6 +19,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
     <script type="text/javascript" src = "/js/service/CheckToken.js"></script>
                 <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
+                <script type="text/javascript" src = "/js/service/client/ClientProfile.js"></script>
+                <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
             
 <style type="text/css">
 .back {
@@ -112,7 +114,7 @@
             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" onclick="checkTokenExist();">ОТЗЫВЫ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" onclick="checkTokenExist();">Профиль</a>
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" onclick="createClientPersonalForm ();">Профиль</a>
         </li>
     </ul>
 
@@ -193,62 +195,18 @@
 
 
         </div>
-        <!-- КАЛЕНДАРЬ-->
+      
 
 
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-
-
-            <div class="mt-5">
-                <div class="container">
-                    <div class="row">
-                        <div class="col ">
-                            <div class="card">
-                                <img src="http://remsmaservis.ru/wp-content/uploads/2017/12/no_img.png" class="card-img-top" alt="..." style="width: 300px; height: 200px">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <form>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label for="exampleInputPassword1">Имя</label>
-                                        <input type="text" class="form-control" placeholder="Имя">
-                                    </div>
-                                    <div class="col">
-                                        <label for="exampleInputPassword1">Телефон</label>
-                                        <input type="text" class="form-control" placeholder="Телефон">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label for="exampleInputPassword1">Login</label>
-                                        <input type="text" class="form-control" placeholder="Login">
-                                    </div>
-                                    <div class="col">
-                                        <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Email</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Email">
-                                </div>
-                                <div class="center">
-                                    <button type="submit" class="btn btn-primary">Изменить</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="mt-5">
-                <!--CКИЛЫ-->
-
-            </div>
-
+         <div class="container">
+    	<div class="row" >
+            
+            <div class="col-2"></div>
+            <div class="col-8" id="myprofile"></div>
+            <div class="col-2"></div>
+		</div>
+		</div>
         </div>
 
 

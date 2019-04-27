@@ -18,3 +18,8 @@ function loginFail(){
 	var fail = document.getElementById('loginfail');
 	fail.innerHTML = "Неправильный Логин или Пароль";
 }
+
+function statusNoActive(){
+	var fail = document.getElementById('loginfail');
+	fail.innerHTML = "Ваш аккаунт заблокирован. Обратитесь к администратору";
+}

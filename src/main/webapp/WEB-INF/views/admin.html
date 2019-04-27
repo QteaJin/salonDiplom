@@ -21,10 +21,14 @@
                 <script type="text/javascript" src = "/js/service/admin/Workers.js"></script>
                 <script type="text/javascript" src = "/js/bean/Worker.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Scheduller.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/Clients.js"></script>
                  
                 
     <title>ADMIN PAGE</title>
     <style type="text/css">
+    .chosenButton{
+			background: #51C2F9;
+		}
     .spansalons:hover{
     color: blue;
     } 
@@ -89,7 +93,7 @@
       </nav>
 </header>
 <!--HEADER-->
-<div class="container mt-5">
+<div class="container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="salon-tab" data-toggle="tab" href="#salon" role="tab" aria-controls="salon" aria-selected="true" onclick="checkTokenExist();">Создать / Изменить салон</a>
@@ -170,16 +174,23 @@
         
 
     <div class="tab-pane fade" id="client" role="tabpanel" aria-labelledby="client-tab">
-
-    <div class="row" >
-            Создать клиента
+    Создать клиента
+		<div class="container">
+    	<div class="row" >
+            
+            <div class="col"  id = "clientLeft">
+	            <button class="btn btn-primary" type="submit" onclick="getAllClients()">Найти всех клиентов</button>
+	        	<button class="btn btn-primary" type="submit" clientId="new" onclick="createClientForm(event)">Создать нового клиента</button>
+	        	<div id="clientsTable"></div>
+	        	<div id ="clientsPagination"></div>
+            </div>
+            <div class="col"  id = "clientright">
+				<div id ="clientformcreate"></div>
+			</div>
+            
         </div>
-            <div class="mt-5">
-               Создать клиента
-             </div>
-
         </div>
-
+	</div>
         <div class="tab-pane fade" id="worker" role="tabpanel" aria-labelledby="worker-tab">
         Создать / Изменить работника
         <div class="container">
