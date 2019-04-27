@@ -2,6 +2,8 @@ package com.salon.service.client.impl;
 
 import com.salon.repository.bean.adress.AdressBean;
 import com.salon.repository.bean.client.ClientBean;
+import com.salon.repository.bean.client.ClientBeanSimple;
+import com.salon.repository.bean.client.ClientProfileBean;
 import com.salon.repository.dao.client.ClientDAO;
 import com.salon.repository.entity.client.Client;
 import com.salon.service.adress.AdressService;
@@ -154,4 +156,50 @@ public class ClientServiceImpl implements ClientService {
         }
         return clientBeans;
     }
+
+	@Override
+	public List<ClientBeanSimple> findAllClients() {
+		List<ClientBean> beans = findAll();
+		List<ClientBeanSimple> beanSimples = new ArrayList<>();
+		for (ClientBean bean : beans) {
+			ClientBeanSimple simple = new ClientBeanSimple();
+			simple.setEmail(bean.getProfile().getEmail());
+			simple.setId(bean.getId());
+			simple.setName(bean.getProfile().getName());
+			simple.setPhone(bean.getProfile().getPhone());
+			simple.setProfileId(bean.getProfile().getProfileId());
+			simple.setStatus(bean.getStatus());
+			beanSimples.add(simple);
+		}
+		return beanSimples;
+	}
+
+	@Override
+	public ClientProfileBean findClient(long id) {
+		ClientBean clientBean = findById(id);
+		ClientProfileBean bean = new ClientProfileBean();
+		bean.setDescription(clientBean.getProfile().getDescription());
+		bean.setEmail(clientBean.getProfile().getEmail());
+		bean.setId(clientBean.getId());
+		bean.setLogin(clientBean.getProfile().getLogin());
+		bean.setName(clientBean.getProfile().getName());
+		bean.setPassword(clientBean.getProfile().getPassword());
+		bean.setPhone(clientBean.getProfile().getPhone());
+		bean.setStatus(clientBean.getStatus());
+		return bean;
+	}
+
+	@Override
+	public ClientProfileBean changeClientProfile(ClientProfileBean clientBean) {
+		ClientBean bean = findById(clientBean.getId());
+		bean.getProfile().setDescription(clientBean.getDescription());
+		bean.getProfile().setEmail(clientBean.getEmail());
+		bean.getProfile().setLogin(clientBean.getLogin());
+		bean.getProfile().setName(clientBean.getName());
+		bean.getProfile().setPassword(clientBean.getPassword());
+		bean.getProfile().setPhone(clientBean.getPhone());
+		bean.setStatus(clientBean.getStatus());
+		update(bean);
+		return clientBean;
+	}
 }

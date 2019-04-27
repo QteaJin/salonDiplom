@@ -16,6 +16,10 @@ const UPDATE_WORKER_SKILL_LIST = URL_DEFAULT + "/worker/admin/skill";
 const ADD_WORKING_DAYS = URL_DEFAULT + "/worker/admin/addDays";
 const GET_WORKING_DAYS = URL_DEFAULT + "/worker/admin/getDays/";
 const DEL_WORKING_DAYS = URL_DEFAULT + "/worker/admin/delDays/";
+const GET_ALL_CLIENTS = URL_DEFAULT + "/client/admin/all";
+const GET_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/";
+const CHANGE_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/changeProfile";
+const CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client";
 
 var RequestAdmin = {};
 
@@ -258,7 +262,6 @@ RequestAdmin.DelWorkingDays = function(jsonObject) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = JSON.parse(xhr.responseText);
-			console.log(result);
 			createschedulecalendar ();
 		}
 	};
@@ -268,6 +271,74 @@ RequestAdmin.DelWorkingDays = function(jsonObject) {
 	xhr.send(JSON.stringify(jsonObject));
 };
 
+RequestAdmin.GetAllClientsRequestAdmin = function(){
+	var xhr = new XMLHttpRequest();
+	var url = GET_ALL_CLIENTS;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        localStorage.setItem("clientsList", JSON.stringify(json)); // saving to local storage
+	        createTableForClients ();
+	    }
+	};
+	xhr.send();
+};
+
+RequestAdmin.GetClientRequestAdmin = function(clientId){
+	var xhr = new XMLHttpRequest();
+	var url = GET_CLIENT_PROFILE + clientId;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        setClientDataToForm(json);
+	    }
+	};
+	xhr.send();
+};
+
+RequestAdmin.SendClientChangeRequestAdmin = function(jsonObject) {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = JSON.parse(xhr.responseText);
+			if(!result){
+				alert("Что-то пошло не так. Изменения не внесены");
+			}else{
+				alert("Изменения прошли успешно");
+				getAllClients();
+			}
+			
+		}
+	};
+
+	xhr.open("POST", CHANGE_CLIENT_PROFILE, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
+};
+
+RequestAdmin.RegistrationNewClient = function (jsonObject) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var registrationMessage = JSON.parse(xhr.responseText);
+            console.log(registrationMessage);
+            if(registrationMessage == true){
+            	alert('Регистрация прошла успешно!');
+            }else{
+            	alert('Такой профиль уже существует!');
+            }
+
+        }
+    };
+
+    xhr.open("POST", CLIENT_REGISTRATION_REQUEST , true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(jsonObject));
+};
 // Request.Registration = function (jsonObject) {
 // let xhr = new XMLHttpRequest();
 // xhr.onreadystatechange = function () {

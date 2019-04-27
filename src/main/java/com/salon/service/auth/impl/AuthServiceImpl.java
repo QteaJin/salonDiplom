@@ -81,6 +81,12 @@ public class AuthServiceImpl implements AuthService {
 		}
 		
 		ProfileBean profBean = list.get(0);
+		
+		if(profBean.getClient() != null && profBean.getClient().getStatus().equals(EnumStatus.NOACTIVE)) {
+			authBean.setErrorMessage("Status NOACTIVE");
+			return authBean;
+		}
+		
 		if(crypt.getUserTokens().get(profBean.getId()) == null) {
 			
 			if (profBean.getClient() != null) {
@@ -168,7 +174,7 @@ public class AuthServiceImpl implements AuthService {
 		ClientBean client = new ClientBean();
 		client.setProfile(profileService.toDomain(bean));
 		client.setRole(EnumRole.CLIENT);
-		client.setStatus(EnumStatus.NOACTIVE);
+		client.setStatus(EnumStatus.ACTIVE);
 		
 		createToken(clientService.toDomain(client));
 

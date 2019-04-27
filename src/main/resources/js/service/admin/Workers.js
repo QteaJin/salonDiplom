@@ -115,7 +115,7 @@ function createWorkerForm(event){
 	}
 	var infoText = event.target.getAttribute("fullInfo");
 	var info = JSON.parse(infoText);
-	console.log(info);
+	
 	
 	var inpMain = document.createElement("input");
 	inpMain.setAttribute("class", "form-control");
@@ -285,7 +285,7 @@ function setWorkerDataToForm(json){
 	
 	createWorkerSkills(json);
 	createschedulecalendar(); // create calendar
-	//сделать запрос на получение рабочих дней и сохранить объект в сессию
+	
 	
 }
 

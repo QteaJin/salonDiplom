@@ -1,15 +1,16 @@
 'use strict';
 
-const URL_DEFAULT = ""; //https://vip-salon.herokuapp.com
+const URL_DEF = ""; //https://vip-salon.herokuapp.com
 const URL_DEFAULT_LOCAL = "http://localhost:8080";
-const QUICK_ORDER_URL = URL_DEFAULT + "/checklist";
-const GET_WORKER_PHOTO_URL = URL_DEFAULT + "/worker/?salonId="; //get all workers by salon id
-const GET_WORKER_PROFILE_URL = URL_DEFAULT + "/worker/profile/";
-const CLIENT_HISTORY_REQUEST = URL_DEFAULT + "/checklist/client/history?";
-const CANCEL_ORDER_BY_ID = URL_DEFAULT + "/checklist/cancel/";
-const LOGIN_SEND_POST = URL_DEFAULT + "/auth/login";
-const CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client";
-const SEND_MESSAGE_TO_ADMIN = URL_DEFAULT + "/email/admin";
+const QUICK_ORDER_URL = URL_DEF + "/checklist";
+const GET_WORKER_PHOTO_URL = URL_DEF + "/worker/?salonId="; //get all workers by salon id
+const GET_WORKER_PROFILE_URL = URL_DEF + "/worker/profile/";
+const CLIENT_HISTORY_REQUEST = URL_DEF + "/checklist/client/history?";
+const CANCEL_ORDER_BY_ID = URL_DEF + "/checklist/cancel/";
+const LOGIN_SEND_POST = URL_DEF + "/auth/login";
+const CLIENT_REGISTRATION_REQUEST = URL_DEF + "/auth/registr/client";
+const SEND_MESSAGE_TO_ADMIN = URL_DEF + "/email/admin";
+const GET_CLIENT_PERSONAL_PROFILE = "/client/profile";
 
 var Request = {};
 
@@ -62,6 +63,11 @@ Request.Login = function (jsonObject) {
             if(loginResponce.errorMessage == "Profile not found"){
             	console.log('Profile not found');
             	loginFail();
+            	return;
+            }
+            if(loginResponce.errorMessage == "Status NOACTIVE"){
+            	console.log("Status NOACTIVE");
+            	statusNoActive();
             	return;
             }
             var date = new Date(new Date().getTime() + 60 * 60 * 1000); //1 hour
@@ -166,6 +172,26 @@ Request.CancelClientOrder = function (orderId){
 	        cancelOrderDone(jsonIncome);
 	       
 
+	    }
+	};
+	xhr.send();
+};
+
+Request.SendClientProfileRequest = function(){
+	var xhr = new XMLHttpRequest();
+	var url = GET_CLIENT_PERSONAL_PROFILE;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        if(json.errorMessage != null){
+	        	alert('Войдите в ваш аккаунт!');
+	        	logoutSessionMainPage();
+	        }else{
+	        	//добавить данные
+	        	console.log(json);
+	        }
 	    }
 	};
 	xhr.send();
