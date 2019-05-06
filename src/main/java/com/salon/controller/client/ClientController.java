@@ -85,4 +85,18 @@ public class ClientController {
 		bean.setErrorMessage(authBean.getErrorMessage());
 		return bean;
 	}
+	
+	@RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
+	public ClientProfileBean changePersonalProfile(@CookieValue("token") String token, @RequestBody ClientProfileBean clientProfileBean) {
+		ClientProfileBean bean = new ClientProfileBean();
+		AuthBean authBean = crypt.checkToken(token);
+		if(authBean.getErrorMessage() == null && authBean.getEnumRole().equals(EnumRole.CLIENT)) {
+			clientProfileBean.setId(authBean.getUserId());
+			bean = clientService.changeClientProfile(clientProfileBean);
+			return bean;
+		}
+
+		bean.setErrorMessage(authBean.getErrorMessage());
+		return bean;
+	}
 }

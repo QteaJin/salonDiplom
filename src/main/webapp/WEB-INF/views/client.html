@@ -21,6 +21,7 @@
                 <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
                 <script type="text/javascript" src = "/js/service/client/ClientProfile.js"></script>
                 <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
+                <script type="text/javascript" src = "/js/service/client/ClientCreateOrder.js"></script>
             
 <style type="text/css">
 .back {
@@ -53,6 +54,13 @@
 	width: 170px;
 	margin: 10px;
 	display: inline-block;
+}
+.workerfreedates{
+
+}
+.addScroll{
+  overflow-y:auto;
+  height: 400px;
 }
 </style>
 
@@ -105,7 +113,7 @@
 <div class="container mt-5">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" onclick="checkTokenExist();">Новый заказ</a>
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" onclick="sendRequestFotoWorkers();">Новый заказ</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="work-tab" data-toggle="tab" href="#work" role="tab" aria-controls="contact" aria-selected="false" onclick="setCurrentDateClient();">Список заказов</a>
@@ -123,15 +131,21 @@
 
     	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
     		<div class="container-fluid">
-		<div class="row" >
-			Оформить новый заказ
+    		Оформить новый заказ
+		
+			
+			<div class="row" >
 			<div id="workerPhoto" class=" col-md-12" ></div> <!-- Тут фото работников -->
+			</div>
 			
-			
-		</div>
+		
 		<div class="row" >
-		<div class="col-md-8 workerprofile">	</div>
-		<div class="col-md-4 workercatalog"> workercatalog </div>
+		<div class="col-md-8 workerprofile" id = "workerprofile">workerprofile</div>
+	 
+
+			<div class="col-md-4 workerfreedates addScroll" id = "workerfreedates"> freedates </div>
+		
+		
 		</div>
 		</div>
     		

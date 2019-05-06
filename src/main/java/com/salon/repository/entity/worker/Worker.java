@@ -29,8 +29,7 @@ public class Worker extends AbstractUser implements Serializable {
     private List<Skills> skillsList = new ArrayList<>();
 
     private List<CheckList> checkLists = new ArrayList<>();
-    
-    
+     
     private List<WorkTime> schedule = new ArrayList<>();
 
     private Salon salon;

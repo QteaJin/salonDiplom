@@ -198,7 +198,10 @@ public class ClientServiceImpl implements ClientService {
 		bean.getProfile().setName(clientBean.getName());
 		bean.getProfile().setPassword(clientBean.getPassword());
 		bean.getProfile().setPhone(clientBean.getPhone());
-		bean.setStatus(clientBean.getStatus());
+		if(clientBean.getStatus() != null) {
+			bean.setStatus(clientBean.getStatus());
+		}
+		
 		update(bean);
 		return clientBean;
 	}

@@ -79,7 +79,7 @@ function createClientPersonalForm (){
 		
 			
 		var buttonCreateEdit = document.createElement("button");
-		buttonCreateEdit.setAttribute("onclick", "createEditClient(event);");
+		buttonCreateEdit.setAttribute("onclick", "editClientProfile(event);");
 		buttonCreateEdit.setAttribute("class", "btn btn-primary");
 		buttonCreateEdit.appendChild(document.createTextNode("Изменить"));
 
@@ -105,3 +105,29 @@ function createClientPersonalForm (){
 		var getProfileRequest = Object.create(Request);
 		getProfileRequest.SendClientProfileRequest();
 	}
+
+function setClientProfileToForm(json){
+	
+	document.forms['clientcustomform']['client_name'].value = json.name;
+	document.forms['clientcustomform']['clientphone'].value = json.phone;
+	document.forms['clientcustomform']['clientemail'].value = json.email;
+	document.forms['clientcustomform']['clientlogin'].value = json.login;
+	document.forms['clientcustomform']['clientpassword'].value = json.password;
+	document.forms['clientcustomform']['clienttextarea'].value = json.description;
+}
+
+function editClientProfile(event){
+	event.stopPropagation();
+	var jsonObj = {};
+	jsonObj.name = document.forms['clientcustomform']['client_name'].value;
+	jsonObj.phone = document.forms['clientcustomform']['clientphone'].value;
+	jsonObj.email = document.forms['clientcustomform']['clientemail'].value;
+	jsonObj.login = document.forms['clientcustomform']['clientlogin'].value;
+	jsonObj.password = document.forms['clientcustomform']['clientpassword'].value;
+	jsonObj.description = document.forms['clientcustomform']['clienttextarea'].value;
+	
+	var editProfileRequest = Object.create(Request);
+	editProfileRequest.EditClientProfile(jsonObj);
+	
+	
+}
