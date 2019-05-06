@@ -2,6 +2,7 @@ package com.salon.controller.checklist;
 
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
+import com.salon.repository.bean.checklist.CheckListNewOrderBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
 import com.salon.service.crypto.TokenCryptImpl;
@@ -9,8 +10,10 @@ import com.salon.utility.EnumStatusCheckList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -91,6 +94,10 @@ public class CheckListController {
     	return orderId+"";
     }
     
-    
-
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public Map<Timestamp, List<Timestamp>> freeDatesForOrder(@RequestBody CheckListNewOrderBean checkListNewOrderBean){
+		
+    	return checkListService.getFreeDatesForOrder(checkListNewOrderBean);
+    	
+    }
 }

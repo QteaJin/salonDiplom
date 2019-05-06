@@ -11,6 +11,8 @@ const LOGIN_SEND_POST = URL_DEF + "/auth/login";
 const CLIENT_REGISTRATION_REQUEST = URL_DEF + "/auth/registr/client";
 const SEND_MESSAGE_TO_ADMIN = URL_DEF + "/email/admin";
 const GET_CLIENT_PERSONAL_PROFILE = "/client/profile";
+const EDIT_CLIENT_PROFILE = "/client/profile/edit";
+const GET_FREE_DATE = "/checklist/new";
 
 var Request = {};
 
@@ -189,11 +191,78 @@ Request.SendClientProfileRequest = function(){
 	        	alert('Войдите в ваш аккаунт!');
 	        	logoutSessionMainPage();
 	        }else{
-	        	//добавить данные
-	        	console.log(json);
+	        	setClientProfileToForm(json);
+	        	
 	        }
 	    }
 	};
 	xhr.send();
 };
 
+Request.EditClientProfile = function(jsonObject) {
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var json = JSON.parse(xhr.responseText);
+			if(json.errorMessage != null){
+				alert("Что-то пошло не так. Изменения не внесены");
+				logoutSessionMainPage();
+			}else{
+				alert("Изменения прошли успешно");
+				
+			}
+			
+		}
+	};
+
+	xhr.open("POST", EDIT_CLIENT_PROFILE, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
+};
+
+Request.GetPhotoWorkerForOrder = function(salonId){
+	var xhr = new XMLHttpRequest();
+	var url = GET_WORKER_PHOTO_URL + salonId;
+	console.log(url);
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        console.log(json);
+	        setWorkerPhoto(json);
+	    }
+	};
+	xhr.send();
+};
+Request.GetWorkerCatalogForOrder = function(workerId){
+	var xhr = new XMLHttpRequest();
+	var url = GET_WORKER_PROFILE_URL + workerId;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        createTableWorkerCatalog (json);
+	        
+	    }
+	};
+	xhr.send();
+};
+
+Request.GetFreeDateForOrder = function(jsonObject) {
+	console.log(jsonObject);
+	console.log(JSON.stringify(jsonObject));
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = JSON.parse(xhr.responseText);
+				console.log(result);
+				createTableWithDates (result);
+		}
+	};
+
+	xhr.open("POST", GET_FREE_DATE, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
+};
