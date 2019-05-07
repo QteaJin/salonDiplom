@@ -62,6 +62,11 @@ function sendRequestGetCatalog (event){
 }
 
 function createTableWorkerCatalog (json){
+	var sheduleDiv = document.getElementById('workerfreedates');
+	while (sheduleDiv.firstChild) {
+		sheduleDiv.removeChild(sheduleDiv.firstChild);
+	}
+	
 	var rowNumber = 0;
 	var mainDiv = document.getElementById('workerprofile');
 	mainDiv.setAttribute("align", "right");
@@ -167,7 +172,8 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 				cell.innerHTML = moment(value[i]).format("HH : mm");
 				var button = document.createElement("button");
 				button.appendChild(document.createTextNode("Записаться"));
-				button.setAttribute("onclick", "");
+				button.setAttribute("onclick", "sendRequestToCreateOrder(event);");
+				button.setAttribute("freeDate", value[i]);
 				cell1.appendChild(button);
 		  	rowNum++;
 		  	}
@@ -176,3 +182,25 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 
 		mainDiv.appendChild(table);
 		}
+	
+	function sendRequestToCreateOrder(event){
+		var date = event.target.getAttribute("freeDate");
+		var jsonObj = {};
+		var catalogs = [];
+		var table = document.getElementById("catalogsTable");
+		var workerId = table.getAttribute("workerId");
+		var checkBoxes = document.getElementsByTagName("input");
+		
+		for (var i = 0; i < checkBoxes.length; i++) {
+			if (checkBoxes[i].checked) {
+			catalogs.push(checkBoxes[i].getAttribute("id"));
+			}
+		}
+	jsonObj.workerId = workerId;
+	jsonObj.dateAppointment = date;
+	jsonObj.catalogList = catalogs;
+	
+	var createNewOrder = Object.create(Request);
+	createNewOrder.createNewOrder(jsonObj);
+		
+	}

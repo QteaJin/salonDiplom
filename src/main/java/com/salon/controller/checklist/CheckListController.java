@@ -1,11 +1,13 @@
 package com.salon.controller.checklist;
 
+import com.salon.repository.bean.auth.AuthBean;
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.checklist.CheckListNewOrderBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
 import com.salon.service.crypto.TokenCryptImpl;
+import com.salon.utility.EnumRole;
 import com.salon.utility.EnumStatusCheckList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -98,6 +100,21 @@ public class CheckListController {
     public Map<Timestamp, List<Timestamp>> freeDatesForOrder(@RequestBody CheckListNewOrderBean checkListNewOrderBean){
 		
     	return checkListService.getFreeDatesForOrder(checkListNewOrderBean);
+    	
+    }
+    
+    @RequestMapping(value = "/new/create", method = RequestMethod.POST)
+    public String createNewOrder (@CookieValue("token") String token, @RequestBody CheckListNewOrderBean checkListNewOrderBean) {
+    	AuthBean authBean = tokenCrypt.checkToken(token);
+    	if(authBean.getErrorMessage() != null) {
+    		return "token error";
+    	}
+    	
+    	if(authBean.getEnumRole().equals(EnumRole.CLIENT)) {
+    		checkListNewOrderBean.setClientId(authBean.getUserId());
+    	}
+    	
+    	return checkListService.createNewOrder(checkListNewOrderBean);
     	
     }
 }

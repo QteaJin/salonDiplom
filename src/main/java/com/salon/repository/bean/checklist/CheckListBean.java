@@ -6,27 +6,10 @@ import com.salon.repository.entity.client.Client;
 import com.salon.repository.entity.worker.Worker;
 import com.salon.utility.EnumStatusCheckList;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/*
-*   dateAppointment,
-*   description,
-*
-*   workerid,
-*   clientid,
-*   "catalod":[
-*       {
-*           "idcatalog":5
-*       },
-*       {
-*          "idcatalog":5
-*       }
-*   ]
-* */
 public class CheckListBean {
     private Long sheckListId;
     private Timestamp timeFinish;

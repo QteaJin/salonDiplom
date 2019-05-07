@@ -130,6 +130,16 @@ public class CatalogServiceImpl implements CatalogService {
 
 		return catalogBeans;
 	}
+	
+	@Override
+	public List<Catalog> toDomain(List<CatalogBean> catalogBeans){
+		List<Catalog> catalogs = new ArrayList<Catalog>();
+		for (CatalogBean catalogBean : catalogBeans) {
+			catalogs.add(toDomain(catalogBean));
+		}
+		return catalogs;
+		
+	}
 
 	@Override
 	public List<CatalogBeanCreateAdmin> findCatalogsBySkillId(Long skillId, HttpServletRequest request) {
