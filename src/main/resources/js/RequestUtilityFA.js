@@ -13,6 +13,7 @@ const SEND_MESSAGE_TO_ADMIN = URL_DEF + "/email/admin";
 const GET_CLIENT_PERSONAL_PROFILE = "/client/profile";
 const EDIT_CLIENT_PROFILE = "/client/profile/edit";
 const GET_FREE_DATE = "/checklist/new";
+const CREATE_NEW_ORDER = "/checklist/new/create";
 
 var Request = {};
 
@@ -263,6 +264,29 @@ Request.GetFreeDateForOrder = function(jsonObject) {
 	};
 
 	xhr.open("POST", GET_FREE_DATE, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(jsonObject));
+};
+
+Request.createNewOrder = function(jsonObject) {
+	console.log(jsonObject);
+	console.log(JSON.stringify(jsonObject));
+	let xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var result = xhr.responseText;
+				console.log(result);
+				if(result == "token error"){
+					alert("Что-то пошло не так. Изменения не внесены");
+					logoutSessionMainPage();
+				}else{
+					
+				}
+				
+		}
+	};
+
+	xhr.open("POST", CREATE_NEW_ORDER, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send(JSON.stringify(jsonObject));
 };

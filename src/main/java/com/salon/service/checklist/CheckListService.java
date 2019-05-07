@@ -25,4 +25,6 @@ public interface CheckListService extends CRUDService<CheckListBean, CheckList> 
     																 Integer year,Integer month,String status);
     
 	Map<Timestamp, List<Timestamp>> getFreeDatesForOrder(CheckListNewOrderBean checkListNewOrderBean);
+	
+	String createNewOrder(CheckListNewOrderBean checkListNewOrderBean);
 }

@@ -353,7 +353,8 @@ public class CheckListServiceImpl implements CheckListService {
 					Timestamp finishOrder = order.getTimeFinish();
 					reservedAndFreeTime.put(time, "reserved");
 					Long workingTime = finishOrder.getTime() - startOrder.getTime();
-					for (int i = 1; i < workingTime%Const.Millis.MILLIS_IN_HALF_HOUR; i++) {
+					int iteration = (int)(workingTime/Const.Millis.MILLIS_IN_HALF_HOUR);
+					for (int i = 1; i < iteration; i++) {
 						long timeMillis = time.getTime() + Const.Millis.MILLIS_IN_HALF_HOUR*i;
 						reservedAndFreeTime.put(new Timestamp(timeMillis), "reserved");
 					}
@@ -388,4 +389,118 @@ public class CheckListServiceImpl implements CheckListService {
 		
 	}
 
+	@Override
+	public String createNewOrder(CheckListNewOrderBean checkListNewOrderBean) {
+		WorkerBean workerBean = workerService.findById(checkListNewOrderBean.getWorkerId());
+		ClientBean clientBean = clientService.findById(checkListNewOrderBean.getClientId());
+		
+		List <CatalogBean> catalogs = new ArrayList<CatalogBean>(); //all catalogs that choose
+		List<Long> catalogsId = checkListNewOrderBean.getCatalogList();
+		Long timelead = 0L; // summ time to do order
+		Double price = 0.0;
+		for (Long catalogId : catalogsId) {
+			CatalogBean catalogBean = new CatalogBean();
+			catalogBean = catalogService.findById(catalogId);
+			catalogs.add(catalogBean);
+			timelead += catalogBean.getTimeLead();
+			price += catalogBean.getPrice(); 
+		}
+		
+		for (CatalogBean long1 : catalogs) {
+			System.out.println(long1.getName());
+		}
+		
+		Long timeFinishL = checkListNewOrderBean.getDateAppointment().getTime() + timelead*Const.Millis.MILLIS_IN_MINUTE;
+		
+		if(!checkIfAviableTime(workerBean, checkListNewOrderBean.getDateAppointment(), timelead)) {
+			return "Date was reservesd";
+		}
+		
+		List<Catalog> catList =  catalogService.toDomain(catalogs);
+		for (Catalog catalog : catList) {
+			System.out.println(catalog.getCatalogId() + " " + catalog.getName());
+		}
+		
+		CheckListBean checkListBean = new CheckListBean();
+		checkListBean.setCatalog(catalogService.toDomain(catalogs));
+		checkListBean.setClient(clientService.toDomain(clientBean));
+		checkListBean.setDateAppointment(checkListNewOrderBean.getDateAppointment());
+		checkListBean.setDateCreate(new Timestamp (System.currentTimeMillis()));
+		checkListBean.setPrice(price);
+		checkListBean.setStatus(EnumStatusCheckList.NEW);
+		checkListBean.setTimeFinish(new Timestamp(timeFinishL));
+		checkListBean.setWorker(workerService.toDomain(workerBean));
+		
+		save(checkListBean);
+		
+		CheckListBean cb = new CheckListBean();
+		cb.setDateAppointment(checkListNewOrderBean.getDateAppointment());
+		List<CheckListBean> beans = findByExample(cb);
+		for (CheckListBean checkListBean2 : beans) {
+			List<Catalog> catalogsTemp = checkListBean2.getCatalog();
+			for (Catalog catalTemp : catalogsTemp) {
+				catalTemp.getCheckLists().add(toDomain(checkListBean2));
+				catalogService.update(catalogService.toBean(catalTemp));
+			}
+		}
+		
+		return "ok";
+	}
+
+	private boolean checkIfAviableTime(WorkerBean workerBean, Timestamp dateAppointment, Long timelead ) {
+		
+		LocalDateTime ld = dateAppointment.toLocalDateTime();
+		Timestamp startWorking = Timestamp.valueOf(ld.plusHours(Const.SalonShedule.START_WORK));
+		Timestamp finishWorking =Timestamp.valueOf(ld.plusHours(Const.SalonShedule.END_WORK)); 
+		
+		List<CheckList> orders = new ArrayList<CheckList>(); // orders in current day
+		List <CheckList> checkLists = workerBean.getCheckLists();
+		for (CheckList checkList : checkLists) {
+			if (checkList.getDateAppointment().before(startWorking) || checkList.getDateAppointment().after(finishWorking) ) {
+				continue;
+			}
+			orders.add(checkList);
+		}
+		LocalDateTime startWork = ld.plusHours(Const.SalonShedule.START_WORK);
+		Map <Timestamp , String > reservedAndFreeTime = new TreeMap<>();
+		
+		for (int i = 0; i < 21; i++) {
+		
+			Timestamp ts = Timestamp.valueOf(startWork.plusMinutes(30*i));	
+			reservedAndFreeTime.put(ts, "free");
+		}
+		Set<Timestamp> timeScale = reservedAndFreeTime.keySet(); //start to create reserved timeline
+		for (Timestamp time : timeScale) {
+			
+			for (CheckList order : orders) {
+				if(order.getDateAppointment().equals(time)) {
+					Timestamp startOrder = order.getDateAppointment();
+					Timestamp finishOrder = order.getTimeFinish();
+					reservedAndFreeTime.put(time, "reserved");
+					Long workingTime = finishOrder.getTime() - startOrder.getTime();
+					for (int i = 1; i < workingTime/Const.Millis.MILLIS_IN_HALF_HOUR; i++) {
+						long timeMillis = time.getTime() + Const.Millis.MILLIS_IN_HALF_HOUR*i;
+						reservedAndFreeTime.put(new Timestamp(timeMillis), "reserved");
+					}
+				}
+			}
+		}														// finish to create reserved timeline
+		
+		//List <Timestamp> newOrderTimeLine = new ArrayList<Timestamp>();
+		
+		for (int i = 0; i < timelead%30; i++) {
+			Long tsTemp = dateAppointment.getTime() + Const.Millis.MILLIS_IN_HALF_HOUR*i;
+			Timestamp orderTs = new Timestamp(tsTemp);
+			//newOrderTimeLine.add(new Timestamp (tsTemp));
+			for (Map.Entry<Timestamp, String> entry : reservedAndFreeTime.entrySet()) {
+				if(orderTs.equals(entry.getKey()) & entry.getValue().equals("reserved")) {
+					return false;
+				}
+			}
+			
+		}
+		
+		return true;
+		
+	}
 }

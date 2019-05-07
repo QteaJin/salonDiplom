@@ -23,7 +23,7 @@ public class Const {
     }
     public static class Millis{
     	 public static final long MILLIS_IN_HOUR = 3600000;
-    	 public static final long MILLIS_IN_HALF_HOUR = 3600000/2;
+    	 public static final long MILLIS_IN_HALF_HOUR = 1800000;
     	 public static final long MILLIS_IN_MINUTE = 60000;
     }
 }
