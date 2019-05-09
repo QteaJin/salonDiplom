@@ -280,7 +280,11 @@ Request.createNewOrder = function(jsonObject) {
 					alert("Что-то пошло не так. Изменения не внесены");
 					logoutSessionMainPage();
 				}else{
-					
+					var sheduleDiv = document.getElementById('workerfreedates');
+					while (sheduleDiv.firstChild) {
+						sheduleDiv.removeChild(sheduleDiv.firstChild);
+					}
+					alert("Ваша заявка принята. Ожидайте подтверждения заказа. Статус заказа можно посмотреть на вкладке Список заказов.")
 				}
 				
 		}

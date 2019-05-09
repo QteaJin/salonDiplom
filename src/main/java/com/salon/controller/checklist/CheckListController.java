@@ -91,7 +91,9 @@ public class CheckListController {
     public String cancelOrderByClient(@PathVariable("orderId") Long orderId) {
     	
     	CheckListBean checkListBean = checkListService.findById(orderId);
+    	//checkListBean.getCatalog();
     	checkListBean.setStatus(EnumStatusCheckList.CANCELED);
+    	//deleteById(orderId);
     	checkListService.update(checkListBean);
     	return orderId+"";
     }

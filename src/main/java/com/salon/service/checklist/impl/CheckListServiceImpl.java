@@ -230,7 +230,7 @@ public class CheckListServiceImpl implements CheckListService {
 					historyBean.setCheckListId(checkList.getSheckListId());
 					historyBean.setDateAppointment(checkList.getDateAppointment());
 					historyBean.setSalon(checkList.getWorker().getSalon().getName());
-					historyBean.setWorker(checkList.getWorker().getProfile().getName() + " - " + checkList.getWorker().getDescription() );
+					historyBean.setWorker(checkList.getWorker().getProfile().getName()); //+ " - " + checkList.getWorker().getDescription() 
 					if(!checkList.getCatalogs().isEmpty()) {
 						historyBean.setCatalogs(checkList.getCatalogs());
 						for (Catalog catalog : checkList.getCatalogs()) {
@@ -406,20 +406,12 @@ public class CheckListServiceImpl implements CheckListService {
 			price += catalogBean.getPrice(); 
 		}
 		
-		for (CatalogBean long1 : catalogs) {
-			System.out.println(long1.getName());
-		}
-		
 		Long timeFinishL = checkListNewOrderBean.getDateAppointment().getTime() + timelead*Const.Millis.MILLIS_IN_MINUTE;
 		
 		if(!checkIfAviableTime(workerBean, checkListNewOrderBean.getDateAppointment(), timelead)) {
 			return "Date was reservesd";
 		}
 		
-		List<Catalog> catList =  catalogService.toDomain(catalogs);
-		for (Catalog catalog : catList) {
-			System.out.println(catalog.getCatalogId() + " " + catalog.getName());
-		}
 		
 		CheckListBean checkListBean = new CheckListBean();
 		checkListBean.setCatalog(catalogService.toDomain(catalogs));

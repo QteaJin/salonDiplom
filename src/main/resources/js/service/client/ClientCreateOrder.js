@@ -174,6 +174,7 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 				button.appendChild(document.createTextNode("Записаться"));
 				button.setAttribute("onclick", "sendRequestToCreateOrder(event);");
 				button.setAttribute("freeDate", value[i]);
+				button.setAttribute("class", "dateButton");
 				cell1.appendChild(button);
 		  	rowNum++;
 		  	}
@@ -184,6 +185,12 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 		}
 	
 	function sendRequestToCreateOrder(event){
+		var disButton = document.querySelectorAll(".dateButton");
+		for (var i = 0; i < disButton.length; i++) {
+			disButton[i].setAttribute("disabled","true");
+		}
+		
+		
 		var date = event.target.getAttribute("freeDate");
 		var jsonObj = {};
 		var catalogs = [];
@@ -202,5 +209,7 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 	
 	var createNewOrder = Object.create(Request);
 	createNewOrder.createNewOrder(jsonObj);
+	
+	alert("Ваш запрос отправлен");
 		
 	}
