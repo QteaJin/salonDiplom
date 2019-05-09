@@ -228,7 +228,13 @@ function createEditCataolg(event) {
 	catalogForm.setName = fieldsCatalog.catalogname.value;
 	catalogForm.setDescription = fieldsCatalog.catalogtextarea.value;
 	catalogForm.setPrice = fieldsCatalog.catalogprice.value;
-	catalogForm.setTimeLead = fieldsCatalog.catalogtime.value;
+	if(fieldsCatalog.catalogtime.value%30 == 0){
+		catalogForm.setTimeLead = fieldsCatalog.catalogtime.value;
+	}else{
+		alert("Время должно быть кратным 30 минутам! Установлено значение по умолчанию 60 мин.");
+		catalogForm.setTimeLead = 60;
+	}
+	
 	catalogForm.setSkillId = fieldsCatalog.catalogSkillId.value;
 	console.log(JSON.stringify(catalogForm));
 

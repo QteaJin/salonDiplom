@@ -78,7 +78,9 @@ function createTable (jsonIncome) {
 
 			var tdDate = document.createElement("td");
 			var normalDate = moment(jsonIncome[i].dateAppointment);
-			tdDate.appendChild(document.createTextNode(normalDate.format('YYYY-MM-DD')));
+			//tdDate.appendChild(document.createTextNode(normalDate.format('YYYY-MM-DD')));
+			//tdDate.appendChild(document.createTextNode(normalDate.format("HH : mm")));
+			tdDate.innerHTML = normalDate.format('YYYY-MM-DD') + "<br>" + "<b>" + normalDate.format("HH : mm") + "</b>";
 
 			var tdSalon = document.createElement("td");
 			tdSalon.appendChild(document.createTextNode(jsonIncome[i].salon));

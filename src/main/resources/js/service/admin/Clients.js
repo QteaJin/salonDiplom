@@ -1,4 +1,4 @@
-var maxNumClientsOnPage = 2;
+var maxNumClientsOnPage = 10;
 	var pages = 0;
 	var numberOfPage = 0;
 
