@@ -4,5 +4,8 @@ public enum EnumStatusCheckList {
     ACTIVE,
     DONE,
     CANCELED,
-    NEW
+    NEW,
+    FREE,
+    RESERVED,
+    ALL
 }

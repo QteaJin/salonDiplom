@@ -4,6 +4,7 @@ import com.salon.repository.bean.auth.AuthBean;
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.checklist.CheckListNewOrderBean;
+import com.salon.repository.bean.checklist.OrderBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.service.checklist.CheckListService;
 import com.salon.service.crypto.TokenCryptImpl;
@@ -119,4 +120,21 @@ public class CheckListController {
     	return checkListService.createNewOrder(checkListNewOrderBean);
     	
     }
+    @RequestMapping(value = "/admin", method = RequestMethod.POST)
+    public Map <String, List <CheckListClientHistoryBean>> getAllOrdersByWorkers (@CookieValue("token") String token,
+    																			@RequestBody OrderBean orderBean){
+    	AuthBean authBean = tokenCrypt.checkToken(token);
+    	
+    	if(authBean.getErrorMessage() != null) {
+    		return null;
+    	}
+    	
+    	if(!authBean.getEnumRole().equals(EnumRole.ADMIN)) {
+    		return null;
+    	}
+    	
+				
+    	return checkListService.getAllOrdersByDate(orderBean);
+    	
+    };
 }
