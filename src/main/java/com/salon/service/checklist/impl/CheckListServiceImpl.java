@@ -5,6 +5,7 @@ import com.salon.repository.bean.catalog.CatalogBean;
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.checklist.CheckListNewOrderBean;
+import com.salon.repository.bean.checklist.OrderBean;
 import com.salon.repository.bean.client.ClientBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.repository.bean.worker.WorkerBean;
@@ -21,6 +22,8 @@ import com.salon.service.crypto.TokenCryptImpl;
 import com.salon.service.exception.ErrorInfoExeption;
 import com.salon.service.worker.WorkerService;
 import com.salon.utility.Const;
+import com.salon.utility.EnumRole;
+import com.salon.utility.EnumStatus;
 import com.salon.utility.EnumStatusCheckList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -409,7 +412,7 @@ public class CheckListServiceImpl implements CheckListService {
 		Long timeFinishL = checkListNewOrderBean.getDateAppointment().getTime() + timelead*Const.Millis.MILLIS_IN_MINUTE;
 		
 		if(!checkIfAviableTime(workerBean, checkListNewOrderBean.getDateAppointment(), timelead)) {
-			return "Date was reservesd";
+			return "Date was reserved";
 		}
 		
 		
@@ -494,5 +497,87 @@ public class CheckListServiceImpl implements CheckListService {
 		
 		return true;
 		
+	}
+
+	@Override
+	public Map<String, List<CheckListClientHistoryBean>> getAllOrdersByDate(OrderBean orderBean) {
+		Map<String, List<CheckListClientHistoryBean>> ordersMap = new HashMap<String, List<CheckListClientHistoryBean>>();
+		List<WorkerBean> workerBeans = workerService.findAll();
+		
+		for (WorkerBean workerBean : workerBeans) {
+			if(workerBean.getRole().equals(EnumRole.ADMIN)) {
+				continue;
+			}
+			boolean isWorking = false;
+			Timestamp correctingTs = new Timestamp (orderBean.getDate().getTime() + Const.Millis.MILLIS_IN_HOUR*3); // difference 3 hour between 
+			List<WorkTime> workTimes = workerBean.getSchedule();
+				for (WorkTime workTime : workTimes) {
+					if(workTime.getDate().equals(correctingTs)) {
+						isWorking = true;
+						break;
+					}
+				}
+				if(isWorking) {
+					ordersMap.put(workerBean.getProfile().getName(), createShedulerForWorker(workerBean, orderBean));
+				}
+			
+		}
+		return ordersMap;
+	}
+
+	private List<CheckListClientHistoryBean> createShedulerForWorker(WorkerBean workerBean, OrderBean orderBean) {
+		List<CheckListClientHistoryBean> historyBeans = new ArrayList<>();
+		List<CheckList> orders = workerBean.getCheckLists();
+		List<CheckList> ordersOnDate = new ArrayList<>();
+		Timestamp end = new Timestamp (orderBean.getDate().getTime() + Const.Millis.MILLIS_IN_HOUR*23);
+		for (CheckList order : orders) {
+			if(order.getDateAppointment().before(orderBean.getDate()) || order.getDateAppointment().after(end)){
+				continue;
+			}
+			ordersOnDate.add(order); // active orders by date that interested
+		}
+		
+		Collections.sort(ordersOnDate, new CheckListComparatorByDate());
+		Timestamp startWorkingTime = new Timestamp(orderBean.getDate().getTime() + Const.Millis.MILLIS_IN_HOUR*10);
+
+		for (int i = 0; i < 10; i++) {
+			Timestamp start = new Timestamp (startWorkingTime.getTime() + Const.Millis.MILLIS_IN_HOUR*i);
+			Timestamp finish = new Timestamp (startWorkingTime.getTime() + Const.Millis.MILLIS_IN_HOUR*(i+1));
+			CheckListClientHistoryBean bean = new CheckListClientHistoryBean();
+			bean.setDateAppointment(start);
+			bean.setFinish(finish);
+			bean.setStatus(EnumStatusCheckList.FREE);
+			historyBeans.add(bean);
+		}
+		
+		for (CheckList orderOnDate : ordersOnDate) {
+
+			CheckListClientHistoryBean bean = new CheckListClientHistoryBean();
+			bean.setCatalogs(orderOnDate.getCatalogs());
+			bean.setCheckListId(orderOnDate.getSheckListId());
+			bean.setClientId(orderOnDate.getClient().getId());
+			bean.setDateAppointment(orderOnDate.getDateAppointment());
+			bean.setFinish(orderOnDate.getTimeFinish());
+			bean.setName(orderOnDate.getClient().getProfile().getName());
+			bean.setPrice(orderOnDate.getPrice());
+			bean.setStatus(orderOnDate.getStatus());
+			bean.setWorker(orderOnDate.getWorker().getProfile().getName());
+			
+			int timelead = (int) ((orderOnDate.getTimeFinish().getTime() - orderOnDate.getDateAppointment().getTime())/Const.Millis.MILLIS_IN_HOUR); 
+				for (int i = 0; i < historyBeans.size(); i++) {
+					CheckListClientHistoryBean cHBean = historyBeans.get(i);
+					if(cHBean.getDateAppointment().equals(orderOnDate.getDateAppointment())) {
+						
+						historyBeans.set(i, bean);
+						for (int j = 1; j < timelead; j++) {
+
+							historyBeans.remove(i+1);
+							
+						}
+					}
+				}
+		}
+		
+		return historyBeans;
 	}
 }

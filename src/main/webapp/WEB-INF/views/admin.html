@@ -22,6 +22,7 @@
                 <script type="text/javascript" src = "/js/bean/Worker.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Scheduller.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Clients.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/Orders.js"></script>
                  
                 
     <title>ADMIN PAGE</title>
@@ -106,7 +107,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить заказ</a>
+            <a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" onclick="chooseDate();" >Создать / Изменить заказ</a>
         </li>
     
         <li class="nav-item">
@@ -215,7 +216,44 @@
         
         </div>
 
-        <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">Создать / Изменить заказ</div>
+        <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">Создать / Изменить заказ
+        <div class="mt-5">
+               <div class="row">
+					<div class="col">
+                        <select id="inputStateYear" class="form-control">
+                            
+                        </select>
+                    </div>
+                   
+                    <div class="col">
+                        <select id="inputStateMounts" class="form-control" onchange="setDaysOfMonth();">
+                        	
+                        </select>
+                    </div>
+					<div class="col">
+                        <select id="inputStateDays" class="form-control">
+                            
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStateStatus" class="form-control">
+                            
+                            <option selected value = "ALL">ВСЕ</option>
+                            <option value="DONE">ВЫПОНЕН</option>
+                            <option value="CANCELED">ОТМЕН</option>
+                            <option value="ACTIVE">АКТИВНЫЙ</option>
+                            <option value = "NEW">НОВЫЙ</option>
+                            
+
+                        </select>
+                    </div>
+                    <button onclick="findOrdersByDateStatus();"> Поиск </button>
+                </div>
+                <div class="row" id = "workersOnDuty">workersOnDuty</div>
+                
+                <div class="row" id = "workersOnDutySchedule">workersOnDutySchedule</div>
+            </div>
+        </div>
 
         <div class="tab-pane fade" id="discount" role="tabpanel" aria-labelledby="discount-tab">Создать / Изменить скидку</div>
 

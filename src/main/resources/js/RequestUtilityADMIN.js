@@ -20,6 +20,7 @@ const GET_ALL_CLIENTS = URL_DEFAULT + "/client/admin/all";
 const GET_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/";
 const CHANGE_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/changeProfile";
 const CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client";
+const GET_WORKER_ORDERS = URL_DEFAULT + "/checklist/admin";
 
 var RequestAdmin = {};
 
@@ -336,6 +337,20 @@ RequestAdmin.RegistrationNewClient = function (jsonObject) {
     };
 
     xhr.open("POST", CLIENT_REGISTRATION_REQUEST , true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(jsonObject));
+};
+
+RequestAdmin.GetWorkerOrdersRequest = function (jsonObject) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var result = JSON.parse(xhr.responseText);
+            createListWorkers(result);
+         }
+    };
+
+    xhr.open("POST", GET_WORKER_ORDERS , true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(jsonObject));
 };

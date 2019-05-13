@@ -3,6 +3,7 @@ package com.salon.service.checklist;
 import com.salon.repository.bean.checklist.CheckListBean;
 import com.salon.repository.bean.checklist.CheckListClientHistoryBean;
 import com.salon.repository.bean.checklist.CheckListNewOrderBean;
+import com.salon.repository.bean.checklist.OrderBean;
 import com.salon.repository.bean.quickorder.QuickOrderBean;
 import com.salon.repository.entity.checklist.CheckList;
 import com.salon.service.CRUDService;
@@ -27,4 +28,6 @@ public interface CheckListService extends CRUDService<CheckListBean, CheckList> 
 	Map<Timestamp, List<Timestamp>> getFreeDatesForOrder(CheckListNewOrderBean checkListNewOrderBean);
 	
 	String createNewOrder(CheckListNewOrderBean checkListNewOrderBean);
+	
+	Map<String, List<CheckListClientHistoryBean>> getAllOrdersByDate(OrderBean orderBean);
 }

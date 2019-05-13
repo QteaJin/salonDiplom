@@ -11,8 +11,10 @@ import com.salon.utility.EnumStatusCheckList;
 public class CheckListClientHistoryBean {
 
 	private Long clientId;
+	private String name;
 	private Long checkListId;
 	private Timestamp dateAppointment;
+	private Timestamp finish;
 	private String salon;
 	private String worker;
 	private List<Catalog> catalogs;
@@ -74,6 +76,18 @@ public class CheckListClientHistoryBean {
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Timestamp getFinish() {
+		return finish;
+	}
+	public void setFinish(Timestamp finish) {
+		this.finish = finish;
 	}
 	
 	
