@@ -12,6 +12,7 @@ public interface SkillsService extends CRUDService<SkillsBean, Skills> {
 	List<Skills> toDomainList(List<SkillsBean> skillsBean);
 	List<SkillsBeanSimple> getAllSkills();
 	SkillsBeanSimple createEditSkill(SkillsBeanSimple beanSimple);
+	List<SkillsBean> findAllSkillsAndCatalogs();
 	
 
 	

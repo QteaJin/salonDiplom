@@ -14,6 +14,7 @@ const GET_CLIENT_PERSONAL_PROFILE = "/client/profile";
 const EDIT_CLIENT_PROFILE = "/client/profile/edit";
 const GET_FREE_DATE = "/checklist/new";
 const CREATE_NEW_ORDER = "/checklist/new/create";
+const PRICE_LIST_CONTROLLER = "/skill/price/all";
 
 var Request = {};
 
@@ -293,4 +294,19 @@ Request.createNewOrder = function(jsonObject) {
 	xhr.open("POST", CREATE_NEW_ORDER, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send(JSON.stringify(jsonObject));
+};
+
+Request.GetPriceList = function(){
+	var xhr = new XMLHttpRequest();
+	var url = PRICE_LIST_CONTROLLER;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        publishPriceList(json);
+	        
+	    }
+	};
+	xhr.send();
 };
