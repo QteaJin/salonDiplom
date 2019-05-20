@@ -48,5 +48,12 @@ public class SkillsController {
     	return skillsService.createEditSkill(beanSimple);
     	
     }
+    
+    @RequestMapping(value = "/price/all", method = RequestMethod.GET) //controller for price-list 
+    public List<SkillsBean> findAllSkillsAndCatalogs() { 
+    	
+    	return skillsService.findAllSkillsAndCatalogs(); 
+    	
+    }
 
 }

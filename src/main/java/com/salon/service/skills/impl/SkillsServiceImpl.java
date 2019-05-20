@@ -158,4 +158,14 @@ public class SkillsServiceImpl implements SkillsService {
 		
 		return beanSimple;
 	}
+
+	@Override
+	public List<SkillsBean> findAllSkillsAndCatalogs() {
+		List<SkillsBean> beans = toBean( skillsDAO.findAllByOrderByName());
+		for (int i = 0; i < beans.size(); i++) {
+			beans.get(i).setWorkers(null);
+		}
+		
+		return beans;
+	}
 }
