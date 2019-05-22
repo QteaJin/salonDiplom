@@ -30,4 +30,5 @@ public interface CheckListService extends CRUDService<CheckListBean, CheckList> 
 	String createNewOrder(CheckListNewOrderBean checkListNewOrderBean);
 	
 	Map<String, List<CheckListClientHistoryBean>> getAllOrdersByDate(OrderBean orderBean);
+	boolean setStatusOrder(long orderId, EnumStatusCheckList status);
 }

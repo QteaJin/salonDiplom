@@ -580,4 +580,14 @@ public class CheckListServiceImpl implements CheckListService {
 		
 		return historyBeans;
 	}
+
+	@Override
+	public boolean setStatusOrder(long orderId, EnumStatusCheckList status) {
+		
+		CheckListBean checkListBean = findById(orderId);
+		checkListBean.setStatus(status);
+		update(checkListBean);
+		
+		return true;
+	}
 }

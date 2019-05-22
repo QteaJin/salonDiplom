@@ -124,12 +124,10 @@ public class CheckListController {
     public Map <String, List <CheckListClientHistoryBean>> getAllOrdersByWorkers (@CookieValue("token") String token,
     																			@RequestBody OrderBean orderBean){
     	AuthBean authBean = tokenCrypt.checkToken(token);
-    	
-    	if(authBean.getErrorMessage() != null) {
+    	   	if(authBean.getErrorMessage() != null) {
     		return null;
     	}
-    	
-    	if(!authBean.getEnumRole().equals(EnumRole.ADMIN)) {
+    	   	if(!authBean.getEnumRole().equals(EnumRole.ADMIN)) {
     		return null;
     	}
     	
@@ -137,4 +135,21 @@ public class CheckListController {
     	return checkListService.getAllOrdersByDate(orderBean);
     	
     };
+    
+    @RequestMapping(value = "/admin/{orderId}/status/{status}", method = RequestMethod.GET)
+    public boolean setStatusOrder(@PathVariable("orderId") long orderId,
+                                              @PathVariable("status") EnumStatusCheckList status,
+                                              @CookieValue("token") String token){
+    	AuthBean authBean = tokenCrypt.checkToken(token);
+	   	if(authBean.getErrorMessage() != null) {
+		return false;
+	}
+	   	if(!authBean.getEnumRole().equals(EnumRole.ADMIN)) {
+		return false;
+	}
+	
+    	return checkListService.setStatusOrder(orderId,status);
+    
+    }
+
 }
