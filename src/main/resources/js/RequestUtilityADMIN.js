@@ -354,6 +354,27 @@ RequestAdmin.GetWorkerOrdersRequest = function (jsonObject) {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(jsonObject));
 };
+
+RequestAdmin.RequestChangeOrderStatus = function(orderId, selectStatus){
+	var xhr = new XMLHttpRequest();
+	var url = "/checklist/admin/" + orderId + "/status/" + selectStatus;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        //var json = JSON.parse(xhr.responseText);
+	        var response = xhr.responseText;
+	        
+	        if(response == "true"){
+	        	alert("Изменения прошли успешно");
+	        	findOrdersByDateStatus();
+	        }else{
+	        	alert("Ошибка при внесении изменений!");
+	        }
+	    }
+	};
+	xhr.send();
+};
 // Request.Registration = function (jsonObject) {
 // let xhr = new XMLHttpRequest();
 // xhr.onreadystatechange = function () {

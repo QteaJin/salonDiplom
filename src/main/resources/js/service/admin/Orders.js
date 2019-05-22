@@ -76,7 +76,6 @@ var arrMonth=['Январь','Февраль','Март','Апрель','Май'
 			jsonObj.date = date;
 			jsonObj.status = status;
 			
-			console.log(jsonObj);
 			var request = Object.create(RequestAdmin);
 			request.GetWorkerOrdersRequest(jsonObj);
 		}
@@ -119,7 +118,7 @@ function createTableOrdersWorker(event){
 	var cell3 = row.insertCell(3);
 	cell3.appendChild(document.createTextNode("Номер заказа"));
 	var cell4 = row.insertCell(4);
-	cell4.appendChild(document.createTextNode("Клиент"));
+	cell4.appendChild(document.createTextNode("Имя клиента"));
 	var cell5 = row.insertCell(5);
 	cell5.appendChild(document.createTextNode("ID клиента"));
 	var cell6 = row.insertCell(6);
@@ -147,10 +146,48 @@ function createTableOrdersWorker(event){
 			var cell5 = row.insertCell(5);
 			cell5.appendChild(document.createTextNode(obj[i].clientId));
 			var cell6 = row.insertCell(6);
-			cell6.appendChild(document.createTextNode("Услуги"));
+			//cell6.appendChild(document.createTextNode("Услуги"));
+			var data = "";
+			for (var j = 0; j < obj[i].catalogs.length; j++){
+				data = data + obj[i].catalogs[j].name + "<br>";
+			}
+			cell6.innerHTML = data;
 			var cell7 = row.insertCell(7);
 			cell7.appendChild(document.createTextNode(obj[i].price));
 			var cell8 = row.insertCell(8);
+			var select = document.createElement("select");
+				select.setAttribute("id","statusSelect");
+				
+				
+			var optionNull = document.createElement("option");
+			optionNull.setAttribute("selected","selected");
+			var option = document.createElement("option");
+			option.setAttribute("value", "ACTIVE");
+			option.innerHTML = "ACTIVE";
+			var option1 = document.createElement("option");
+			option1.setAttribute("value", "CANCELED");
+			option1.innerHTML = "CANCELED";
+			var option2 = document.createElement("option");
+			option2.setAttribute("value", "DONE");
+			option2.innerHTML = "DONE";
+			var option3 = document.createElement("option");
+			option3.setAttribute("value", "NEW");
+			option3.innerHTML = "NEW";
+			
+			var buttonOK = document.createElement("button");
+			buttonOK.setAttribute("orderNum", obj[i].checkListId);
+			buttonOK.setAttribute("onclick", "sendRequestChangeOrderStatus(event);");
+			buttonOK.innerHTML = "OK";
+			
+			select.appendChild(optionNull);
+			select.appendChild(option);
+			select.appendChild(option1);
+			select.appendChild(option2);
+			select.appendChild(option3);
+			cell8.appendChild(select);
+			cell8.appendChild(buttonOK);
+			
+			
 			rowNum++;
 	}else{
 		var row = table.insertRow(rowNum);
@@ -203,4 +240,12 @@ function createTableOrdersWorker(event){
 	}
 	
 	mainDiv.appendChild(table);
+}
+
+function sendRequestChangeOrderStatus(event){
+	event.stopPropagation();
+	var orderId = event.target.getAttribute("orderNum");
+	var selectStatus = document.getElementById("statusSelect").value;
+	var request = Object.create(RequestAdmin);
+	request.RequestChangeOrderStatus(orderId, selectStatus);
 }
