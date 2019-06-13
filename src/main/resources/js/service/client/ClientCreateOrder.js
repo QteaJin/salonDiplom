@@ -122,6 +122,8 @@ function createTableWorkerCatalog (json){
 	}
 
 	function sendRequestForOrder () {
+	var textBlockInfo = "Ищем свободные даты и время";
+	infoBlock(textBlockInfo);
 	var jsonObj = {};
 	var catalogs = [];
 	var table = document.getElementById("catalogsTable");
@@ -157,6 +159,12 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 
 		var map = new Map(Object.entries(json));
 		console.log(map);
+		
+		if(map.size == 0){
+			var textBlockInfo = "Нет свободных дат";
+			infoBlock(textBlockInfo);
+			setTimeout(reloadpage, 3000);
+		}
 
 		for (var [key, value] of map) {
 			var row = table.insertRow(rowNum);
@@ -210,6 +218,11 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 	var createNewOrder = Object.create(Request);
 	createNewOrder.createNewOrder(jsonObj);
 	
-	alert("Ваш запрос отправлен");
+	//alert("Ваш запрос отправлен");
+	var textBlockInfo = "Ваш запрос отправлен";
+	infoBlock(textBlockInfo);
 		
+	}
+	function reloadpage(){
+		document.location.reload(true);
 	}

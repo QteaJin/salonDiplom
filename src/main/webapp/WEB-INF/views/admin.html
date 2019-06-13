@@ -23,6 +23,7 @@
                 <script type="text/javascript" src = "/js/service/admin/Scheduller.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Clients.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Orders.js"></script>
+                <script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
                  
                 
     <title>ADMIN PAGE</title>
@@ -48,6 +49,20 @@
 		.isWorking{
 		background-color: #F9BC51;
 		}
+	.infoblock {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  min-height: 5em;
+  background: #B0C4DE;
+  text-align: center;
+  line-height: 4em;
+  visibility: hidden;
+  z-index: 999999;
+}
+	.infotext{
+	font-size: 20px;
+}
     </style>
     
 </head>
@@ -94,6 +109,9 @@
       </nav>
 </header>
 <!--HEADER-->
+<div class="infoblock" id="infoblock">
+		<span class="infotext" id="infotext"></span>
+	</div>
 <div class="container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">

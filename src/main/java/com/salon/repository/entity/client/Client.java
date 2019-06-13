@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.salon.repository.entity.abstractEntity.AbstractUser;
 import com.salon.repository.entity.address.Address;
 import com.salon.repository.entity.checklist.CheckList;
+import com.salon.repository.entity.comment.Comment;
 import com.salon.repository.entity.discount.Discount;
 import com.salon.repository.entity.profile.Profile;
 import com.salon.repository.entity.salon.Salon;
@@ -22,10 +23,9 @@ public class Client extends AbstractUser implements Serializable {
     private Long id;
     private Address address;
     private Discount discount;
-
     private Salon salon;
-
     private List<CheckList> checkList = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public Client() {
 
@@ -91,4 +91,15 @@ public class Client extends AbstractUser implements Serializable {
     public void setCheckList(List<CheckList> checkList) {
         this.checkList = checkList;
     }
+    
+    @OneToMany(mappedBy = "client")
+    @JsonBackReference
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+    
 }

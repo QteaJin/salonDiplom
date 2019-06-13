@@ -9,12 +9,16 @@ function sendRegistrationForm(event){
 	var passRepeat = fields.passwordconfirm.value;
 	
 	if(registrForm.getLogin == '' || registrForm.getEmail == '' || registrForm.getPhone == '' || registrForm.getPassword == '' ){
-		alert("Заполните все поля регистрационной формы");
+		//alert("Заполните все поля регистрационной формы");
+		var textBlockInfo = "Заполните все поля регистрационной формы";
+		infoBlock(textBlockInfo);
 		return;
 	}
 	
 	if(registrForm.getPassword != passRepeat){
-		alert("Пароли не совпадают!");
+		//alert("Пароли не совпадают!");
+		var textBlockInfo = "Пароли не совпадают!";
+		infoBlock(textBlockInfo);
 		return;
 	}
 	
@@ -36,6 +40,15 @@ function successRegistrationClient(){
 	var text = document.createElement('span');
 	text.setAttribute('class' , 'spanSuccess');
 	var messageSuccessRegister = document.createTextNode('Вы успешно зарегистрировались и можете воспользоваться Вашим личным кабинетом');
+	//alert("Вы успешно зарегистрировались и можете воспользоваться Вашим личным кабинетом");
+	var textBlockInfo = "Вы успешно зарегистрировались и можете воспользоваться Вашим личным кабинетом" +
+			"<p>Вы автоматически перенаправитесь на страницу входа в личный кабинет</p>";
+	infoBlock(textBlockInfo);
 	text.appendChild(messageSuccessRegister);
 	divS.appendChild(text);
+	setTimeout(relocate, 7000);
+	//window.location.href = "/login";
+}
+function relocate(){
+	window.location.href = "/login";
 }

@@ -2,6 +2,7 @@ package com.salon.repository.bean.client;
 
 import com.salon.repository.entity.address.Address;
 import com.salon.repository.entity.checklist.CheckList;
+import com.salon.repository.entity.comment.Comment;
 import com.salon.repository.entity.discount.Discount;
 import com.salon.repository.entity.profile.Profile;
 import com.salon.repository.entity.salon.Salon;
@@ -19,6 +20,7 @@ public class ClientBean {
     private Profile profile;
     private EnumStatus status;
     private List<CheckList> checkList;
+    private List<Comment> comments;
     private String description;
 
     public Long getId() {
@@ -92,4 +94,13 @@ public class ClientBean {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+    
 }

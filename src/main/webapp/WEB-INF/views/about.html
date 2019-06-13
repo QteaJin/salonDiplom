@@ -16,6 +16,23 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+<script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
+<style type="text/css">
+	.infoblock {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  min-height: 5em;
+  background: #B0C4DE;
+  text-align: center;
+  line-height: 4em;
+  visibility: hidden;
+  z-index: 999999;
+}
+	.infotext{
+	font-size: 20px;
+}
+</style>
     <title>О нас</title>
 </head>
 <body>
@@ -61,7 +78,9 @@
       </nav>
 </header>
 <!--HEADER-->
-about
+<div class="infoblock" id="infoblock">
+		<span class="infotext" id="infotext"></span>
+	</div>
 </body>
 				<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
                 <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>

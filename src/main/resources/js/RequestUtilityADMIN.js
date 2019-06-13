@@ -62,7 +62,9 @@ RequestAdmin.CreateSkill = function(jsonObject) {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var salon = JSON.parse(xhr.responseText);
 			console.log(salon);
-			alert("Услуга создана / изменена успешно");
+			var text = "Услуга создана / изменена успешно";
+			infoBlock(text);
+			//alert("Услуга создана / изменена успешно");
 			sendRequestFindAllSKills(event);
 
 		}
@@ -123,7 +125,9 @@ RequestAdmin.CreateEditCatalogAdmin = function(jsonObject) {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var catalogBean = JSON.parse(xhr.responseText);
 			console.log(catalogBean);
-			alert("Создание / Изменение услуги прошло успешно");
+			var textBlockInfo = "Создание / Изменение услуги прошло успешно";
+			infoBlock(textBlockInfo);
+			//alert("Создание / Изменение услуги прошло успешно");
 			requestCatalogs();
 			successCreateEditCatalog();
 
@@ -174,9 +178,13 @@ RequestAdmin.UpdateWorkerInfo = function(jsonObject) {
 			var workerBean = JSON.parse(xhr.responseText);
 			console.log(workerBean);
 			if(workerBean.workerId == null){
-				alert("Что-то пошло не так. Изменения не внесены");
+				//alert("Что-то пошло не так. Изменения не внесены");
+				var textBlockInfo = "Что-то пошло не так. Изменения не внесены";
+				infoBlock(textBlockInfo);
 			}else{
-				alert("Создание / Изменение сотрудника прошло успешно");
+				//alert("Создание / Изменение сотрудника прошло успешно");
+				var textBlockInfo = "Создание / Изменение сотрудника прошло успешно";
+				infoBlock(textBlockInfo);
 			}
 
 		}
@@ -195,9 +203,13 @@ RequestAdmin.CreateNewWorker = function(jsonObject) {
 			console.log(workerBean);
 			
 			if(!workerBean){
-				alert("Что-то пошло не так. Изменения не внесены");
+				//alert("Что-то пошло не так. Изменения не внесены");
+				var textBlockInfo = "Что-то пошло не так. Изменения не внесены";
+				infoBlock(textBlockInfo);
 			}else{
-				alert("Создание / Изменение сотрудника прошло успешно");
+				//alert("Создание / Изменение сотрудника прошло успешно");
+				var textBlockInfo = "Создание / Изменение сотрудника прошло успешно";
+				infoBlock(textBlockInfo);
 				requestWorkers(event);
 			}
 		}
@@ -215,9 +227,13 @@ RequestAdmin.UpdateWorkerSkillList = function(jsonObject) {
 			var result = JSON.parse(xhr.responseText);
 			console.log(result);
 			if(!result){
-				alert("Что-то пошло не так. Изменения не внесены");
+				//alert("Что-то пошло не так. Изменения не внесены");
+				var textBlockInfo = "Что-то пошло не так. Изменения не внесены";
+				infoBlock(textBlockInfo);
 			}else{
-				alert("Изменения прошли успешно");
+				//alert("Изменения прошли успешно");
+				var textBlockInfo = "Изменения прошли успешно";
+				infoBlock(textBlockInfo);
 				requestWorkers(event);
 			}
 
@@ -307,9 +323,13 @@ RequestAdmin.SendClientChangeRequestAdmin = function(jsonObject) {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var result = JSON.parse(xhr.responseText);
 			if(!result){
-				alert("Что-то пошло не так. Изменения не внесены");
+				//alert("Что-то пошло не так. Изменения не внесены");
+				var textBlockInfo = "Что-то пошло не так. Изменения не внесены";
+				infoBlock(textBlockInfo);
 			}else{
-				alert("Изменения прошли успешно");
+				//alert("Изменения прошли успешно");
+				var textBlockInfo = "Изменения прошли успешно";
+				infoBlock(textBlockInfo);
 				getAllClients();
 			}
 			
@@ -328,9 +348,13 @@ RequestAdmin.RegistrationNewClient = function (jsonObject) {
             var registrationMessage = JSON.parse(xhr.responseText);
             console.log(registrationMessage);
             if(registrationMessage == true){
-            	alert('Регистрация прошла успешно!');
+            	//alert('Регистрация прошла успешно!');
+				var textBlockInfo = "Регистрация прошла успешно!";
+				infoBlock(textBlockInfo);
             }else{
-            	alert('Такой профиль уже существует!');
+            	//alert('Такой профиль уже существует!');
+				var textBlockInfo = "Такой профиль уже существует!";
+				infoBlock(textBlockInfo);
             }
 
         }
@@ -366,10 +390,14 @@ RequestAdmin.RequestChangeOrderStatus = function(orderId, selectStatus){
 	        var response = xhr.responseText;
 	        
 	        if(response == "true"){
-	        	alert("Изменения прошли успешно");
+	        	//alert("Изменения прошли успешно");
+				var textBlockInfo = "Изменения прошли успешно";
+				infoBlock(textBlockInfo);
 	        	findOrdersByDateStatus();
 	        }else{
-	        	alert("Ошибка при внесении изменений!");
+	        	//alert("Ошибка при внесении изменений!");
+				var textBlockInfo = "Ошибка при внесении изменений!";
+				infoBlock(textBlockInfo);
 	        }
 	    }
 	};
