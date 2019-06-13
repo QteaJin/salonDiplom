@@ -8,7 +8,9 @@ function sendEmail(event){
 	console.log(JSON.stringify(messageForm));
 	
 	if(messageForm.getMessage == ''){
-		alert("Невозможно отправить пустое сообщение");
+		//alert("Невозможно отправить пустое сообщение");
+		var textBlockInfo = "Невозможно отправить пустое сообщение";
+		infoBlock(textBlockInfo);
 		return;
 	}
 	
@@ -18,5 +20,7 @@ function sendEmail(event){
 function sendEmailSuccess(){
 	document.forms['message-form']['subject'].value = "";
 	document.forms['message-form']['message'].value = "";
-	alert("Сообщение отправлено");
+	//alert("Сообщение отправлено");
+	var textBlockInfo = "Сообщение отправлено";
+	infoBlock(textBlockInfo);
 }

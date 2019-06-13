@@ -17,9 +17,13 @@ function sendLoginForm(event){
 function loginFail(){
 	var fail = document.getElementById('loginfail');
 	fail.innerHTML = "Неправильный Логин или Пароль";
+	var textBlockInfo = "Неправильный Логин или Пароль";
+	infoBlock(textBlockInfo);
 }
 
 function statusNoActive(){
 	var fail = document.getElementById('loginfail');
 	fail.innerHTML = "Ваш аккаунт заблокирован. Обратитесь к администратору";
+	var textBlockInfo = "Ваш аккаунт заблокирован. Обратитесь к администратору";
+	infoBlock(textBlockInfo);
 }

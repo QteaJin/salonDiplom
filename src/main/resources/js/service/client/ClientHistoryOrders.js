@@ -61,6 +61,11 @@ function createTable (jsonIncome) {
 			return;
 		}
 		
+		if(jsonIncome.length == 0){
+			var textBlockInfo = "Нет заказов за указанный период";
+			infoBlock(textBlockInfo);
+		}
+		
     	var table = document.getElementById("tbodyTable");
 
 		while (table.firstChild) {

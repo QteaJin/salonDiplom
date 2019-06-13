@@ -25,9 +25,13 @@ Request.SendMessageByEmail = function (jsonObject) {
             var sendMessage = JSON.parse(xhr.responseText);
             console.log(sendMessage);
             if(sendMessage == true){
+    			var text = "Ваше сообщение отправлено.";
+    			infoBlock(text);
             	sendEmailSuccess();
             }else{
-            	alert('Что-то пошло не так. Ваше сообщение не доставлено.');
+            	//alert('Что-то пошло не так. Ваше сообщение не доставлено.');
+    			var text = "Что-то пошло не так. Ваше сообщение не доставлено.";
+    			infoBlock(text);
             }
 
         }
@@ -45,9 +49,13 @@ Request.Registration = function (jsonObject) {
             var registrationMessage = JSON.parse(xhr.responseText);
             console.log(registrationMessage);
             if(registrationMessage == true){
+            	var text = "Регистрация прошла успешно!";
+    			infoBlock(text);
             	successRegistrationClient();
             }else{
-            	alert('Такой профиль уже существует!');
+            	//alert('Такой профиль уже существует!');
+    			var text = "Такой профиль уже существует!";
+    			infoBlock(text);
             }
 
         }
@@ -97,6 +105,8 @@ Request.PostQuickOrder = function (jsonObject) {
             var quickOrder = JSON.parse(xhr.responseText);
             console.log(quickOrder);
             if(quickOrder != null){
+    			var text = "Сообщение отправлено";
+    			infoBlock(text);
             	succesQuickMessage();
             }
 
@@ -210,7 +220,9 @@ Request.EditClientProfile = function(jsonObject) {
 				alert("Что-то пошло не так. Изменения не внесены");
 				logoutSessionMainPage();
 			}else{
-				alert("Изменения прошли успешно");
+				//alert("Изменения прошли успешно");
+    			var text = "Изменения прошли успешно";
+    			infoBlock(text);
 				
 			}
 			
@@ -285,7 +297,9 @@ Request.createNewOrder = function(jsonObject) {
 					while (sheduleDiv.firstChild) {
 						sheduleDiv.removeChild(sheduleDiv.firstChild);
 					}
-					alert("Ваша заявка принята. Ожидайте подтверждения заказа. Статус заказа можно посмотреть на вкладке Список заказов.")
+	    			var text = "Ваша заявка принята. Ожидайте подтверждения заказа. Статус заказа можно посмотреть на вкладке Список заказов.";
+	    			infoBlock(text);
+					//alert("Ваша заявка принята. Ожидайте подтверждения заказа. Статус заказа можно посмотреть на вкладке Список заказов.")
 				}
 				
 		}
