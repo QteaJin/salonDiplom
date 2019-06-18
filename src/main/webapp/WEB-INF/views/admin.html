@@ -24,6 +24,7 @@
                 <script type="text/javascript" src = "/js/service/admin/Clients.js"></script>
                 <script type="text/javascript" src = "/js/service/admin/Orders.js"></script>
                 <script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
+                <script type="text/javascript" src = "/js/service/admin/Comments.js"></script>
                  
                 
     <title>ADMIN PAGE</title>
@@ -132,7 +133,7 @@
             <a class="nav-link" id="discount-tab" data-toggle="tab" href="#discount" role="tab" aria-controls="discount" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить скидку</a>
         </li>
             <li class="nav-item">
-            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить комментарий</a>
+            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false" onclick="getAllComments();">Создать / Изменить комментарий</a>
         </li>
         </li>
             <li class="nav-item">
@@ -278,7 +279,14 @@
         </div>
 
         <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">Создать / Изменить комментарий
-        <img src="../img/not_working.jpg">
+        <!-- <img src="../img/not_working.jpg"> -->
+        	<div class="container">
+				<div class="row">
+				
+				<div class="col-12"  id = "commentstable"></div>
+							
+				</div>
+			</div>
         </div>
         
         <div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="skill-tab">
