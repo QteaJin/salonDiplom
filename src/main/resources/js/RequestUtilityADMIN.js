@@ -403,6 +403,56 @@ RequestAdmin.RequestChangeOrderStatus = function(orderId, selectStatus){
 	};
 	xhr.send();
 };
+
+RequestAdmin.GetAllCommentsRequest = function(){
+	var xhr = new XMLHttpRequest();
+	var url = "/comment/allSortByDate";
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        //var json = JSON.parse(xhr.responseText);
+	    	var result = JSON.parse(xhr.responseText);
+	        
+	        if(result){
+	        	//alert("Изменения прошли успешно");
+//				var textBlockInfo = "Получаем список комментариев";
+//				infoBlock(textBlockInfo);
+				createTableForComments(result);
+	        }else{
+	        	//alert("Ошибка при внесении изменений!");
+				var textBlockInfo = "Ошибка получении списка коммертариев";
+				infoBlock(textBlockInfo);
+	        }
+	    }
+	};
+	xhr.send();
+};
+
+RequestAdmin.ChangeCommentStatus = function(commentId){
+	var xhr = new XMLHttpRequest();
+	var url = "/comment/change/"+commentId;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        //var json = JSON.parse(xhr.responseText);
+	    	var result = xhr.responseText;
+	        
+	        if(result == "true"){
+	        	var textBlockInfo = "Изменения прошли успешно";
+				infoBlock(textBlockInfo);
+				
+	        }else{
+	        	//alert("Ошибка при внесении изменений!");
+				var textBlockInfo = "Ошибка при изменении статуса комментария";
+				infoBlock(textBlockInfo);
+	        }
+	        getAllComments();
+	    }
+	};
+	xhr.send();
+};
 // Request.Registration = function (jsonObject) {
 // let xhr = new XMLHttpRequest();
 // xhr.onreadystatechange = function () {

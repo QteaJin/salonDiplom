@@ -15,6 +15,7 @@ const EDIT_CLIENT_PROFILE = "/client/profile/edit";
 const GET_FREE_DATE = "/checklist/new";
 const CREATE_NEW_ORDER = "/checklist/new/create";
 const PRICE_LIST_CONTROLLER = "/skill/price/all";
+const SAVE_NEW_COMMENT = "/comment/add";
 
 var Request = {};
 
@@ -323,4 +324,29 @@ Request.GetPriceList = function(){
 	    }
 	};
 	xhr.send();
+};
+
+Request.SendNewComment = function (jsonObject) {
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var sendMessage = JSON.parse(xhr.responseText);
+            
+            if(sendMessage == true){
+            	sendCommentSuccess();
+    			var text = "Ваш комментарий отправлен";
+    			infoBlock(text);
+    			
+            }else{
+            	//alert('Что-то пошло не так. Ваше сообщение не доставлено.');
+    			var text = "Что-то пошло не так. Ваш комментарий не отправлен";
+    			infoBlock(text);
+            }
+
+        }
+    };
+
+    xhr.open("POST", SAVE_NEW_COMMENT , true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify(jsonObject));
 };

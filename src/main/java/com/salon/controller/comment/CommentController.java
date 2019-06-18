@@ -1,9 +1,5 @@
 package com.salon.controller.comment;
 
-
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.salon.repository.bean.client.ClientBean;
 import com.salon.repository.bean.comment.CommentBean;
 import com.salon.repository.bean.comment.SimpleCommentBean;
-import com.salon.repository.entity.comment.Comment;
-import com.salon.service.client.ClientService;
 import com.salon.service.comment.CommentService;
-import com.salon.utility.EnumStatus;
+
 
 @RestController
 @RequestMapping("/comment")
@@ -28,9 +21,6 @@ public class CommentController {
 
 	@Autowired
 	private CommentService commentService;
-	
-	@Autowired
-	private ClientService clientService;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public CommentBean findById(@PathVariable("id") long id) {
@@ -58,22 +48,28 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public CommentBean testRequest(@CookieValue("token") String token, @RequestBody SimpleCommentBean simpleCommentBean) {
-		ClientBean clientBean = clientService.findById(5L);
-		CommentBean commentBean = new CommentBean();
-		List<Comment> comments = clientBean.getComments();
-		if(comments.size()==0) {
-			comments = new ArrayList<Comment>();
-		}
-		commentBean.setDescription(simpleCommentBean.getDescription());
-		commentBean.setDate(new Timestamp (System.currentTimeMillis()));
-		commentBean.setClient(clientService.toDomain(clientBean));
-		commentBean.setStatus(EnumStatus.ACTIVE);
-		commentService.save(commentBean);
-		comments.add(commentService.toDomain(commentBean));
-		clientBean.setComments(comments);
-		clientService.update(clientBean);
+	public boolean addComment(@CookieValue("token") String token, @RequestBody SimpleCommentBean simpleCommentBean) {
 		
-		return commentBean;
+		return commentService.addNewComment(token, simpleCommentBean);
+	}
+	
+	@RequestMapping(value = "/allSortByDate", method = RequestMethod.GET)
+	public List<CommentBean> getAllSortByDate(){
+		
+		return commentService.getAllByDate();
+	}
+	
+	
+	@RequestMapping(value = "/change/{id}", method = RequestMethod.GET)
+	public boolean changeCommentStatus(@CookieValue("token") String token, @PathVariable("id") Long id) {
+		
+		return commentService.changeCommentStatus(token, id);
+		
+	}
+	@RequestMapping(value = "/findActive", method = RequestMethod.GET)
+	public List<CommentBean> findAllActive(){
+		
+		return commentService.findAllByDateAndActive();
+			
 	}
 }
