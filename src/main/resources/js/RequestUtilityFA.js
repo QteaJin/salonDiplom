@@ -16,6 +16,7 @@ const GET_FREE_DATE = "/checklist/new";
 const CREATE_NEW_ORDER = "/checklist/new/create";
 const PRICE_LIST_CONTROLLER = "/skill/price/all";
 const SAVE_NEW_COMMENT = "/comment/add";
+const GET_COMMENTS_FOR_PAGE = "/comment/findActive";
 
 var Request = {};
 
@@ -349,4 +350,19 @@ Request.SendNewComment = function (jsonObject) {
     xhr.open("POST", SAVE_NEW_COMMENT , true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(jsonObject));
+};
+
+Request.GetAllActiveComments = function(){
+	var xhr = new XMLHttpRequest();
+	var url = GET_COMMENTS_FOR_PAGE;
+	xhr.open("GET", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        var json = JSON.parse(xhr.responseText);
+	        createCommentsBlocks(json);
+	        
+	    }
+	};
+	xhr.send();
 };
