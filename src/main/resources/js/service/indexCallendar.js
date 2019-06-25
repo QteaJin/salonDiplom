@@ -59,6 +59,9 @@ function createDate () {
     
     startDayofWeek++;
   }
+  var profile =  document.createElement('div');
+  profile.setAttribute('class', 'workerprofile');
+  calendarHead.appendChild(profile);
 }
 // function doSomething (event) {
 //     var myNode = document.querySelectorAll('.chooseTime');

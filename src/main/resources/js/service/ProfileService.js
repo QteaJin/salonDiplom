@@ -36,7 +36,10 @@ function createWorkerProfile(json, workerId){
 		workerFoto.setAttribute('src', 'img/nofoto.png');
 	}
 	p.appendChild(workerFoto);
-	p.appendChild(document.createTextNode(json.description));
+	var span = document.createElement('span');
+	span.innerHTML = json.description;
+	p.appendChild(span);
+	//p.appendChild(document.createTextNode(json.description));
 
 //	let profileDescription = document.createElement('span');
 //	profileDescription.appendChild(document.createTextNode(json.description));
@@ -54,6 +57,7 @@ function createWorkerProfile(json, workerId){
 			for (var j = 0; j < json.listSkills[i].catalogList.length; j++){
 				console.log(json.listSkills[i].catalogList[j].description);
 				let li = document.createElement('li');
+				//li.innerHTML = json.listSkills[i].catalogList[j].description;
 				li.appendChild(document.createTextNode(json.listSkills[i].catalogList[j].description));
 				ul.appendChild(li);
 			}
