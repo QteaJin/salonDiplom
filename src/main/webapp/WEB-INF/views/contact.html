@@ -1,165 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
-                <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
-   <style type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+  <script type="text/javascript" src = "/js/service/CheckToken.js"></script>
+  <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
+  <style type="text/css">
    .messagediv{
-   background-color: lightblue;
-   padding: 10px 10px 10px 100px;
+     background-color: lightblue;
+     padding: 10px 10px 10px 100px;
    }
    .back {
-	background-color: #D9E1DA;
-}
-.footer{
-	height: 70px;
-	margin-top: 20px;
-}
-   </style>
-    <title>Контакты</title>
+    background-color: #D9E1DA;
+  }
+  .footer{
+    height: 70px;
+    margin-top: 20px;
+  }
+</style>
+<title>Контакты</title>
 </head>
 <body onload='createLoginLogoutButton()'>
-<!--HEADER-->
-<header>
+  <!--HEADER-->
+  <header>
     <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
-        <div class="container">
-            <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
-                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarsExample07">
-           
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Главная</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/service">Услуги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/trends">В тренде</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/price-list">Стоимость</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/comments">Отзывы</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/contact">Контакы</a>
-                    </li>
-                </ul>
+      <div class="container">
+        <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+       
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Главная</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/service">Услуги</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/trends">В тренде</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/price-list">Стоимость</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/comments">Отзывы</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/contact">Контакы</a>
+          </li>
+        </ul>
 
-                
-                <div class=" my-2 my-md-0 " id="logbutton">
-                	
-               
-                </div>
-            </div>
+        
+        <div class=" my-2 my-md-0 " id="logbutton">
+          
+         
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
 </header>
 <!--HEADER-->
 
 <div class="container-fluid">
-			<div class="row">
+  <div class="row">
 
-				<div class="col-md-2 ">
+    <div class="col-md-2 ">
 
-				</div>
-				<div class="col-md-8 ">
-					<div class="container-fluid bg-light py-3">
-						<div> <h3> Контакты </h3></div>
-						<h4>ул. Данченко, 6-8, Черноморск, Одесская область, 68000</h4>
-						 <br>
-(048) -xxx-xx-xx <br><div align = "center">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2756.1838871746136!2d30.65794511539441!3d46.306185379119924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c7c968b7d0a40b%3A0xe31bb659516f02f9!2z0YPQuy4g0JTQsNC90YfQtdC90LrQviwgNi04LCDQp9C10YDQvdC-0LzQvtGA0YHQuiwg0J7QtNC10YHRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjgwMDA!5e0!3m2!1sru!2sua!4v1557998383066!5m2!1sru!2sua" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-</div>
-<br>
-<br>
-<div class = 'messagediv'>
-    <form id="message-form" >
-        <div class="messages"></div>
-        <div class="controls">
-            
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="form_name">Тема сообщения</label>
-                        <input id="form_name" type="text" name="subject" class="form-control" placeholder="Введите тему сообщения" >
-                        
-                    </div>
-                </div>
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <label for="FormControlTextarea">Сообщение *</label>
-    				<textarea class="form-control" id="FormControlTextarea" name="message" rows="3"></textarea>
-                    </div>
-                </div>
+    </div>
+    <div class="col-md-8 ">
+      <div class="container-fluid bg-light py-3">
+        <div> <h3> Контакты </h3></div>
+        <h4>ул. Данченко, 6-8, Черноморск, Одесская область, 68000</h4>
+        <br>
+        (048) -xxx-xx-xx <br><div align = "center">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2756.1838871746136!2d30.65794511539441!3d46.306185379119924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c7c968b7d0a40b%3A0xe31bb659516f02f9!2z0YPQuy4g0JTQsNC90YfQtdC90LrQviwgNi04LCDQp9C10YDQvdC-0LzQvtGA0YHQuiwg0J7QtNC10YHRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjgwMDA!5e0!3m2!1sru!2sua!4v1557998383066!5m2!1sru!2sua" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
-        <div class="clearfix"></div>
+        <br>
+        <br>
+        <div class = 'messagediv'>
+          <form id="message-form" >
+            <div class="messages"></div>
+            <div class="controls">
+              
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="form_name">Тема сообщения</label>
+                  <input id="form_name" type="text" name="subject" class="form-control" placeholder="Введите тему сообщения" >
+                  
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <label for="FormControlTextarea">Сообщение *</label>
+                  <textarea class="form-control" id="FormControlTextarea" name="message" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
 
-        <div class="row">
+            <div class="row">
 
-            <div class="col-md-8">
+              <div class="col-md-8">
                 <input type="submit" style="float: right;" class="btn btn-primary btn-send" value="Отправить" onclick="sendEmail(event)">
+              </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
                 <p class="text-muted"><strong>*</strong> Поля обязательны к заполнению</p>
+              </div>
             </div>
+          </form>
         </div>
-    </form>
-     </div>
-</div>	<div id = 'successLogin'></div>
-				</div>
-				<div class="col-md-2 ">3</div>
-			</div>
+      </div>  <div id = 'successLogin'></div>
+    </div>
+    <div class="col-md-2 ">3</div>
+  </div>
 </div>
 <footer >
-	<div class="container-fluid">
-			<div class="row">
-				
-				<div class="col-md-12 back footer d-flex flex-row" align="center">
-				
-				<div class="col">
-				<a href="/">Главная</a>
-				<br>
-				<a href="/service">Услуги</a>
-				<br>
-				<a href="/price-list">Цены</a>
-				</div>
-				<div class="col">
-				Пн-Вс: с 10:00 до 20:00
-				<br>
-				Сб-Вс: с 10:00 до 20:00
-				</div>
-				<div class="col">
-				ул. Данченко, 6-8, Черноморск, Одесская область, 68000
-				<br>
-				(048) -xxx-xx-xx 
-				<br>
-				email@email.com.ua
-				</div>
-				</div>
-			</div>
-		</div>
+  <div class="container-fluid">
+    <div class="row">
+      
+      <div class="col-md-12 back footer d-flex flex-row" align="center">
+        
+        <div class="col">
+          <a href="/">Главная</a>
+          <br>
+          <a href="/service">Услуги</a>
+          <br>
+          <a href="/price-list">Цены</a>
+        </div>
+        <div class="col">
+          Пн-Вс: с 10:00 до 20:00
+          <br>
+          Сб-Вс: с 10:00 до 20:00
+        </div>
+        <div class="col">
+          ул. Данченко, 6-8, Черноморск, Одесская область, 68000
+          <br>
+          (048) -xxx-xx-xx 
+          <br>
+          email@email.com.ua
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
 </body>
 <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>

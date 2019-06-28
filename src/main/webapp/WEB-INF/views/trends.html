@@ -1,139 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
-                <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
-<style type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
+  <script type="text/javascript" src = "/js/service/CheckToken.js"></script>
+  <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
+  <style type="text/css">
 
-.back {
-	background-color: #D9E1DA;
-}
-.footer{
-	height: 70px;
-	margin-top: 20px;
-}
-</style>
-    <title>Trends</title>
+    .back {
+      background-color: #D9E1DA;
+    }
+    .footer{
+      height: 70px;
+      margin-top: 20px;
+    }
+  </style>
+  <title>Trends</title>
 </head>
 
 <body onload='createLoginLogoutButton()'>
-<!--HEADER-->
-<header>
+  <!--HEADER-->
+  <header>
     <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
-        <div class="container">
-            <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
-                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarsExample07">
-           
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Главная</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/service">Услуги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/trends">В тренде</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/price-list">Стоимость</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/comments">Отзывы</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/contact">Контакы</a>
-                    </li>
-                </ul>
+      <div class="container">
+        <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+       
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Главная</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/service">Услуги</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/trends">В тренде</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/price-list">Стоимость</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/comments">Отзывы</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/contact">Контакы</a>
+          </li>
+        </ul>
 
-                
-                <div class=" my-2 my-md-0 " id="logbutton">
-                	
-               
-                </div>
-            </div>
+        
+        <div class=" my-2 my-md-0 " id="logbutton">
+          
+         
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
 </header>
 
 <div class="container">
-	<div class="shadow-lg p-5 mb-5 bg-white rounded" style="text-align: justify">
-		<div style="background-color: lightblue"><h3 align="center">Бьюти-тренд: белые стрелки</h3></div>
-		
-		<img src="../img/trend1.jpeg" width="30%" height="30%" class="img-fluid rounded float-left mr-5">
-		<span>Белая подводка последние несколько лет уверенно держится среди главных бьюти-трендов в макияже – в новом сезоне она не собирается сдавать свои позиции. Многие знаменитые девушки, начиная от Рианны и заканчивая Марго Робби, тестируют этот бьюти-прием как в повседневных образах, так и на красных ковровых дорожках. С помощью белой подводки можно нарисовать выразительные стрелки, создать графический макияж или мягкий переход, растушевывая линии карандаша, прорисовать внутреннюю часть века, придать сияние взгляду и при правильном нанесении избавиться от эффекта "красных глаз".
-		</span>
-		<span>Белая подводка смотрится ничуть не хуже, чем классическая черная или коричневая, придавая образу свежести. Американская певица Жанель Монэ продемонстрировала новый бьюти-прием на собственном примере — девушка появилась на шоу Chanel осень-зима 2019/2020 с белыми "кошачьими" стрелками чуть выше подвижного века. В то время как Лили Роуз освежила дымчатый макияж с помощью яркого белоснежного лайнера, а Рианна дополнила минималистичный образ белыми аккуратными стрелками.</span>
-	</div>
-		<div class="shadow-lg p-5 mb-5 bg-white rounded" style="text-align: justify">
-		<div style="background-color: lightblue"><h3 align="center">Очень вызывающе: звездный маникюр на Met Gala 2019</h3></div>
-		
-		<img src="../img/trend2.jpeg" width="30%" height="30%" class="img-fluid rounded float-right mr-5 ml-5">
-		<span>Соответствовать тематике Met Gala - эстетике кэмп - надо было до кончиков ногтей. Мы выбрали знаменитостей, которые с блеском выполнили задачу (причем "с блеском" в данном случае - не просто фигура речи).Nail-Оскар за лучший женский маникюр уходит звездному мастеру Мэр Y Соул, которая создала ногти с пирсингом и подвесками для Эль Феннинг. Актриса позировала без конца, демонстрируя свой маникюр. Это не первый опыт работы в стилистике кэмп для мастера. Накануне Met Gala Gucci представили линейку помад, запуск которой сопровождался серией провокационных кадров в соцсетях. Маникюр, мелькавший в промо, - дело рук Мэр. 
-		</span>
-		
-	</div>
-		<div class="shadow-lg p-5 mb-5 bg-white rounded" style="text-align: justify">
-		<div style="background-color: lightblue"><h3 align="center">Модный педикюр сезона: главные тренды 2019</h3></div>
-		
-		<img src="../img/trend3.jpeg" width="30%" height="30%" class="img-fluid rounded float-left mr-5">
-		<span>Один из самых впечатляющих трендов – полное отсутствие покрытия. С одной стороны, какой смысл упоминать о том, чего нет; с другой – уж слишком ярко проявилось это направление, когда дизайнеры стремятся достичь ощущения абсолютно обнаженных ступней. 
-		</span>
-		<span>Глубокий индиго – очень красивый цвет. Его выбрали стилисты больших шоу – Giorgio Armani и Kenzo. Он отлично рифмуется с обувью в тон – или на фоне бежевых сандалий. Кремовые покрытия универсальны. Они сочетаются с любым оттенком кожи – и любым цветом обуви. 
-		Оттенки ягод – от клубники до черешни – ярко (в прямом смысле) представлены на подиумах, от Dolce&Gabbana до Jacquemus.
-	Покрытие точно в тон обуви – красивый тренд. Особенно вдохновляющими кажутся примеры Etro и 1017 Alyx 9Sm. </span>
-	<span>Глубокий индиго – очень красивый цвет. Его выбрали стилисты больших шоу – Giorgio Armani и Kenzo. Он отлично рифмуется с обувью в тон – или на фоне бежевых сандалий. Кремовые покрытия универсальны. Они сочетаются с любым оттенком кожи – и любым цветом обуви. 
-		Оттенки ягод – от клубники до черешни – ярко (в прямом смысле) представлены на подиумах, от Dolce&Gabbana до Jacquemus.
-	Покрытие точно в тон обуви – красивый тренд. Особенно вдохновляющими кажутся примеры Etro и 1017 Alyx 9Sm. </span>
-	</div>
+  <div class="shadow-lg p-5 mb-5 bg-white rounded" style="text-align: justify">
+    <div style="background-color: lightblue"><h3 align="center">Бьюти-тренд: белые стрелки</h3></div>
+    
+    <img src="../img/trend1.jpeg" width="30%" height="30%" class="img-fluid rounded float-left mr-5">
+    <span>Белая подводка последние несколько лет уверенно держится среди главных бьюти-трендов в макияже – в новом сезоне она не собирается сдавать свои позиции. Многие знаменитые девушки, начиная от Рианны и заканчивая Марго Робби, тестируют этот бьюти-прием как в повседневных образах, так и на красных ковровых дорожках. С помощью белой подводки можно нарисовать выразительные стрелки, создать графический макияж или мягкий переход, растушевывая линии карандаша, прорисовать внутреннюю часть века, придать сияние взгляду и при правильном нанесении избавиться от эффекта "красных глаз".
+    </span>
+    <span>Белая подводка смотрится ничуть не хуже, чем классическая черная или коричневая, придавая образу свежести. Американская певица Жанель Монэ продемонстрировала новый бьюти-прием на собственном примере — девушка появилась на шоу Chanel осень-зима 2019/2020 с белыми "кошачьими" стрелками чуть выше подвижного века. В то время как Лили Роуз освежила дымчатый макияж с помощью яркого белоснежного лайнера, а Рианна дополнила минималистичный образ белыми аккуратными стрелками.</span>
+  </div>
+  <div class="shadow-lg p-5 mb-5 bg-white rounded" style="text-align: justify">
+    <div style="background-color: lightblue"><h3 align="center">Очень вызывающе: звездный маникюр на Met Gala 2019</h3></div>
+    
+    <img src="../img/trend2.jpeg" width="30%" height="30%" class="img-fluid rounded float-right mr-5 ml-5">
+    <span>Соответствовать тематике Met Gala - эстетике кэмп - надо было до кончиков ногтей. Мы выбрали знаменитостей, которые с блеском выполнили задачу (причем "с блеском" в данном случае - не просто фигура речи).Nail-Оскар за лучший женский маникюр уходит звездному мастеру Мэр Y Соул, которая создала ногти с пирсингом и подвесками для Эль Феннинг. Актриса позировала без конца, демонстрируя свой маникюр. Это не первый опыт работы в стилистике кэмп для мастера. Накануне Met Gala Gucci представили линейку помад, запуск которой сопровождался серией провокационных кадров в соцсетях. Маникюр, мелькавший в промо, - дело рук Мэр. 
+    </span>
+    
+  </div>
+  <div class="shadow-lg p-5 mb-5 bg-white rounded" style="text-align: justify">
+    <div style="background-color: lightblue"><h3 align="center">Модный педикюр сезона: главные тренды 2019</h3></div>
+    
+    <img src="../img/trend3.jpeg" width="30%" height="30%" class="img-fluid rounded float-left mr-5">
+    <span>Один из самых впечатляющих трендов – полное отсутствие покрытия. С одной стороны, какой смысл упоминать о том, чего нет; с другой – уж слишком ярко проявилось это направление, когда дизайнеры стремятся достичь ощущения абсолютно обнаженных ступней. 
+    </span>
+    <span>Глубокий индиго – очень красивый цвет. Его выбрали стилисты больших шоу – Giorgio Armani и Kenzo. Он отлично рифмуется с обувью в тон – или на фоне бежевых сандалий. Кремовые покрытия универсальны. Они сочетаются с любым оттенком кожи – и любым цветом обуви. 
+      Оттенки ягод – от клубники до черешни – ярко (в прямом смысле) представлены на подиумах, от Dolce&Gabbana до Jacquemus.
+    Покрытие точно в тон обуви – красивый тренд. Особенно вдохновляющими кажутся примеры Etro и 1017 Alyx 9Sm. </span>
+    <span>Глубокий индиго – очень красивый цвет. Его выбрали стилисты больших шоу – Giorgio Armani и Kenzo. Он отлично рифмуется с обувью в тон – или на фоне бежевых сандалий. Кремовые покрытия универсальны. Они сочетаются с любым оттенком кожи – и любым цветом обуви. 
+      Оттенки ягод – от клубники до черешни – ярко (в прямом смысле) представлены на подиумах, от Dolce&Gabbana до Jacquemus.
+    Покрытие точно в тон обуви – красивый тренд. Особенно вдохновляющими кажутся примеры Etro и 1017 Alyx 9Sm. </span>
+  </div>
 
 </div>
 <footer >
-	<div class="container-fluid">
-			<div class="row">
-				
-				<div class="col-md-12 back footer d-flex flex-row" align="center">
-				
-				<div class="col">
-				<a href="/">Главная</a>
-				<br>
-				<a href="/service">Услуги</a>
-				<br>
-				<a href="/price-list">Цены</a>
-				</div>
-				<div class="col">
-				Пн-Вс: с 10:00 до 20:00
-				<br>
-				Сб-Вс: с 10:00 до 20:00
-				</div>
-				<div class="col">
-				ул. Данченко, 6-8, Черноморск, Одесская область, 68000
-				<br>
-				(048) -xxx-xx-xx 
-				<br>
-				email@email.com.ua
-				</div>
-				</div>
-			</div>
-		</div>
+  <div class="container-fluid">
+    <div class="row">
+      
+      <div class="col-md-12 back footer d-flex flex-row" align="center">
+        
+        <div class="col">
+          <a href="/">Главная</a>
+          <br>
+          <a href="/service">Услуги</a>
+          <br>
+          <a href="/price-list">Цены</a>
+        </div>
+        <div class="col">
+          Пн-Вс: с 10:00 до 20:00
+          <br>
+          Сб-Вс: с 10:00 до 20:00
+        </div>
+        <div class="col">
+          ул. Данченко, 6-8, Черноморск, Одесская область, 68000
+          <br>
+          (048) -xxx-xx-xx 
+          <br>
+          email@email.com.ua
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
 </body>
 </html>
