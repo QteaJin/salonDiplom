@@ -40,6 +40,9 @@ function requestCatalogs(argument) {
 
 	var skillId = document.getElementById('selectedskill').value;
 	var buttonExist = document.getElementById("createNewCatalogButton");
+	if(document.getElementById("formcatalog")){
+		document.forms['formcatalog']['catalogSkillId'].value = skillId;
+	}
 	if (buttonExist) {
 		buttonExist.parentNode.removeChild(buttonExist);
 
@@ -222,6 +225,7 @@ function createCatalogForm(event) {
 
 function createEditCataolg(event) {
 	event.preventDefault();
+	
 	var fieldsCatalog = document.getElementById('formcatalog');
 	var catalogForm = Object.create(CatalogBean);
 	catalogForm.setCatalogId = fieldsCatalog.catalogId.value;
@@ -242,7 +246,8 @@ function createEditCataolg(event) {
 	createEditCatalogRequest.CreateEditCatalogAdmin(catalogForm);
 }
 function successCreateEditCatalog() {
-	document.forms['formcatalog']['catalogSkillId'].value = "";
+	var skillId = document.getElementById('selectedskill').value;
+	document.forms['formcatalog']['catalogSkillId'].value = skillId;
 	document.forms['formcatalog']['catalogId'].value = "";
 	document.forms['formcatalog']['catalogname'].value = "";
 	document.forms['formcatalog']['catalogtextarea'].value = "";

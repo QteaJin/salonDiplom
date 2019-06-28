@@ -1,351 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment-with-locales.min.js"></script>
-            	<script type="text/javascript" src = "/js/service/CheckToken.js"></script>
-                <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
-                <script type="text/javascript" src = "/js/bean/Salon.js"></script>
-                <script type="text/javascript" src = "/js/RequestUtilityADMIN.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/CreateSalon.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/Skills.js"></script>
-                <script type="text/javascript" src = "/js/bean/Skill.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/Catalogs.js"></script>
-                <script type="text/javascript" src = "/js/bean/Catalog.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/Workers.js"></script>
-                <script type="text/javascript" src = "/js/bean/Worker.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/Scheduller.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/Clients.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/Orders.js"></script>
-                <script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
-                <script type="text/javascript" src = "/js/service/admin/Comments.js"></script>
-                 
-                
-    <title>ADMIN PAGE</title>
-    <style type="text/css">
+  <script type="text/javascript" src = "/js/service/CheckToken.js"></script>
+  <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
+  <script type="text/javascript" src = "/js/bean/Salon.js"></script>
+  <script type="text/javascript" src = "/js/RequestUtilityADMIN.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/CreateSalon.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/Skills.js"></script>
+  <script type="text/javascript" src = "/js/bean/Skill.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/Catalogs.js"></script>
+  <script type="text/javascript" src = "/js/bean/Catalog.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/Workers.js"></script>
+  <script type="text/javascript" src = "/js/bean/Worker.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/Scheduller.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/Clients.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/Orders.js"></script>
+  <script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
+  <script type="text/javascript" src = "/js/service/admin/Comments.js"></script>
+  
+  
+  <title>ADMIN PAGE</title>
+  <style type="text/css">
     .chosenButton{
-			background: #51C2F9;
-		}
+      background: #51C2F9;
+    }
     .spansalons:hover{
-    color: blue;
+      color: blue;
     } 
     .pasttime{
-			background-color: grey;
-		}
-	.futuretime{
+      background-color: grey;
+    }
+    .futuretime{
 
-		}
-	.futuretime:hover{
-			background-color: #EFBCF5;
-		}
-	.selectedDate{
-			background-color: green;
-		}
-		.isWorking{
-		background-color: #F9BC51;
-		}
-	.infoblock {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  min-height: 5em;
-  background: #B0C4DE;
-  text-align: center;
-  line-height: 4em;
-  visibility: hidden;
-  z-index: 999999;
-}
-	.infotext{
-	font-size: 20px;
-}
-    </style>
-    
+    }
+    .futuretime:hover{
+      background-color: #EFBCF5;
+    }
+    .selectedDate{
+      background-color: green;
+    }
+    .isWorking{
+      background-color: #F9BC51;
+    }
+    .infoblock {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      min-height: 5em;
+      background: #B0C4DE;
+      text-align: center;
+      line-height: 4em;
+      visibility: hidden;
+      z-index: 999999;
+    }
+    .infotext{
+      font-size: 20px;
+    }
+  </style>
+  
 </head>
 <body onload='createLoginLogoutButton()'>
-<!--HEADER-->
-<header>
+  <!--HEADER-->
+  <header>
     <nav class="navbar  navbar-expand-lg navbar-dark bg-dark" id="imNav">
-        <div class="container">
-            <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
-                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarsExample07">
-           
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Главная</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/service">Услуги</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/trends">В тренде</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/price-list">Стоимость</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/comments">Отзывы</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/contact">Контакы</a>
-                    </li>
-                </ul>
+      <div class="container">
+        <img src="../img/logo.png" class="nabar-brand img-fluid" style="max-width: 170px; max-height: 100px">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07"
+        aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExample07">
+       
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Главная</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/service">Услуги</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/trends">В тренде</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/price-list">Стоимость</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/comments">Отзывы</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/contact">Контакы</a>
+          </li>
+        </ul>
 
-                
-                <div class=" my-2 my-md-0 " id="logbutton">
-                	
-               
-                </div>
-            </div>
+        
+        <div class=" my-2 my-md-0 " id="logbutton">
+          
+         
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
 </header>
 <!--HEADER-->
 <div class="infoblock" id="infoblock">
-		<span class="infotext" id="infotext"></span>
-	</div>
+  <span class="infotext" id="infotext"></span>
+</div>
 <div class="container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="salon-tab" data-toggle="tab" href="#salon" role="tab" aria-controls="salon" aria-selected="true" onclick="checkTokenExist();">Создать / Изменить салон</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить клиента</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="worker-tab" data-toggle="tab" href="#worker" role="tab" aria-controls="worker" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить работника</a>
-        </li>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="salon-tab" data-toggle="tab" href="#salon" role="tab" aria-controls="salon" aria-selected="true" onclick="checkTokenExist();">Создать / Изменить салон</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="client-tab" data-toggle="tab" href="#client" role="tab" aria-controls="client" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить клиента</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="worker-tab" data-toggle="tab" href="#worker" role="tab" aria-controls="worker" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить работника</a>
+    </li>
 
-        <li class="nav-item">
-            <a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" onclick="chooseDate();" >Создать / Изменить заказ</a>
-        </li>
+    <li class="nav-item">
+      <a class="nav-link" id="order-tab" data-toggle="tab" href="#order" role="tab" aria-controls="order" aria-selected="false" onclick="chooseDate();" >Создать / Изменить заказ</a>
+    </li>
     
-        <li class="nav-item">
-            <a class="nav-link" id="discount-tab" data-toggle="tab" href="#discount" role="tab" aria-controls="discount" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить скидку</a>
-        </li>
-            <li class="nav-item">
-            <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false" onclick="getAllComments();">Создать / Изменить комментарий</a>
-        </li>
-        </li>
-            <li class="nav-item">
-            <a class="nav-link" id="skill-tab" data-toggle="tab" href="#skill" role="tab" aria-controls="skill" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить услугу</a>
-        </li>
-    
-         </li>
-            <li class="nav-item">
-            <a class="nav-link" id="catalog-tab" data-toggle="tab" href="#catalog" role="tab" aria-controls="catalog" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить каталог</a>
-        </li>
-    </ul>
+    <li class="nav-item">
+      <a class="nav-link" id="discount-tab" data-toggle="tab" href="#discount" role="tab" aria-controls="discount" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить скидку</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false" onclick="getAllComments();">Создать / Изменить комментарий</a>
+    </li>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="skill-tab" data-toggle="tab" href="#skill" role="tab" aria-controls="skill" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить услугу</a>
+  </li>
+  
+</li>
+<li class="nav-item">
+  <a class="nav-link" id="catalog-tab" data-toggle="tab" href="#catalog" role="tab" aria-controls="catalog" aria-selected="false" onclick="checkTokenExist();">Создать / Изменить каталог</a>
+</li>
+</ul>
 
-    
-    <div class="tab-content" id="myTabContent">
 
-        <div class="tab-pane fade show active" id="salon" role="tabpanel" aria-labelledby="salon-tab">
-            <div class="container-fluid">
-       <div class="container">
-                      <div class="row">
-                        <div class="col"  id = "salon1">
-                          1 из 2
-                            
-                            <form id = 'salonForm'>
-                                      <div class="form-group">
-                                      <input class="form-control" type="text" id="salonid" placeholder="Id салона" readonly>
-                                        <label for="salonname">Название салона:</label>
-                                        <input type="text" class="form-control" id="salonname" name="salonname">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="salondescr">Описание салона:</label>
-                                        <textarea class="form-control" rows="3" id="salondescr" name="salondescr"></textarea>
-                                      </div>
-                                      <label>Адресс салона:</label>
-                                      <br>
-                                      <label for="saloncountry">Страна:</label>
-                                      <input type="text" class="form-control" id="saloncountry" name="saloncountry">
-                                      <label for="saloncity">Город:</label>
-                                      <input type="text" class="form-control" id="saloncity" name="saloncity">
-                                      <label for="salonstreet">Улица:</label>
-                                      <input type="text" class="form-control" id="salonstreet" name="salonstreet">
+<div class="tab-content" id="myTabContent">
 
-                                      <button type="submit" class="btn btn-primary" onclick="savesalon(event);">Добавить / Изменить</button>
-                                    </form>
-
-                        </div>
-                        <div class="col" id = "salon2">
-                          2 из 2
-                          <br>
-                          <button type="submit" class="btn btn-primary" onclick="getsalons(event);">Найти все салоны</button>
-                          <div id = "salonslist"></div>
-                        </div>
-                      </div>
-                    </div>
-        </div>
-            
-        </div>
-        
-        
-
-    <div class="tab-pane fade" id="client" role="tabpanel" aria-labelledby="client-tab">
-    Создать клиента
-		<div class="container">
-    	<div class="row" >
-            
-            <div class="col"  id = "clientLeft">
-	            <button class="btn btn-primary" type="submit" onclick="getAllClients()">Найти всех клиентов</button>
-	        	<button class="btn btn-primary" type="submit" clientId="new" onclick="createClientForm(event)">Создать нового клиента</button>
-	        	<div id="clientsTable"></div>
-	        	<div id ="clientsPagination"></div>
+  <div class="tab-pane fade show active" id="salon" role="tabpanel" aria-labelledby="salon-tab">
+    <div class="container-fluid">
+     <div class="container">
+      <div class="row">
+        <div class="col"  id = "salon1">
+          1 из 2
+          
+          <form id = 'salonForm'>
+            <div class="form-group">
+              <input class="form-control" type="text" id="salonid" placeholder="Id салона" readonly>
+              <label for="salonname">Название салона:</label>
+              <input type="text" class="form-control" id="salonname" name="salonname">
             </div>
-            <div class="col"  id = "clientright">
-				<div id ="clientformcreate"></div>
-			</div>
-            
-        </div>
-        </div>
-	</div>
-        <div class="tab-pane fade" id="worker" role="tabpanel" aria-labelledby="worker-tab">
-        Создать / Изменить работника
-        <div class="container">
-             <div class="row">
-                        <div class="col"  id = "worker1">
-                        <button class="btn btn-primary" type="submit" onclick="getSalonsToChooseWorker()">Найти все Салоны</button>
-                        <div id = "salonsforworkers"></div>
-                        <div id = "createnewworker"></div>
-                        <div id = "createtableforworkers"></div>
-        			<form >
-						
-					</form>
-					<div id="workerTable"></div>
-                        </div>
-        			<div class="col"  id = "worker2"> 
-        			<div id = "workerform"></div>
-        			     <div id="schedulecalendar"></div>  			
-        			</div>
-				
-		     </div>
-		</div>	
-        
-        </div>
-
-        <div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">Создать / Изменить заказ
-        <div class="mt-5">
-               <div class="row">
-					<div class="col">
-                        <select id="inputStateYear" class="form-control">
-                            
-                        </select>
-                    </div>
-                   
-                    <div class="col">
-                        <select id="inputStateMounts" class="form-control" onchange="setDaysOfMonth();">
-                        	
-                        </select>
-                    </div>
-					<div class="col">
-                        <select id="inputStateDays" class="form-control">
-                            
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select id="inputStateStatus" class="form-control">
-                            
-                            <option selected value = "ALL">ВСЕ</option>
-                            <option value="DONE">ВЫПОНЕН</option>
-                            <option value="CANCELED">ОТМЕН</option>
-                            <option value="ACTIVE">АКТИВНЫЙ</option>
-                            <option value = "NEW">НОВЫЙ</option>
-                            
-
-                        </select>
-                    </div>
-                    <button onclick="findOrdersByDateStatus();"> Поиск </button>
-                </div>
-                <div class="row" id = "workersOnDuty">workersOnDuty</div>
-                
-                <div class="row" id = "workersOnDutySchedule">workersOnDutySchedule</div>
+            <div class="form-group">
+              <label for="salondescr">Описание салона:</label>
+              <textarea class="form-control" rows="3" id="salondescr" name="salondescr"></textarea>
             </div>
-        </div>
+            <label>Адресс салона:</label>
+            <br>
+            <label for="saloncountry">Страна:</label>
+            <input type="text" class="form-control" id="saloncountry" name="saloncountry">
+            <label for="saloncity">Город:</label>
+            <input type="text" class="form-control" id="saloncity" name="saloncity">
+            <label for="salonstreet">Улица:</label>
+            <input type="text" class="form-control" id="salonstreet" name="salonstreet">
 
-        <div class="tab-pane fade" id="discount" role="tabpanel" aria-labelledby="discount-tab">Создать / Изменить скидку
-        <img src="../img/not_working.jpg">
-        </div>
+            <button type="submit" class="btn btn-primary" onclick="savesalon(event);">Добавить / Изменить</button>
+          </form>
 
-        <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">Создать / Изменить комментарий
-        <!-- <img src="../img/not_working.jpg"> -->
-        	<div class="container">
-				<div class="row">
-				
-				<div class="col-12"  id = "commentstable"></div>
-							
-				</div>
-			</div>
         </div>
+        <div class="col" id = "salon2">
+         
+          <br>
+          <button type="submit" class="btn btn-primary" onclick="getsalons(event);">Найти все салоны</button>
+          <div id = "salonslist"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+<div class="tab-pane fade" id="client" role="tabpanel" aria-labelledby="client-tab">
+  Создать клиента
+  <div class="container">
+    <div class="row" >
+      
+      <div class="col"  id = "clientLeft">
+        <button class="btn btn-primary" type="submit" onclick="getAllClients()">Найти всех клиентов</button>
+        <button class="btn btn-primary" type="submit" clientId="new" onclick="createClientForm(event)">Создать нового клиента</button>
+        <div id="clientsTable"></div>
+        <div id ="clientsPagination"></div>
+      </div>
+      <div class="col"  id = "clientright">
+        <div id ="clientformcreate"></div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="tab-pane fade" id="worker" role="tabpanel" aria-labelledby="worker-tab">
+  Создать / Изменить работника
+  <div class="container">
+   <div class="row">
+    <div class="col"  id = "worker1">
+      <button class="btn btn-primary" type="submit" onclick="getSalonsToChooseWorker()">Найти все Салоны</button>
+      <div id = "salonsforworkers"></div>
+      <div id = "createnewworker"></div>
+      <div id = "createtableforworkers"></div>
+      <form >
         
-        <div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="skill-tab">
+      </form>
+      <div id="workerTable"></div>
+    </div>
+    <div class="col"  id = "worker2"> 
+      <div id = "workerform"></div>
+      <div id="schedulecalendar"></div>        
+    </div>
+    
+  </div>
+</div>  
+
+</div>
+
+<div class="tab-pane fade" id="order" role="tabpanel" aria-labelledby="order-tab">Создать / Изменить заказ
+  <div class="mt-5">
+   <div class="row">
+    <div class="col">
+      <select id="inputStateYear" class="form-control">
         
-        Создать / Изменить услугу
+      </select>
+    </div>
+    
+    <div class="col">
+      <select id="inputStateMounts" class="form-control" onchange="setDaysOfMonth();">
         
-        	<div class="container">
-		<div class="row">
-
-			<div class="col-8"  id = "skill1">
-
-				<form id = 'skillForm'>
-
-					<div class="input-group mb-3">			
-						<div class="col-3"  id = "skill2">
-				<input class="form-control" type="text" id="skillid" placeholder="Id услуги" name="skillid" readonly >
-			</div>
-						
-						<input type="text" class="form-control" placeholder="Название услуги:" aria-label="Название услуги:" aria-describedby="basic-addon2" id="skillname" name="skillname" >
-						<div class="input-group-append">
-							<button class="btn btn-primary" type="submit" onclick="saveEditSkill(event);">Добавить / Изменить</button>
-						</div>
-					</div>
-				</form>
-
-				<button class="btn btn-primary" type="submit" onclick="sendRequestFindAllSKills(event);">Найти все услуги</button>
-				<div id="skilltable"> </div>
-
-			</div>
-
-		</div>
-	</div>
+      </select>
+    </div>
+    <div class="col">
+      <select id="inputStateDays" class="form-control">
         
-        </div>
+      </select>
+    </div>
+    <div class="col">
+      <select id="inputStateStatus" class="form-control">
+        
+        <option selected value = "ALL">ВСЕ</option>
+        <option value="DONE">ВЫПОНЕН</option>
+        <option value="CANCELED">ОТМЕН</option>
+        <option value="ACTIVE">АКТИВНЫЙ</option>
+        <option value = "NEW">НОВЫЙ</option>
+        
 
-        <div class="tab-pane fade" id="catalog" role="tabpanel" aria-labelledby="catalog-tab">Создать / Изменить каталог
-         <div class="container">
-                      <div class="row">
-                        <div class="col"  id = "catalog1">
-                        <button class="btn btn-primary" type="submit" onclick="getSkillsForCatalog();">Выберите умение</button>
-                        
-        			<form>
-							<div class="form-group" id="catalogskillselect" >
-								
-							</div>
-					</form>
-					<div id="catalogTable"></div>
-                        </div>
-        			<div class="col"  id = "catalog2"> 2 
-        			<div id="changecatalog"></div>
-        			</div>
-				
-		</div>
-		</div>			
-        </div>
+      </select>
+    </div>
+    <button onclick="findOrdersByDateStatus();"> Поиск </button>
+  </div>
+  <div class="row" id = "workersOnDuty">workersOnDuty</div>
+  
+  <div class="row" id = "workersOnDutySchedule">workersOnDutySchedule</div>
+</div>
+</div>
 
+<div class="tab-pane fade" id="discount" role="tabpanel" aria-labelledby="discount-tab">Создать / Изменить скидку
+  <img src="../img/not_working.jpg">
+</div>
 
+<div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">Создать / Изменить комментарий
+  <!-- <img src="../img/not_working.jpg"> -->
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-12"  id = "commentstable"></div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="tab-pane fade" id="skill" role="tabpanel" aria-labelledby="skill-tab">
+  
+  Создать / Изменить услугу
+  
+  <div class="container">
+    <div class="row">
+
+      <div class="col-8"  id = "skill1">
+
+        <form id = 'skillForm'>
+
+          <div class="input-group mb-3">      
+            <div class="col-3"  id = "skill2">
+              <input class="form-control" type="text" id="skillid" placeholder="Id услуги" name="skillid" readonly >
+            </div>
+            
+            <input type="text" class="form-control" placeholder="Название услуги:" aria-label="Название услуги:" aria-describedby="basic-addon2" id="skillname" name="skillname" >
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit" onclick="saveEditSkill(event);">Добавить / Изменить</button>
+            </div>
+          </div>
+        </form>
+
+        <button class="btn btn-primary" type="submit" onclick="sendRequestFindAllSKills(event);">Найти все услуги</button>
+        <div id="skilltable"> </div>
+
+      </div>
 
     </div>
+  </div>
+  
+</div>
+
+<div class="tab-pane fade" id="catalog" role="tabpanel" aria-labelledby="catalog-tab">Создать / Изменить каталог
+ <div class="container">
+  <div class="row">
+    <div class="col"  id = "catalog1">
+      <button class="btn btn-primary" type="submit" onclick="getSkillsForCatalog();">Выберите умение</button>
+      
+      <form>
+        <div class="form-group" id="catalogskillselect" >
+          
+        </div>
+      </form>
+      <div id="catalogTable"></div>
+    </div>
+    <div class="col"  id = "catalog2"> 
+      <div id="changecatalog"></div>
+    </div>
+   
+  </div>
+</div>      
+</div>
+</div>
 </div>
 <!--BODY-->
 </body>

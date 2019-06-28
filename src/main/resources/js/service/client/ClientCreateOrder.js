@@ -9,13 +9,14 @@ function sendRequestFotoWorkers(){
 }
 
 function setWorkerPhoto(obj){
-	var myNode = document.querySelectorAll('.workerPhoto'); //delete prevent nodes
+	var myNode = document.querySelectorAll('.workerPhoto'); // delete prevent
+															// nodes
 		if(myNode != null){
 		myNode.forEach(e => e.parentNode.removeChild(e));}
 		
 		var photo = document.getElementById('workerPhoto');
 		
-		//console.log((Object.keys(obj).length === 0));
+		// console.log((Object.keys(obj).length === 0));
 	if(Object.keys(obj).length === 0){
 		let divParent = document.createElement('div');
 		divParent.setAttribute('class', 'workerPhoto');
@@ -30,7 +31,7 @@ function setWorkerPhoto(obj){
 	var divParent = document.createElement('div');
 	divParent.setAttribute('id', 'worker'+obj[i].id);
 	divParent.setAttribute('class', 'workerPhoto');
-	//divParent.setAttribute('onclick', 'openWorkerProfile (event);');
+	// divParent.setAttribute('onclick', 'openWorkerProfile (event);');
 	var divChild1 = document.createElement('div');
 	var divChild2 = document.createElement('div');
 	divChild2.setAttribute('class', 'thumbnail');
@@ -56,12 +57,46 @@ function setWorkerPhoto(obj){
 }
 
 function sendRequestGetCatalog (event){
-	console.log(event.target);
+	console.log(event.target.innerHTML);
 	var workerCatalogsRequest = Object.create(Request);
 	workerCatalogsRequest.GetWorkerCatalogForOrder(event.target.getAttribute("mydata"));
+	
 }
 
 function createTableWorkerCatalog (json){
+	console.log(json);
+	var myNode = document.querySelectorAll('.workerPhoto'); // delete prevent
+															// nodes
+	if(myNode != null){
+	myNode.forEach(e => e.parentNode.removeChild(e));}
+	
+	var photo = document.getElementById('workerPhoto');
+	
+	var backDiv = document.createElement('div');
+	backDiv.setAttribute('class', 'workerPhoto');
+	var backButton = document.createElement('button');
+	backButton.innerHTML = " <b> <- Назад </b>";
+	backButton.setAttribute("onclick", "reloadpage()");
+	
+	backDiv.appendChild(backButton);
+	photo.appendChild(backDiv);
+	
+	var divParent = document.createElement('div');
+	divParent.setAttribute('id', 'worker'+json.workerId);
+	divParent.setAttribute('class', 'workerPhoto');
+	var photoSrc = document.createElement('img');
+	photoSrc.setAttribute('src', 'img/worker/' + json.workerId + 'workerPhoto.jpg');
+	photoSrc.setAttribute('alt', 'worker'+json.workerId);
+	photoSrc.setAttribute('style', 'width:100%');
+	photoSrc.setAttribute('myData', json.workerId);
+	
+	var divName = document.createElement('div');
+	divName.innerHTML ="<b>" + json.name + "</b>";
+	
+	divParent.appendChild(photoSrc);
+	divParent.appendChild(divName);
+	photo.appendChild(divParent);
+	
 	var sheduleDiv = document.getElementById('workerfreedates');
 	while (sheduleDiv.firstChild) {
 		sheduleDiv.removeChild(sheduleDiv.firstChild);
@@ -92,7 +127,7 @@ function createTableWorkerCatalog (json){
 
 			for (var j = 0; j < json.listSkills[i].catalogList.length; j++) {
 				var rowIn = table.insertRow(rowNumber);
-				//console.log(json.listSkills[i].catalogList[j].name);
+				// console.log(json.listSkills[i].catalogList[j].name);
 				var cell0 = rowIn.insertCell(0);
 				cell0.innerHTML = json.listSkills[i].catalogList[j].catalogId;
 				var cell1 = rowIn.insertCell(1);
@@ -218,7 +253,7 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 	var createNewOrder = Object.create(Request);
 	createNewOrder.createNewOrder(jsonObj);
 	
-	//alert("Ваш запрос отправлен");
+	// alert("Ваш запрос отправлен");
 	var textBlockInfo = "Ваш запрос отправлен";
 	infoBlock(textBlockInfo);
 		

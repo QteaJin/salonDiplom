@@ -198,6 +198,8 @@ public class WorkerServiceImpl implements WorkerService {
 		WorkerProfileSkillsBean profileSkillsBean = new WorkerProfileSkillsBean();
 		profileSkillsBean.setWorkerProfileId(workerId);
 		profileSkillsBean.setDescription(workerBean.getProfile().getDescription());
+		profileSkillsBean.setName(workerBean.getProfile().getName());
+		profileSkillsBean.setWorkerId(workerBean.getId());
 		if (!workerBean.getSkillsList().isEmpty()) {
 			profileSkillsBean.setListSkills(workerBean.getSkillsList());
 		}
