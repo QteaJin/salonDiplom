@@ -275,3 +275,18 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 	function reloadpage(){
 		document.location.reload(true);
 	}
+	function cleanDiv(){ //workerprofile // .workerfreedates
+		var node = document.getElementById("workerprofile");
+		while (node.firstChild) {
+			node.removeChild(node.firstChild);
+		}
+		var node = document.getElementById("workerfreedates");
+		node.style.display = "none";
+		while (node.firstChild) {
+			node.removeChild(node.firstChild);
+		}
+		
+		
+	}
+	
+	
