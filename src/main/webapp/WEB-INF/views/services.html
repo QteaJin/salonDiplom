@@ -21,6 +21,12 @@
       height: 70px;
       margin-top: 20px;
     }
+    #acolor{
+	 color: white;
+	}
+	#acolor:hover{
+	color: grey;
+	}
   </style>
 </head>
 <body onload='createLoginLogoutButton()'>
@@ -36,25 +42,25 @@
       <div class="collapse navbar-collapse" id="navbarsExample07">
        
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Главная</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="/service">Услуги</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/trends">В тренде</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/price-list">Стоимость</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/comments">Отзывы</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/contact">Контакы</a>
-          </li>
-        </ul>
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Главная</a>
+            </li>
+            <li class="nav-item acolor">
+              <a class="nav-link " href="/service" id="acolor">Услуги</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/trends" id="acolor">В тренде</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/price-list" id="acolor">Стоимость</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/comments" id="acolor">Отзывы</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="/contact" id="acolor">Контакы</a>
+            </li>
+          </ul>
 
         
         <div class=" my-2 my-md-0 " id="logbutton">

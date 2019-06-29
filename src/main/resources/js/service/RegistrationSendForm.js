@@ -15,6 +15,12 @@ function sendRegistrationForm(event){
 		return;
 	}
 	
+	if(!validateEmail(fields.email.value)){
+		var textBlockInfo = "Некорректный адресс электронной почты ";
+		infoBlock(textBlockInfo);
+		return;
+	}
+	
 	if(registrForm.getPassword != passRepeat){
 		//alert("Пароли не совпадают!");
 		var textBlockInfo = "Пароли не совпадают!";
@@ -46,9 +52,20 @@ function successRegistrationClient(){
 	infoBlock(textBlockInfo);
 	text.appendChild(messageSuccessRegister);
 	divS.appendChild(text);
-	setTimeout(relocate, 7000);
+	setTimeout(relocate, 5000);
 	//window.location.href = "/login";
 }
 function relocate(){
 	window.location.href = "/login";
+}
+
+function validateEmail(inputText){
+	var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+if(reg.test(inputText)){
+	return true;
+}
+else
+	{
+return false;
+}
 }
