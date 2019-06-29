@@ -185,6 +185,8 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 			while (mainDiv.firstChild) {
 				mainDiv.removeChild(mainDiv.firstChild);
 			}
+		
+			mainDiv.style.display = "block";
 		var table = document.createElement("table");
 			table.setAttribute("class", "table-sm table-hover");
 			table.setAttribute("id", "freeDatesTable");
@@ -225,6 +227,18 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 
 
 		mainDiv.appendChild(table);
+		
+		document.getElementById('workerfreedates').scrollIntoView({block: "center", behavior: "smooth"}); // focus on top of page
+		
+		var checkBoxes = document.getElementsByTagName("input");
+		
+		for (var i = 0; i < checkBoxes.length; i++) {
+			if (checkBoxes[i].checked) {
+				checkBoxes[i].checked = false;
+			}
+			checkBoxes[i].disabled = false;
+		}
+		
 		}
 	
 	function sendRequestToCreateOrder(event){

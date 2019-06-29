@@ -70,14 +70,21 @@ function successLogin(){
 	var uToken = checkUserToken();
 	if (uToken == null || uToken == undefined || uToken == "null") {return;}
 	else{
-		var formCabinet = document.createElement('a');
-		formCabinet.setAttribute('href', "/cabinet");
-		formCabinet.setAttribute('class', "btn btn-warning");
+//		var formCabinet = document.createElement('a');
+//		formCabinet.setAttribute('href', "/cabinet");
+//		formCabinet.setAttribute('class', "btn btn-warning");
 //		formCabinet.setAttribute('onclick',
 //		"sendCabinetRequest();return false;")
-		formCabinet.innerHTML = 'Перейти в личный кабинет';
-		message.appendChild(formCabinet);
+//		formCabinet.innerHTML = 'Перейти в личный кабинет';
+//		message.appendChild(formCabinet);
+		var text = "Переход в личный кабинет";
+		infoBlock(text);
+		setTimeout(redirectToCabinet, 1000);
 		
+		
+	}
+	function redirectToCabinet(){
+		window.location.href = "/cabinet";
 	}
 	
 }

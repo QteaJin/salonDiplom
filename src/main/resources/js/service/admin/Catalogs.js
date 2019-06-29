@@ -140,14 +140,14 @@ function createCatalogForm(event) {
 
 	var inp1 = document.createElement("input");
 	inp1.setAttribute("class", "form-control");
-	inp1.setAttribute("type", "text");
+	inp1.setAttribute("type", "hidden");
 	inp1.setAttribute("placeholder", "skillId");
 	inp1.setAttribute("readonly", "");
 	inp1.setAttribute("id", "catalogSkillId");
 
 	var inp = document.createElement("input");
 	inp.setAttribute("class", "form-control");
-	inp.setAttribute("type", "text");
+	inp.setAttribute("type", "hidden");
 	inp.setAttribute("placeholder", "catalogId");
 	inp.setAttribute("readonly", "");
 	inp.setAttribute("id", "catalogId");

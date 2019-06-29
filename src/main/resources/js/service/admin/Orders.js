@@ -1,3 +1,5 @@
+var saveWorker;
+
 function chooseDate(){
 var arrMonth=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 		var now = moment();
@@ -87,22 +89,39 @@ function createListWorkers(json){
 	var map = new Map(Object.entries(json));
 	for (var [key, value] of map){
 		var button = document.createElement("button");
-		button.setAttribute ("class", "btn btn-light");
+		button.setAttribute ("class", "btn btn-light workers");
+		button.setAttribute ("id", "workButton");
 		button.setAttribute ("data", JSON.stringify(value));
 		button.setAttribute ("onclick", "createTableOrdersWorker(event);");
 		button.appendChild(document.createTextNode(key));
 		mainDiv.appendChild(button);
 	}
+	if(saveWorker != undefined){
+		var elements = document.querySelectorAll(".workers");
+		for(var i=0; i<elements.length; i++) {
+		    if(saveWorker == elements[i].innerHTML ){
+		    	elements[i].click();
+		    	
+		    }
+		}
+	}
 }
 function createTableOrdersWorker(event){
 	event.stopPropagation();
+	var element = document.querySelector(".btn-info");
+	if(element){
+		element.className = "btn btn-light workers";
+	}
+	event.target.className = "btn btn-info workers";
+	var workerName = event.target.innerHTML;
+	
 	var mainDiv = document.getElementById("workersOnDutySchedule");
 	
 	while (mainDiv.firstChild) {
 		mainDiv.removeChild(mainDiv.firstChild);
 	}
 	var obj = JSON.parse(event.target.getAttribute("data"));
-	console.log(obj);
+	//console.log(obj);
 	
 	var table = document.createElement("table");
 	table.setAttribute("class", "table table-striped table-hover");
@@ -112,7 +131,8 @@ function createTableOrdersWorker(event){
 	var cell0 = row.insertCell(0);
 	cell0.appendChild(document.createTextNode("Начало"));
 	var cell1 = row.insertCell(1);
-	cell1.appendChild(document.createTextNode("Конец"));
+	cell1.innerHTML = "Конец" + "&nbsp";
+	//cell1.appendChild(document.createTextNode("Конец"));
 	var cell2 = row.insertCell(2);
 	cell2.appendChild(document.createTextNode("Статус"));
 	var cell3 = row.insertCell(3);
@@ -176,6 +196,7 @@ function createTableOrdersWorker(event){
 			
 			var buttonOK = document.createElement("button");
 			buttonOK.setAttribute("orderNum", obj[i].checkListId);
+			buttonOK.setAttribute("workerName", workerName);
 			buttonOK.setAttribute("onclick", "sendRequestChangeOrderStatus(event);");
 			buttonOK.innerHTML = "OK";
 			
@@ -244,6 +265,7 @@ function createTableOrdersWorker(event){
 
 function sendRequestChangeOrderStatus(event){
 	event.stopPropagation();
+	saveWorker = event.target.getAttribute("workerName");
 	var orderId = event.target.getAttribute("orderNum");
 	var selectStatus = document.getElementById("statusSelect").value;
 	var request = Object.create(RequestAdmin);

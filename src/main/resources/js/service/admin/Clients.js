@@ -26,7 +26,7 @@ var clientsList = {};
 		var row0 = table.insertRow(0);
 
 		var cell0 = row0.insertCell(0);
-		cell0.innerHTML = "ID";
+		cell0.innerHTML = "№";
 		var cell1 = row0.insertCell(1);
 		cell1.innerHTML = "Имя";
 		var cell2 = row0.insertCell(2);

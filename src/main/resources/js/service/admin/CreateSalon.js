@@ -23,7 +23,8 @@ function successCreateSalon(){
 	document.forms['salonForm']['saloncity'].value = "";
 	document.forms['salonForm']['salonstreet'].value = "";
 	
-	alert("Изменения прошли успешно");
+	var textBlockInfo = "Изменения внесены";
+	infoBlock(textBlockInfo);
 }
 
 function getsalons(event){ //get all salons
