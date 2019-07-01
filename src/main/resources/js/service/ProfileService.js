@@ -10,6 +10,13 @@ function createWorkerProfile(json, workerId){
 	//console.log("function ---");
 	//console.log(JSON.stringify(json));
 	//console.log(workerId);
+	  var myNode = document.querySelector('.calendar');
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+}
+    var profile =  document.createElement('div');
+    profile.setAttribute('class', 'workerprofile');
+    myNode.appendChild(profile);
 	createProfile(json, workerId);
 	function createProfile (json, workerId) {
 		

@@ -18,6 +18,8 @@ function sendComment(event){
 	
 	var messageRequest = Object.create(Request);
 	messageRequest.SendNewComment(messageForm);
+	
+	document.forms['message-form']['message'].value = "";
 }
 function sendCommentSuccess(){
 	document.forms['message-form']['message'].value = "";

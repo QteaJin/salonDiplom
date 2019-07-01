@@ -1,3 +1,4 @@
+var errorInformForPhoneNumber;
 
 function sendQuickOrder(event) {
 	event.preventDefault();
@@ -11,6 +12,11 @@ function sendQuickOrder(event) {
 	if( qOrder.name == "" || qOrder.description == ""){
 		var textBlockInfo = "Заполните обязательные поля для отправки сообщения!";
 		infoBlock(textBlockInfo);
+		return;
+	}
+	if(!validMobileNumber(fields.phone.value)){
+		
+		infoBlock(errorInformForPhoneNumber);
 		return;
 	}
 	
@@ -29,3 +35,20 @@ function succesQuickMessage() {
 	
 }
 
+function validMobileNumber(number) { // validation 12 digits mobile phone +380XXXXXXXX
+	let checkDigits = number;
+	if(checkDigits.replace(/\D/g,'').length == 12){
+		  let regex = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g,
+		  result = regex.test(number);
+		  if(!result){
+			  errorInformForPhoneNumber = "Введите номер в формате +380ХХХХХХХХ";  
+		  }
+		  return result;
+	}else{
+		errorInformForPhoneNumber = "Проверьте количество цифр в номере";
+		
+		return false;
+	}
+	
+
+	}

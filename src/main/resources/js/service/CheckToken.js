@@ -28,6 +28,17 @@ function checkTokenExist(){
 	return checkToken;
 }
 
+function checkTokenExistForComments(){
+	  
+	  var checkToken = getCookie('token');
+	  
+	  if(checkToken == null || checkToken === undefined){
+	    console.log("Token error");
+	    return false;
+	  }
+	  return true;
+	}
+
 function checkErrorToken(){
 	
 	var checkToken = getCookie('token');

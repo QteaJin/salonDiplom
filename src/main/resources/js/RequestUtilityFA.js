@@ -105,7 +105,7 @@ Request.PostQuickOrder = function (jsonObject) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var quickOrder = JSON.parse(xhr.responseText);
-            console.log(quickOrder);
+            //console.log(quickOrder);
             if(quickOrder != null){
     			var text = "Сообщение отправлено";
     			infoBlock(text);
@@ -334,7 +334,7 @@ Request.SendNewComment = function (jsonObject) {
             var sendMessage = JSON.parse(xhr.responseText);
             
             if(sendMessage == true){
-            	sendCommentSuccess();
+            	//sendCommentSuccess();
     			var text = "Ваш комментарий отправлен";
     			infoBlock(text);
     			
@@ -342,6 +342,8 @@ Request.SendNewComment = function (jsonObject) {
             	//alert('Что-то пошло не так. Ваше сообщение не доставлено.');
     			var text = "Что-то пошло не так. Ваш комментарий не отправлен";
     			infoBlock(text);
+    			setTimeout(redirectFunc, 3000);
+    			
             }
 
         }
@@ -366,3 +368,7 @@ Request.GetAllActiveComments = function(){
 	};
 	xhr.send();
 };
+
+function redirectFunc(){
+	window.location.href = "/login";
+}
