@@ -11,12 +11,18 @@ function createHead () {
 	var temp = document.querySelector('.dropdown');
 	temp.setAttribute('salonid', '1');
 	getRequestWorkersPhoto(temp);
-
+	
+	
+	
   var myNode = document.querySelector('.calendar');
-      while (myNode.firstChild) {
-        myNode.removeChild(myNode.firstChild);
-}
-    
+//      while (myNode.firstChild) {
+//        myNode.removeChild(myNode.firstChild);
+//}
+      var profile =  document.createElement('div');
+      profile.setAttribute('class', 'workerprofile');
+      myNode.appendChild(profile);
+      return;
+      
     for (var i = 0; i < weekDay.length; i++) {
     
      var weekDiv =  document.createElement('div');
@@ -59,8 +65,8 @@ function createDate () {
     
     startDayofWeek++;
   }
-  var profile =  document.createElement('div');
-  profile.setAttribute('class', 'workerprofile');
+//  var profile =  document.createElement('div');
+//  profile.setAttribute('class', 'workerprofile');
   calendarHead.appendChild(profile);
 }
 // function doSomething (event) {

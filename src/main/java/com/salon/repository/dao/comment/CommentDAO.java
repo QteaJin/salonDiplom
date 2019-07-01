@@ -8,5 +8,5 @@ import com.salon.repository.entity.comment.Comment;
 
 public interface CommentDAO extends JpaRepository<Comment, Long>{
 
-	List<Comment> findAllByOrderByDate();
+	List<Comment> findAllByOrderByDateDesc();
 }

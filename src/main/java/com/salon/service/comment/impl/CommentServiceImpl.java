@@ -127,7 +127,7 @@ public class CommentServiceImpl implements CommentService{
 
 	@Override
 	public List<CommentBean> getAllByDate() {
-		List<Comment> comments = commentDAO.findAllByOrderByDate();
+		List<Comment> comments = commentDAO.findAllByOrderByDateDesc();
 		return toBean(comments);
 	}
 

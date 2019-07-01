@@ -20,7 +20,23 @@
   <script type="text/javascript" src = "/js/service/LoginCabinet.js"></script>
   <script type="text/javascript" src = "/js/service/CommentsActive.js"></script>
   <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>
+  <script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
+  <script type="text/javascript" src = "/js/service/CommentsPage.js"></script>
   <style type="text/css">
+      .infoblock {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      min-height: 5em;
+      background: #B0C4DE;
+      text-align: center;
+      line-height: 4em;
+      visibility: hidden;
+      z-index: 999999;
+    }
+    .infotext{
+      font-size: 20px;
+    }
     .comment{
       border: 2px solid blue;
       min-height: 100px;
@@ -44,6 +60,16 @@
 	#acolor:hover{
 	color: grey;
 	}
+	.errorlogin{
+    background: pink;
+    padding: 20px;
+  }
+  #newcomment{
+  padding-bottom: 20px;
+  }
+  #sendCommentsButton{
+    margin-top: 10px;
+  }
   </style>
   <title>Отзывы</title>
 </head>
@@ -87,13 +113,37 @@
     </div>
   </nav>
 </header>
-<!--HEADER-->
-<!-- <div class="container">
-  <div id="comments" align="center">
-  <img src="../img/not_working.jpg">
-  </div>
-</div> -->
+<div class="infoblock" id="infoblock">
+  <span class="infotext" id="infotext"></span>
+</div>
 <div class="topDiv"></div>
+
+<div class="newcomment" id="newcomment">
+	<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="checkUserTokenForComment();">
+          Оставить отзыв
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body" id="commentform">
+        
+          <div class="errorlogin"> Вы должны авторизоваться, чтобы оставлять комментарии. 
+            <a href="/login">Войти в кабинет</a>
+          </div>
+       
+        
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 <div id="commentblock"></div>
 </body>
+
 </html>
