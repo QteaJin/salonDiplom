@@ -144,14 +144,14 @@ function createWorkerForm(event){
 	
 	var inp1 = document.createElement("input");
 	inp1.setAttribute("class", "form-control");
-	inp1.setAttribute("type", "text");
+	inp1.setAttribute("type", "hidden");
 	inp1.setAttribute("placeholder", "salonId");
 	inp1.setAttribute("readonly", "");
 	inp1.setAttribute("id", "workerSalonId");
 
 	var inp2 = document.createElement("input");
 	inp2.setAttribute("class", "form-control");
-	inp2.setAttribute("type", "text");
+	inp2.setAttribute("type", "hidden");
 	inp2.setAttribute("placeholder", "workerId");
 	inp2.setAttribute("readonly", "");
 	inp2.setAttribute("id", "workerId");

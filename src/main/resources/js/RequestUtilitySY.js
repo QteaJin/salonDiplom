@@ -1,7 +1,7 @@
 'use strict';
 
-const URL_DEFAULT = "http://localhost:8080";
-const URL_CHECKLIST = URL_DEFAULT + "/checklist";
+var URL_DEFAULT = "http://localhost:8080";
+var URL_CHECKLIST = URL_DEFAULT + "/checklist";
 
 
 var Request = {};

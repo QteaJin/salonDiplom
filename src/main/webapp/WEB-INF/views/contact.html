@@ -30,8 +30,9 @@
   .footer{
     height: 100px;
     margin-top: 20px;
-    bottom:0;
-  }
+    bottom:0; 
+    background: #343a40; 	
+             }
    .infoblock {
         position: fixed;
         width: 100%;
@@ -111,8 +112,13 @@
       <div class="container-fluid bg-light py-3">
         <div> <h3> Контакты </h3></div>
         <h4>ул. Данченко, 6-8, Черноморск, Одесская область, 68000</h4>
-        <br>
-        (048) -xxx-xx-xx <br><div align = "center">
+       
+        <h5>(048) -xxx-xx-xx</h5>
+        <h5>(097) -xxx-xx-xx</h5>
+        <h5>(050) -xxx-xx-xx</h5>
+        
+        <h4>График работы: ежедневно c 10-00 до 20-00</h4>
+        <div align = "center">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2756.1838871746136!2d30.65794511539441!3d46.306185379119924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c7c968b7d0a40b%3A0xe31bb659516f02f9!2z0YPQuy4g0JTQsNC90YfQtdC90LrQviwgNi04LCDQp9C10YDQvdC-0LzQvtGA0YHQuiwg0J7QtNC10YHRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjgwMDA!5e0!3m2!1sru!2sua!4v1557998383066!5m2!1sru!2sua" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
         <br>
@@ -153,37 +159,36 @@
         </div>
       </div>  <div id = 'successLogin'></div>
     </div>
-    <div class="col-md-2 ">3</div>
+    <div class="col-md-2 "></div>
   </div>
 </div>
 <footer >
-  <div class="container-fluid">
-    <div class="row">
-      
-      <div class="col-md-12 back footer d-flex flex-row" align="center">
+	<div class="container-fluid">
+   <div class="row">
+
+    <div class="col-md-12 back footer d-flex flex-row" align="center">
+
+      <div class="col">
+        <a href="/" style="color:white;">Главная</a>
+        <br>
+        <a href="/service" style="color:white;">Услуги</a>
+        <br>
+        <a href="/price-list" style="color:white;">Цены</a>
+      </div>
+      <div class="col">
+       <font style="color:white;">Пн-Вс: с 10:00 до 20:00</font> 
+        <br>
+       <font style="color:white;">Сб-Вс: с 10:00 до 20:00</font> 
         
-        <div class="col">
-          <a href="/">Главная</a>
-          <br>
-          <a href="/service">Услуги</a>
-          <br>
-          <a href="/price-list">Цены</a>
-        </div>
-        <div class="col">
-          Пн-Вс: с 10:00 до 20:00
-          <br>
-          Сб-Вс: с 10:00 до 20:00
-        </div>
-        <div class="col">
-          ул. Данченко, 6-8, Черноморск, Одесская область, 68000
-          <br>
-          (048) -xxx-xx-xx 
-          <br>
-          email@email.com.ua
-        </div>
+      </div>
+      <div class="col">
+      <font style="color:white;">ул. Данченко, 6-8, Черноморск, Одесская область, 68000</font>
+      <br>
+      <font style="color:white;">(048) -xxx-xx-xx , email@email.com.ua</font>
       </div>
     </div>
   </div>
+</div>
 </footer>
 </body>
 <script type="text/javascript" src = "/js/RequestUtilityFA.js"></script>

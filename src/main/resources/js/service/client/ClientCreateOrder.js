@@ -148,15 +148,44 @@ function createTableWorkerCatalog (json){
 
 
 	mainDiv.appendChild(table);
+	
+	var buttonCancel = document.createElement("button");
+	buttonCancel.innerHTML = "Отменить выбор";
+	buttonCancel.setAttribute("onclick", "cancelChoosenOrder();");
+	buttonCancel.className = "btn";
 
 	var button = document.createElement("button");
 	button.innerHTML = "Отправить запрос";
 	button.setAttribute("onclick", "sendRequestForOrder();");
+	button.setAttribute("id", "sendRequestButton");
+	button.className = "btn";
 
+	mainDiv.appendChild(buttonCancel);
 	mainDiv.appendChild(button);
 	}
 
+	function cancelChoosenOrder(){
+		document.getElementById("sendRequestButton").disabled = false;
+		var checkBoxes = document.getElementsByTagName("input");
+		
+		for (var i = 0; i < checkBoxes.length; i++) {
+			if (checkBoxes[i].checked) {
+				checkBoxes[i].checked = false;
+		}
+			checkBoxes[i].disabled=false;
+		}
+		var mainDiv = document.getElementById("workerfreedates");
+		while (mainDiv.firstChild) {
+			mainDiv.removeChild(mainDiv.firstChild);
+		}
+	
+		mainDiv.style.display = "none";
+		
+	}
+
 	function sendRequestForOrder () {
+	document.getElementById("sendRequestButton").disabled = true;
+	
 	var textBlockInfo = "Ищем свободные даты и время";
 	infoBlock(textBlockInfo);
 	var jsonObj = {};
@@ -270,7 +299,8 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 	// alert("Ваш запрос отправлен");
 	var textBlockInfo = "Ваш запрос отправлен";
 	infoBlock(textBlockInfo);
-		
+	
+	setTimeout(reloadpage, 2000);
 	}
 	function reloadpage(){
 		document.location.reload(true);
@@ -285,8 +315,5 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 		while (node.firstChild) {
 			node.removeChild(node.firstChild);
 		}
-		
-		
 	}
-	
 	
