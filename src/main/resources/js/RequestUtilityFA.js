@@ -1,22 +1,22 @@
 'use strict';
 
-const URL_DEF = ""; //https://vip-salon.herokuapp.com
-const URL_DEFAULT_LOCAL = "http://localhost:8080";
-const QUICK_ORDER_URL = URL_DEF + "/checklist";
-const GET_WORKER_PHOTO_URL = URL_DEF + "/worker/?salonId="; //get all workers by salon id
-const GET_WORKER_PROFILE_URL = URL_DEF + "/worker/profile/";
-const CLIENT_HISTORY_REQUEST = URL_DEF + "/checklist/client/history?";
-const CANCEL_ORDER_BY_ID = URL_DEF + "/checklist/cancel/";
-const LOGIN_SEND_POST = URL_DEF + "/auth/login";
-const CLIENT_REGISTRATION_REQUEST = URL_DEF + "/auth/registr/client";
-const SEND_MESSAGE_TO_ADMIN = URL_DEF + "/email/admin";
-const GET_CLIENT_PERSONAL_PROFILE = "/client/profile";
-const EDIT_CLIENT_PROFILE = "/client/profile/edit";
-const GET_FREE_DATE = "/checklist/new";
-const CREATE_NEW_ORDER = "/checklist/new/create";
-const PRICE_LIST_CONTROLLER = "/skill/price/all";
-const SAVE_NEW_COMMENT = "/comment/add";
-const GET_COMMENTS_FOR_PAGE = "/comment/findActive";
+var URL_DEF = ""; //https://vip-salon.herokuapp.com
+var URL_DEFAULT_LOCAL = "http://localhost:8080";
+var QUICK_ORDER_URL = URL_DEF + "/checklist";
+var GET_WORKER_PHOTO_URL = URL_DEF + "/worker/?salonId="; //get all workers by salon id
+var GET_WORKER_PROFILE_URL = URL_DEF + "/worker/profile/";
+var CLIENT_HISTORY_REQUEST = URL_DEF + "/checklist/client/history?";
+var CANCEL_ORDER_BY_ID = URL_DEF + "/checklist/cancel/";
+var LOGIN_SEND_POST = URL_DEF + "/auth/login";
+var CLIENT_REGISTRATION_REQUEST = URL_DEF + "/auth/registr/client";
+var SEND_MESSAGE_TO_ADMIN = URL_DEF + "/email/admin";
+var GET_CLIENT_PERSONAL_PROFILE = "/client/profile";
+var EDIT_CLIENT_PROFILE = "/client/profile/edit";
+var GET_FREE_DATE = "/checklist/new";
+var CREATE_NEW_ORDER = "/checklist/new/create";
+var PRICE_LIST_CONTROLLER = "/skill/price/all";
+var SAVE_NEW_COMMENT = "/comment/add";
+var GET_COMMENTS_FOR_PAGE = "/comment/findActive";
 
 var Request = {};
 

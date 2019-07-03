@@ -1,26 +1,26 @@
 'use strict';
 
-const URL_DEFAULT = ""; // https://vip-salon.herokuapp.com
-const URL_DEFAULT_LOCAL = "http://localhost:8080";
-const CREATE_SALON = "/salon/create";
-const GET_ALL_SALONS = "/salon/admin/all"; 
-const CREATE_EDIT_SKILL = "/skill/create";
-const GET_ALL_SKILLS = "/skill/admin/all";
-const GET_CATALOGS_BY_SKILL = "/catalog/admin/";
-const CREATE_EDIT_CATALOG = "/catalog/create";
-const GET_WORKER_URL = URL_DEFAULT + "/worker/?salonId="; //get all workers by salon id
-const GET_WORKER_BY_ID = URL_DEFAULT + "/worker/admin/"; //get worker by ID
-const UPDATE_WORKER_DATA = URL_DEFAULT + "/worker/admin/update";
-const CREATE_NEW_WORKER = URL_DEFAULT + "/auth/registr/worker";
-const UPDATE_WORKER_SKILL_LIST = URL_DEFAULT + "/worker/admin/skill";
-const ADD_WORKING_DAYS = URL_DEFAULT + "/worker/admin/addDays";
-const GET_WORKING_DAYS = URL_DEFAULT + "/worker/admin/getDays/";
-const DEL_WORKING_DAYS = URL_DEFAULT + "/worker/admin/delDays/";
-const GET_ALL_CLIENTS = URL_DEFAULT + "/client/admin/all";
-const GET_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/";
-const CHANGE_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/changeProfile";
-const CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client";
-const GET_WORKER_ORDERS = URL_DEFAULT + "/checklist/admin";
+var URL_DEFAULT = ""; // https://vip-salon.herokuapp.com
+var URL_DEFAULT_LOCAL = "http://localhost:8080";
+var CREATE_SALON = "/salon/create";
+var GET_ALL_SALONS = "/salon/admin/all"; 
+var CREATE_EDIT_SKILL = "/skill/create";
+var GET_ALL_SKILLS = "/skill/admin/all";
+var GET_CATALOGS_BY_SKILL = "/catalog/admin/";
+var CREATE_EDIT_CATALOG = "/catalog/create";
+var GET_WORKER_URL = URL_DEFAULT + "/worker/?salonId="; //get all workers by salon id
+var GET_WORKER_BY_ID = URL_DEFAULT + "/worker/admin/"; //get worker by ID
+var UPDATE_WORKER_DATA = URL_DEFAULT + "/worker/admin/update";
+var CREATE_NEW_WORKER = URL_DEFAULT + "/auth/registr/worker";
+var UPDATE_WORKER_SKILL_LIST = URL_DEFAULT + "/worker/admin/skill";
+var ADD_WORKING_DAYS = URL_DEFAULT + "/worker/admin/addDays";
+var GET_WORKING_DAYS = URL_DEFAULT + "/worker/admin/getDays/";
+var DEL_WORKING_DAYS = URL_DEFAULT + "/worker/admin/delDays/";
+var GET_ALL_CLIENTS = URL_DEFAULT + "/client/admin/all";
+var GET_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/";
+var CHANGE_CLIENT_PROFILE = URL_DEFAULT + "/client/admin/changeProfile";
+var CLIENT_REGISTRATION_REQUEST = URL_DEFAULT + "/auth/registr/client";
+var GET_WORKER_ORDERS = URL_DEFAULT + "/checklist/admin";
 
 var RequestAdmin = {};
 

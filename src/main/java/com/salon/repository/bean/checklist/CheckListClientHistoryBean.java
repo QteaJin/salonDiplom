@@ -17,6 +17,7 @@ public class CheckListClientHistoryBean {
 	private Timestamp finish;
 	private String salon;
 	private String worker;
+	private String clientContacts;
 	private List<Catalog> catalogs;
 	private Double price;
 	private EnumStatusCheckList status;
@@ -88,6 +89,12 @@ public class CheckListClientHistoryBean {
 	}
 	public void setFinish(Timestamp finish) {
 		this.finish = finish;
+	}
+	public String getClientContacts() {
+		return clientContacts;
+	}
+	public void setClientContacts(String clientContacts) {
+		this.clientContacts = clientContacts;
 	}
 	
 	

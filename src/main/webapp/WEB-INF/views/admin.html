@@ -25,9 +25,10 @@
   <script type="text/javascript" src = "/js/service/admin/Orders.js"></script>
   <script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
   <script type="text/javascript" src = "/js/service/admin/Comments.js"></script>
+  <script type="text/javascript" src = "/js/service/Translations.js"></script>
   
   
-  <title>ADMIN PAGE</title>
+  <title>Кабинет администратора</title>
   <style type="text/css">
     .chosenButton{
       background: #51C2F9;
@@ -168,11 +169,10 @@
      <div class="container">
       <div class="row">
         <div class="col"  id = "salon1">
-          1 из 2
-          
+                  
           <form id = 'salonForm'>
             <div class="form-group">
-              <input class="form-control" type="text" id="salonid" placeholder="Id салона" readonly>
+              <input class="form-control" id="salonid" placeholder="Id салона" readonly type="hidden">
               <label for="salonname">Название салона:</label>
               <input type="text" class="form-control" id="salonname" name="salonname">
             </div>

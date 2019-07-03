@@ -96,7 +96,7 @@ function createTable (jsonIncome) {
 			var catalogs =  document.createElement("td");
 			var ul = document.createElement('ul');
 			if (jsonIncome[i].catalogs == null) {
-				catalogs.appendChild(document.createTextNode('NO VALUE'));
+				catalogs.appendChild(document.createTextNode('НЕТ ДАННЫХ'));
 			} else {
 				
 				for (var j = 0; j < jsonIncome[i].catalogs.length; j++) {
@@ -113,10 +113,10 @@ function createTable (jsonIncome) {
 			tdPrice.appendChild(document.createTextNode(jsonIncome[i].price));
 
 			var tdStatus = document.createElement("td");
-			tdStatus.appendChild(document.createTextNode(jsonIncome[i].status));
+			tdStatus.appendChild(document.createTextNode(translateRU (jsonIncome[i].status)));
 
 			var tdButton = document.createElement("td");
-			if(jsonIncome[i].status == "NEW"){
+			if(jsonIncome[i].status != "CANCELED" || jsonIncome[i].status != "DONE"){ // убрать проверку на отменту заказа
 				var button = document.createElement('button');
 				button.appendChild(document.createTextNode("Отменить"));
 				button.setAttribute('value', jsonIncome[i].checkListId );
@@ -150,7 +150,12 @@ function cancelOrder(e) {
 }
 
 function cancelOrderDone(text){
-	alert('Ваша заявка успешно отменена. Номер заявки '+ text);
-	location.reload(true)
+	//alert('Ваша заявка успешно отменена. Номер заявки '+ text);
+	var textBlockInfo = "Ваша заявка успешно отменена. Номер заявки " + text;
+	infoBlock(textBlockInfo);
+	setTimeout(reloadPage, 4000);
+}
 
+function reloadPage(){
+	location.reload(true);
 }

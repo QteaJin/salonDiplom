@@ -582,6 +582,9 @@ public class CheckListServiceImpl implements CheckListService {
 			bean.setPrice(orderOnDate.getPrice());
 			bean.setStatus(orderOnDate.getStatus());
 			bean.setWorker(orderOnDate.getWorker().getProfile().getName());
+			bean.setClientContacts(orderOnDate.getClient().getProfile().getPhone().concat("<br>").
+										concat(orderOnDate.getClient().getProfile().getEmail()));
+			
 
 			int timelead = (int) ((orderOnDate.getTimeFinish().getTime() - orderOnDate.getDateAppointment().getTime())
 					/ Const.Millis.MILLIS_IN_HOUR);

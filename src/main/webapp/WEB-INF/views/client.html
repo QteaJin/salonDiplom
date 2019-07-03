@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MyPage </title>
+  <title>Кабинет клиента</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -24,6 +24,7 @@
   <script type="text/javascript" src = "/js/service/client/ClientCreateOrder.js"></script>
   <script type="text/javascript" src = "/js/service/InfoBlockTop.js"></script>
   <script type="text/javascript" src = "/js/service/SendNewComment.js"></script>
+  <script type="text/javascript" src = "/js/service/Translations.js"></script>
   
   <style type="text/css">
     html {
@@ -37,16 +38,17 @@
       bottom: 0;
       width: 100%;
       height: 70px;
-      padding-top:50px;
-
+      padding-top: 10px;
+      margin-top: 10px;
+	  
     }
 
     .back {
       background-color: #D9E1DA;
     }
     .footer{
-      height: 70px;
-      margin-top: 20px;
+
+      background: #343a40;
     }
     .block{
       width: 60px;
@@ -100,6 +102,7 @@
 	}
 	#workerprofile{
 	padding-bottom: 70px;
+	margin-bottom: 20px;
 	}
 	#workerfreedates {
   
@@ -327,23 +330,21 @@
     <div class="col-md-12 back footer d-flex flex-row" align="center">
       
       <div class="col">
-        <a href="/">Главная</a>
+        <a href="/" style="color:white;">Главная</a>
         <br>
-        <a href="/service">Услуги</a>
+        <a href="/service" style="color:white;">Услуги</a>
         <br>
-        <a href="/price-list">Цены</a>
+        <a href="/price-list" style="color:white;">Цены</a>
       </div>
       <div class="col">
-        Пн-Вс: с 10:00 до 20:00
+        <font style="color:white;">Пн-Вс: с 10:00 до 20:00</font> 
         <br>
-        Сб-Вс: с 10:00 до 20:00
+       <font style="color:white;">Сб-Вс: с 10:00 до 20:00</font> 
       </div>
       <div class="col">
-        ул. Данченко, 6-8, Черноморск, Одесская область, 68000
-        <br>
-        (048) -xxx-xx-xx 
-        <br>
-        email@email.com.ua
+       <font style="color:white;">ул. Данченко, 6-8, Черноморск, Одесская область, 68000</font>
+      <br>
+      <font style="color:white;">(048) -xxx-xx-xx , email@email.com.ua</font>
       </div>
     </div>
   </div>

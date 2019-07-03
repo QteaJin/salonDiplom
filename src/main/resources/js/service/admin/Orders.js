@@ -58,6 +58,8 @@ var arrMonth=['Январь','Февраль','Март','Апрель','Май'
 		}
 
 		function findOrdersByDateStatus() {
+			var textBlockInfo = "Ваш запрос отправлен";
+			infoBlock(textBlockInfo);
 			var mainDiv = document.getElementById("workersOnDutySchedule");
 			
 			while (mainDiv.firstChild) {
@@ -140,12 +142,14 @@ function createTableOrdersWorker(event){
 	var cell4 = row.insertCell(4);
 	cell4.appendChild(document.createTextNode("Имя клиента"));
 	var cell5 = row.insertCell(5);
-	cell5.appendChild(document.createTextNode("ID клиента"));
+	cell5.appendChild(document.createTextNode("Контакты"));
 	var cell6 = row.insertCell(6);
-	cell6.appendChild(document.createTextNode("Услуги"));
+	cell6.appendChild(document.createTextNode("ID клиента"));
 	var cell7 = row.insertCell(7);
-	cell7.appendChild(document.createTextNode("Общая стоимость"));
+	cell7.appendChild(document.createTextNode("Услуги"));
 	var cell8 = row.insertCell(8);
+	cell8.appendChild(document.createTextNode("Общая стоимость"));
+	var cell9 = row.insertCell(9);
 	rowNum++;
 	for (var i = 0; i < obj.length; i++) {
 		
@@ -158,23 +162,31 @@ function createTableOrdersWorker(event){
 			var finish = moment(obj[i].finish).format("HH : mm");
 			cell1.appendChild(document.createTextNode(finish));
 			var cell2 = row.insertCell(2);
-			cell2.appendChild(document.createTextNode(obj[i].status));
+			cell2.innerHTML = "<font color='#FF5733'>" + translateRU (obj[i].status) + "</font>";
+			//cell2.appendChild(document.createTextNode(translateRU (obj[i].status)));
 			var cell3 = row.insertCell(3);
 			cell3.appendChild(document.createTextNode(obj[i].checkListId));
 			var cell4 = row.insertCell(4);
-			cell4.appendChild(document.createTextNode(obj[i].name));
+			if(obj[i].name != null){
+				cell4.appendChild(document.createTextNode(obj[i].name));
+			}else{
+				cell4.appendChild(document.createTextNode("НЕТ ИМЕНИ"));
+			}
+			//cell5
 			var cell5 = row.insertCell(5);
-			cell5.appendChild(document.createTextNode(obj[i].clientId));
+			cell5.innerHTML = obj[i].clientContacts;
 			var cell6 = row.insertCell(6);
+			cell6.appendChild(document.createTextNode(obj[i].clientId));
+			var cell7 = row.insertCell(7);
 			//cell6.appendChild(document.createTextNode("Услуги"));
 			var data = "";
 			for (var j = 0; j < obj[i].catalogs.length; j++){
 				data = data + obj[i].catalogs[j].name + "<br>";
 			}
-			cell6.innerHTML = data;
-			var cell7 = row.insertCell(7);
-			cell7.appendChild(document.createTextNode(obj[i].price));
+			cell7.innerHTML = data;
 			var cell8 = row.insertCell(8);
+			cell8.appendChild(document.createTextNode(obj[i].price));
+			var cell9 = row.insertCell(9);
 			var select = document.createElement("select");
 				select.setAttribute("id","statusSelect");
 				
@@ -183,16 +195,16 @@ function createTableOrdersWorker(event){
 			optionNull.setAttribute("selected","selected");
 			var option = document.createElement("option");
 			option.setAttribute("value", "ACTIVE");
-			option.innerHTML = "ACTIVE";
+			option.innerHTML = "АКТИВНЫЙ";
 			var option1 = document.createElement("option");
 			option1.setAttribute("value", "CANCELED");
-			option1.innerHTML = "CANCELED";
+			option1.innerHTML = "ОТМЕНЕН";
 			var option2 = document.createElement("option");
 			option2.setAttribute("value", "DONE");
-			option2.innerHTML = "DONE";
+			option2.innerHTML = "ВЫПОЛНЕН";
 			var option3 = document.createElement("option");
 			option3.setAttribute("value", "NEW");
-			option3.innerHTML = "NEW";
+			option3.innerHTML = "НОВЫЙ";
 			
 			var buttonOK = document.createElement("button");
 			buttonOK.setAttribute("orderNum", obj[i].checkListId);
@@ -205,8 +217,8 @@ function createTableOrdersWorker(event){
 			select.appendChild(option1);
 			select.appendChild(option2);
 			select.appendChild(option3);
-			cell8.appendChild(select);
-			cell8.appendChild(buttonOK);
+			cell9.appendChild(select);
+			cell9.appendChild(buttonOK);
 			
 			
 			rowNum++;
@@ -219,7 +231,8 @@ function createTableOrdersWorker(event){
 		var finish = moment(obj[i].finish).format("HH : mm");
 		cell1.appendChild(document.createTextNode(finish));
 		var cell2 = row.insertCell(2);
-		cell2.appendChild(document.createTextNode(obj[i].status));
+		cell2.innerHTML = "<font color='#0E9E09'>" + translateRU (obj[i].status) + "</font>";
+		//cell2.appendChild(document.createTextNode(translateRU (obj[i].status)));
 		var cell3 = row.insertCell(3);
 		//cell3.appendChild(document.createTextNode(obj[i].checkListId));
 		var cell4 = row.insertCell(4);
@@ -231,6 +244,7 @@ function createTableOrdersWorker(event){
 		var cell7 = row.insertCell(7);
 		//cell7.appendChild(document.createTextNode(obj[i].price));
 		var cell8 = row.insertCell(8);
+		var cell9 = row.insertCell(9);
 		rowNum++;
 	}
 		
