@@ -123,7 +123,7 @@ function createTableWorkerCatalog (json){
 		var cell4 = row.insertCell(4);
 
 		rowNumber++;
-		console.log(json.listSkills[i].catalogList[0].name);
+		//console.log(json.listSkills[i].catalogList[0].name);
 
 			for (var j = 0; j < json.listSkills[i].catalogList.length; j++) {
 				var rowIn = table.insertRow(rowNumber);
@@ -139,6 +139,7 @@ function createTableWorkerCatalog (json){
 				var input = document.createElement("input");
 				input.setAttribute("type", "checkbox");
 				input.setAttribute("id", json.listSkills[i].catalogList[j].catalogId );
+				input.setAttribute("time" , json.listSkills[i].catalogList[j].timeLead);
 				var cell4 = rowIn.insertCell(4);
 				cell4.appendChild(input);
 
@@ -193,14 +194,22 @@ function createTableWorkerCatalog (json){
 	var table = document.getElementById("catalogsTable");
 	var workerId = table.getAttribute("workerId");
 	var checkBoxes = document.getElementsByTagName("input");
-	
+	var maxTime = 0;
 	for (var i = 0; i < checkBoxes.length; i++) {
 		if (checkBoxes[i].checked) {
 		catalogs.push(checkBoxes[i].getAttribute("id"));
-
+		maxTime = maxTime + parseInt(checkBoxes[i].getAttribute("time"), 10);
 	}
 		checkBoxes[i].setAttribute("disabled","true");
 	}
+	if(maxTime > 600 ){
+		var textBlockInfo = "Общее время выбранных услуг превышает максимально допустимое !";
+		infoBlock(textBlockInfo);
+		cancelChoosenOrder();
+		maxTime = 0;
+		return;
+	}
+	maxTime = 0;
 jsonObj.workerId = workerId;
 jsonObj.catalogList = catalogs;
 
@@ -227,6 +236,7 @@ workerFreeDateRequest.GetFreeDateForOrder(jsonObj);
 		console.log(map);
 		
 		if(map.size == 0){
+			mainDiv.innerHTML = "<h3>Нет свободных дат</h3>";
 			var textBlockInfo = "Нет свободных дат";
 			infoBlock(textBlockInfo);
 			setTimeout(reloadpage, 3000);
