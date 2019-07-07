@@ -23,7 +23,7 @@ function loginFail(){
 
 function statusNoActive(){
 	var fail = document.getElementById('loginfail');
-	fail.innerHTML = "Ваш аккаунт заблокирован. Обратитесь к администратору";
+	fail.innerHTML = "<h3> Ваш аккаунт заблокирован. Обратитесь к администратору </h3>";
 	var textBlockInfo = "Ваш аккаунт заблокирован. Обратитесь к администратору";
 	infoBlock(textBlockInfo);
 }
