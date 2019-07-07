@@ -27,8 +27,6 @@ crossorigin="anonymous"></script>
   .footer{
     height: 100px;
     margin-top: 20px;
-    bottom:0;
-    position: absolute;
     background: #343a40;
   }
   .block{
@@ -75,6 +73,9 @@ crossorigin="anonymous"></script>
 	#acolor:hover{
 	color: grey;
 	}
+#formlogin{
+	margin-bottom: 15%;
+}
 </style>
 <head>
   <meta charset="UTF-8">
@@ -135,7 +136,7 @@ crossorigin="anonymous"></script>
     </div>
     <div class="col-md-8 ">
       <span id = 'loginfail'></span>
-      <div class="container-fluid bg-light py-3">
+      <div class="container-fluid bg-light py-3" id="formlogin">
         <div> <h3> Войти в кабинет </h3></div>
         <form id="login-form" >
           <div class="messages"></div>
@@ -176,7 +177,7 @@ crossorigin="anonymous"></script>
     <div class="col-md-2 "></div>
   </div>
 </div>
-<footer >
+<footer class="footer">
 	<div class="container-fluid">
    <div class="row">
 
