@@ -1,6 +1,6 @@
-const CUSTOMER_CABINET = "/customer";
-const WORKER_CABINET = "/employee";
-const ADMIN_CABINET = "/admin";
+var CUSTOMER_CABINET = "/customer";
+var WORKER_CABINET = "/employee";
+var ADMIN_CABINET = "/admin";
 
 function checkUserToken(){
 	
