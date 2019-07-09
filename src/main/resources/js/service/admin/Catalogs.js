@@ -220,7 +220,7 @@ function createCatalogForm(event) {
 
 		document.forms['formcatalog']['catalogSkillId'].value = infoText;
 	}
-
+	document.getElementById('formcatalog').scrollIntoView({block: "center", behavior: "smooth"}); // focus on formcatalog
 }
 
 function createEditCataolg(event) {

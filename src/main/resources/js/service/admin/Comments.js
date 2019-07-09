@@ -41,10 +41,15 @@ function createTableForComments(jsonObj){
 			cell4.innerHTML = jsonObj[i].description;
 			cell4.setAttribute("width", "40%");
 		var cell5 = row.insertCell(4);
-			cell5.innerHTML = jsonObj[i].status;
+			cell5.innerHTML = translateRU(jsonObj[i].status);
 		var cell6 = row.insertCell(5);
 		var button = document.createElement("button");
-			button.appendChild(document.createTextNode("Изменить"));
+			if(jsonObj[i].status == "ACTIVE"){
+				button.appendChild(document.createTextNode("Отключить"));
+			}else{
+				button.appendChild(document.createTextNode("Включить"));
+			}
+			button.setAttribute("class", "btn btn-primary");
 			button.setAttribute("commentid", jsonObj[i].id);
 			button.setAttribute("onclick", "changeStatusComment(event);");
 			cell6.appendChild(button);
