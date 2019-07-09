@@ -84,7 +84,7 @@ Request.Login = function (jsonObject) {
             	statusNoActive();
             	return;
             }
-            var date = new Date(new Date().getTime() + 60 * 60 * 1000); //1 hour
+            var date = new Date(new Date().getTime() + 4 * 60 * 60 * 1000); //4 hour token active
             document.cookie = "token="+loginResponce.token +"; path=/; expires=" + date.toUTCString();
             createLoginLogoutButton();
             successLogin();
@@ -202,8 +202,11 @@ Request.SendClientProfileRequest = function(){
 	    if (xhr.readyState === 4 && xhr.status === 200) {
 	        var json = JSON.parse(xhr.responseText);
 	        if(json.errorMessage != null){
-	        	alert('Войдите в ваш аккаунт!');
-	        	logoutSessionMainPage();
+	        	//alert('Войдите в ваш аккаунт!');
+	        	var textBlockInfo = "Войдите в ваш аккаунт!";
+	        	infoBlock(textBlockInfo);
+	        	setTimeout(logoutSessionMainPage, 3000);
+	        	
 	        }else{
 	        	setClientProfileToForm(json);
 	        	

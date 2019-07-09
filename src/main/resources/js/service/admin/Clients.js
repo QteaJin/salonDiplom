@@ -150,6 +150,7 @@ var clientsList = {};
 		inp3.setAttribute("name", "client_name");
 		inp3.setAttribute("placeholder", "Имя клиента");
 		
+		
 		var lable2 = document.createElement("lable");
 		lable2.appendChild(document.createTextNode("Телефон:"));
 		lable2.setAttribute("for", "clientphone");
@@ -160,6 +161,7 @@ var clientsList = {};
 		inp4.setAttribute("id", "clientphone");
 		inp4.setAttribute("name", "clientphone");
 		inp4.setAttribute("placeholder", "Телефон клиента");
+		
 		
 		var lable3 = document.createElement("lable");
 		lable3.appendChild(document.createTextNode("Email:"));
@@ -172,6 +174,7 @@ var clientsList = {};
 		inp5.setAttribute("name", "clientemail");
 		inp5.setAttribute("placeholder", "Email клиента");
 		
+		
 		var lable4 = document.createElement("lable");
 		lable4.appendChild(document.createTextNode("Login:"));
 		lable4.setAttribute("for", "clientlogin");
@@ -183,16 +186,18 @@ var clientsList = {};
 		inp6.setAttribute("name", "clientlogin");
 		inp6.setAttribute("placeholder", "Логин клиента");
 		
+		
 		var lable5 = document.createElement("lable");
 		lable5.appendChild(document.createTextNode("Password:"));
 		lable5.setAttribute("for", "clientpassword");
 		
 		var inp7 = document.createElement("input");
 		inp7.setAttribute("class", "form-control");
-		inp7.setAttribute("type", "text");
+		inp7.setAttribute("type", "password");
 		inp7.setAttribute("id", "clientpassword");
 		inp7.setAttribute("name", "clientpassword");
 		inp7.setAttribute("placeholder", "Пароль клиента");
+		
 		
 		var lable6 = document.createElement("lable");
 		lable6.appendChild(document.createTextNode("Описание:"));

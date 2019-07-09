@@ -77,6 +77,7 @@ function successLogin(){
 //		"sendCabinetRequest();return false;")
 //		formCabinet.innerHTML = 'Перейти в личный кабинет';
 //		message.appendChild(formCabinet);
+		document.getElementById('cabinet').disabled = true;
 		var text = "Переход в личный кабинет";
 		infoBlock(text);
 		setTimeout(redirectToCabinet, 1000);
