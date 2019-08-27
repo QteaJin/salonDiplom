@@ -29,7 +29,13 @@ public class TokenCryptImpl implements TokenCrypt {
 	private transient Map<Long, String> userTokens = new HashMap<Long, String>(); // save Users tokens
 
 	private String salt = KeyGenerators.string().generateKey();
+	
 	private TextEncryptor encryptor = Encryptors.text(password, salt);
+	
+
+	public Map<Long, String> getUserTokens() {
+		return userTokens;
+	}
 
 	@Override
 	public String cryptToken(String message) {
@@ -46,10 +52,6 @@ public class TokenCryptImpl implements TokenCrypt {
 		
 		return decryptedText;
 
-	}
-
-	public Map<Long, String> getUserTokens() {
-		return userTokens;
 	}
 
 	@Override
@@ -120,22 +122,5 @@ public class TokenCryptImpl implements TokenCrypt {
 		return null;
 	}
 
-//	public void checkUserToken(HttpServletResponse response, HttpServletRequest request) {
-//		
-//		if(request.getCookies()==null) {
-//			return;
-//		}
-//        for (Cookie c : request.getCookies()) {
-//           if (c.getName().equals("token"))
-//        	   c.setValue("error");
-//           System.err.println(c.getValue());
-//           response.addCookie(c);
-//           return;
-//           }
-//        
-//		
-//		
-//		
-//	}
 
 }
