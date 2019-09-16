@@ -180,15 +180,21 @@ function createTableOrdersWorker(event){
 			var cell7 = row.insertCell(7);
 			//cell6.appendChild(document.createTextNode("Услуги"));
 			var data = "";
+			console.log(obj[i].catalogs);
+			var tempSet = new Set();
 			for (var j = 0; j < obj[i].catalogs.length; j++){
-				data = data + obj[i].catalogs[j].name + "<br>";
+				
+				tempSet.add(obj[i].catalogs[j].name);
 			}
+			
+			for (let item of tempSet.values()) data = data + item + "<br>";
+			
 			cell7.innerHTML = data;
 			var cell8 = row.insertCell(8);
 			cell8.appendChild(document.createTextNode(obj[i].price));
 			var cell9 = row.insertCell(9);
 			var select = document.createElement("select");
-				select.setAttribute("id","statusSelect");
+				select.setAttribute("id","statusSelect"+obj[i].checkListId);
 				
 				
 			var optionNull = document.createElement("option");
@@ -281,7 +287,7 @@ function sendRequestChangeOrderStatus(event){
 	event.stopPropagation();
 	saveWorker = event.target.getAttribute("workerName");
 	var orderId = event.target.getAttribute("orderNum");
-	var selectStatus = document.getElementById("statusSelect").value;
+	var selectStatus = document.getElementById("statusSelect"+orderId).value;
 	var request = Object.create(RequestAdmin);
 	request.RequestChangeOrderStatus(orderId, selectStatus);
 }

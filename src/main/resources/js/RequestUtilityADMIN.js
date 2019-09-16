@@ -268,6 +268,7 @@ RequestAdmin.GetWorkingDays = function(workerId){
 	xhr.onreadystatechange = function () {
 	    if (xhr.readyState === 4 && xhr.status === 200) {
 	        var json = JSON.parse(xhr.responseText);
+	        console.log(json);
 	        setWorkingDaysToCallendar(json);
 	       
 	    }
@@ -382,6 +383,7 @@ RequestAdmin.GetWorkerOrdersRequest = function (jsonObject) {
 RequestAdmin.RequestChangeOrderStatus = function(orderId, selectStatus){
 	var xhr = new XMLHttpRequest();
 	var url = "/checklist/admin/" + orderId + "/status/" + selectStatus;
+	console.log(url);
 	xhr.open("GET", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.onreadystatechange = function () {

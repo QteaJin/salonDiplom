@@ -98,7 +98,8 @@ function createTable (jsonIncome) {
 			if (jsonIncome[i].catalogs == null) {
 				catalogs.appendChild(document.createTextNode('НЕТ ДАННЫХ'));
 			} else {
-				
+				var tempSet = new Set();
+				console.log(jsonIncome[i].catalogs);
 				for (var j = 0; j < jsonIncome[i].catalogs.length; j++) {
 					var li = document.createElement('li');
 					li.appendChild(document.createTextNode(jsonIncome[i].catalogs[j].description + " : " + jsonIncome[i].catalogs[j].price + " грн."));
