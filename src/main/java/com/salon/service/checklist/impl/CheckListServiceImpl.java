@@ -214,6 +214,7 @@ public class CheckListServiceImpl implements CheckListService {
 		Long clientId = bean.getUserId();
 
 		List<CheckListClientHistoryBean> clientHistoryBeans = new ArrayList<CheckListClientHistoryBean>();
+		Set<String> checkBean = new HashSet<String>();
 
 		LocalDate start = LocalDate.of(year, month, 1);
 		int days = start.lengthOfMonth();
@@ -252,14 +253,25 @@ public class CheckListServiceImpl implements CheckListService {
 				historyBean.setWorker(checkList.getWorker().getProfile().getName()); // + " - " +
 																						// checkList.getWorker().getDescription()
 				if (!checkList.getCatalogs().isEmpty()) {
-					historyBean.setCatalogs(checkList.getCatalogs());
-					for (Catalog catalog : checkList.getCatalogs()) {
-						price += catalog.getPrice();
+					//historyBean.setCatalogs(checkList.getCatalogs());
+					List<Catalog> catalogs = checkList.getCatalogs();
+					List<Catalog> tempList = new ArrayList<>();
+					for (Catalog temp : catalogs) {
+						if(!checkBean.contains(temp.getName())) {
+							checkBean.add(temp.getName());
+							tempList.add(temp);
+							price += temp.getPrice();
+						}
 					}
+					historyBean.setCatalogs(tempList);
+//					for (Catalog catalog : tempList) {
+//						price += catalog.getPrice();
+//					}
 				}
 
 				historyBean.setPrice(price);
 				historyBean.setStatus(checkList.getStatus());
+				//проверка
 				clientHistoryBeans.add(historyBean);
 			}
 
