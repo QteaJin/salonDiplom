@@ -46,6 +46,6 @@ public class AdressController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public AdressBean updateAdress(@RequestBody AdressBean adressBean) {
 		return adressService.update(adressBean);
-	}
+	} //
 
 }
